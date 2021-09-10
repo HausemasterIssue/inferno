@@ -45,8 +45,6 @@ public class Tracers extends Module {
                     if (!friends.getValue() && Inferno.friendManager.isFriend((EntityPlayer) entity)) {
                         continue;
                     }
-
-                    continue;
                 }
 
                 if (!passive.getValue() && EntityUtils.isPassive(entity)) {
