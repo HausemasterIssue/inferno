@@ -90,7 +90,7 @@ public class Scaffold extends Module {
                     break;
                 }
 
-                if (mc.player.getDistance(p.x, p.y, p.z) > 5.0f) {
+                if (mc.player.getDistance(p.x, p.y, p.z) > 2.0f) {
                     continue;
                 }
 
