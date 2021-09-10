@@ -37,11 +37,15 @@ public class Tracers extends Module {
                     continue;
                 }
 
-                if (!players.getValue() && EntityUtils.isPlayer(entity)) {
-                    return;
-                }
+                if (EntityUtils.isPlayer(entity)) {
+                    if (!players.getValue()) {
+                        continue;
+                    }
 
-                if (!friends.getValue() && EntityUtils.isPlayer(entity) && Inferno.friendManager.isFriend((EntityPlayer) entity)) {
+                    if (!friends.getValue() && Inferno.friendManager.isFriend((EntityPlayer) entity)) {
+                        continue;
+                    }
+
                     continue;
                 }
 
