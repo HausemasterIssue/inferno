@@ -12,7 +12,11 @@ public class Sprint extends Module {
 
     @SubscribeEvent
     public void onUpdate(UpdateEvent event) {
-        if ((mode.getValue() == Mode.LEGIT && !mc.gameSettings.keyBindForward.pressed || mode.getValue() == Mode.RAGE) && (mc.player.getFoodStats().getFoodLevel() <= 6 && hungerCheck.getValue())) {
+        if (mode.getValue() == Mode.LEGIT && !mc.gameSettings.keyBindForward.pressed || mode.getValue() == Mode.RAGE) {
+            if (hungerCheck.getValue() && mc.player.getFoodStats().getFoodLevel() <= 6) {
+                return;
+            }
+
             mc.gameSettings.keyBindSprint.pressed = true;
         }
     }
