@@ -1,0 +1,33 @@
+{
+  "required": true,
+  "priority": 2147483647,
+  "mixinPriority": 2147483647,
+  "minVersion": "0.7-SNAPSHOT",
+  "compatibilityLevel": "JAVA_8",
+  "package": "me.sxmurai.inferno.mixin.mixins",
+  "refmap": "mixins.inferno.refmap.json",
+  "verbose": true,
+  "mixins": [
+    "entity.MixinEntityPlayer",
+    "entity.MixinEntityPlayerSP",
+
+    "input.MixinKeyBinding",
+    "input.MixinPlayerControllerMP",
+
+    "network.MixinNetworkManager",
+
+    "render.MixinItemRenderer",
+    "render.MixinRenderEnderCrystal",
+    "render.MixinRenderLivingBase",
+
+    "world.blocks.MixinBlockSlime",
+    "world.blocks.MixinBlockSoulSand",
+    "world.sounds.MixinElytraSound",
+    "world.MixinWorldClient",
+
+    "MixinMinecraft"
+  ],
+  "injectors": {
+    "maxShiftBy": 10
+  }
+}
