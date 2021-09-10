@@ -60,7 +60,7 @@ public class Speed extends Module {
         if (shouldStop()) {
             return;
         }
-
+        // @todo still broken
 //        if (mode.getValue() == Mode.BHOP || (mode.getValue() == Mode.STRAFE && hop.getValue() && strafeHop.getValue() == Hop.JUMP) || hop.getValue() && mc.player.onGround) {
 //            mc.player.jump();
 //        }
@@ -75,7 +75,7 @@ public class Speed extends Module {
 
     @SubscribeEvent
     public void onMoveUpdate(UpdateMoveEvent event) {
-        if (Module.fullNullCheck() && event.getEra() == UpdateMoveEvent.Era.PRE) {
+        if (Module.fullNullCheck() && event.getEra() == UpdateMoveEvent.Era.PRE && mode.getValue() == Mode.STRAFE) {
             EntityPlayerSP player = mc.player;
             distance = Math.sqrt((player.posX - player.prevPosX) * (player.posX - player.prevPosX) + (player.posZ - player.prevPosZ) * (player.posZ - player.prevPosZ));
         }
@@ -83,7 +83,7 @@ public class Speed extends Module {
 
     @SubscribeEvent
     public void onMove(MoveEvent event) {
-        if (shouldStop()) {
+        if (mode.getValue() != Mode.STRAFE || shouldStop()) {
             return;
         }
 
