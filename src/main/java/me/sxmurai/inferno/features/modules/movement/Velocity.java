@@ -55,10 +55,23 @@ public class Velocity extends Module {
     @SubscribeEvent
     public void onPush(PushEvent event) {
         if (!Module.fullNullCheck()) {
-            if (event.getType() == PushEvent.Type.LIQUID || event.getType() == PushEvent.Type.BLOCKS) {
-                event.setCanceled(event.getType() == PushEvent.Type.LIQUID && liquid.getValue() || event.getType() == PushEvent.Type.BLOCKS && blocks.getValue());
-            } else if (event.getType() == PushEvent.Type.ENTITY) {
-                // @todo
+            switch (event.getType()) {
+                case LIQUID: {
+                    event.setCanceled(liquid.getValue());
+                    break;
+                }
+
+                case BLOCKS: {
+                    event.setCanceled(blocks.getValue());
+                    break;
+                }
+
+                case ENTITY: {
+                    if (push.getValue()) {
+                        // @todo
+                    }
+                    break;
+                }
             }
         }
     }
