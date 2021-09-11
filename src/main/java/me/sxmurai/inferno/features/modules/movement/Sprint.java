@@ -9,11 +9,16 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class Sprint extends Module {
     public final Setting<Mode> mode = this.register(new Setting<>("Mode", Mode.LEGIT));
     public final Setting<Boolean> hungerCheck = this.register(new Setting<>("HungerCheck", false));
+    public final Setting<Boolean> strict = this.register(new Setting<>("Strict", false));
 
     @SubscribeEvent
     public void onUpdate(UpdateEvent event) {
         if (mode.getValue() == Mode.LEGIT && !mc.gameSettings.keyBindForward.pressed || mode.getValue() == Mode.RAGE) {
             if (hungerCheck.getValue() && mc.player.getFoodStats().getFoodLevel() <= 6) {
+                return;
+            }
+
+            if (strict.getValue() && mc.player.isHandActive()) {
                 return;
             }
 
