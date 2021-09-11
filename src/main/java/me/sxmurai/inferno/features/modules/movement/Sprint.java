@@ -18,7 +18,7 @@ public class Sprint extends Module {
                 return;
             }
 
-            if (strict.getValue() && mc.player.isHandActive()) {
+            if (strict.getValue() && mc.player.isHandActive() || mc.player.isSneaking()) {
                 return;
             }
 
