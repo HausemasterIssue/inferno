@@ -3,6 +3,8 @@ package me.sxmurai.inferno.features.modules.combat;
 import me.sxmurai.inferno.events.network.PacketEvent;
 import me.sxmurai.inferno.features.settings.Setting;
 import me.sxmurai.inferno.managers.modules.Module;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.network.play.client.CPacketUseEntity;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -10,12 +12,15 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Module.Define(name = "Criticals", description = "Applies critical hits", category = Module.Category.COMBAT)
 public class Criticals extends Module {
     public final Setting<Mode> mode = this.register(new Setting<>("Mode", Mode.PACKET));
+    public final Setting<Boolean> entityCheck = this.register(new Setting<>("EntityCheck", false));
 
     @SubscribeEvent
     public void onPacketSend(PacketEvent.Send event) {
         if (!Module.fullNullCheck() && event.getPacket() instanceof CPacketUseEntity) {
             CPacketUseEntity packet = (CPacketUseEntity) event.getPacket();
-            if (packet.action == CPacketUseEntity.Action.ATTACK && packet.getEntityFromWorld(mc.world) != null && mc.player.onGround) {
+            Entity entity = packet.getEntityFromWorld(mc.world);
+
+            if (packet.action == CPacketUseEntity.Action.ATTACK && (entityCheck.getValue() ? entity instanceof EntityLiving : entity != null) && mc.player.onGround) {
                 switch (mode.getValue()) {
                     case JUMP: {
                         mc.player.jump();
