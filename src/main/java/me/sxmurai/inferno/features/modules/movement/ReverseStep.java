@@ -1,6 +1,8 @@
 package me.sxmurai.inferno.features.modules.movement;
 
+import me.sxmurai.inferno.Inferno;
 import me.sxmurai.inferno.events.mc.UpdateEvent;
+import me.sxmurai.inferno.features.modules.player.Freecam;
 import me.sxmurai.inferno.features.settings.Setting;
 import me.sxmurai.inferno.managers.modules.Module;
 import net.minecraft.network.play.client.CPacketEntityAction;
@@ -14,7 +16,7 @@ public class ReverseStep extends Module {
 
     @SubscribeEvent
     public void onUpdate(UpdateEvent event) {
-        if (mc.player.onGround) {
+        if (mc.player.onGround && !this.shouldStop()) {
             // @todo strict
             if (sneak.getValue()) {
                 mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.START_SNEAKING));
@@ -26,5 +28,9 @@ public class ReverseStep extends Module {
                 mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.STOP_SNEAKING));
             }
         }
+    }
+
+    private boolean shouldStop() {
+        return Inferno.moduleManager.getModule(Freecam.class).isToggled();
     }
 }
