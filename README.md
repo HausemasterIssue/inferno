@@ -15,6 +15,14 @@ You need Java 8 installed to build the client. I personally use Java 8u101, but 
 Download the code and run these commands in a terminal opened in the directory where you downloaded the code:
 
 ```
+For Windows:
+
+/gradlew setupDecompWorkspace
+/gradlew clean
+/gradlew build
+
+For Mac:
+
 ./gradlew setupDecompWorkspace
 ./gradlew clean
 ./gradlew build
