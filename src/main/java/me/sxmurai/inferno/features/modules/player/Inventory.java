@@ -4,7 +4,7 @@ import me.sxmurai.inferno.events.network.PacketEvent;
 import me.sxmurai.inferno.features.settings.Setting;
 import me.sxmurai.inferno.managers.modules.Module;
 import net.minecraft.network.play.client.CPacketClickWindow;
-import net.minecraft.network.play.server.SPacketCloseWindow;
+import net.minecraft.network.play.client.CPacketCloseWindow;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "Inventory", description = "Does shit with ur inventory", category = Module.Category.PLAYER)
@@ -16,7 +16,7 @@ public class Inventory extends Module {
     public void onPacketSend(PacketEvent.Send event) {
         if (!Module.fullNullCheck()) {
             // @todo make a bypass
-            if (event.getPacket() instanceof SPacketCloseWindow && xcarry.getValue()) {
+            if (event.getPacket() instanceof CPacketCloseWindow && xcarry.getValue()) {
                 event.setCanceled(true);
             }
 
