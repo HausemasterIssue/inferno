@@ -39,6 +39,7 @@ These are clients/cool people who have helped with the development of the client
 #### Clients:
 - Phobos 1.9.0 - Original access transformers + CrystalChams + Custom Font renderer
 - Cosmos 1.0.0 - 2b2t Criticals bypass
+- Cookie Client 1.01 - TPSSync in timer
 
 #### People
 - [Sxmurai](https://github.com/Sxmurai) - Main Developer
