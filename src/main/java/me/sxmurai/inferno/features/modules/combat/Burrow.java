@@ -92,7 +92,7 @@ public class Burrow extends Module {
 
                     if (rotate.getValue()) {
                         RotationUtils.Rotation rotation = RotationUtils.calcRotations(mc.player.getPositionEyes(mc.getRenderPartialTicks()), new Vec3d(origin).add(0.5, -0.5, 0.5));
-                        mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rotation.getYaw(), rotation.getPitch(true), mc.player.onGround));
+                        mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rotation.getYaw(), rotation.getPitch(false), mc.player.onGround));
                     }
 
                     BlockUtil.place(origin, hand, swing.getValue(), true, packetPlace.getValue());
@@ -106,7 +106,7 @@ public class Burrow extends Module {
 
                     if (rotate.getValue()) {
                         RotationUtils.Rotation rotation = RotationUtils.calcRotations(mc.player.getPositionEyes(mc.getRenderPartialTicks()), new Vec3d(origin).add(0.5, -0.5, 0.5));
-                        mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rotation.getYaw(), rotation.getPitch(true), mc.player.onGround));
+                        mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rotation.getYaw(), rotation.getPitch(false), mc.player.onGround));
                     }
 
                     BlockUtil.place(origin, hand, swing.getValue(), true, packetPlace.getValue());
@@ -120,7 +120,7 @@ public class Burrow extends Module {
 
                     if (rotate.getValue()) {
                         RotationUtils.Rotation rotation = RotationUtils.calcRotations(mc.player.getPositionEyes(mc.getRenderPartialTicks()), new Vec3d(origin).add(0.5, -0.5, 0.5));
-                        mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rotation.getYaw(), rotation.getPitch(true), mc.player.onGround));
+                        mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rotation.getYaw(), rotation.getPitch(false), mc.player.onGround));
                     }
 
                     BlockUtil.place(origin, hand, swing.getValue(), true, packetPlace.getValue());

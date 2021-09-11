@@ -95,9 +95,9 @@ public class Scaffold extends Module {
                 }
 
                 if (mc.gameSettings.keyBindJump.isKeyDown() && tower.getValue()) {
-                    mc.player.jump();
                     mc.player.motionX *= 0.3;
                     mc.player.motionZ *= 0.3;
+                    mc.player.jump();
 
                     if (stop.getValue() && timer.passedMs(1200L)) {
                         mc.player.motionY -= 0.28;
@@ -106,9 +106,12 @@ public class Scaffold extends Module {
                 }
 
                 if (rotate.getValue()) {
-                    RotationUtils.Rotation rotation = RotationUtils.calcRotations(mc.player.getPositionEyes(mc.getRenderPartialTicks()), new Vec3d(pos).add(0.5, -0.5, 0.5));
-                    mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rotation.getYaw(), rotation.getPitch(normalize.getValue()), mc.player.onGround));
+                    RotationUtils.Rotation rotation = RotationUtils.calcRotations(mc.player.getPositionEyes(mc.getRenderPartialTicks()), new Vec3d(pos.x + 0.5, pos.y - 0.5, pos.z + 0.5));
+                    mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rotation.getYaw(), rotation.getPitch(), mc.player.onGround));
                     mc.player.rotationYawHead = rotation.getYaw();
+
+                    mc.player.rotationYaw = rotation.getYaw();
+                    mc.player.rotationPitch = rotation.getPitch();
                 }
 
                 BlockUtil.place(p, hand, swing.getValue(), false, packet.getValue());
