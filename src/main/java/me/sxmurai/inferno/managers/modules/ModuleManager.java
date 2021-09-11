@@ -5,10 +5,7 @@ import me.sxmurai.inferno.config.ModulesConfig;
 import me.sxmurai.inferno.features.modules.client.ClickGUI;
 import me.sxmurai.inferno.features.modules.client.CustomFont;
 import me.sxmurai.inferno.features.modules.combat.*;
-import me.sxmurai.inferno.features.modules.miscellaneous.FakePlayer;
-import me.sxmurai.inferno.features.modules.miscellaneous.MiddleClick;
-import me.sxmurai.inferno.features.modules.miscellaneous.NoEntityTrace;
-import me.sxmurai.inferno.features.modules.miscellaneous.PingSpoof;
+import me.sxmurai.inferno.features.modules.miscellaneous.*;
 import me.sxmurai.inferno.features.modules.movement.*;
 import me.sxmurai.inferno.features.modules.player.*;
 import me.sxmurai.inferno.features.modules.render.*;
@@ -39,6 +36,7 @@ public class ModuleManager {
         this.modules.add(new FakePlayer());
         this.modules.add(new MiddleClick());
         this.modules.add(new NoEntityTrace());
+        this.modules.add(new NoHandshake());
         this.modules.add(new PingSpoof());
 
         // movement
