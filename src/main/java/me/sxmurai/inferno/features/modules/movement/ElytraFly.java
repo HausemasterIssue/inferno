@@ -24,7 +24,7 @@ public class ElytraFly extends Module {
     public final Setting<Float> speed = this.register(new Setting<>("Speed", 2.5f, 0.1f, 5.0f));
     public final Setting<Float> speedLimit = this.register(new Setting<>("SpeedLimit", 180.0f, 1.0f, 250.0f));
     public final Setting<Boolean> takeOff = this.register(new Setting<>("TakeOff", true));
-    public final Setting<Float> takeOffTimerAmount = this.register(new Setting<>("TakeOffTimer", 0.1f, 0.1f, 1.0f));
+    public final Setting<Float> takeOffTimerAmount = this.register(new Setting<>("TakeOffTimer", 0.1f, 0.1f, 1.0f, (v) -> takeOff.getValue()));
     public final Setting<Up> up = this.register(new Setting<>("GoUp", Up.MOTION));
     public final Setting<Float> fireworkDelay = this.register(new Setting<>("FireworkDelay", 2.0f, 1.0f, 5.0f, (v) -> this.up.getValue() == Up.FIREWORK));
     public final Setting<Boolean> infiniteElytra = this.register(new Setting<>("InfiniteElytra", false));
