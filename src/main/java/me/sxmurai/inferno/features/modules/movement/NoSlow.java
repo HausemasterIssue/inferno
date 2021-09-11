@@ -59,19 +59,19 @@ public class NoSlow extends Module {
                 for (KeyBinding bind : KEYS) {
                     bind.pressed = Keyboard.isKeyDown(bind.keyCode);
                 }
-            }
 
-            if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
-                mc.player.rotationPitch -= 2.0f;
-            } else if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
-                mc.player.rotationPitch += 2.0f;
-            } else if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
-                mc.player.rotationYaw += 2.0f;
-            } else if (Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
-                mc.player.rotationYaw -= 2.0f;
-            }
+                if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
+                    mc.player.rotationPitch -= 2.0f;
+                } else if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+                    mc.player.rotationPitch += 2.0f;
+                } else if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
+                    mc.player.rotationYaw += 2.0f;
+                } else if (Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
+                    mc.player.rotationYaw -= 2.0f;
+                }
 
-            mc.player.rotationPitch = MathHelper.clamp(mc.player.rotationPitch, -90.0f, 90.0f);
+                mc.player.rotationPitch = MathHelper.clamp(mc.player.rotationPitch, -90.0f, 90.0f);
+            }
         }
     }
 
