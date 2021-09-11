@@ -11,12 +11,24 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "FastUse", description = "Lets you use things fast", category = Module.Category.PLAYER)
 public class FastUse extends Module {
+    public final Setting<Integer> delay = this.register(new Setting<>("Delay", 0, 0, 20));
     public final Setting<Boolean> xp = this.register(new Setting<>("XP", false));
     public final Setting<Boolean> crystals = this.register(new Setting<>("Crystals", false));
     public final Setting<Boolean> blocks = this.register(new Setting<>("Blocks", false));
 
+    private int ticks = 0;
+
     @SubscribeEvent
     public void onUpdate(UpdateEvent event) {
+        if (this.delay.getValue() != 0) {
+            ++this.ticks;
+            if (this.ticks <= this.delay.getValue()) {
+                return;
+            }
+
+            this.ticks = 0;
+        }
+
         if (this.xp.getValue() && InventoryUtils.isHolding(Items.EXPERIENCE_BOTTLE)) {
             mc.rightClickDelayTimer = 0;
         }
