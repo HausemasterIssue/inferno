@@ -30,7 +30,7 @@ public class Timer extends Module {
     	if (sync.getValue()) {
             mc.timer.tickLength = (1000.0f / Inferno.serverManager.getTps());
     	} else {
-            mc.timer.tickLength = 1000.0f / speed.getValue();
+            mc.timer.tickLength = 50.0f / speed.getValue();
     	}
     	
 
