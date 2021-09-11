@@ -1,6 +1,5 @@
 package me.sxmurai.inferno.features.modules.combat;
 
-import me.sxmurai.inferno.Inferno;
 import me.sxmurai.inferno.events.mc.UpdateEvent;
 import me.sxmurai.inferno.features.settings.Setting;
 import me.sxmurai.inferno.managers.commands.Command;
