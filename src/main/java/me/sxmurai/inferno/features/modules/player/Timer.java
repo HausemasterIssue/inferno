@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Module.Define(name = "Timer", description = "Makes the game go zoom zoom", category = Module.Category.PLAYER)
 public class Timer extends Module {
     public final Setting<Float> speed = this.register(new Setting<>("ClientTPS", 2.0f, 0.1f, 20.0f));
-    public final Setting<Boolean> sync = this.register(new Setting<>("TPS Sync", true));
+    public final Setting<Boolean> sync = this.register(new Setting<>("TPSSync", true));
     
     private static float[] ticks = new float[20];
     
@@ -45,7 +45,7 @@ public class Timer extends Module {
 
     @SubscribeEvent
     public void onUpdate(UpdateEvent event) {
-    	if(sync.getValue() == true) {
+    	if(sync.getValue() = true) {
             mc.timer.tickLength = (float) (50.0f / getTps());
     	} else {
             mc.timer.tickLength = 50.0f / speed.getValue();
