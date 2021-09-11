@@ -92,7 +92,7 @@ public class Speed extends Module {
             return;
         }
 
-        if (mc.player.onGround && limiter.getValue()) {
+        if (mc.player.onGround && !limiter.getValue()) {
             strafeStage = 2;
         }
 
@@ -105,7 +105,7 @@ public class Speed extends Module {
 
             case 2: {
                 if (hop.getValue() && strafeHop.getValue() == Hop.MOTION) {
-                    if ((mc.player.moveForward == 0.0f || mc.player.moveStrafing == 0.0f) || !mc.player.onGround) {
+                    if (mc.player.moveForward == 0.0f && mc.player.moveStrafing == 0.0f || !mc.player.onGround) {
                         break;
                     }
 
