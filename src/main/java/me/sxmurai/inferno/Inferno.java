@@ -30,6 +30,7 @@ public class Inferno {
     public static ServerManager serverManager;
     public static TotemPopManager totemPopManager;
     private static EventManager eventHelperManager;
+    public static XrayManager xrayManager;
 
     public static FileManager fileManager;
 
@@ -68,6 +69,7 @@ public class Inferno {
         serverManager = new ServerManager();
         totemPopManager = new TotemPopManager();
         eventHelperManager = new EventManager();
+        xrayManager = new XrayManager();
 
         MinecraftForge.EVENT_BUS.register(eventHelperManager);
         MinecraftForge.EVENT_BUS.register(moduleManager);

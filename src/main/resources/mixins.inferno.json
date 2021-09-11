@@ -21,8 +21,10 @@
     "render.MixinRenderEnderCrystal",
     "render.MixinRenderLivingBase",
 
+    "world.blocks.MixinBlock",
     "world.blocks.MixinBlockSlime",
     "world.blocks.MixinBlockSoulSand",
+    "world.blocks.MixinBlockStateImplementation",
     "world.sounds.MixinElytraSound",
     "world.MixinWorldClient",
 
