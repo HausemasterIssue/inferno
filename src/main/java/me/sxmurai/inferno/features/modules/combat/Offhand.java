@@ -19,6 +19,7 @@ public class Offhand extends Module {
     public final Setting<Float> healthSwitch = this.register(new Setting<>("HealthSwitch", 14.0f, 0.1f, 20.0f));
     public final Setting<Boolean> fallDistance = this.register(new Setting<>("FallDistance", true));
     public final Setting<Boolean> offhandGapple = this.register(new Setting<>("OffhandGapple", false));
+    public final Setting<Boolean> motionStrict = this.register(new Setting<>("MotionStrict", false));
     public final Setting<Boolean> hotbar = this.register(new Setting<>("UseHotbar", true));
     public final Setting<Boolean> update = this.register(new Setting<>("UpdateController", true));
     public final Setting<Integer> delay = this.register(new Setting<>("Delay", 5, 0, 50));
@@ -85,7 +86,12 @@ public class Offhand extends Module {
         }
 
         if (!offhand.isEmpty) {
-            taskList.add(new InventoryUtils.Task(InventoryUtils.OFFHAND_SLOT, update.getValue()));
+            if (motionStrict.getValue()) {
+                mc.player.setVelocity(0, 0, 0);
+                taskList.add(new InventoryUtils.Task(InventoryUtils.OFFHAND_SLOT, update.getValue()));
+            } else {
+                taskList.add(new InventoryUtils.Task(InventoryUtils.OFFHAND_SLOT, update.getValue()));
+            }
         }
 
         taskList.add(new InventoryUtils.Task(slot, update.getValue()));
