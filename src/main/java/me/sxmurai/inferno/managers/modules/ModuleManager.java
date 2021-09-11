@@ -35,6 +35,7 @@ public class ModuleManager {
         // miscellaneous
         this.modules.add(new FakePlayer());
         this.modules.add(new MiddleClick());
+        this.modules.add(new MountBypass());
         this.modules.add(new NoEntityTrace());
         this.modules.add(new NoHandshake());
         this.modules.add(new PingSpoof());
