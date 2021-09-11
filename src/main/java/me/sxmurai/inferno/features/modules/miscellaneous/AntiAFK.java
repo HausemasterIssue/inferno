@@ -13,7 +13,10 @@ import net.minecraft.util.EnumHand;
 
 @Module.Define(name = "AntiAFK", description = "Stops you from getting kicked by the AFK timer on servers that have it")
 public class AntiAFK extends Module {
-	
+
+public int minChat = 0;
+public int maxChat = 99999999;
+public int chatRandom = (int)Math.floor(Math.random()*(maxChat-minChat+1)+minChat);
 private static Thread thread;
 	
 	public final Setting<Double> delay = this.register(new Setting<>("Delay", 2));
@@ -21,6 +24,7 @@ private static Thread thread;
 	public final Setting<Boolean> punch = this.register(new Setting<>("Punch", true));
 	public final Setting<Boolean> jump = this.register(new Setting<>("Jump", true));
 	public final Setting<Boolean> random = this.register(new Setting<>("Rotate", true));
+	public final Setting<Boolean> chat = this.register(new Setting<>("ChatMessage", true));
 	
 	@Override
 	public void onEnabled() {
@@ -55,6 +59,7 @@ private static Thread thread;
 		if (rotate.getValue()) actions.add(1);
 		if (punch.getValue()) actions.add(2);
 		if (jump.getValue()) actions.add(3);
+		if (chat.getValue()) actions.add(4);
 		
 		if (!actions.isEmpty()) {
 			if (random.getValue()) {
@@ -76,6 +81,8 @@ private static Thread thread;
 			mc.player.swingArm(EnumHand.MAIN_HAND);
 		} else if (id == 3) {
 			mc.player.jump();
+		} else if (id == 4) {
+			mc.player.sendChatMessage("im sending this message so i dont get afk kicked thanks to inferno client, so yeah, whatever i guess " + chatRandom);
 		}
 	}
 
