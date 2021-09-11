@@ -10,9 +10,9 @@ This is also meant for Anarchy Environments, I do not encourage you to use this 
 
 ## building
 
-Download the code and run these commands in a terminal opened in the directory where you downloaded the code.
+You need Java 8 installed to build the client. I personally use Java 8u101, but any version of Java 8 should work just fine with building the client.
 
-You need Java 8 installed to build the client. Version 8u101 is what I use, but you can really use any version of Java 8.
+Download the code and run these commands in a terminal opened in the directory where you downloaded the code:
 
 ```
 ./gradlew setupDecompWorkspace
