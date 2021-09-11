@@ -89,8 +89,4 @@ public class AntiAFK extends Module {
     private int random(int min, int max) {
         return RNG.nextInt(max + min) - min;
     }
-
-    public enum Punch {
-        DONTCARE, BLOCK
-    }
 }
