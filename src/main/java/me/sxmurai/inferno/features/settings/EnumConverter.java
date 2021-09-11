@@ -32,9 +32,13 @@ public class EnumConverter {
     }
 
     public static String getActualName(Enum clazz) {
-        String name = clazz.name();
+        return getActualName(clazz.name());
+    }
+
+    public static String getActualName(String name) {
         return Character.toString(name.charAt(0)).toUpperCase() + name.substring(1).toLowerCase().replaceAll("_", " ");
     }
+
 
     public Enum doBackward(String name) {
         try {

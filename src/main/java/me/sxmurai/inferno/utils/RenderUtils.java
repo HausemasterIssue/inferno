@@ -1,5 +1,6 @@
 package me.sxmurai.inferno.utils;
 
+import me.sxmurai.inferno.Inferno;
 import me.sxmurai.inferno.features.Feature;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -115,6 +116,30 @@ public class RenderUtils extends Feature {
         GlStateManager.enableTexture2D();
     }
 
+    public static void drawLine(double x, double y, double x2, double y2, float width, int color) {
+        GlStateManager.disableTexture2D();
+        GlStateManager.enableBlend();
+        GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+        GlStateManager.glLineWidth(width);
+
+        float alpha = (color >> 24 & 0xff) / 255f;
+        float red = (color >> 16 & 0xff) / 255f;
+        float green = (color >> 8 & 0xff) / 255f;
+        float blue = (color & 0xff) / 255f;
+
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder buffer = tessellator.getBuffer();
+
+        buffer.begin(GL11.GL_LINES, DefaultVertexFormats.POSITION_COLOR);
+        buffer.pos(x, y, 0.0).color(red, green, blue, alpha).endVertex();
+        buffer.pos(x2, y2, 0.0).color(red, green, blue, alpha).endVertex();
+        tessellator.draw();
+
+        GlStateManager.glLineWidth(1.0f);
+        GlStateManager.disableBlend();
+        GlStateManager.enableTexture2D();
+    }
+
     public static double interpolate(double start, double end) {
         return end + (start - end) * mc.getRenderPartialTicks();
     }
@@ -129,5 +154,13 @@ public class RenderUtils extends Feature {
 
     public static Vec3d toScreen(Vec3d interpolated) {
         return interpolated.subtract(mc.renderManager.renderPosX, mc.renderManager.renderPosY, mc.renderManager.renderPosZ);
+    }
+
+    public static float centerVertically(float y, float height) {
+        return (y + (height / 2.0f)) - (Inferno.textManager.getHeight() / 2.0f);
+    }
+
+    public static float centerHorizontally(float x, float width, float textWidth) {
+        return x + (width / 2.0f) - (textWidth / 2.0f);
     }
 }

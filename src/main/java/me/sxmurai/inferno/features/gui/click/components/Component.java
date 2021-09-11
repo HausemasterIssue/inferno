@@ -9,21 +9,21 @@ public class Component {
     protected float x, y;
     protected float width, height;
 
-    public Component(String name, float x, float y, float width, float height) {
+    public Component(String name) {
         this.name = name;
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
     }
 
-    public void drawScreen(int mouseX, int mouseY, float partialTicks) { }
+    public void draw(int mouseX, int mouseY) { }
     public void mouseClicked(int mouseX, int mouseY, int button) { }
     public void mouseReleased(int mouseX, int mouseY, int state) { }
     public void keyTyped(char character, int keyCode) { }
 
-    public String getName() {
-        return name;
+    public boolean isMouseInBounds(int mouseX, int mouseY) {
+        return mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height;
+    }
+
+    public void playClickSound(float pitch) {
+        Inferno.mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, pitch));
     }
 
     public float getX() {
@@ -56,18 +56,6 @@ public class Component {
 
     public void setHeight(float height) {
         this.height = height;
-    }
-
-    public boolean isMouseInBounds(int mouseX, int mouseY) {
-        return mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height;
-    }
-
-    public void playClickSound(float pitch) {
-        Inferno.mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, pitch));
-    }
-
-    public float centerShit(float y, float height) {
-        return (y + (height / 2.0f)) - (Inferno.textManager.getHeight() / 2.0f);
     }
 
     public boolean isVisible() {

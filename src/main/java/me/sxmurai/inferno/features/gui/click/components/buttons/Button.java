@@ -1,16 +1,16 @@
-package me.sxmurai.inferno.features.gui.click.components.button;
+package me.sxmurai.inferno.features.gui.click.components.buttons;
 
 import me.sxmurai.inferno.features.gui.click.components.Component;
 
 public class Button extends Component {
-    public Button(String name, float x, float y) {
-        super(name, x, y, 88.0f, 14.0f);
+    public Button(String name) {
+        super(name);
     }
 
     @Override
     public void mouseClicked(int mouseX, int mouseY, int button) {
-        if (isMouseInBounds(mouseX, mouseY)) {
-            onClick(button);
+        if (this.isMouseInBounds(mouseX, mouseY)) {
+            this.onClick(button);
             playClickSound(1.0f);
         }
     }

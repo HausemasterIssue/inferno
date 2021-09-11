@@ -42,6 +42,14 @@ public class TextManager {
         drawString(text, x, y, color);
     }
 
+    public float getWidth(String text) {
+        if (fontMod.isToggled()) {
+            return customFontRenderer.getStringWidth(text);
+        } else {
+            return defaultFontRenderer.getStringWidth(text);
+        }
+    }
+
     public int getHeight() {
         if (fontMod.isToggled()) {
             return customFontRenderer.getHeight();

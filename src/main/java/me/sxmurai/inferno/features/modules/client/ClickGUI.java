@@ -1,7 +1,7 @@
 package me.sxmurai.inferno.features.modules.client;
 
 import me.sxmurai.inferno.events.mc.UpdateEvent;
-import me.sxmurai.inferno.features.gui.click.ClickGUIScreen;
+import me.sxmurai.inferno.features.gui.click.InfernoClickGUIScreen;
 import me.sxmurai.inferno.features.settings.Setting;
 import me.sxmurai.inferno.managers.modules.Module;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -12,6 +12,7 @@ public class ClickGUI extends Module {
     public static ClickGUI INSTANCE;
 
     public final Setting<Integer> scrollSpeed = this.register(new Setting<>("ScrollSpeed", 10, 1, 25));
+    public final Setting<Boolean> pause = this.register(new Setting<>("Pause", false));
 
     public ClickGUI() {
         INSTANCE = this;
@@ -24,12 +25,12 @@ public class ClickGUI extends Module {
             return;
         }
 
-        mc.displayGuiScreen(ClickGUIScreen.getInstance());
+        mc.displayGuiScreen(InfernoClickGUIScreen.getInstance());
     }
 
     @SubscribeEvent
     public void onUpdate(UpdateEvent event) {
-        if (!(mc.currentScreen instanceof ClickGUIScreen)) {
+        if (!(mc.currentScreen instanceof InfernoClickGUIScreen)) {
             toggle();
         }
     }
