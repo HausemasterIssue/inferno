@@ -45,7 +45,7 @@ public class Timer extends Module {
 
     @SubscribeEvent
     public void onUpdate(UpdateEvent event) {
-    	if(sync.getValue() = true) {
+    	if(sync.getValue()) {
             mc.timer.tickLength = (float) (50.0f / getTps());
     	} else {
             mc.timer.tickLength = 50.0f / speed.getValue();
