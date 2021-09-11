@@ -64,6 +64,7 @@ public class ModuleManager {
         this.modules.add(new HandModifier());
         this.modules.add(new Tracers());
         this.modules.add(new Trails());
+        this.modules.add(new ViewClip());
         this.modules.add(new Wireframes());
 
         Inferno.LOGGER.info("Loaded {} modules!", this.modules.size());

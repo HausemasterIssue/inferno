@@ -16,6 +16,7 @@
 
     "network.MixinNetworkManager",
 
+    "render.MixinEntityRenderer",
     "render.MixinItemRenderer",
     "render.MixinRenderEnderCrystal",
     "render.MixinRenderLivingBase",
