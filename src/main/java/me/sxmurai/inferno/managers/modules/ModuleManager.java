@@ -52,6 +52,7 @@ public class ModuleManager {
         // player
         this.modules.add(new Blink());
         this.modules.add(new FastUse());
+        this.modules.add(new Freecam());
         this.modules.add(new Inventory());
         this.modules.add(new MultiTask());
         this.modules.add(new Reach());

@@ -5,6 +5,7 @@ import me.sxmurai.inferno.events.entity.MoveEvent;
 import me.sxmurai.inferno.events.entity.UpdateMoveEvent;
 import me.sxmurai.inferno.events.mc.UpdateEvent;
 import me.sxmurai.inferno.events.network.PacketEvent;
+import me.sxmurai.inferno.features.modules.player.Freecam;
 import me.sxmurai.inferno.features.settings.Setting;
 import me.sxmurai.inferno.managers.modules.Module;
 import me.sxmurai.inferno.utils.RotationUtils;
@@ -171,7 +172,7 @@ public class Speed extends Module {
     }
 
     private boolean shouldStop() {
-        return Inferno.moduleManager.getModule(ElytraFly.class).isToggled() || Inferno.moduleManager.getModule(PacketFly.class).isToggled();
+        return Inferno.moduleManager.getModule(ElytraFly.class).isToggled() || Inferno.moduleManager.getModule(PacketFly.class).isToggled() || Inferno.moduleManager.getModule(Freecam.class).isToggled();
     }
 
     public enum Mode {
