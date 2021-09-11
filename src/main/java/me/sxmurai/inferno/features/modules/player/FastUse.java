@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "FastUse", description = "Lets you use things fast", category = Module.Category.PLAYER)
 public class FastUse extends Module {
+    public final Setting<Double> speed = this.register(new Setting<>("Speed", 0.0, 0.0, 4.0, 0);
     public final Setting<Boolean> xp = this.register(new Setting<>("XP", false));
     public final Setting<Boolean> crystals = this.register(new Setting<>("Crystals", false));
     public final Setting<Boolean> blocks = this.register(new Setting<>("Blocks", false));
@@ -18,15 +19,15 @@ public class FastUse extends Module {
     @SubscribeEvent
     public void onUpdate(UpdateEvent event) {
         if (this.xp.getValue() && InventoryUtils.isHolding(Items.EXPERIENCE_BOTTLE)) {
-            mc.rightClickDelayTimer = 0;
+            mc.rightClickDelayTimer = ((int) ((double) speed.getValue()));
         }
 
         if (this.crystals.getValue() && InventoryUtils.isHolding(Items.END_CRYSTAL)) {
-            mc.rightClickDelayTimer = 0;
+            mc.rightClickDelayTimer = ((int) ((double) speed.getValue()));
         }
 
         if (this.blocks.getValue() && InventoryUtils.isHolding(ItemBlock.class)) {
-            mc.rightClickDelayTimer = 0;
+            mc.rightClickDelayTimer = ((int) ((double) speed.getValue()));
         }
     }
 }
