@@ -38,4 +38,4 @@ These are clients/cool people who have helped with the development of the client
 
 ---
 
-<h5 algin="center">Sxmurai - 2021</h5>
+<h5>Sxmurai - 2021</h5>
