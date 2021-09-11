@@ -1,9 +1,6 @@
 package me.sxmurai.inferno;
 
-import me.sxmurai.inferno.managers.EventManager;
-import me.sxmurai.inferno.managers.FileManager;
-import me.sxmurai.inferno.managers.TextManager;
-import me.sxmurai.inferno.managers.TotemPopManager;
+import me.sxmurai.inferno.managers.*;
 import me.sxmurai.inferno.managers.friends.FriendManager;
 import me.sxmurai.inferno.managers.modules.ModuleManager;
 import net.minecraft.client.Minecraft;
@@ -30,6 +27,7 @@ public class Inferno {
     public static TextManager textManager;
     public static FriendManager friendManager;
 
+    public static ServerManager serverManager;
     public static TotemPopManager totemPopManager;
     private static EventManager eventHelperManager;
 
@@ -67,12 +65,14 @@ public class Inferno {
         textManager = new TextManager();
         friendManager = new FriendManager();
 
+        serverManager = new ServerManager();
         totemPopManager = new TotemPopManager();
         eventHelperManager = new EventManager();
 
         MinecraftForge.EVENT_BUS.register(eventHelperManager);
         MinecraftForge.EVENT_BUS.register(moduleManager);
         MinecraftForge.EVENT_BUS.register(totemPopManager);
+        MinecraftForge.EVENT_BUS.register(serverManager);
 
         LOGGER.info("Loaded {} v{}!", MOD_NAME, MOD_VER);
 
