@@ -52,6 +52,8 @@ dependencies {
     annotationProcessor("org.spongepowered:mixin:0.8.2:processor") {
         exclude module: 'gson'
     }
+
+    compile("org.json:json:20210307")
 }
 
 compileJava {
@@ -92,6 +94,7 @@ jar {
 shadowJar {
     dependencies {
         include(dependency('org.spongepowered:mixin'))
+        include(dependency('org.json:json'))
     }
 
     exclude 'dummyThing'

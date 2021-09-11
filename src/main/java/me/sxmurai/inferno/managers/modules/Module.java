@@ -70,6 +70,16 @@ public class Module extends Feature {
         return settings;
     }
 
+    public <T> Setting<T> getSetting(String name) {
+        for (Setting setting : this.settings) {
+            if (setting.getName().equalsIgnoreCase(name)) {
+                return setting;
+            }
+        }
+
+        return null;
+    }
+
     protected void onActivated() { }
     protected void onDeactivated() { }
 

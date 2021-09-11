@@ -1,6 +1,7 @@
 package me.sxmurai.inferno.managers.modules;
 
 import me.sxmurai.inferno.Inferno;
+import me.sxmurai.inferno.config.ModulesConfig;
 import me.sxmurai.inferno.features.modules.client.ClickGUI;
 import me.sxmurai.inferno.features.modules.client.CustomFont;
 import me.sxmurai.inferno.features.modules.combat.*;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 
 public class ModuleManager {
     private final ArrayList<Module> modules = new ArrayList<>();
+    private final ModulesConfig config;
 
     public ModuleManager() {
         // client
@@ -64,7 +66,11 @@ public class ModuleManager {
         this.modules.add(new Trails());
         this.modules.add(new Wireframes());
 
-        Inferno.LOGGER.info("Loaded {} modules", this.modules.size());
+        Inferno.LOGGER.info("Loaded {} modules!", this.modules.size());
+
+        Inferno.LOGGER.info("Loading configurations for {} modules...", this.modules.size());
+        config = new ModulesConfig(this);
+        config.load();
     }
 
     @SubscribeEvent
@@ -79,6 +85,16 @@ public class ModuleManager {
         }
     }
 
+    public <T extends Module> T getModule(String name) {
+        for (Module module : modules) {
+            if (module.getName().equalsIgnoreCase(name)) {
+                return (T) module;
+            }
+        }
+
+        return null;
+    }
+
     public <T extends Module> T getModule(Class<? extends Module> clazz) {
         for (Module module : modules) {
             if (clazz.isInstance(module)) {
@@ -91,5 +107,9 @@ public class ModuleManager {
 
     public ArrayList<Module> getModules() {
         return modules;
+    }
+
+    public void unload() {
+        this.config.stop();
     }
 }
