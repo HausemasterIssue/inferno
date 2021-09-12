@@ -1,4 +1,8 @@
-<!-- Please add the "bug" label before submitting the issue! -->
+---
+name: Bug Report
+about: Report a bug within the client
+labels: bug
+---
 
 **Please describe the issue you are facing.**
 <!-- What is not working correctly. Provide a short description of your problem. -->
