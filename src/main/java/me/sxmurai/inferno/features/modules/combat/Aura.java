@@ -26,6 +26,9 @@ public class Aura extends Module {
     public final Setting<Float> customDelay = this.register(new Setting<>("CustomDelay", 0.0f, 0.0f, 2500.0f, (v) -> delay.getValue() == Delay.CUSTOM));
     public final Setting<Boolean> rotate = this.register(new Setting<>("Rotate", true));
     public final Setting<Boolean> swing = this.register(new Setting<>("Swing", true));
+    public final Setting<Boolean> pauseEating = this.register(new Setting<>("PauseEating", true));
+    public final Setting<Boolean> pauseMending = this.register(new Setting<>("PauseMending", true));
+    public final Setting<Boolean> pauseMining = this.register(new Setting<>("PauseMining", true));
     public final Setting<Float> wallRange = this.register(new Setting<>("WallRange", 2.0f, 0.0f, 5.0f));
     public final Setting<Boolean> packet = this.register(new Setting<>("Packet", false));
     public final Setting<Boolean> players = this.register(new Setting<>("Players", true));
@@ -91,6 +94,21 @@ public class Aura extends Module {
     private boolean canAttack() {
         return delay.getValue() == Delay.VANILLA ? mc.player.getCooledAttackStrength(0.0f) == 1.0f : delay.getValue() == Delay.CUSTOM && timer.passedMs(customDelay.getValue().longValue());
     }
+    
+    public boolean pauses() {
+    	if (EntityUtils.isEating() && pauseEating.getValue()) {
+    		return false;
+    	} else if (EntityUtils.isMending() && pauseMending.getValue() ) {
+    		return false;
+    	} else if (EntityUtils.isMining() && pauseMining.getValue() ) {
+    		return false;
+    	}
+    
+    	return true;
+    }
+    	
+ 
+    
 
     private void findTarget() {
         Entity newTarget = null;
@@ -143,6 +161,7 @@ public class Aura extends Module {
 
         target = newTarget;
     }
+    
 
     public enum Priority {
         CLOSEST, HEALTH
