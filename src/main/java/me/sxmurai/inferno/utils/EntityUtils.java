@@ -10,7 +10,10 @@ import net.minecraft.entity.passive.EntityAmbientCreature;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
+import net.minecraft.item.EnumAction;
+import org.lwjgl.input.Mouse;
 
 public class EntityUtils extends Feature {
     public static boolean isPlayer(Entity entity) {
@@ -43,5 +46,17 @@ public class EntityUtils extends Feature {
         }
 
         return ((EntityLiving) entity).getHealth() + ((EntityLiving) entity).getAbsorptionAmount();
+    }
+    
+    public static boolean isEating() {
+        return mc.player.getHeldItemMainhand().getItemUseAction().equals(EnumAction.EAT) || mc.player.getHeldItemMainhand().getItemUseAction().equals(EnumAction.DRINK);
+    }
+
+    public static boolean isMending() {
+        return InventoryUtils.isHolding(Items.EXPERIENCE_BOTTLE) && Mouse.isButtonDown(1);
+    }
+
+    public static boolean isMining() {
+        return InventoryUtils.isHolding(Items.DIAMOND_PICKAXE) && mc.playerController.getIsHittingBlock();
     }
 }
