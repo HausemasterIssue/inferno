@@ -6,7 +6,7 @@ import me.sxmurai.inferno.managers.modules.Module;
 import me.sxmurai.inferno.utils.EntityUtils;
 import me.sxmurai.inferno.utils.InventoryUtils;
 import me.sxmurai.inferno.utils.RotationUtils;
-import me.sxmurai.inferno.utils.Timer;
+import me.sxmurai.inferno.utils.timing.Timer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.Item;

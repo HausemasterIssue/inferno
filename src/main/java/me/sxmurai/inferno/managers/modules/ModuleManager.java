@@ -34,6 +34,7 @@ public class ModuleManager {
         this.modules.add(new Burrow());
         this.modules.add(new Criticals());
         this.modules.add(new Offhand());
+        this.modules.add(new Surround());
         this.modules.add(new TotemPopNotifier());
 
         // miscellaneous

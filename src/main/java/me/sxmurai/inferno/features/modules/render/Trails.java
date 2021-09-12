@@ -7,7 +7,7 @@ import me.sxmurai.inferno.managers.modules.Module;
 import me.sxmurai.inferno.utils.ColorUtils;
 import me.sxmurai.inferno.utils.Pair;
 import me.sxmurai.inferno.utils.RenderUtils;
-import me.sxmurai.inferno.utils.Timer;
+import me.sxmurai.inferno.utils.timing.Timer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IProjectile;

@@ -4,7 +4,7 @@ import me.sxmurai.inferno.events.mc.UpdateEvent;
 import me.sxmurai.inferno.events.network.PacketEvent;
 import me.sxmurai.inferno.features.settings.Setting;
 import me.sxmurai.inferno.managers.modules.Module;
-import me.sxmurai.inferno.utils.Timer;
+import me.sxmurai.inferno.utils.timing.Timer;
 import net.minecraft.network.play.client.CPacketKeepAlive;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 

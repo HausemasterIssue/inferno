@@ -10,7 +10,7 @@ import me.sxmurai.inferno.features.modules.combat.TotemPopNotifier;
 import me.sxmurai.inferno.managers.commands.Command;
 import me.sxmurai.inferno.managers.commands.text.ChatColor;
 import me.sxmurai.inferno.managers.commands.text.TextBuilder;
-import me.sxmurai.inferno.utils.Timer;
+import me.sxmurai.inferno.utils.timing.Timer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
