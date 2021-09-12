@@ -17,7 +17,7 @@ public class AutoCrystal extends Module {
     public final Setting<Boolean> yawStep = this.register(new Setting<>("YawStep", true, (v) -> menu.getValue() == Menu.PLACE && place.getValue()));
     public final Setting<Float> yawStepTicks = this.register(new Setting<>("YawStepTicks", 1.0f, 1.0f, 10.0f, (v) -> menu.getValue() == Menu.PLACE && place.getValue() && yawStep.getValue()));
     public final Setting<Float> placeWallRange = this.register(new Setting<>("PlaceWallRange", 2.5f, 1.0f, 5.0f, (v) -> menu.getValue() == Menu.PLACE && place.getValue()));
-    public final Setting<Integer> placeDelay = this.register(new Setting<>("PlaceDelay", 2, 0, 20, (v) -> menu.getValue() == Menu.PLACE && place.getValue()));
+    public final Setting<Float> placeDelay = this.register(new Setting<>("PlaceDelay", 2.0, 0.0, 20.0, (v) -> menu.getValue() == Menu.PLACE && place.getValue()));
     public final Setting<Float> placeMinDamage = this.register(new Setting<>("PlaceMinDmg", 6.0f, 1.0f, 36.0f, (v) -> menu.getValue() == Menu.PLACE && place.getValue()));
     public final Setting<Float> placeMaxSelfDamage = this.register(new Setting<>("PlaceMaxSelfDmg", 10.0f, 1.0f, 36.0f, (v) -> menu.getValue() == Menu.PLACE && place.getValue()));
     public final Setting<Float> facePlaceHealth = this.register(new Setting<>("FacePlaceHealth", 16.0f, 1.0f, 36.0f, (v) -> menu.getValue() == Menu.PLACE && place.getValue()));
@@ -35,7 +35,7 @@ public class AutoCrystal extends Module {
     public final Setting<Boolean> destroy = this.register(new Setting<>("Destroy", true, (v) -> menu.getValue() == Menu.DESTROY));
     public final Setting<Float> destroyRange = this.register(new Setting<>("DestroyRange", 4.0f, 1.0f, 7.0f, (v) -> menu.getValue() == Menu.DESTROY && destroy.getValue()));
     public final Setting<Float> destroyWallRange = this.register(new Setting<>("DestroyWallRange", 3.5f, 1.0f, 5.0f, (v) -> menu.getValue() == Menu.DESTROY && destroy.getValue()));
-    public final Setting<Integer> destroyDelay = this.register(new Setting<>("DestroyDelay", 1, 0, 20, (v) -> menu.getValue() == Menu.DESTROY && destroy.getValue()));
+    public final Setting<Float> destroyDelay = this.register(new Setting<>("DestroyDelay", 1.0, 0.0, 20.0, (v) -> menu.getValue() == Menu.DESTROY && destroy.getValue()));
     public final Setting<Float> destroyMinDamage = this.register(new Setting<>("DestroyMinDmg", 6.5f, 1.0f, 36.0f, (v) -> menu.getValue() == Menu.DESTROY && destroy.getValue()));
     public final Setting<Float> destroyMaxSelfDamage = this.register(new Setting<>("DestroyMaxSelfDmg", 10.0f, 1.0f, 36.0f, (v) -> menu.getValue() == Menu.DESTROY && destroy.getValue()));
     public final Setting<Boolean> destroyRotate = this.register(new Setting<>("DestroyRotate", true, (v) -> menu.getValue() == Menu.DESTROY && destroy.getValue()));
