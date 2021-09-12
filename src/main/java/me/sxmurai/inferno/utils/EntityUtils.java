@@ -10,7 +10,10 @@ import net.minecraft.entity.passive.EntityAmbientCreature;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
+import net.minecraft.item.EnumAction;
+import org.lwjgl.input.Mouse;
 
 public class EntityUtils extends Feature {
     public static boolean isPlayer(Entity entity) {
@@ -50,10 +53,10 @@ public class EntityUtils extends Feature {
     }
 
     public static boolean isMending() {
-        return InventoryUtil.isHolding(Items.EXPERIENCE_BOTTLE) && Mouse.isButtonDown(1);
+        return InventoryUtils.isHolding(Items.EXPERIENCE_BOTTLE) && Mouse.isButtonDown(1);
     }
 
     public static boolean isMining() {
-        return InventoryUtil.isHolding(Items.DIAMOND_PICKAXE || Items.GOLDEN_PICKAXE || Items.IRON_PICKAXE || Items.STONE_PICKAXE || Items.WOODEN_PICKAXE) && mc.playerController.getIsHittingBlock();
+        return InventoryUtils.isHolding(Items.DIAMOND_PICKAXE) && mc.playerController.getIsHittingBlock();
     }
 }
