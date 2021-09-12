@@ -44,4 +44,16 @@ public class EntityUtils extends Feature {
 
         return ((EntityLiving) entity).getHealth() + ((EntityLiving) entity).getAbsorptionAmount();
     }
+    
+    public static boolean isEating() {
+        return mc.player.getHeldItemMainhand().getItemUseAction().equals(EnumAction.EAT) || mc.player.getHeldItemMainhand().getItemUseAction().equals(EnumAction.DRINK);
+    }
+
+    public static boolean isMending() {
+        return InventoryUtil.isHolding(Items.EXPERIENCE_BOTTLE) && Mouse.isButtonDown(1);
+    }
+
+    public static boolean isMining() {
+        return InventoryUtil.isHolding(Items.DIAMOND_PICKAXE || Items.GOLDEN_PICKAXE || Items.IRON_PICKAXE || Items.STONE_PICKAXE || Items.WOODEN_PICKAXE) && mc.playerController.getIsHittingBlock();
+    }
 }
