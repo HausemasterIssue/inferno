@@ -63,19 +63,7 @@ public class AntiAFK extends Module {
             }
 
             case 2: {
-                int handRandom = this.random(1, 2);
-                switch (handRandom) {
-                    case 1: {
-                        mc.player.swingArm(EnumHand.MAIN_HAND);
-                        break;
-                    }
-                        
-                    case 2: {
-                        mc.player.swingArm(EnumHand.OFF_HAND);
-                        break;
-                    }
-                        
-                }
+                mc.player.swingArm(RNG.nextBoolean() ? EnumHand.MAIN_HAND : EnumHand.OFF_HAND);
                 break;
             }
 
@@ -86,7 +74,6 @@ public class AntiAFK extends Module {
 
             case 4: {
                 mc.player.setSneaking(true);
-                // @todo: add a delay between sneaking and standing, maybe 1 sec?
                 mc.player.setSneaking(false);
                 break;
             }
