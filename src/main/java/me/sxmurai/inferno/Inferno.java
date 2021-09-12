@@ -19,6 +19,7 @@ public class Inferno {
     public static final String MOD_ID = "inferno";
     public static final String MOD_NAME = "Inferno";
     public static final String MOD_VER = "1.0.0";
+    public static final Build BUILD = Build.DEVELOPER;
     public static State state = State.NONE;
 
     public static final Logger LOGGER = LogManager.getLogger(Inferno.class);
@@ -112,5 +113,9 @@ public class Inferno {
 
     public enum State {
         NONE, LOADING, LOADED, UNLOADING, UNLOADED
+    }
+
+    public enum Build {
+        STABLE, BETA, DEVELOPER
     }
 }

@@ -3,6 +3,7 @@ package me.sxmurai.inferno.features.gui.hud;
 import me.sxmurai.inferno.features.gui.click.components.Container;
 import me.sxmurai.inferno.features.gui.hud.components.HudElementButton;
 import me.sxmurai.inferno.features.hud.TpsHudComponent;
+import me.sxmurai.inferno.features.hud.WatermarkHudComponent;
 import me.sxmurai.inferno.utils.ColorUtils;
 import me.sxmurai.inferno.utils.RenderUtils;
 import net.minecraft.client.gui.GuiScreen;
@@ -23,6 +24,7 @@ public class HUDEditorGuiScreen extends GuiScreen {
 
     public HUDEditorGuiScreen() {
         this.components.add(new TpsHudComponent());
+        this.components.add(new WatermarkHudComponent());
 
         this.container = new Container("Elements", 4.0f, 4.0f) {
             @Override
