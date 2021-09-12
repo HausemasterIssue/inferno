@@ -1,3 +1,9 @@
+---
+name: Feature Suggestion
+about: Suggest a feature to be added to the client
+labels: enhancement
+---
+
 <!-- Please add the proper labels before submitting the issue. Eg module if you're requesting a module, or command if you're requesting a command -->
 
 **What would you like to suggest?**
