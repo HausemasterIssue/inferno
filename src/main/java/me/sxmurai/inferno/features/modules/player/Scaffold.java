@@ -30,12 +30,9 @@ public class Scaffold extends Module {
     public final Setting<Boolean> offhand = this.register(new Setting<>("Offhand", true));
     public final Setting<Boolean> packet = this.register(new Setting<>("Packet", true));
     public final Setting<Boolean> tower = this.register(new Setting<>("Tower", false));
-    public final Setting<Boolean> stop = this.register(new Setting<>("Stop", true, (v) -> tower.getValue()));
     public final Setting<Boolean> rotate = this.register(new Setting<>("Rotate", true));
-    public final Setting<Boolean> normalize = this.register(new Setting<>("Normalize", true, (v) -> rotate.getValue()));
     public final Setting<Boolean> swing = this.register(new Setting<>("Swing", true));
     public final Setting<Boolean> silentSwitch = this.register(new Setting<>("SilentSwitch", false));
-    public final Setting<SwitchBack> switchBack = this.register(new Setting<>("SwitchBack", SwitchBack.LOOPEND));
 
     private final Timer timer = new Timer();
     private final Queue<Pair<BlockPos, EnumFacing>> blocks = new ConcurrentLinkedDeque<>();
@@ -99,7 +96,7 @@ public class Scaffold extends Module {
                     mc.player.motionZ *= 0.3;
                     mc.player.jump();
 
-                    if (stop.getValue() && timer.passedMs(1200L)) {
+                    if (timer.passedMs(1500L)) {
                         mc.player.motionY -= 0.28;
                         timer.reset();
                     }
@@ -112,12 +109,9 @@ public class Scaffold extends Module {
                 }
 
                 BlockUtil.place(p, hand, swing.getValue(), false, packet.getValue());
-                if (switchBack.getValue() == SwitchBack.PLACED) {
-                    InventoryUtils.switchTo(oldSlot, silentSwitch.getValue());
-                }
             }
 
-            if (switchBack.getValue() == SwitchBack.LOOPEND) {
+            if (hand == EnumHand.MAIN_HAND) {
                 InventoryUtils.switchTo(oldSlot, silentSwitch.getValue());
             }
         }
@@ -149,9 +143,5 @@ public class Scaffold extends Module {
     public Pair<BlockPos, EnumFacing> add(Pair<BlockPos, EnumFacing> pair) {
         blocks.add(pair);
         return pair;
-    }
-
-    public enum SwitchBack {
-        LOOPEND, PLACED
     }
 }
