@@ -63,7 +63,7 @@ public class AntiAFK extends Module {
             }
 
             case 2: {
-                mc.player.swingArm(EnumHand.MAIN_HAND);
+                mc.player.swingArm(RNG.nextBoolean() ? EnumHand.MAIN_HAND : EnumHand.OFF_HAND);
                 break;
             }
 
@@ -79,7 +79,7 @@ public class AntiAFK extends Module {
             }
 
             case 5: {
-                mc.player.sendChatMessage(this.random(4872, 9357653) + " im sending this message because I have AntiAFk on, interesting isnt it " + this.random(100, 74643));
+                mc.player.sendChatMessage(this.random(4872, 9357653) + " im sending this message because I have AntiAFK on, interesting isnt it " + this.random(100, 74643));
                 break;
             }
         }
