@@ -32,8 +32,6 @@ public class Inferno {
     public static FriendManager friendManager;
     public static MacroManager macroManager;
 
-    public static RotationManager rotationManager;
-
     public static ServerManager serverManager;
     public static TotemPopManager totemPopManager;
     private static EventManager eventHelperManager;
@@ -75,8 +73,6 @@ public class Inferno {
         friendManager = new FriendManager();
         macroManager = new MacroManager();
 
-        rotationManager = new RotationManager();
-
         serverManager = new ServerManager();
         totemPopManager = new TotemPopManager();
         eventHelperManager = new EventManager();
@@ -86,7 +82,6 @@ public class Inferno {
         MinecraftForge.EVENT_BUS.register(moduleManager);
         MinecraftForge.EVENT_BUS.register(commandManager);
         MinecraftForge.EVENT_BUS.register(totemPopManager);
-        MinecraftForge.EVENT_BUS.register(rotationManager);
         MinecraftForge.EVENT_BUS.register(serverManager);
 
         LOGGER.info("Loaded {} v{}!", MOD_NAME, MOD_VER);
