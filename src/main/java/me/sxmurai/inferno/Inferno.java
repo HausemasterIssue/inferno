@@ -1,6 +1,7 @@
 package me.sxmurai.inferno;
 
 import me.sxmurai.inferno.managers.*;
+import me.sxmurai.inferno.managers.commands.CommandManager;
 import me.sxmurai.inferno.managers.friends.FriendManager;
 import me.sxmurai.inferno.managers.modules.ModuleManager;
 import net.minecraft.client.Minecraft;
@@ -24,6 +25,7 @@ public class Inferno {
     public static Minecraft mc;
 
     public static ModuleManager moduleManager;
+    public static CommandManager commandManager;
     public static TextManager textManager;
     public static FriendManager friendManager;
 
@@ -63,6 +65,7 @@ public class Inferno {
         }
 
         moduleManager = new ModuleManager();
+        commandManager = new CommandManager();
         textManager = new TextManager();
         friendManager = new FriendManager();
 
@@ -73,6 +76,7 @@ public class Inferno {
 
         MinecraftForge.EVENT_BUS.register(eventHelperManager);
         MinecraftForge.EVENT_BUS.register(moduleManager);
+        MinecraftForge.EVENT_BUS.register(commandManager);
         MinecraftForge.EVENT_BUS.register(totemPopManager);
         MinecraftForge.EVENT_BUS.register(serverManager);
 

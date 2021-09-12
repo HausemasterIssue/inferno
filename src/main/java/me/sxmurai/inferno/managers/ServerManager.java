@@ -46,4 +46,12 @@ public class ServerManager extends Feature {
     public float getTps() {
         return tps;
     }
+
+    public int getLatency() {
+        try {
+            return mc.player.connection.getPlayerInfo(mc.player.entityUniqueID).getResponseTime();
+        } catch (Exception e) {
+            return 0;
+        }
+    }
 }
