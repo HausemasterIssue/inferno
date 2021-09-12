@@ -4,10 +4,11 @@ import me.sxmurai.inferno.Inferno;
 import me.sxmurai.inferno.features.Feature;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
 import org.lwjgl.opengl.GL11;
 
@@ -140,6 +141,31 @@ public class RenderUtils extends Feature {
         GlStateManager.enableTexture2D();
     }
 
+    public static void drawFilledBox(AxisAlignedBB box, int color) {
+        GlStateManager.pushMatrix();
+        GlStateManager.enableBlend();
+        GlStateManager.disableDepth();
+        GlStateManager.tryBlendFuncSeparate(770, 771, 0, 1);
+        GlStateManager.disableTexture2D();
+        GlStateManager.depthMask(false);
+        GL11.glEnable(GL11.GL_LINE_SMOOTH);
+        GL11.glHint(GL11.GL_LINE_SMOOTH_HINT, GL11.GL_NICEST);
+
+        float alpha = (color >> 24 & 0xff) / 255f;
+        float red = (color >> 16 & 0xff) / 255f;
+        float green = (color >> 8 & 0xff) / 255f;
+        float blue = (color & 0xff) / 255f;
+
+        RenderGlobal.renderFilledBox(box, red, green, blue, alpha);
+
+        GL11.glDisable(GL11.GL_LINE_SMOOTH);
+        GlStateManager.depthMask(true);
+        GlStateManager.enableDepth();
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableBlend();
+        GlStateManager.popMatrix();
+    }
+
     public static double interpolate(double start, double end) {
         return end + (start - end) * mc.getRenderPartialTicks();
     }
@@ -154,6 +180,10 @@ public class RenderUtils extends Feature {
 
     public static Vec3d toScreen(Vec3d interpolated) {
         return interpolated.subtract(mc.renderManager.renderPosX, mc.renderManager.renderPosY, mc.renderManager.renderPosZ);
+    }
+
+    public static Vec3d screen() {
+        return new Vec3d(-mc.renderManager.renderPosX, -mc.renderManager.renderPosY, -mc.renderManager.renderPosZ);
     }
 
     public static float centerVertically(float y, float height) {

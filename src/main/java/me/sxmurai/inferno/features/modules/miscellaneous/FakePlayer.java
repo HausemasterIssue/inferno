@@ -1,7 +1,10 @@
 package me.sxmurai.inferno.features.modules.miscellaneous;
 
+import com.mojang.authlib.GameProfile;
 import me.sxmurai.inferno.managers.modules.Module;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
+
+import java.util.UUID;
 
 @Module.Define(name = "FakePlayer", description = "Spawns in a dummy player to configure on")
 public class FakePlayer extends Module {
@@ -16,7 +19,7 @@ public class FakePlayer extends Module {
             return;
         }
 
-        fakePlayer = new EntityOtherPlayerMP(mc.world, mc.player.getGameProfile());
+        fakePlayer = new EntityOtherPlayerMP(mc.world, new GameProfile(UUID.randomUUID(), "Fit"));
         fakePlayer.copyLocationAndAnglesFrom(mc.player);
         fakePlayer.inventory.copyInventory(mc.player.inventory);
         fakePlayer.setEntityId(-694201337);

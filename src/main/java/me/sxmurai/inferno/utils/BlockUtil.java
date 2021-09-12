@@ -100,6 +100,10 @@ public class BlockUtil extends Feature {
         return mc.world.getBlockState(pos).getBlock();
     }
 
+    public static boolean canSeePos(BlockPos pos) {
+        return mc.world.rayTraceBlocks(new Vec3d(mc.player.posX, mc.player.posY + mc.player.getEyeHeight(), mc.player.posZ), new Vec3d(pos), false, true, false) == null;
+    }
+
     public static void place(BlockPos pos, EnumHand hand, boolean swing, boolean sneak, boolean packetPlace) {
         if (sneak && !mc.player.isSneaking()) {
             mc.player.setSneaking(true);

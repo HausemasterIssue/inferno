@@ -73,6 +73,10 @@ public class ModuleButton extends Button {
         super.mouseClicked(mouseX, mouseY, button);
         if (this.expanded) {
             for (Component component : this.components) {
+                if (!component.isVisible()) {
+                    continue;
+                }
+
                 component.mouseClicked(mouseX, mouseY, button);
             }
         }
@@ -82,6 +86,10 @@ public class ModuleButton extends Button {
     public void keyTyped(char character, int keyCode) {
         if (this.expanded) {
             for (Component component : this.components) {
+                if (!component.isVisible()) {
+                    continue;
+                }
+
                 component.keyTyped(character, keyCode);
             }
         }

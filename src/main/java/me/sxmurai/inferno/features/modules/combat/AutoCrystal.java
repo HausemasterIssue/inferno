@@ -1,19 +1,13 @@
 package me.sxmurai.inferno.features.modules.combat;
 
-import me.sxmurai.inferno.events.mc.UpdateEvent;
 import me.sxmurai.inferno.features.settings.Setting;
 import me.sxmurai.inferno.managers.modules.Module;
 import me.sxmurai.inferno.utils.ColorUtils;
-import me.sxmurai.inferno.utils.RotationUtils;
 import me.sxmurai.inferno.utils.Timer;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.network.play.client.CPacketUseEntity;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedDeque;
@@ -82,33 +76,6 @@ public class AutoCrystal extends Module {
     private final Timer destroyTimer = new Timer();
     private final Timer predictTimer = new Timer();
 
-    @Override
-    protected void onDeactivated() {
-        target = null;
-        currentPos = null;
-        currentDamage = 0.0f;
-        brokenCrystals = 0;
-        destroyPackets.clear();
-        queuedPositions.clear();
-        cooldownTimer.reset();
-        placeTimer.reset();
-        destroyTimer.reset();
-    }
-
-    @SubscribeEvent
-    public void onUpdate(UpdateEvent event) {
-
-    }
-
-    private void lookAt(Entity entity) {
-        RotationUtils.Rotation rotation = RotationUtils.calcRotations(mc.player.getPositionEyes(mc.getRenderPartialTicks()), entity.getPositionVector());
-        mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rotation.getYaw(), rotation.getPitch(true), mc.player.onGround));
-    }
-
-    private void lookAt(BlockPos pos) {
-        RotationUtils.Rotation rotation = RotationUtils.calcRotations(mc.player.getPositionEyes(mc.getRenderPartialTicks()), new Vec3d(pos));
-        mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rotation.getYaw(), rotation.getPitch(true), mc.player.onGround));
-    }
 
     public enum Menu {
         PLACE, DESTROY, TARGET, MISC, RENDER
@@ -140,5 +107,29 @@ public class AutoCrystal extends Module {
 
     public enum RenderType {
         NONE, FILLED, OUTLINE, BOTH
+    }
+
+    private static class Result {
+        private final EntityPlayer target;
+        private final BlockPos pos;
+        private final float damage;
+
+        public Result(EntityPlayer target, BlockPos pos, float damage) {
+            this.target = target;
+            this.pos = pos;
+            this.damage = damage;
+        }
+
+        public EntityPlayer getTarget() {
+            return target;
+        }
+
+        public BlockPos getPos() {
+            return pos;
+        }
+
+        public float getDamage() {
+            return damage;
+        }
     }
 }

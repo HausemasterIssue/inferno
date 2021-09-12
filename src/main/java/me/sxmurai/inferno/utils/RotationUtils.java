@@ -67,11 +67,7 @@ public class RotationUtils extends Feature {
         }
 
         public float getPitch() {
-            return getPitch(false);
-        }
-
-        public float getPitch(boolean normalize) {
-            return normalize ? MathHelper.normalizeAngle((int) pitch, 360) : pitch;
+            return this.pitch;
         }
     }
 }
