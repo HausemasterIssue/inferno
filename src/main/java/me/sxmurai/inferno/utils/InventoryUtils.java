@@ -64,6 +64,21 @@ public class InventoryUtils extends Feature {
         return -1;
     }
 
+    public static int getHotbarBlockSlot(Class<? extends Block> block, boolean offhand) {
+        if (offhand && mc.player.getHeldItemOffhand().item instanceof ItemBlock && block.isInstance(((ItemBlock) mc.player.getHeldItemOffhand().item).block)) {
+            return 45;
+        }
+
+        for (int i = 0; i < 9; ++i) {
+            ItemStack stack = mc.player.inventory.getStackInSlot(i);
+            if (!stack.isEmpty && stack.item instanceof ItemBlock && block.isInstance(((ItemBlock) stack.item).block)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
     public static int getInventoryItemSlot(Item item, boolean hotbar) {
         for (int i = hotbar ? 0 : 9; i < 39; ++i) {
             ItemStack stack = mc.player.inventory.getStackInSlot(i);
