@@ -63,7 +63,19 @@ public class AntiAFK extends Module {
             }
 
             case 2: {
-                mc.player.swingArm(EnumHand.MAIN_HAND);
+                int handRandom = this.random(1, 2);
+                switch (handRandom) {
+                    case 1: {
+                        mc.player.swingArm(EnumHand.MAIN_HAND);
+                        break;
+                    }
+                        
+                    case 2: {
+                        mc.player.swingArm(EnumHand.OFF_HAND);
+                        break;
+                    }
+                        
+                }
                 break;
             }
 
@@ -74,12 +86,13 @@ public class AntiAFK extends Module {
 
             case 4: {
                 mc.player.setSneaking(true);
+                // @todo: add a delay between sneaking and standing, maybe 1 sec?
                 mc.player.setSneaking(false);
                 break;
             }
 
             case 5: {
-                mc.player.sendChatMessage(this.random(4872, 9357653) + " im sending this message because I have AntiAFk on, interesting isnt it " + this.random(100, 74643));
+                mc.player.sendChatMessage(this.random(4872, 9357653) + " im sending this message because I have AntiAFK on, interesting isnt it " + this.random(100, 74643));
                 break;
             }
         }
