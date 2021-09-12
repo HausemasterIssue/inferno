@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Container extends Component {
-    protected final ArrayList<ModuleButton> buttons = new ArrayList<>();
+    protected final ArrayList<Component> buttons = new ArrayList<>();
 
     private boolean expanded = true;
     private boolean dragging = false;
@@ -41,7 +41,7 @@ public class Container extends Component {
             RenderUtils.drawRect(this.x, this.y + this.height, this.width, this.getTotalHeight(), new Color(35, 39, 42).getRGB());
 
             float positionY = (this.y + this.height) + 1.5f;
-            for (ModuleButton button : this.buttons) {
+            for (Component button : this.buttons) {
                 button.setX(this.x + 2.0f);
                 button.setY(positionY);
                 button.setWidth(this.width - 4.0f);
@@ -70,7 +70,7 @@ public class Container extends Component {
         }
 
         if (this.expanded) {
-            for (ModuleButton b : this.buttons) {
+            for (Component b : this.buttons) {
                 b.mouseClicked(mouseX, mouseY, button);
             }
         }
@@ -86,13 +86,13 @@ public class Container extends Component {
     @Override
     public void keyTyped(char character, int keyCode) {
         if (this.expanded) {
-            for (ModuleButton button : this.buttons) {
+            for (Component button : this.buttons) {
                 button.keyTyped(character, keyCode);
             }
         }
     }
 
     private float getTotalHeight() {
-        return this.expanded ? this.buttons.stream().map(ModuleButton::getHeight).reduce(0.0f, (a, b) -> b + (a + 1.5f)) : 0.0f;
+        return this.expanded ? this.buttons.stream().map(Component::getHeight).reduce(0.0f, (a, b) -> b + (a + 1.5f)) : 0.0f;
     }
 }
