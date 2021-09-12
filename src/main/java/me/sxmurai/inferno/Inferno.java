@@ -3,6 +3,7 @@ package me.sxmurai.inferno;
 import me.sxmurai.inferno.managers.*;
 import me.sxmurai.inferno.managers.commands.CommandManager;
 import me.sxmurai.inferno.managers.friends.FriendManager;
+import me.sxmurai.inferno.managers.macros.MacroManager;
 import me.sxmurai.inferno.managers.modules.ModuleManager;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
@@ -29,6 +30,7 @@ public class Inferno {
     public static CommandManager commandManager;
     public static TextManager textManager;
     public static FriendManager friendManager;
+    public static MacroManager macroManager;
 
     public static ServerManager serverManager;
     public static TotemPopManager totemPopManager;
@@ -69,6 +71,7 @@ public class Inferno {
         commandManager = new CommandManager();
         textManager = new TextManager();
         friendManager = new FriendManager();
+        macroManager = new MacroManager();
 
         serverManager = new ServerManager();
         totemPopManager = new TotemPopManager();
