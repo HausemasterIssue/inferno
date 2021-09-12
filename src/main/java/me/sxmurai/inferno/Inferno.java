@@ -42,6 +42,7 @@ public class Inferno {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         LOGGER.info("penis");
+        Display.setTitle("Inferno v1.0.0");
     }
 
     @EventHandler
