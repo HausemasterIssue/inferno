@@ -33,6 +33,7 @@ public class ModuleManager {
         this.modules.add(new TotemPopNotifier());
 
         // miscellaneous
+        this.modules.add(new ExtraTab());
         this.modules.add(new FakePlayer());
         this.modules.add(new MiddleClick());
         this.modules.add(new MountBypass());

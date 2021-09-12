@@ -16,6 +16,7 @@
 
     "network.MixinNetworkManager",
 
+    "render.gui.MixinGuiPlayerTabOverlay",
     "render.MixinEntityRenderer",
     "render.MixinItemRenderer",
     "render.MixinRenderEnderCrystal",
