@@ -4,10 +4,13 @@ import me.sxmurai.inferno.events.mc.UpdateEvent;
 import me.sxmurai.inferno.features.settings.Setting;
 import me.sxmurai.inferno.managers.modules.Module;
 import me.sxmurai.inferno.utils.timing.Timer;
+import net.minecraft.network.play.client.CPacketEntityAction;
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.util.Arrays;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Module.Define(name = "AntiAFK", description = "Stops you from being kicked for being AFK", category = Module.Category.PLAYER)
 public class AntiAFK extends Module {
@@ -22,9 +25,31 @@ public class AntiAFK extends Module {
     public final Setting<Integer> randomDelay = this.register(new Setting<>("RandomDelay", 5, 1, 30));
 
     private final Timer timer = new Timer();
+    private int sneakTicks = 0;
+    private int requiredSneakTicks = 0;
+
+    @Override
+    protected void onDeactivated() {
+        this.timer.reset();
+        if (this.sneakTicks != 0) {
+            mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.STOP_SNEAKING));
+        }
+
+        this.sneakTicks = 0;
+        this.requiredSneakTicks = 0;
+    }
 
     @SubscribeEvent
     public void onUpdate(UpdateEvent event) {
+        if (this.sneak.getValue()) {
+            ++this.sneakTicks;
+            if (this.sneakTicks >= this.requiredSneakTicks) {
+                this.sneakTicks = 0;
+                this.requiredSneakTicks = 0;
+                mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.STOP_SNEAKING));
+            }
+        }
+
         if (this.timer.passedS(this.delay.getValue() + RNG.nextInt(this.randomDelay.getValue()))) {
             this.timer.reset();
 
@@ -73,17 +98,35 @@ public class AntiAFK extends Module {
             }
 
             case 4: {
-                mc.player.setSneaking(true);
-                mc.player.setSneaking(false);
+                mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.START_SNEAKING));
+
+                this.sneakTicks = 0;
+                this.requiredSneakTicks = this.random(1, 3);
                 break;
             }
 
             case 5: {
-                mc.player.sendChatMessage(this.random(4872, 9357653) + " im sending this message because I have AntiAFK on, interesting isnt it " + this.random(100, 74643));
+                mc.player.sendChatMessage(this.weDoABitOfTrolling("how fun, I have AntiAFK on and i'm sending this to not get kicked! fun!!" + this.random(2489, 92472)));
                 break;
             }
         }
 
+    }
+
+    private String weDoABitOfTrolling(String text) {
+        return Arrays.stream(text.split("")).map((str) -> {
+            String s = RNG.nextBoolean() ? str.toUpperCase() : str.toLowerCase();
+
+            if (RNG.nextBoolean()) {
+                s = s.replaceAll("o", "0");
+            }
+
+            if (RNG.nextBoolean()) {
+                s = s.replaceAll("i", "1");
+            }
+
+            return s;
+        }).collect(Collectors.joining(""));
     }
 
     private int random(int min, int max) {
