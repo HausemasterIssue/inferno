@@ -9,21 +9,21 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public abstract class BaseConfig {
-    private static final ScheduledExecutorService SERVICE = Executors.newSingleThreadScheduledExecutor();
+    private final ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
 
     protected final Path path;
     protected final FileManager files = FileManager.getInstance();
 
     public BaseConfig(Path path) {
         this.path = path;
-        SERVICE.scheduleAtFixedRate(this::save, 5, 5, TimeUnit.MINUTES);
+        this.service.scheduleAtFixedRate(this::save, 5, 5, TimeUnit.MINUTES);
     }
 
     public abstract void save();
     public abstract void load();
 
     public void stop() {
-        SERVICE.shutdown();
+        this.service.shutdown();
         this.save();
     }
 
