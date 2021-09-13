@@ -1,6 +1,7 @@
 package me.sxmurai.inferno;
 
 import me.sxmurai.inferno.managers.*;
+import me.sxmurai.inferno.managers.alts.AltManager;
 import me.sxmurai.inferno.managers.commands.CommandManager;
 import me.sxmurai.inferno.managers.friends.FriendManager;
 import me.sxmurai.inferno.managers.macros.MacroManager;
@@ -31,6 +32,7 @@ public class Inferno {
     public static TextManager textManager;
     public static FriendManager friendManager;
     public static MacroManager macroManager;
+    public static AltManager altManager;
 
     public static ServerManager serverManager;
     public static TotemPopManager totemPopManager;
@@ -72,6 +74,7 @@ public class Inferno {
         textManager = new TextManager();
         friendManager = new FriendManager();
         macroManager = new MacroManager();
+        altManager = new AltManager();
 
         serverManager = new ServerManager();
         totemPopManager = new TotemPopManager();
@@ -96,20 +99,29 @@ public class Inferno {
 
         state = State.UNLOADING;
 
-        LOGGER.info("Unloading and saving configurations...");
+        LOGGER.info("Unloading managers and saving configurations...");
+
+        textManager = null;
+        friendManager = null; // @todo save this
+        altManager = null; // @todo save this
+        xrayManager = null; // @todo save this
 
         moduleManager.unload();
         MinecraftForge.EVENT_BUS.unregister(moduleManager);
         moduleManager = null;
 
-        textManager = null;
-        friendManager = null; // @todo save this
+        MinecraftForge.EVENT_BUS.unregister(commandManager);
+        commandManager = null;
 
         MinecraftForge.EVENT_BUS.unregister(totemPopManager);
         totemPopManager = null;
 
         MinecraftForge.EVENT_BUS.unregister(eventHelperManager);
         eventHelperManager = null;
+
+        MinecraftForge.EVENT_BUS.unregister(macroManager);
+        macroManager.unload();
+        macroManager = null;
 
         state = State.UNLOADED;
     }
