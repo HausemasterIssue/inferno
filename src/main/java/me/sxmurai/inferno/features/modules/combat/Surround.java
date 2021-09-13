@@ -117,6 +117,7 @@ public class Surround extends Module {
 
         int slot = InventoryUtils.getHotbarBlockSlot(Blocks.OBSIDIAN, true);
         if (slot == -1) {
+            Command.send(new TextBuilder().append(ChatColor.Dark_Gray, "You have no obsidian in your hotbar!")); // i think this is where it checks if u have obi idk
             this.toggle();
             return;
         }
