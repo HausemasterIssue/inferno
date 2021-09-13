@@ -36,7 +36,7 @@ public class Criticals extends Module {
                         break;
                     }
 
-                    case TOOBEE: {
+                    case BYPASS: {
                         mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX, mc.player.posY + 0.062602401692772D, mc.player.posZ, false));
                         mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX, mc.player.posY + 0.0726023996066094D, mc.player.posZ, false));
                         mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX, mc.player.posY, mc.player.posZ, false));
@@ -48,6 +48,6 @@ public class Criticals extends Module {
     }
 
     public enum Mode {
-        PACKET, JUMP, TOOBEE
+        PACKET, JUMP, BYPASS
     }
 }
