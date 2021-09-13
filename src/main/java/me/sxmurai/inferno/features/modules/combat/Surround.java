@@ -38,7 +38,7 @@ public class Surround extends Module {
     public final Setting<Boolean> airPlace = this.register(new Setting<>("AirPlace", false)); // @todo
     public final Setting<Boolean> helperBlocks = this.register(new Setting<>("HelperBlocks", true, (v) -> !airPlace.getValue())); // @todo
     public final Setting<Boolean> sneak = this.register(new Setting<>("Sneak", true));
-    public final Setting<Integer> blocksPerTick = this.register(new Setting<>("BlocksPerTick", 1, 1, 3));
+    public final Setting<Integer> blocksPerTick = this.register(new Setting<>("BlocksPerTick", 1, 1, 4));
 
     private final ArrayList<BlockPos> queue = new ArrayList<>();
     private boolean finished = false;
@@ -60,8 +60,11 @@ public class Surround extends Module {
             this.toggle();
         } else {
             if (this.center.getValue()) {
-                mc.player.posX = Math.floor(mc.player.posX) + 0.5;
-                mc.player.posZ = Math.floor(mc.player.posZ) + 0.5;
+                //mc.player.posX = Math.floor(mc.player.posX) + 0.5;
+                //mc.player.posZ = Math.floor(mc.player.posZ) + 0.5;
+                mc.player.motionX = (center.x - mc.player.posX) / 2;
+                mc.player.motionZ = (center.z - mc.player.posZ) / 2;
+                // better center?
             }
 
             if (this.noAutoCrystal.getValue()) {
