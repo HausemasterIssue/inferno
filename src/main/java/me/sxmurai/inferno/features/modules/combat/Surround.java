@@ -8,12 +8,9 @@ import me.sxmurai.inferno.managers.HoleManager;
 import me.sxmurai.inferno.managers.modules.Module;
 import me.sxmurai.inferno.utils.BlockUtil;
 import me.sxmurai.inferno.utils.InventoryUtils;
-import me.sxmurai.inferno.utils.RotationUtils;
 import net.minecraft.init.Blocks;
-import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.ArrayList;

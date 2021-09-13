@@ -8,7 +8,6 @@ import me.sxmurai.inferno.managers.commands.text.TextBuilder;
 import me.sxmurai.inferno.managers.modules.Module;
 import me.sxmurai.inferno.utils.BlockUtil;
 import me.sxmurai.inferno.utils.InventoryUtils;
-import me.sxmurai.inferno.utils.RotationUtils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -17,7 +16,6 @@ import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "Burrow", description = "becomes cringe and burrows", category = Module.Category.COMBAT)
