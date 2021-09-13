@@ -85,7 +85,9 @@ public class ModulesConfig extends BaseConfig {
 
                 Object value = this.get(settings, settingKey, setting.getDefaultValue());
                 if (setting.getValue() instanceof Enum) {
-                    setting.setValue(new EnumConverter(((Enum) setting.getValue()).getClass()).doBackward((String) value));
+                    try {
+                        setting.setValue(new EnumConverter(((Enum) setting.getValue()).getClass()).doBackward((String) value));
+                    } catch (Exception ignored) { }
                 } else if (setting.getValue() instanceof Float) {
                     setting.setValue(settings.getFloat(settingKey));
                 } else if (setting.getValue() instanceof Double) {
