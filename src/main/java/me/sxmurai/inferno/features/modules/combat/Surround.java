@@ -60,11 +60,8 @@ public class Surround extends Module {
             this.toggle();
         } else {
             if (this.center.getValue()) {
-                //mc.player.posX = Math.floor(mc.player.posX) + 0.5;
-                //mc.player.posZ = Math.floor(mc.player.posZ) + 0.5;
-                mc.player.motionX = (center.x - mc.player.posX) / 2;
-                mc.player.motionZ = (center.z - mc.player.posZ) / 2;
-                // better center?
+                mc.player.motionX = ((Math.floor(mc.player.posX) + 0.5) - mc.player.posX) / 2;
+                mc.player.motionZ = ((Math.floor(mc.player.posZ) + 0.5) - mc.player.posZ) / 2;
             }
 
             if (this.noAutoCrystal.getValue()) {
