@@ -103,14 +103,20 @@ public class InventoryUtils extends Feature {
     public static class Task {
         private final int slot;
         private final boolean updateController;
+        private final boolean shiftClick;
 
-        public Task(int slot, boolean updateController) {
+        public Task(int slot, boolean updateController, boolean shiftClick) {
             this.slot = slot;
             this.updateController = updateController;
+            this.shiftClick = shiftClick;
+        }
+
+        public Task(int slot, boolean updateController) {
+            this(slot, updateController, false);
         }
 
         public void run() {
-            mc.playerController.windowClick(0, slot, 0, ClickType.PICKUP, mc.player);
+            mc.playerController.windowClick(0, this.slot, 0, this.shiftClick ? ClickType.QUICK_MOVE : ClickType.PICKUP, mc.player);
             if (updateController) {
                 mc.playerController.updateController();
             }

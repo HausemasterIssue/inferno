@@ -90,12 +90,7 @@ public class Burrow extends Module {
                     mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX, mc.player.posY + 1.00133597911214, mc.player.posZ, true));
                     mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX, mc.player.posY + 1.16610926093821, mc.player.posZ, true));
 
-                    if (rotate.getValue()) {
-                        RotationUtils.Rotation rotation = RotationUtils.calcRotations(mc.player.getPositionEyes(mc.getRenderPartialTicks()), new Vec3d(origin).add(0.5, -0.5, 0.5));
-                        mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rotation.getYaw(), rotation.getPitch(), mc.player.onGround));
-                    }
-
-                    BlockUtil.place(origin, hand, swing.getValue(), true, packetPlace.getValue());
+                    BlockUtil.place(origin, hand, swing.getValue(), true, packetPlace.getValue(), this.rotate.getValue());
 
                     mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX, mc.player.posY + rubberband.getValue(), mc.player.posZ, true));
                     break;
@@ -103,13 +98,7 @@ public class Burrow extends Module {
 
                 case MOTION: {
                     mc.player.jump();
-
-                    if (rotate.getValue()) {
-                        RotationUtils.Rotation rotation = RotationUtils.calcRotations(mc.player.getPositionEyes(mc.getRenderPartialTicks()), new Vec3d(origin).add(0.5, -0.5, 0.5));
-                        mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rotation.getYaw(), rotation.getPitch(), mc.player.onGround));
-                    }
-
-                    BlockUtil.place(origin, hand, swing.getValue(), true, packetPlace.getValue());
+                    BlockUtil.place(origin, hand, swing.getValue(), true, packetPlace.getValue(), this.rotate.getValue());
                     mc.player.motionY = rubberband.getValue();
                     break;
                 }
@@ -118,12 +107,7 @@ public class Burrow extends Module {
                     mc.player.connection.sendPacket(new CPacketPlayer.Position(origin.getX(), origin.getY() + rubberband.getValue().doubleValue(), origin.getZ(), true));
                     mc.player.setPosition(origin.getX(), origin.getY() + rubberband.getValue().doubleValue(), origin.getZ());
 
-                    if (rotate.getValue()) {
-                        RotationUtils.Rotation rotation = RotationUtils.calcRotations(mc.player.getPositionEyes(mc.getRenderPartialTicks()), new Vec3d(origin).add(0.5, -0.5, 0.5));
-                        mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rotation.getYaw(), rotation.getPitch(), mc.player.onGround));
-                    }
-
-                    BlockUtil.place(origin, hand, swing.getValue(), true, packetPlace.getValue());
+                    BlockUtil.place(origin, hand, swing.getValue(), true, packetPlace.getValue(), this.rotate.getValue());
                     mc.player.setPosition(origin.getX(), origin.getY(), origin.getZ());
                     break;
                 }

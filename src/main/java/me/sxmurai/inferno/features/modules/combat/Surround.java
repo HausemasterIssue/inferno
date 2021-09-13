@@ -35,8 +35,6 @@ public class Surround extends Module {
     public final Setting<Boolean> rotate = this.register(new Setting<>("Rotate", true));
     public final Setting<Boolean> swing = this.register(new Setting<>("Swing", true));
     public final Setting<Boolean> packet = this.register(new Setting<>("Packet", false));
-    public final Setting<Boolean> airPlace = this.register(new Setting<>("AirPlace", false)); // @todo
-    public final Setting<Boolean> helperBlocks = this.register(new Setting<>("HelperBlocks", true, (v) -> !airPlace.getValue())); // @todo
     public final Setting<Boolean> sneak = this.register(new Setting<>("Sneak", true));
     public final Setting<Integer> blocksPerTick = this.register(new Setting<>("BlocksPerTick", 1, 1, 3));
 
@@ -152,7 +150,9 @@ public class Surround extends Module {
                 BlockPos pos = this.queue.get(i);
 
                 this.place(pos);
-                this.queue.remove(pos);
+                if (!mc.world.isAirBlock(pos)) {
+                    this.queue.remove(pos);
+                }
 
                 ++this.placed;
                 if (this.placed > this.blocksPerTick.getValue()) {
@@ -175,12 +175,7 @@ public class Surround extends Module {
     }
 
     private void place(BlockPos pos) {
-        if (this.rotate.getValue()) {
-            RotationUtils.Rotation rotation = RotationUtils.calcRotations(mc.player.getPositionEyes(mc.getRenderPartialTicks()), new Vec3d(pos.x + 0.5, pos.y - 0.5, pos.z + 0.5));
-            mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rotation.getYaw(), rotation.getPitch(), mc.player.onGround));
-        }
-
-        BlockUtil.place(pos, this.hand, this.swing.getValue(), this.sneak.getValue(), this.packet.getValue());
+        BlockUtil.place(pos, this.hand, this.swing.getValue(), this.sneak.getValue(), this.packet.getValue(), this.rotate.getValue());
     }
 
     public enum Toggle {

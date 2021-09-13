@@ -102,13 +102,7 @@ public class Scaffold extends Module {
                     }
                 }
 
-                if (rotate.getValue()) {
-                    RotationUtils.Rotation rotation = RotationUtils.calcRotations(mc.player.getPositionEyes(mc.getRenderPartialTicks()), new Vec3d(pos.x + 0.5, pos.y - 0.5, pos.z + 0.5));
-                    mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rotation.getYaw(), rotation.getPitch(), mc.player.onGround));
-                    mc.player.rotationYawHead = rotation.getYaw();
-                }
-
-                BlockUtil.place(p, hand, swing.getValue(), false, packet.getValue());
+                BlockUtil.place(p, hand, swing.getValue(), false, packet.getValue(), this.rotate.getValue());
             }
 
             if (hand == EnumHand.MAIN_HAND) {

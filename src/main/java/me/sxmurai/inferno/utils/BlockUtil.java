@@ -4,8 +4,10 @@ import me.sxmurai.inferno.features.Feature;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityEnderCrystal;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.network.play.client.CPacketEntityAction;
+import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.network.play.client.CPacketPlayerTryUseItemOnBlock;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -104,58 +106,75 @@ public class BlockUtil extends Feature {
         return mc.world.rayTraceBlocks(new Vec3d(mc.player.posX, mc.player.posY + mc.player.getEyeHeight(), mc.player.posZ), new Vec3d(pos), false, true, false) == null;
     }
 
-    public static void place(BlockPos pos, EnumHand hand, boolean swing, boolean sneak, boolean packetPlace) {
-        if (sneak && !mc.player.isSneaking()) {
-            mc.player.setSneaking(true);
-            mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.START_SNEAKING));
-        }
+    public static void place(BlockPos pos, EnumHand hand, boolean swing, boolean sneak, boolean packetPlace, boolean rotate) {
+        for (EnumFacing facing : EnumFacing.values()) {
+            BlockPos neighbor = pos.offset(facing);
+            if (!mc.world.isAirBlock(neighbor) && intersectsWith(neighbor)) {
+                continue;
+            }
 
-        RayTraceResult result = mc.world.rayTraceBlocks(mc.player.getPositionVector().add(0.0, mc.player.getEyeHeight(), 0.0), new Vec3d(pos).add(0.5, 0.5, 0.5));
+            if (sneak) {
+                mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.START_SNEAKING));
+            }
 
-        EnumFacing facing = result == null || result.sideHit == null ? EnumFacing.UP : result.sideHit;
-        Vec3d hitVec = result == null ? new Vec3d(pos.offset(facing)).add(0.5, 0.5, 0.5).add(new Vec3d(facing.getOpposite().getDirectionVec()).scale(0.5)) : result.hitVec;
+            Vec3d hitVec = new Vec3d(neighbor.x + 0.5, neighbor.y + 0.5, neighbor.z + 0.5).add(new Vec3d(facing.getOpposite().getDirectionVec()).scale(0.5));
 
-        if (packetPlace) {
-            mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(pos, facing, hand, 0.0f, 0.0f, 0.0f));
-        } else {
-            mc.playerController.processRightClickBlock(mc.player, mc.world, pos, facing, hitVec, hand);
-        }
+            if (rotate) {
+                RotationUtils.Rotation rotation = RotationUtils.calcRotations(mc.player.getPositionEyes(mc.getRenderPartialTicks()), hitVec);
+                mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rotation.getYaw(), rotation.getPitch(), mc.player.onGround));
+                mc.player.rotationYawHead = rotation.getYaw();
+                mc.player.renderYawOffset = rotation.getYaw();
+            }
 
-        if (swing) {
-            mc.player.swingArm(hand);
-        }
+            if (packetPlace) {
+                mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(neighbor, facing.getOpposite(), hand, (float) (hitVec.x - pos.x), (float) (hitVec.y - pos.y), (float) (hitVec.z - pos.z)));
+            } else {
+                mc.playerController.processRightClickBlock(mc.player, mc.world, neighbor, facing.getOpposite(), hitVec, hand);
+            }
 
-        if (sneak && mc.player.isSneaking()) {
-            mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.STOP_SNEAKING));
-            mc.player.setSneaking(false);
+            if (swing) {
+                mc.player.swingArm(hand);
+            }
+
+            if (sneak) {
+                mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.STOP_SNEAKING));
+            }
+
+            return;
         }
     }
 
     public static EnumFacing getFacing(BlockPos pos) {
         for (EnumFacing direction : EnumFacing.values()) {
             RayTraceResult result = mc.world.rayTraceBlocks(
-                    mc.player.getPositionVector().add(0.0, mc.player.getEyeHeight(), 0.0),
+                    new Vec3d(mc.player.posX, mc.player.posY + mc.player.getEyeHeight(), mc.player.posZ),
                     new Vec3d(
-                            pos.getX() + 0.5 + direction.getDirectionVec().getX() * 1.0 / 2.0,
-                            pos.getY() + 0.5 + direction.getDirectionVec().getY() * 1.0 / 2.0,
-                            pos.getZ() + 0.5 + direction.getDirectionVec().getZ() * 1.0 / 2.0
+                            pos.x + 0.5 + direction.getDirectionVec().x * 1.0 / 2.0,
+                            pos.x + 0.5 + direction.getDirectionVec().y * 1.0 / 2.0,
+                            pos.x + 0.5 + direction.getDirectionVec().z * 1.0 / 2.0
                     ),
                     false,
                     true,
                     false
             );
 
-            if (result != null && result.typeOfHit != RayTraceResult.Type.BLOCK || !result.getBlockPos().equals(pos)) {
+            if (result != null && (result.typeOfHit != RayTraceResult.Type.BLOCK || !result.getBlockPos().equals(pos))) {
                 continue;
             }
 
             return direction;
         }
 
-        if (pos.getY() > mc.player.posY + mc.player.getEyeHeight()) {
-            return EnumFacing.DOWN;
+        return pos.y > mc.player.posY + mc.player.getEyeHeight() ? EnumFacing.DOWN : EnumFacing.UP;
+    }
+
+    public static boolean intersectsWith(BlockPos pos) {
+        for (Entity entity : mc.world.loadedEntityList) {
+            if (new AxisAlignedBB(pos).intersects(entity.getEntityBoundingBox())) {
+                return true;
+            }
         }
 
-        return EnumFacing.UP;
+        return false;
     }
 }
