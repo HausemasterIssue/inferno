@@ -7,8 +7,8 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@Module.Define(name = "Brightness", description = "Makes the game... brigther... tf else?", category = Module.Category.RENDER)
-public class Brightness extends Module {
+@Module.Define(name = "Fullbright", description = "Makes the game... brigther... tf else?", category = Module.Category.RENDER)
+public class Fullbright extends Module {
     public static float oldGamma = -1.0f;
 
     public final Setting<Mode> mode = this.register(new Setting<>("Mode", Mode.GAMMA));

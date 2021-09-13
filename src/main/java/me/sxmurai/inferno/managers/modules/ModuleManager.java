@@ -69,7 +69,7 @@ public class ModuleManager {
         this.modules.add(new Yaw());
 
         // render
-        this.modules.add(new Brightness());
+        this.modules.add(new Fullbright());
         this.modules.add(new Chams());
         this.modules.add(new CrystalModifier());
         this.modules.add(new HandModifier());
