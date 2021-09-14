@@ -52,7 +52,7 @@ public class NoSlow extends Module {
 
     @SubscribeEvent
     public void onInputUpdate(InputUpdateEvent event) {
-        if (items.getValue() && mc.player.isHandActive()) {
+        if (items.getValue() && mc.player.isHandActive() && !mc.player.isRiding()) {
             event.getMovementInput().moveForward *= 5.0f;
             event.getMovementInput().moveStrafe *= 5.0f;
         }
@@ -72,16 +72,26 @@ public class NoSlow extends Module {
                 }
 
                 if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
-                    mc.player.rotationPitch -= 2.0f;
+                    mc.player.rotationPitch -= 5.0f;
                 } else if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
-                    mc.player.rotationPitch += 2.0f;
+                    mc.player.rotationPitch += 5.0f;
                 } else if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
-                    mc.player.rotationYaw += 2.0f;
+                    mc.player.rotationYaw += 5.0f;
                 } else if (Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
-                    mc.player.rotationYaw -= 2.0f;
+                    mc.player.rotationYaw -= 5.0f;
                 }
+                
+                if (mc.player.rotationPitch > 90) {
+                    mc.player.rotationPitch = 90;
+                }
+                
+                
+                if (mc.player.rotationPitch < -90) {
+                    mc.player.rotationPitch = -90;
+                }
+                
 
-                mc.player.rotationPitch = MathHelper.clamp(mc.player.rotationPitch, -90.0f, 90.0f);
+                // @todo: remove later if it works: mc.player.rotationPitch = MathHelper.clamp(mc.player.rotationPitch, -90.0f, 90.0f);
             }
         }
     }
