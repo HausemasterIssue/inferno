@@ -35,6 +35,7 @@ public class NoSlow extends Module {
     public final Setting<Boolean> strict = this.register(new Setting<>("Strict", false));
     public final Setting<Boolean> sneak = this.register(new Setting<>("Sneak", true));
     public final Setting<Boolean> guiMove = this.register(new Setting<>("GuiMove", false));
+    public final Setting<Float> lookSpeed = this.register(new Setting<>("LookSpeed", 3.0f, 0.1f, 15.0f, (v) -> guiMove.getValue()));
 
     private boolean sneaking = false;
 
@@ -72,13 +73,13 @@ public class NoSlow extends Module {
                 }
 
                 if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
-                    mc.player.rotationPitch -= 2.0f;
+                    mc.player.rotationPitch -= this.lookSpeed.getValue();
                 } else if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
-                    mc.player.rotationPitch += 2.0f;
+                    mc.player.rotationPitch += this.lookSpeed.getValue();
                 } else if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
-                    mc.player.rotationYaw += 2.0f;
+                    mc.player.rotationYaw += this.lookSpeed.getValue();
                 } else if (Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
-                    mc.player.rotationYaw -= 2.0f;
+                    mc.player.rotationYaw -= this.lookSpeed.getValue();
                 }
 
                 mc.player.rotationPitch = MathHelper.clamp(mc.player.rotationPitch, -90.0f, 90.0f);
