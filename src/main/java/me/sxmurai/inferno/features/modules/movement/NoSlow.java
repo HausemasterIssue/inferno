@@ -51,7 +51,7 @@ public class NoSlow extends Module {
     @SubscribeEvent
     public void onUpdate(UpdateEvent event) {
         if (!Module.fullNullCheck()) {
-            if (sneak.getValue() && mc.player.isHandActive() && items.getValue()) {
+            if (sneak.getValue() && !mc.player.isHandActive() && items.getValue()) {
                 mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.STOP_SNEAKING));
             }
 
