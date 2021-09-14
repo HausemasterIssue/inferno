@@ -1,18 +1,36 @@
 package me.sxmurai.inferno.mixin.mixins;
 
 import me.sxmurai.inferno.Inferno;
+import me.sxmurai.inferno.events.mc.GuiChangeEvent;
 import me.sxmurai.inferno.features.modules.player.MultiTask;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.multiplayer.PlayerControllerMP;
+import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import javax.annotation.Nullable;
+
 @Mixin(Minecraft.class)
 public class MixinMinecraft {
+    @Shadow
+    public GuiScreen currentScreen;
+
+    @Inject(method = "displayGuiScreen", at = @At("HEAD"), cancellable = true)
+    public void displayGuiScreen(@Nullable GuiScreen guiScreenIn, CallbackInfo info) {
+        GuiChangeEvent event = new GuiChangeEvent(this.currentScreen, guiScreenIn);
+        MinecraftForge.EVENT_BUS.post(event);
+        if (event.isCanceled()) {
+            info.cancel();
+        }
+    }
+
     @Redirect(method = "sendClickBlockToController", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/EntityPlayerSP;isHandActive()Z"))
     private boolean isHandActive(EntityPlayerSP player) {
         return !MultiTask.INSTANCE.isToggled() && player.isHandActive();
