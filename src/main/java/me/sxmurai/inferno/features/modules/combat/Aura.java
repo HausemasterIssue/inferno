@@ -9,6 +9,7 @@ import me.sxmurai.inferno.utils.RotationUtils;
 import me.sxmurai.inferno.utils.timing.Timer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemSword;
@@ -110,7 +111,7 @@ public class Aura extends Module {
                 continue;
             }
 
-            if (!players.getValue() && EntityUtils.isPlayer(entity)) {
+            if (!players.getValue() && entity instanceof EntityPlayer) {
                 continue;
             }
 

@@ -102,7 +102,7 @@ public class Scaffold extends Module {
                     }
                 }
 
-                BlockUtil.place(p, hand, swing.getValue(), false, packet.getValue(), this.rotate.getValue());
+                BlockUtil.placeNormal(p, hand, swing.getValue(), false, packet.getValue(), this.rotate.getValue());
             }
 
             if (hand == EnumHand.MAIN_HAND) {

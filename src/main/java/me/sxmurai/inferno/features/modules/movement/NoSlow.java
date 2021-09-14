@@ -36,8 +36,18 @@ public class NoSlow extends Module {
     public final Setting<Boolean> sneak = this.register(new Setting<>("Sneak", true));
     public final Setting<Boolean> guiMove = this.register(new Setting<>("GuiMove", false));
 
+    private boolean sneaking = false;
+
     public NoSlow() {
         INSTANCE = this;
+    }
+
+    @Override
+    protected void onDeactivated() {
+        if (!Module.fullNullCheck() && this.sneaking) {
+            mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.STOP_SNEAKING));
+            this.sneaking = false;
+        }
     }
 
     @SubscribeEvent
@@ -51,8 +61,9 @@ public class NoSlow extends Module {
     @SubscribeEvent
     public void onUpdate(UpdateEvent event) {
         if (!Module.fullNullCheck()) {
-            if (sneak.getValue() && mc.player.isHandActive() && items.getValue()) {
+            if (this.sneak.getValue() && !mc.player.isHandActive() && this.items.getValue() && this.sneaking) {
                 mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.STOP_SNEAKING));
+                this.sneaking = false;
             }
 
             if (guiMove.getValue() && mc.currentScreen != null) {
@@ -77,7 +88,8 @@ public class NoSlow extends Module {
 
     @SubscribeEvent
     public void onUseItem(LivingEntityUseItemEvent event) {
-        if (items.getValue() && sneak.getValue()) {
+        if (items.getValue() && sneak.getValue() && !this.sneaking) {
+            this.sneaking = true;
             mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.START_SNEAKING));
         }
     }

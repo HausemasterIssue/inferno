@@ -147,10 +147,11 @@ public class Surround extends Module {
                 BlockPos pos = this.queue.get(i);
 
                 this.place(pos);
-                if (!mc.world.isAirBlock(pos)) {
-                    this.queue.remove(pos);
-                } else {
+                this.queue.remove(pos);
+
+                if (mc.world.isAirBlock(pos)) {
                     this.queue.add(pos.add(0.0, -1.0, 0.0));
+                    this.queue.add(pos);
                     this.placed = this.blocksPerTick.getValue();
                 }
 

@@ -9,6 +9,7 @@ import me.sxmurai.inferno.features.modules.player.Freecam;
 import me.sxmurai.inferno.features.settings.Setting;
 import me.sxmurai.inferno.managers.modules.Module;
 import me.sxmurai.inferno.utils.RotationUtils;
+import me.sxmurai.inferno.utils.timing.Timer;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.init.MobEffects;
 import net.minecraft.network.play.client.CPacketPlayer;
@@ -20,6 +21,8 @@ import java.util.Objects;
 @Module.Define(name = "Speed", description = "Speeds you up", category = Module.Category.MOVEMENT)
 public class Speed extends Module {
     public final Setting<Mode> mode = this.register(new Setting<>("Mode", Mode.STRAFE));
+    public final Setting<Boolean> liquids = this.register(new Setting<>("Liquids", true));
+    public final Setting<Boolean> webs = this.register(new Setting<>("Webs", true));
     public final Setting<Float> speed = this.register(new Setting<>("Speed", 30.0f, 1.0f, 50.0f, (v) -> mode.getValue() != Mode.BHOP));
     public final Setting<Boolean> hop = this.register(new Setting<>("Hop", true, (v) -> mode.getValue() != Mode.BHOP));
 
@@ -31,6 +34,7 @@ public class Speed extends Module {
     public final Setting<Boolean> limiter = this.register(new Setting<>("Limiter", false, (v) -> mode.getValue() == Mode.STRAFE));
     public final Setting<Boolean> noLag = this.register(new Setting<>("NoLag", true, (v) -> mode.getValue() == Mode.STRAFE));
 
+    private final Timer timer = new Timer();
     private int strafeStage = 1;
     private double strafeSpeed = 0.0;
     private double distance = 0.0;
@@ -39,6 +43,7 @@ public class Speed extends Module {
     protected void onActivated() {
         if (!Module.fullNullCheck()) {
             strafeSpeed = getBaseMoveSpeed();
+            this.timer.reset();
         }
     }
 
@@ -47,6 +52,7 @@ public class Speed extends Module {
         strafeStage = startStage.getValue();
         strafeSpeed = 0.0;
         distance = 0.0;
+        this.timer.reset();
     }
 
     @SubscribeEvent
@@ -61,6 +67,11 @@ public class Speed extends Module {
         if (shouldStop()) {
             return;
         }
+
+        if ((!this.liquids.getValue() && (mc.player.isInWater() || mc.player.isInLava())) || (!this.webs.getValue() && mc.player.isInWeb)) {
+            return;
+        }
+
         // @todo still broken
 //        if (mode.getValue() == Mode.BHOP || (mode.getValue() == Mode.STRAFE && hop.getValue() && strafeHop.getValue() == Hop.JUMP) || hop.getValue() && mc.player.onGround) {
 //            mc.player.jump();
@@ -84,7 +95,7 @@ public class Speed extends Module {
 
     @SubscribeEvent
     public void onMove(MoveEvent event) {
-        if (mode.getValue() != Mode.STRAFE || shouldStop()) {
+        if (mode.getValue() != Mode.STRAFE || (!this.liquids.getValue() && (mc.player.isInWater() || mc.player.isInLava())) || (!this.webs.getValue() && mc.player.isInWeb) || shouldStop()) {
             return;
         }
 
@@ -110,15 +121,18 @@ public class Speed extends Module {
                         break;
                     }
 
+                    if (this.strict.getValue() && !this.timer.passedMs(250L)) {
+                        break;
+                    }
+                    this.timer.reset();
+
                     double motionY = hopHeight.getValue().doubleValue();
                     if (mc.player.isPotionActive(MobEffects.JUMP_BOOST)) {
                         motionY += (Objects.requireNonNull(mc.player.getActivePotionEffect(MobEffects.JUMP_BOOST)).getAmplifier() + 1) * 0.1;
                     }
 
-                    mc.player.motionY = motionY;
-                    event.setY(mc.player.motionY);
-
-                    strafeSpeed *= strict.getValue() ? 1.98234128 : 2.149;
+                    event.setY(mc.player.motionY = motionY);
+                    strafeSpeed *= strict.getValue() ? 2.008 : 2.149;
                 }
 
                 break;
