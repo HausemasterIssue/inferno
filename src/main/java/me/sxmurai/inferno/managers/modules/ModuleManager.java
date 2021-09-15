@@ -70,6 +70,7 @@ public class ModuleManager {
 
         // render
         this.modules.add(new Fullbright());
+        this.modules.add(new BlockVision());
         this.modules.add(new Chams());
         this.modules.add(new CrystalModifier());
         this.modules.add(new HandModifier());
