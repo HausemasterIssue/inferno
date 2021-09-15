@@ -79,7 +79,12 @@ public class Surround extends Module {
         this.waiting = false;
 
         if (this.oldSlot != -1 && !Module.fullNullCheck()) {
-            InventoryUtils.switchTo(this.oldSlot, this.silent.getValue());
+            if (silent.getValue()) {
+                InventoryUtils.switchTo(this.oldSlot);
+            } else if (!silent.getValue()) {
+                mc.player.inventory.currentItem = oldSlot;
+            }
+            
         }
 
         this.oldSlot = -1;
