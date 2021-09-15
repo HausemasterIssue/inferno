@@ -106,7 +106,7 @@ public class AntiAFK extends Module {
             }
 
             case 5: {
-                mc.player.sendChatMessage(this.weDoABitOfTrolling("how fun, I have AntiAFK on and i'm sending this to not get kicked! fun!!" + this.random(2489, 92472)));
+                mc.player.sendChatMessage(("how fun, I have AntiAFK on and i'm sending this to not get kicked! fun!!" + this.random(2489, 92472)));
                 break;
             }
         }
