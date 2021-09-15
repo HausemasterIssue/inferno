@@ -50,6 +50,7 @@ public class ModuleManager {
         this.modules.add(new Velocity());
 
         // player
+        this.modules.add(new AntiDesync());
         this.modules.add(new Blink());
         this.modules.add(new FastUse());
         this.modules.add(new Inventory());
