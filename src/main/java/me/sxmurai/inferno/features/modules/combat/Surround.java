@@ -68,6 +68,20 @@ public class Surround extends Module {
                 this.wasAutoCrystalEnabled = true;
                 autoCrystal.toggle();
             }
+
+            int slot = InventoryUtils.getHotbarBlockSlot(Blocks.OBSIDIAN, true);
+            if (slot == -1) {
+                this.toggle();
+                return;
+            }
+
+            if (slot == 45) {
+                this.hand = EnumHand.OFF_HAND;
+            } else {
+                this.hand = EnumHand.MAIN_HAND;
+                this.oldSlot = mc.player.inventory.currentItem;
+                InventoryUtils.switchTo(slot, this.silent.getValue());
+            }
         }
     }
 
@@ -105,19 +119,6 @@ public class Surround extends Module {
         if (this.waiting) {
             this.waiting = false;
             this.placed = 0;
-        }
-
-        int slot = InventoryUtils.getHotbarBlockSlot(Blocks.OBSIDIAN, true);
-        if (slot == -1) {
-            this.toggle();
-            return;
-        }
-
-        if (slot == 45) {
-            this.hand = EnumHand.OFF_HAND;
-        } else {
-            this.hand = EnumHand.MAIN_HAND;
-            InventoryUtils.switchTo(slot, this.silent.getValue());
         }
 
         if (this.queue.isEmpty()) {
