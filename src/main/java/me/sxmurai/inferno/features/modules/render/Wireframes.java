@@ -24,12 +24,6 @@ public class Wireframes extends Module {
                 return;
             }
 
-            boolean fancyGraphics = mc.gameSettings.fancyGraphics;
-            mc.gameSettings.fancyGraphics = false;
-
-            float gamma = mc.gameSettings.gammaSetting;
-            mc.gameSettings.gammaSetting = 10000.0f;
-
             GL11.glPushMatrix();
             GL11.glPushAttrib(1048575);
             GL11.glPolygonMode(1032, 6913);
@@ -57,9 +51,6 @@ public class Wireframes extends Module {
 
             GL11.glPopAttrib();
             GL11.glPopMatrix();
-
-            mc.gameSettings.gammaSetting = gamma;
-            mc.gameSettings.fancyGraphics = fancyGraphics;
         }
     }
 }
