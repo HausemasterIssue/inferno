@@ -147,7 +147,7 @@ public class BlockUtil extends Feature {
     public static void placeNormal(BlockPos pos, EnumHand hand, boolean swing, boolean sneak, boolean packetPlace, boolean rotate) {
         RayTraceResult result = mc.world.rayTraceBlocks(new Vec3d(mc.player.posX, mc.player.posY + mc.player.getEyeHeight(), mc.player.posZ), new Vec3d(pos.x + 0.5, pos.y + 0.5, pos.z + 0.5));
 
-        EnumFacing facing = result == null || result.sideHit == null ? EnumFacing.UP : result.sideHit;
+        EnumFacing facing = result == null || result.sideHit == null ? getFacing(pos) : result.sideHit;
         Vec3d hitVec = result == null ? new Vec3d(pos.offset(facing)).add(0.5, 0.5, 0.5).add(new Vec3d(facing.getOpposite().getDirectionVec()).scale(0.5)) : result.hitVec;
 
         if (sneak) {
