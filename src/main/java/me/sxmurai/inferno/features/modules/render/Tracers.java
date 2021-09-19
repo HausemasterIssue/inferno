@@ -9,6 +9,7 @@ import me.sxmurai.inferno.utils.RenderUtils;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -33,7 +34,7 @@ public class Tracers extends Module {
                     continue;
                 }
 
-                if (!invisible.getValue() && EntityUtils.isInvisible((EntityLiving) entity)) {
+                if (invisible.getValue() && EntityUtils.isInvisible((EntityLivingBase) entity)) {
                     continue;
                 }
 

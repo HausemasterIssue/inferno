@@ -1,9 +1,7 @@
 package me.sxmurai.inferno.utils;
 
 import me.sxmurai.inferno.features.Feature;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.IProjectile;
+import net.minecraft.entity.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.passive.EntityAmbientCreature;
@@ -21,18 +19,18 @@ public class EntityUtils extends Feature {
     }
 
     public static boolean isPassive(Entity entity) {
-        return entity instanceof EntityAmbientCreature || entity instanceof EntitySquid || entity instanceof EntityAnimal;
+        return entity.isCreatureType(EnumCreatureType.CREATURE, false) || entity.isCreatureType(EnumCreatureType.AMBIENT, false);
     }
 
     public static boolean isHostile(Entity entity) {
-        return !isPassive(entity) || entity instanceof EntitySlime || entity instanceof EntityMob && ((EntityMob) entity).getRevengeTarget() != null;
+        return entity.isCreatureType(EnumCreatureType.MONSTER, false) && !isPassive(entity);
     }
 
     public static boolean isLiving(Entity entity) {
-        return entity instanceof EntityLiving && !entity.isDead;
+        return entity instanceof EntityLivingBase;
     }
 
-    public static boolean isInvisible(EntityLiving entity) {
+    public static boolean isInvisible(EntityLivingBase entity) {
         return entity.isInvisibleToPlayer(mc.player) && entity.isPotionActive(MobEffects.INVISIBILITY);
     }
 
