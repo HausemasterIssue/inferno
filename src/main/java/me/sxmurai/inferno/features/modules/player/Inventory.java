@@ -9,18 +9,18 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "Inventory", description = "Does shit with ur inventory", category = Module.Category.PLAYER)
 public class Inventory extends Module {
-    public final Setting<Boolean> xcarry = this.register(new Setting<>("XCarry", false));
-    public final Setting<Boolean> bypass = this.register(new Setting<>("Bypass", false)); // this is for 2b2t, stops movement when a CPacketHeldItemChange packet is sent
+    public final Setting<Boolean> xCarry = this.register(new Setting<>("XCarry", false));
+    public final Setting<Boolean> bypass = this.register(new Setting<>("Bypass", false));
 
     @SubscribeEvent
     public void onPacketSend(PacketEvent.Send event) {
         if (!Module.fullNullCheck()) {
             // @todo make a bypass
-            if (event.getPacket() instanceof CPacketCloseWindow && xcarry.getValue()) {
+            if (event.getPacket() instanceof CPacketCloseWindow && xCarry.getValue()) {
                 event.setCanceled(true);
             }
 
-            if (event.getPacket() instanceof CPacketClickWindow && bypass.getValue() && (mc.player.moveForward != 0.0f || mc.player.moveStrafing != 0.0f)) {
+            if (event.getPacket() instanceof CPacketClickWindow && bypass.getValue() && mc.player.moveForward != 0.0f) {
                 mc.player.setVelocity(0.0, 0.0, 0.0);
             }
         }
