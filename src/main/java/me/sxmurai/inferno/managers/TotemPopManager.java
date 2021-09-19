@@ -1,5 +1,6 @@
 package me.sxmurai.inferno.managers;
 
+import io.netty.util.internal.ConcurrentSet;
 import me.sxmurai.inferno.events.entity.DeathEvent;
 import me.sxmurai.inferno.events.entity.TotemPopEvent;
 import me.sxmurai.inferno.events.mc.UpdateEvent;
@@ -14,14 +15,13 @@ import me.sxmurai.inferno.utils.timing.Timer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class TotemPopManager extends Feature {
     private final Map<EntityPlayer, Integer> pops = new ConcurrentHashMap<>();
-    private final Set<EntityPlayer> toAnnounce = new HashSet<>();
+    private final Set<EntityPlayer> toAnnounce = new ConcurrentSet<>();
     private final Timer timer = new Timer();
 
     @SubscribeEvent
