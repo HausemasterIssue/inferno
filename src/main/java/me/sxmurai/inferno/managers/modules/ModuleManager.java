@@ -58,6 +58,7 @@ public class ModuleManager {
         // player
         this.modules.add(new AntiAFK());
         this.modules.add(new AntiLevitation());
+        this.modules.add(new AntiVoid());
         this.modules.add(new AutoRespawn());
         this.modules.add(new Blink());
         this.modules.add(new FastUse());
