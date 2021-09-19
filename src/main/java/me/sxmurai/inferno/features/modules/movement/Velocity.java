@@ -27,9 +27,9 @@ public class Velocity extends Module {
             if (knockback.getValue() && event.getPacket() instanceof SPacketEntityVelocity) {
                 SPacketEntityVelocity packet = (SPacketEntityVelocity) event.getPacket();
                 if (packet.getEntityID() == mc.player.entityId) {
-                    packet.motionX *= horizontal.getValue();
-                    packet.motionY *= vertical.getValue();
-                    packet.motionZ *= horizontal.getValue();
+                    packet.motionX *= horizontal.getValue().intValue();
+                    packet.motionY *= vertical.getValue().intValue();
+                    packet.motionZ *= horizontal.getValue().intValue();
                 }
             }
 
