@@ -53,7 +53,7 @@ public class Container extends Component {
         }
 
         // we put this here to persist after drawing another rect @ line 41
-        RenderUtils.drawLine(this.x, this.y + this.height, this.x + this.width, this.y + this.height, 2.0f, new Color(51, 119, 222).getRGB());
+        RenderUtils.drawLine(this.x, this.y + this.height, this.x + this.width, this.y + this.height, 2.0f, new Color(253, 31, 31).getRGB());
     }
 
     @Override

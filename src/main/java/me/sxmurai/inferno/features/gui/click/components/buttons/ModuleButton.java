@@ -64,7 +64,7 @@ public class ModuleButton extends Button {
                 }
             }
 
-            RenderUtils.drawRect(this.x, this.y + this.height, 0.5f, this.getHeight() - this.height, new Color(51, 119, 222).getRGB());
+            RenderUtils.drawRect(this.x, this.y + this.height, 0.5f, this.getHeight() - this.height, new Color(253, 31, 31).getRGB());
         }
     }
 
