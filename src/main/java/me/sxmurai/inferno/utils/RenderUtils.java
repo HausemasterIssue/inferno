@@ -166,6 +166,33 @@ public class RenderUtils extends Feature {
         GlStateManager.popMatrix();
     }
 
+    public static void drawOutlinedBox(AxisAlignedBB box, float width, int color) {
+        GlStateManager.pushMatrix();
+        GlStateManager.enableBlend();
+        GlStateManager.disableDepth();
+        GlStateManager.tryBlendFuncSeparate(770, 771, 0, 1);
+        GlStateManager.disableTexture2D();
+        GlStateManager.depthMask(false);
+        GL11.glEnable(GL11.GL_LINE_SMOOTH);
+        GL11.glHint(GL11.GL_LINE_SMOOTH_HINT, GL11.GL_NICEST);
+        GlStateManager.glLineWidth(width);
+
+        float alpha = (color >> 24 & 0xff) / 255f;
+        float red = (color >> 16 & 0xff) / 255f;
+        float green = (color >> 8 & 0xff) / 255f;
+        float blue = (color & 0xff) / 255f;
+
+        RenderGlobal.drawBoundingBox(box.minX, box.minY, box.minZ, box.maxX, box.maxY, box.maxZ, red, green, blue, alpha);
+
+        GlStateManager.glLineWidth(1.0f);
+        GL11.glDisable(GL11.GL_LINE_SMOOTH);
+        GlStateManager.depthMask(true);
+        GlStateManager.enableDepth();
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableBlend();
+        GlStateManager.popMatrix();
+    }
+
     public static double interpolate(double start, double end) {
         return end + (start - end) * mc.getRenderPartialTicks();
     }
