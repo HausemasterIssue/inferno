@@ -13,6 +13,10 @@ import net.minecraft.world.Explosion;
 
 public class DamageUtils extends Feature {
     public static float calculateDamage(double x, double y, double z, float power, boolean causesFire, EntityPlayer target) {
+        if (target == mc.player && mc.player.isCreative()) {
+            return 0.0f;
+        }
+
         float doublePower = power * 2.0f;
         double distancedSize = target.getDistanceSq(x, y, z) / doublePower;
         double blast = target.world.getBlockDensity(new Vec3d(x, y, z), target.getEntityBoundingBox());

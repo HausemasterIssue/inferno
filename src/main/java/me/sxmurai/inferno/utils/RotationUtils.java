@@ -54,8 +54,8 @@ public class RotationUtils extends Feature {
     }
 
     public static class Rotation {
-        private final float yaw;
-        private final float pitch;
+        private float yaw;
+        private float pitch;
 
         public Rotation(float yaw, float pitch) {
             this.yaw = yaw;
@@ -66,8 +66,16 @@ public class RotationUtils extends Feature {
             return yaw;
         }
 
+        public void setYaw(float yaw) {
+            this.yaw = yaw;
+        }
+
         public float getPitch() {
             return this.pitch;
+        }
+
+        public void setPitch(float pitch) {
+            this.pitch = pitch;
         }
     }
 }
