@@ -29,7 +29,6 @@ public class InventorySaver extends Module {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onGuiChange(GuiChangeEvent event) {
         if (!Module.fullNullCheck() && event.getCurrentGui() instanceof GuiContainer) {
-            System.out.println("penis");
             this.gui = (GuiContainer) event.getCurrentGui();
         }
     }
