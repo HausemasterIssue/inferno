@@ -44,6 +44,15 @@ public abstract class Command extends Feature {
         send(builder.build());
     }
 
+    public static boolean containsArg(List<String> args, int index) {
+        try {
+            args.get(index);
+            return true;
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
+    }
+
     @Retention(RetentionPolicy.RUNTIME)
     public @interface Define {
         String[] handles();

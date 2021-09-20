@@ -2,8 +2,11 @@ package me.sxmurai.inferno.managers.commands;
 
 import me.sxmurai.inferno.events.network.PacketEvent;
 import me.sxmurai.inferno.features.Feature;
+import me.sxmurai.inferno.features.commands.Bind;
 import me.sxmurai.inferno.features.commands.Ping;
+import me.sxmurai.inferno.managers.commands.exceptions.BaseException;
 import me.sxmurai.inferno.managers.commands.text.ChatColor;
+import me.sxmurai.inferno.managers.commands.text.TextBuilder;
 import net.minecraft.network.play.client.CPacketChatMessage;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -16,6 +19,7 @@ public class CommandManager extends Feature {
     private String prefix = ",";
 
     public CommandManager() {
+        this.commands.add(new Bind());
         this.commands.add(new Ping());
     }
 
@@ -42,7 +46,19 @@ public class CommandManager extends Feature {
             try {
                 command.execute(args.subList(1, args.size()));
             } catch (Exception exception) {
-                // @todo
+                if (exception instanceof BaseException) {
+                    Command.send(new TextBuilder()
+                            .append(ChatColor.Dark_Gray, "There was an exception while running this command.")
+                            .append("\n").append("\n")
+                            .append(ChatColor.Red, ((BaseException) exception).getReason())
+                    );
+                } else {
+                    Command.send(new TextBuilder()
+                            .append(ChatColor.Dark_Gray, "There was an exception while running this command.")
+                            .append("\n").append("\n")
+                            .append(ChatColor.Red, exception.toString())
+                    );
+                }
             }
         }
     }
