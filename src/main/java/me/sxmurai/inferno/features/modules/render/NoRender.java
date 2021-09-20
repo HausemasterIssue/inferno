@@ -6,14 +6,21 @@ import me.sxmurai.inferno.managers.modules.Module;
 @Module.Define(name = "NoRender", description = "Stops shit from rendering", category = Module.Category.RENDER)
 public class NoRender extends Module {
     public static NoRender INSTANCE;
-
+    
+    public final Setting<Boolean> particles = this.register(new Setting<>("Armor", false));
     public final Setting<Boolean> hurtcam = this.register(new Setting<>("Hurtcam", false));
     public final Setting<Boolean> weather = this.register(new Setting<>("Weather", false));
+    public final Setting<Boolean> particles = this.register(new Setting<>("Fog", false));
+    public final Setting<Boolean> particles = this.register(new Setting<>("LiquidOverlay", false));
     public final Setting<Boolean> fireOverlay = this.register(new Setting<>("FireOverlay", false));
     public final Setting<Boolean> pumpkinOverlay = this.register(new Setting<>("PumpkinOverlay", false));
     public final Setting<Boolean> scoreboard = this.register(new Setting<>("Scoreboard", false));
+    public final Setting<Boolean> particles = this.register(new Setting<>("Skylight", false));
     public final Setting<Boolean> particles = this.register(new Setting<>("Particles", false));
+    public final Setting<Boolean> particles = this.register(new Setting<>("WitherSkull", false));
+    public final Setting<Boolean> particles = this.register(new Setting<>("Items", false));
     public final Setting<Boolean> totemAnimation = this.register(new Setting<>("TotemAnimation", false));
+    
 
     public NoRender() {
         INSTANCE = this;
