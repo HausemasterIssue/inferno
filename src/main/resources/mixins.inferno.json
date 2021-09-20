@@ -16,11 +16,13 @@
 
     "network.MixinNetworkManager",
 
+    "render.entity.MixinEntityRenderer",
+    "render.entity.MixinRenderEnderCrystal",
+    "render.entity.MixinRenderLivingBase",
+    "render.gui.MixinGuiIngame",
     "render.gui.MixinGuiPlayerTabOverlay",
-    "render.MixinEntityRenderer",
     "render.MixinItemRenderer",
-    "render.MixinRenderEnderCrystal",
-    "render.MixinRenderLivingBase",
+    "render.MixinParticleManager",
 
     "world.blocks.MixinBlock",
     "world.blocks.MixinBlockSlime",

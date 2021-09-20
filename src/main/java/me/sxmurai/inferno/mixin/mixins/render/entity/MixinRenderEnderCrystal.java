@@ -1,4 +1,4 @@
-package me.sxmurai.inferno.mixin.mixins.render;
+package me.sxmurai.inferno.mixin.mixins.render.entity;
 
 import me.sxmurai.inferno.events.render.RenderModelEvent;
 import me.sxmurai.inferno.features.modules.render.CrystalModifier;

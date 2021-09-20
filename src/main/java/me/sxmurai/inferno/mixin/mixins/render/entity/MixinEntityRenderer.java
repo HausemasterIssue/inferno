@@ -1,4 +1,4 @@
-package me.sxmurai.inferno.mixin.mixins.render;
+package me.sxmurai.inferno.mixin.mixins.render.entity;
 
 import com.google.common.base.Predicate;
 import me.sxmurai.inferno.features.modules.miscellaneous.NoEntityTrace;
