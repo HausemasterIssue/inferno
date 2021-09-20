@@ -80,9 +80,9 @@ public class AutoCrystal extends Module {
     public final Setting<Integer> minArmor = this.register(new Setting<>("MinArmor", 20, 0, 125, (v) -> menu.getValue() == Menu.MISCELLANEOUS));
     public final Setting<AntiFriendPop> antiFriendPop = this.register(new Setting<>("AntiFriendPop", AntiFriendPop.HIT, (v) -> menu.getValue() == Menu.MISCELLANEOUS));
     public final Setting<Boolean> inhibit = this.register(new Setting<>("Inhibit", false, (v) -> menu.getValue() == Menu.MISCELLANEOUS));
-    public final Setting<Double> randomRotations = this.register(new Setting<>("RandomRotations", 0.0, 4.0, 6.0f, (v) -> menu.getValue() == Menu.MISCELLANEOUS));
+    public final Setting<Double> randomRotations = this.register(new Setting<>("RandomRotations", 0.0, 0.0, 6.0f, (v) -> menu.getValue() == Menu.MISCELLANEOUS));
     public final Setting<Boolean> yawStep = this.register(new Setting<>("YawStep", true, (v) -> menu.getValue() == Menu.MISCELLANEOUS));
-    public final Setting<Integer> yawSteps = this.register(new Setting<>("YawSteps", 6, 2, 20, (v) -> menu.getValue() == Menu.MISCELLANEOUS));
+    public final Setting<Integer> yawSteps = this.register(new Setting<>("YawSteps", 6, 2, 20, (v) -> menu.getValue() == Menu.MISCELLANEOUS && yawStep.getValue()));
     public final Setting<Boolean> sync = this.register(new Setting<>("Sync", true, (v) -> menu.getValue() == Menu.MISCELLANEOUS));
     public final Setting<Boolean> randomPause = this.register(new Setting<>("RandomPause", true, (v) -> menu.getValue() == Menu.MISCELLANEOUS));
     public final Setting<Boolean> extraCalc = this.register(new Setting<>("ExtraCalc", false, (v) -> menu.getValue() == Menu.MISCELLANEOUS));
@@ -258,7 +258,6 @@ public class AutoCrystal extends Module {
         this.hitTimer.tick();
 
         if (!this.check()) {
-            System.out.println("rip");
             return;
         }
 
@@ -269,12 +268,12 @@ public class AutoCrystal extends Module {
         this.cleanup();
 
         // update rotations
-        if (this.currentPos != null) {
-            this.look(new Vec3d(this.currentPos.x + 0.5, this.currentPos.y - 0.5, this.currentPos.z + 0.5));
-        }
-
         if (this.currentCrystal != null) {
             this.look(this.currentCrystal.getPositionEyes(mc.getRenderPartialTicks()));
+        } else {
+            if (this.currentPos != null) {
+                this.look(new Vec3d((double) (this.currentPos.x) + 0.5, this.currentPos.y, (double) (this.currentPos.z) + 0.5));
+            }
         }
 
         if (this.prioritize.getValue() == Prioritize.CLOSEST) {
@@ -282,8 +281,6 @@ public class AutoCrystal extends Module {
             if (this.target == null) {
                 return;
             }
-
-            System.out.println(target);
         }
 
         if (this.logic.getValue() == Logic.PLACEBREAK) {
@@ -543,11 +540,11 @@ public class AutoCrystal extends Module {
         this.cooldownTimer.reset();
 
         if (this.inhibit.getValue()) {
-            if (this.inhibitHits < 45) {
+            if (this.inhibitHits < 40) {
                 this.inhibitTimer.reset();
             } else {
                 this.inhibitTimer.tick();
-                if (!this.inhibitTimer.passed(3)) {
+                if (!this.inhibitTimer.passed(4)) {
                     return false;
                 }
 
@@ -591,7 +588,7 @@ public class AutoCrystal extends Module {
 
     private void place(BlockPos pos) {
         if (this.placeRotate.getValue()) {
-            this.look(new Vec3d(pos.x + 0.5, pos.y - 0.5, pos.z + 0.5));
+            this.look(new Vec3d((double) (pos.x) + 0.5, pos.y, (double) (pos.z) + 0.5));
         }
 
         BlockUtil.placeNormal(pos, this.hand, false, true, this.packetPlace.getValue(), false);
@@ -613,6 +610,7 @@ public class AutoCrystal extends Module {
         }
 
         if (this.hitSwing.getValue() != Arm.NONE) {
+            ++this.inhibitHits;
             mc.player.swingArm(this.hitSwing.getValue().getHand());
         }
     }
@@ -621,8 +619,12 @@ public class AutoCrystal extends Module {
         RotationUtils.Rotation rotation = RotationUtils.calcRotations(mc.player.getPositionEyes(mc.getRenderPartialTicks()), pos);
 
         this.rotating = true;
-        this.rotation.setYaw(rotation.getYaw() + (float) ThreadLocalRandom.current().nextDouble(-this.randomRotations.getValue(), this.randomRotations.getValue()));
-        this.rotation.setPitch(rotation.getPitch() + (float) ThreadLocalRandom.current().nextDouble(-this.randomRotations.getValue(), this.randomRotations.getValue()));
+        this.rotation.setYaw(rotation.getYaw() + this.getRandomRotation());
+        this.rotation.setPitch(rotation.getPitch() + this.getRandomRotation());
+    }
+
+    private float getRandomRotation() {
+        return this.randomRotations.getValue().floatValue() == 0.0f ? 0.0f : (float) ThreadLocalRandom.current().nextDouble(-this.randomRotations.getValue(), this.randomRotations.getValue());
     }
 
     private EntityPlayer getClosest() {

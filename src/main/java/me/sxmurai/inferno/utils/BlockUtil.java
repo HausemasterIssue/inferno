@@ -157,8 +157,6 @@ public class BlockUtil extends Feature {
         if (rotate) {
             RotationUtils.Rotation rotation = RotationUtils.calcRotations(mc.player.getPositionEyes(mc.getRenderPartialTicks()), hitVec);
             mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rotation.getYaw(), rotation.getPitch(), mc.player.onGround));
-            mc.player.rotationYawHead = rotation.getYaw();
-            mc.player.renderYawOffset = rotation.getYaw();
         }
 
         if (packetPlace) {

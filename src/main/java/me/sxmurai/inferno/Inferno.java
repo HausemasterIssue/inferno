@@ -89,6 +89,7 @@ public class Inferno {
         MinecraftForge.EVENT_BUS.register(commandManager);
         MinecraftForge.EVENT_BUS.register(totemPopManager);
         MinecraftForge.EVENT_BUS.register(serverManager);
+        MinecraftForge.EVENT_BUS.register(rotationManager);
 
         LOGGER.info("Loaded {} v{}!", MOD_NAME, MOD_VER);
 
@@ -125,6 +126,9 @@ public class Inferno {
         MinecraftForge.EVENT_BUS.unregister(macroManager);
         macroManager.unload();
         macroManager = null;
+
+        MinecraftForge.EVENT_BUS.unregister(rotationManager);
+        rotationManager = null;
 
         state = State.UNLOADED;
     }
