@@ -1,11 +1,9 @@
 package me.sxmurai.inferno.managers;
 
 import me.sxmurai.inferno.events.mc.UpdateEvent;
-import me.sxmurai.inferno.events.network.PacketEvent;
 import me.sxmurai.inferno.features.Feature;
 import me.sxmurai.inferno.utils.RotationUtils;
 import net.minecraft.entity.Entity;
-import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 

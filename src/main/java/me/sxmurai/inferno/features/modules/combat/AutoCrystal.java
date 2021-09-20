@@ -529,9 +529,9 @@ public class AutoCrystal extends Module {
     }
 
     private boolean check() {
-        if (this.minArmor.getValue() < mc.player.getTotalArmorValue()) {
-            return false;
-        }
+//        if (this.minArmor.getValue() < mc.player.getTotalArmorValue()) {
+//            return false;
+//        }
 
         if (!this.cooldownTimer.passed(this.cooldown.getValue())) {
             return false;
