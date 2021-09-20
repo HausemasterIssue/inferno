@@ -1,5 +1,6 @@
 package me.sxmurai.inferno.features.modules.combat;
 
+import me.sxmurai.inferno.Inferno;
 import me.sxmurai.inferno.events.mc.UpdateEvent;
 import me.sxmurai.inferno.features.settings.Setting;
 import me.sxmurai.inferno.managers.modules.Module;
@@ -74,10 +75,7 @@ public class Aura extends Module {
         }
 
         if (rotate.getValue()) {
-            RotationUtils.Rotation rotation = RotationUtils.calcRotations(mc.player.getPositionEyes(mc.getRenderPartialTicks()), target.getPositionEyes(mc.getRenderPartialTicks()));
-            mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rotation.getYaw(), rotation.getPitch(), mc.player.onGround));
-            mc.player.rotationYawHead = rotation.getYaw();
-            mc.player.renderYawOffset = rotation.getYaw();
+            Inferno.rotationManager.look(this.target);
         }
 
         if (packet.getValue()) {

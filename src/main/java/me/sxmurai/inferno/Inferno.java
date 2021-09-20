@@ -34,6 +34,7 @@ public class Inferno {
     public static MacroManager macroManager;
     public static AltManager altManager;
 
+    public static RotationManager rotationManager;
     public static ServerManager serverManager;
     public static TotemPopManager totemPopManager;
     private static EventManager eventHelperManager;
@@ -75,6 +76,8 @@ public class Inferno {
         friendManager = new FriendManager();
         macroManager = new MacroManager();
         altManager = new AltManager();
+
+        rotationManager = new RotationManager();
 
         serverManager = new ServerManager();
         totemPopManager = new TotemPopManager();

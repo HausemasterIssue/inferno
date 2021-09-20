@@ -1,8 +1,10 @@
 package me.sxmurai.inferno.managers;
 
 import joptsimple.internal.Strings;
+import me.sxmurai.inferno.Inferno;
 import me.sxmurai.inferno.events.entity.DeathEvent;
 import me.sxmurai.inferno.events.entity.TotemPopEvent;
+import me.sxmurai.inferno.events.entity.UpdateMoveEvent;
 import me.sxmurai.inferno.events.mc.UpdateEvent;
 import me.sxmurai.inferno.events.network.ConnectionEvent;
 import me.sxmurai.inferno.events.network.PacketEvent;
@@ -19,6 +21,7 @@ import net.minecraft.network.play.server.SPacketPlayerListItem;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent;
 import org.lwjgl.opengl.GL11;
@@ -38,6 +41,17 @@ public class EventManager extends Feature {
     public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         if (!Feature.fullNullCheck() && event.getEntityLiving() == mc.player) {
             MinecraftForge.EVENT_BUS.post(new UpdateEvent());
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public void onUpdateMove(UpdateMoveEvent event) {
+        if (!Module.fullNullCheck()) {
+            if (event.getEra() == UpdateMoveEvent.Era.PRE) {
+                Inferno.rotationManager.update();
+            } else if (event.getEra() == UpdateMoveEvent.Era.POST) {
+                Inferno.rotationManager.reset();
+            }
         }
     }
 

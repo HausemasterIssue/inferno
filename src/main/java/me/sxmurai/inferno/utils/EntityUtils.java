@@ -43,7 +43,7 @@ public class EntityUtils extends Feature {
             return 0.0f;
         }
 
-        return ((EntityLiving) entity).getHealth() + ((EntityLiving) entity).getAbsorptionAmount();
+        return ((EntityLivingBase) entity).getHealth() + ((EntityLivingBase) entity).getAbsorptionAmount();
     }
     
     public static boolean isEating() {
