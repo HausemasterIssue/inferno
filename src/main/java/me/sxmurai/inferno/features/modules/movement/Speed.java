@@ -180,7 +180,7 @@ public class Speed extends Module {
     }
 
     private boolean shouldStop() {
-        return Inferno.moduleManager.getModule(ElytraFly.class).isToggled() || Inferno.moduleManager.getModule(PacketFly.class).isToggled() || Inferno.moduleManager.getModule(Freecam.class).isToggled();
+        return Inferno.moduleManager.getModule(ElytraFly.class).isToggled() || Inferno.moduleManager.getModule(Freecam.class).isToggled();
     }
 
     public enum Mode {
