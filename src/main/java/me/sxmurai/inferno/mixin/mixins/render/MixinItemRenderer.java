@@ -1,6 +1,7 @@
 package me.sxmurai.inferno.mixin.mixins.render;
 
 import me.sxmurai.inferno.features.modules.render.HandModifier;
+import me.sxmurai.inferno.features.modules.render.NoRender;
 import me.sxmurai.inferno.utils.ColorUtils;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -18,6 +19,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ItemRenderer.class)
 public abstract class MixinItemRenderer {
     private boolean a = true;
+
+    @Inject(method = "renderFireInFirstPerson", at = @At("HEAD"), cancellable = true)
+    public void onRenderFireInFirstPerson(CallbackInfo info) {
+        if (NoRender.INSTANCE.isToggled() && NoRender.INSTANCE.fireOverlay.getValue()) {
+            info.cancel();
+        }
+    }
 
     @Shadow
     public abstract void renderItemInFirstPerson(AbstractClientPlayer player, float p_187457_2_, float p_187457_3_, EnumHand hand, float p_187457_5_, ItemStack stack, float p_187457_7_);
