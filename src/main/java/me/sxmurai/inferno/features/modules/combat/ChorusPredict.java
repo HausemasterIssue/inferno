@@ -25,6 +25,7 @@ public class ChorusPredict extends Module {
                         .append(ChatColor.Red, "Y: ")
                         .append(ChatColor.Red, String.valueOf(packet.getY()))
                         .append(ChatColor.Dark_Gray, ", ")
+                        .append(ChatColor.Red, "Z: ")
                         .append(ChatColor.Red, String.valueOf(packet.getZ()))
                         .append(ChatColor.Dark_Gray, ".")
                 );
