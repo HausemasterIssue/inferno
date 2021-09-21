@@ -68,7 +68,8 @@ public class Velocity extends Module {
 
                 case ENTITY: {
                     if (push.getValue()) {
-                        // @todo
+                        event.setCanceled(push.getValue());
+                        break;
                     }
                     break;
                 }
