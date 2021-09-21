@@ -26,8 +26,8 @@ public class Nametags extends Module {
 
     public final Setting<Boolean> invisible = this.register(new Setting<>("Invisible", true));
     public final Setting<Boolean> rectangle = this.register(new Setting<>("Rectangle", true));
-    public final Setting<Float> opacity = this.register(new Setting<>("Opacity", 0.2f, 0.0f, 1.0f, (v) -> rectangle.getValue()));
-    public final Setting<Float> scaling = this.register(new Setting<>("Scaling", 1.0f, 0.1f, 3.0f));
+    public final Setting<Float> opacity = this.register(new Setting<>("Opacity", 0.5f, 0.0f, 1.0f, (v) -> rectangle.getValue()));
+    public final Setting<Float> scaling = this.register(new Setting<>("Scaling", 0.3f, 0.1f, 3.0f));
     public final Setting<Boolean> nameProtect = this.register(new Setting<>("NameProtect", false));
     public final Setting<Boolean> onlyFriends = this.register(new Setting<>("OnlyFriends", false, (v) -> nameProtect.getValue()));
     public final Setting<Boolean> health = this.register(new Setting<>("Health", true));
