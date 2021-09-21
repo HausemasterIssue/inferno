@@ -60,14 +60,18 @@ public class RenderUtils extends Feature {
     }
 
     public static void drawRect(float x, float y, float width, float height, int color) {
-        GlStateManager.disableTexture2D();
-        GlStateManager.enableBlend();
-        GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-
         float alpha = (color >> 24 & 0xff) / 255f;
         float red = (color >> 16 & 0xff) / 255f;
         float green = (color >> 8 & 0xff) / 255f;
         float blue = (color & 0xff) / 255f;
+
+        drawRect(x, y, width, height, red, green, blue, alpha);
+    }
+
+    public static void drawRect(float x, float y, float width, float height, float red, float green, float blue, float alpha) {
+        GlStateManager.disableTexture2D();
+        GlStateManager.enableBlend();
+        GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder buffer = tessellator.getBuffer();

@@ -77,6 +77,7 @@ public class ModuleManager {
         this.modules.add(new Chams());
         this.modules.add(new CrystalModifier());
         this.modules.add(new HandModifier());
+        this.modules.add(new Nametags());
         this.modules.add(new NoRender());
         this.modules.add(new Tracers());
         this.modules.add(new Trails());

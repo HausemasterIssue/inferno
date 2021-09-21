@@ -6,6 +6,8 @@ import me.sxmurai.inferno.managers.modules.Module;
 import net.minecraft.network.play.server.SPacketTimeUpdate;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.util.UUID;
+
 public class ServerManager extends Feature {
     private float tps = 20.0f;
     private long lastUpdate = -1L;
@@ -50,6 +52,14 @@ public class ServerManager extends Feature {
     public int getLatency() {
         try {
             return mc.player.connection.getPlayerInfo(mc.player.entityUniqueID).getResponseTime();
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    public int getLatency(UUID uuid) {
+        try {
+            return mc.player.connection.getPlayerInfo(uuid).getResponseTime();
         } catch (Exception e) {
             return 0;
         }

@@ -37,6 +37,16 @@ public class FriendManager {
         return isFriend(player.entityUniqueID);
     }
 
+    public Friend getFriend(EntityPlayer player) {
+        for (Friend friend : this.friends) {
+            if (friend.getUuid().equals(player.entityUniqueID)) {
+                return friend;
+            }
+        }
+
+        return null;
+    }
+
     public ArrayList<Friend> getFriends() {
         return friends;
     }
