@@ -5,10 +5,13 @@ import me.sxmurai.inferno.events.entity.JumpEvent;
 import me.sxmurai.inferno.events.mc.UpdateEvent;
 import me.sxmurai.inferno.features.settings.Setting;
 import me.sxmurai.inferno.managers.HoleManager;
+import me.sxmurai.inferno.managers.commands.Command;
+import me.sxmurai.inferno.managers.commands.text.ChatColor;
 import me.sxmurai.inferno.managers.modules.Module;
 import me.sxmurai.inferno.utils.BlockUtil;
 import me.sxmurai.inferno.utils.InventoryUtils;
 import net.minecraft.init.Blocks;
+import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -55,8 +58,11 @@ public class Surround extends Module {
             this.toggle();
         } else {
             if (this.center.getValue()) {
-                mc.player.posX = Math.floor(mc.player.posX) + 0.5;
-                mc.player.posZ = Math.floor(mc.player.posZ) + 0.5;
+                BlockPos centered = new BlockPos(Math.floor(mc.player.posX), mc.player.posY, Math.floor(mc.player.posZ));
+                if (Math.abs(centered.x - mc.player.posX) > 0.1 && Math.abs(centered.z - mc.player.posZ) > 0.1) {
+                    mc.player.connection.sendPacket(new CPacketPlayer.Position(centered.x, mc.player.posY, centered.z, mc.player.onGround));
+                    mc.player.setPosition(centered.x, mc.player.posY, centered.z);
+                }
             }
 
             if (this.noAutoCrystal.getValue()) {
@@ -71,6 +77,7 @@ public class Surround extends Module {
 
             int slot = InventoryUtils.getHotbarBlockSlot(Blocks.OBSIDIAN, true);
             if (slot == -1) {
+                Command.send(ChatColor.Dark_Gray.text("You have no obsidian in your hotbar, toggling..."));
                 this.toggle();
                 return;
             }
