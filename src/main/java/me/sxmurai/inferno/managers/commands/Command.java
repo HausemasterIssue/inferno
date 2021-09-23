@@ -31,13 +31,11 @@ public abstract class Command extends Feature {
     }
 
     public static void send(String text) {
-        mc.player.sendMessage(new TextBuilder.ChatMessage(
-                ChatColor.Red.text("<Inferno>") +
-                        " " +
-                        ChatColor.Dark_Gray.text("\u00BB") +
-                        " " +
-                        text
-        ));
+        mc.player.sendMessage(new TextBuilder.ChatMessage(watermark() + text));
+    }
+
+    public static String watermark() {
+        return new TextBuilder().append(ChatColor.Red, "[Inferno]").append(" ").append(ChatColor.Dark_Gray, "\u00BB").append(" ").build();
     }
 
     public static void send(TextBuilder builder) {

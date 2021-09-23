@@ -6,6 +6,7 @@ import me.sxmurai.inferno.managers.commands.CommandManager;
 import me.sxmurai.inferno.managers.friends.FriendManager;
 import me.sxmurai.inferno.managers.macros.MacroManager;
 import me.sxmurai.inferno.managers.modules.ModuleManager;
+import me.sxmurai.inferno.managers.notifications.NotificationManager;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -29,6 +30,7 @@ public class Inferno {
 
     public static ModuleManager moduleManager;
     public static CommandManager commandManager;
+    public static NotificationManager notificationManager;
     public static TextManager textManager;
     public static FriendManager friendManager;
     public static MacroManager macroManager;
@@ -73,6 +75,7 @@ public class Inferno {
 
         moduleManager = new ModuleManager();
         commandManager = new CommandManager();
+        notificationManager = new NotificationManager();
         textManager = new TextManager();
         friendManager = new FriendManager();
         macroManager = new MacroManager();

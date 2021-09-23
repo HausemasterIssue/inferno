@@ -2,10 +2,7 @@ package me.sxmurai.inferno.managers.modules;
 
 import me.sxmurai.inferno.Inferno;
 import me.sxmurai.inferno.config.ModulesConfig;
-import me.sxmurai.inferno.features.modules.client.ClickGUI;
-import me.sxmurai.inferno.features.modules.client.CustomFont;
-import me.sxmurai.inferno.features.modules.client.HUD;
-import me.sxmurai.inferno.features.modules.client.HudEditor;
+import me.sxmurai.inferno.features.modules.client.*;
 import me.sxmurai.inferno.features.modules.combat.*;
 import me.sxmurai.inferno.features.modules.miscellaneous.*;
 import me.sxmurai.inferno.features.modules.movement.*;
@@ -27,6 +24,7 @@ public class ModuleManager {
         this.modules.add(new CustomFont());
         this.modules.add(new HUD());
         this.modules.add(new HudEditor());
+        this.modules.add(new Notifications());
 
         // combat
         this.modules.add(new Aura());

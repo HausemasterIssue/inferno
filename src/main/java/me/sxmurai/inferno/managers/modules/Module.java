@@ -1,5 +1,6 @@
 package me.sxmurai.inferno.managers.modules;
 
+import me.sxmurai.inferno.events.inferno.ModuleToggledEvent;
 import me.sxmurai.inferno.features.Feature;
 import me.sxmurai.inferno.features.settings.Bind;
 import me.sxmurai.inferno.features.settings.Setting;
@@ -93,6 +94,8 @@ public class Module extends Feature {
             MinecraftForge.EVENT_BUS.unregister(this);
             onDeactivated();
         }
+
+        MinecraftForge.EVENT_BUS.post(new ModuleToggledEvent(this));
     }
 
     public boolean isToggled() {
