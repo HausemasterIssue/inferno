@@ -28,20 +28,24 @@ public class MiddleClick extends Module {
             if (mc.objectMouseOver.typeOfHit == RayTraceResult.Type.ENTITY && mc.objectMouseOver.entityHit instanceof EntityPlayer) {
                 EntityPlayer player = (EntityPlayer) mc.objectMouseOver.entityHit;
 
-                if (Inferno.friendManager.isFriend(player)) {
-                    if (!unfriend.getValue()) {
-                        return;
-                    }
+                if (this.overPlayer.getValue() == OverPlayer.FRIEND) {
+                    if (Inferno.friendManager.isFriend(player)) {
+                        if (!unfriend.getValue()) {
+                            return;
+                        }
 
-                    Inferno.friendManager.removeFriend(player);
-                    if (notify.getValue()) {
-                        Command.send("Unfriended " + player.getName());
+                        Inferno.friendManager.removeFriend(player);
+                        if (notify.getValue()) {
+                            Command.send("Unfriended " + player.getName());
+                        }
+                    } else {
+                        Inferno.friendManager.addFriend(player);
+                        if (notify.getValue()) {
+                            Command.send("Friended " + player.getName());
+                        }
                     }
-                } else {
-                    Inferno.friendManager.addFriend(player);
-                    if (notify.getValue()) {
-                        Command.send("Friended " + player.getName());
-                    }
+                } else if (this.overPlayer.getValue() == OverPlayer.DUEL) {
+                    mc.player.sendChatMessage("/duel " + player.getName());
                 }
 
                 return;
