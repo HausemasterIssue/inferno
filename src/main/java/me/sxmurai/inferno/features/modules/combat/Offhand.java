@@ -3,11 +3,13 @@ package me.sxmurai.inferno.features.modules.combat;
 import me.sxmurai.inferno.events.mc.UpdateEvent;
 import me.sxmurai.inferno.features.settings.Setting;
 import me.sxmurai.inferno.managers.modules.Module;
+import me.sxmurai.inferno.utils.EntityUtils;
 import me.sxmurai.inferno.utils.InventoryUtils;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import org.lwjgl.input.Mouse;
 
 import java.util.ArrayList;
 import java.util.Queue;
@@ -26,63 +28,64 @@ public class Offhand extends Module {
     private final Queue<ArrayList<InventoryUtils.Task>> tasks = new ConcurrentLinkedQueue<>();
     private int ticks = 0;
     private boolean switching = false;
-    private Item switchingTo = null;
 
     @Override
     protected void onDeactivated() {
-        tasks.clear();
-        ticks = 0;
-        switching = false;
-        switchingTo = null;
+        this.tasks.clear();
+        this.ticks = 0;
+        this.switching = false;
     }
 
     @SubscribeEvent
     public void onUpdate(UpdateEvent event) {
-        handleTasks();
+        this.handleTasks();
 
+        Item item = this.item.getValue().item;
+        if (this.healthSwitch.getValue() > EntityUtils.getHealth(mc.player) || (this.fallDistance.getValue() && mc.player.fallDistance >= 3)) {
+            this.addTask(Items.TOTEM_OF_UNDYING);
+            return;
+        }
+
+        if (Mouse.isButtonDown(1) && this.offhandGapple.getValue()) {
+            item = Items.GOLDEN_APPLE;
+        }
+
+        this.addTask(item);
     }
 
     private void handleTasks() {
-        ++ticks;
-        if (ticks == 1 && switching) {
-            switching = false;
-            --ticks;
+        ++this.ticks;
+        if (this.ticks == 1 && this.switching) {
+            this.switching = false;
+            --this.ticks;
         }
 
-        if (ticks >= delay.getValue()) {
-            ticks = 0;
+        if (this.ticks >= this.delay.getValue()) {
+            this.ticks = 0;
 
             ArrayList<InventoryUtils.Task> taskList = tasks.poll();
             if (taskList == null) {
-                switching = false;
-                switchingTo = null;
+                this.switching = false;
                 return;
             }
 
-            switching = true;
+            this.switching = true;
             taskList.forEach(InventoryUtils.Task::run);
-            switchingTo = null;
         }
     }
 
     private void addTask(Item item) {
         ItemStack offhand = mc.player.getHeldItemOffhand();
-        if (switchingTo != null && switchingTo == item && offhand.getItem() == item) {
+        if (offhand.getItem() == item) {
             return;
         }
 
-        switchingTo = item;
-
-        int slot = InventoryUtils.getInventoryItemSlot(item, hotbar.getValue());
+        int slot = InventoryUtils.getInventoryItemSlot(item, this.hotbar.getValue());
         if (slot == -1) {
             return;
         }
 
         final ArrayList<InventoryUtils.Task> taskList = new ArrayList<>();
-
-        if (offhand.getItem() == item) {
-            return;
-        }
 
         if (!offhand.isEmpty) {
             taskList.add(new InventoryUtils.Task(InventoryUtils.OFFHAND_SLOT, update.getValue()));
@@ -91,7 +94,7 @@ public class Offhand extends Module {
         taskList.add(new InventoryUtils.Task(slot, update.getValue()));
         taskList.add(new InventoryUtils.Task(InventoryUtils.OFFHAND_SLOT, update.getValue()));
 
-        tasks.add(taskList);
+        this.tasks.add(taskList);
     }
 
     public enum ItemType {
