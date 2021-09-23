@@ -5,7 +5,7 @@ import me.sxmurai.inferno.managers.modules.Module;
 import net.minecraft.init.MobEffects;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@Module.Define(name = "AntiLevitation", description = "", category = Module.Category.PLAYER)
+@Module.Define(name = "AntiLevitation", description = "Stops you from levitating lol", category = Module.Category.PLAYER)
 public class AntiLevitation extends Module {
     @SubscribeEvent
     public void onUpdate(UpdateEvent event) {
