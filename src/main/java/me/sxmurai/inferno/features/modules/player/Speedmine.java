@@ -17,7 +17,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@Module.Define(name = "Speedmine", description = "Goes vroom vroom when fucking someone", category = Module.Category.COMBAT)
+@Module.Define(name = "Speedmine", description = "Goes vroom vroom when fucking someone", category = Module.Category.PLAYER)
 public class Speedmine extends Module {
     public final Setting<Mode> mode = this.register(new Setting<>("Mode", Mode.PACKET));
     public final Setting<Boolean> reset = this.register(new Setting<>("Reset", false));
