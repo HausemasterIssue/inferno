@@ -19,6 +19,14 @@ public class InventoryUtils extends Feature {
         return clazz.isInstance(mc.player.getHeldItemMainhand().getItem()) || clazz.isInstance(mc.player.getHeldItemOffhand().getItem());
     }
 
+    public static boolean isHolding(Item item, boolean offhand) {
+        return mc.player.getHeldItemMainhand().item == item || (offhand && mc.player.getHeldItemOffhand().item == item);
+    }
+
+    public static boolean isHolding(Class<? extends Item> clazz, boolean offhand) {
+        return clazz.isInstance(mc.player.getHeldItemMainhand().getItem()) || (offhand && clazz.isInstance(mc.player.getHeldItemOffhand().getItem()));
+    }
+
     public static int getHotbarItemSlot(Item item, boolean offhand) {
         if (offhand && mc.player.getHeldItemOffhand().item == item) {
             return 45;

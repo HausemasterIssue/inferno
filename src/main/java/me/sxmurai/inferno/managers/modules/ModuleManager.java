@@ -69,6 +69,7 @@ public class ModuleManager {
         this.modules.add(new NoFall());
         this.modules.add(new Reach());
         this.modules.add(new Scaffold());
+        this.modules.add(new Speedmine());
         this.modules.add(new Timer());
         this.modules.add(new Yaw());
 
