@@ -109,7 +109,7 @@ public class BlockUtil extends Feature {
     public static void place(BlockPos pos, EnumHand hand, boolean swing, boolean sneak, boolean packetPlace, boolean rotate) {
         for (EnumFacing facing : EnumFacing.values()) {
             BlockPos neighbor = pos.offset(facing);
-            if (!mc.world.isAirBlock(neighbor) && intersectsWith(neighbor)) {
+            if (mc.world.isAirBlock(neighbor) || intersectsWith(neighbor)) {
                 continue;
             }
 
