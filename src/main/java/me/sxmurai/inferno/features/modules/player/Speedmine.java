@@ -20,6 +20,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Module.Define(name = "Speedmine", description = "Goes vroom vroom when fucking someone", category = Module.Category.PLAYER)
 public class Speedmine extends Module {
     public final Setting<Mode> mode = this.register(new Setting<>("Mode", Mode.PACKET));
+    public final Setting<Float> distance = this.register(new Setting<>("Distance", 4.5f, 1.0f, 10.0f));
     public final Setting<Boolean> reset = this.register(new Setting<>("Reset", false));
     public final Setting<Boolean> swing = this.register(new Setting<>("Swing", true));
     public final Setting<Boolean> doublePacket = this.register(new Setting<>("Double", false));
@@ -45,6 +46,11 @@ public class Speedmine extends Module {
 
     @SubscribeEvent
     public void onUpdate(UpdateEvent event) {
+        if (mc.player.getDistance(this.currentPos.x, this.currentPos.y, this.currentPos.z) > this.distance.getValue()) {
+            this.currentPos = null;
+            this.doSwitchBack();
+        }
+
         if (this.currentPos != null && mc.world.getBlockState(this.currentPos).getMaterial().isReplaceable()) {
             this.currentPos = null;
             this.doSwitchBack();
