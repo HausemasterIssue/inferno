@@ -37,6 +37,7 @@ public class Surround extends Module {
     public final Setting<Boolean> packet = this.register(new Setting<>("Packet", false));
     public final Setting<Boolean> sneak = this.register(new Setting<>("Sneak", true));
     public final Setting<Integer> blocksPerTick = this.register(new Setting<>("BlocksPerTick", 1, 1, 3));
+    public final Setting<Boolean> helpers = this.register(new Setting<>("Helpers", true));
 
     private final ArrayList<BlockPos> queue = new ArrayList<>();
     private boolean finished = false;
@@ -158,7 +159,11 @@ public class Surround extends Module {
                 this.queue.remove(pos);
 
                 if (mc.world.isAirBlock(pos)) {
-                    this.queue.add(pos.add(0.0, -1.0, 0.0));
+                    BlockPos under = pos.add(0.0, -1.0, 0.0);
+                    if (this.helpers.getValue() && mc.world.isAirBlock(under)) {
+                        this.queue.add(under);
+                    }
+
                     this.queue.add(pos);
                     this.placed = this.blocksPerTick.getValue();
                 }
