@@ -8,7 +8,6 @@ import me.sxmurai.inferno.utils.InventoryUtils;
 import me.sxmurai.inferno.utils.RotationUtils;
 import me.sxmurai.inferno.utils.timing.TickTimer;
 import net.minecraft.block.*;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
