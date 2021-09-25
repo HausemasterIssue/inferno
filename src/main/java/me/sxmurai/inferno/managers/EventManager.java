@@ -44,7 +44,7 @@ public class EventManager extends Feature {
         }
     }
 
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
     public void onUpdateMove(UpdateMoveEvent event) {
         if (!Module.fullNullCheck()) {
             if (event.getEra() == UpdateMoveEvent.Era.PRE) {
