@@ -8,6 +8,9 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.client.CPacketHeldItemChange;
 
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
 public class InventoryUtils extends Feature {
     public static int OFFHAND_SLOT = 45;
 
@@ -125,9 +128,32 @@ public class InventoryUtils extends Feature {
 
         public void run() {
             mc.playerController.windowClick(0, this.slot, 0, this.shiftClick ? ClickType.QUICK_MOVE : ClickType.PICKUP, mc.player);
-            if (updateController) {
+            if (this.updateController) {
                 mc.playerController.updateController();
             }
+        }
+    }
+
+    public static class TaskGroup {
+        private final Queue<Task> tasks = new ConcurrentLinkedQueue<>();
+
+        public void add(Task task) {
+            this.tasks.add(task);
+        }
+
+        public void handle() {
+            while (!this.tasks.isEmpty()) {
+                Task task = this.tasks.poll();
+                if (task == null) {
+                    return;
+                }
+
+                task.run();
+            }
+        }
+
+        public Queue<Task> getTasks() {
+            return tasks;
         }
     }
 }
