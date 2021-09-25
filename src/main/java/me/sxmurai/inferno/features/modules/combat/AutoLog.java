@@ -37,13 +37,13 @@ public class AutoLog extends Module {
 
     @SubscribeEvent
     public void onUpdate(UpdateEvent event) {
-        if (this.health.getValue() && EntityUtils.getHealth(mc.player) < this.healthAmount.getValue()) {
-            this.log("Your health was below " + this.healthAmount.getValue() + "!");
+        if (this.totems.getValue() && InventoryUtils.getCount(Items.TOTEM_OF_UNDYING, true, true) < this.totemAmount.getValue()) {
+            this.log("You had less than " + this.totemAmount.getValue() + " totems!");
             return;
         }
 
-        if (this.totems.getValue() && InventoryUtils.getCount(Items.TOTEM_OF_UNDYING, true, true) < this.totemAmount.getValue()) {
-            this.log("You had less than " + this.totemAmount.getValue() + " totems!");
+        if (this.health.getValue() && EntityUtils.getHealth(mc.player) < this.healthAmount.getValue()) {
+            this.log("Your health was below " + this.healthAmount.getValue() + "!");
             return;
         }
     }
