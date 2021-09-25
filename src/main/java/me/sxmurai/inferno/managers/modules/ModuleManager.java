@@ -29,6 +29,7 @@ public class ModuleManager {
         // combat
         this.modules.add(new Aura());
         this.modules.add(new AutoCrystal());
+        this.modules.add(new AutoLog());
         this.modules.add(new Burrow());
         this.modules.add(new ChorusPredict());
         this.modules.add(new Criticals());

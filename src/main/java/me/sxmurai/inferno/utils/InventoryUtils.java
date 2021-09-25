@@ -101,6 +101,22 @@ public class InventoryUtils extends Feature {
         return -1;
     }
 
+    public static int getCount(Item item, boolean offhand, boolean hotbar) {
+        int count = 0;
+        if (offhand && mc.player.getHeldItemOffhand().item == item) {
+            count += 1;
+        }
+
+        for (int i = hotbar ? 0 : 9; i < 39; ++i) {
+            ItemStack stack = mc.player.inventory.getStackInSlot(i < 9 ? i + 36 : i);
+            if (stack.item == item) {
+                ++count;
+            }
+        }
+
+        return count;
+    }
+
     public static void switchTo(int slot, boolean silent) {
         if (silent) {
             mc.player.connection.sendPacket(new CPacketHeldItemChange(slot));
