@@ -12,8 +12,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Module.Define(name = "FastUse", description = "Lets you use things fast", category = Module.Category.PLAYER)
 public class FastUse extends Module {
     public final Setting<Integer> delay = this.register(new Setting<>("Delay", 0, 0, 20));
-    public final Setting<Integer> speed = this.register(new Setting<>("Speed", 0, 0, 4)); // https://github.com/Sxmurai/inferno/pull/4/files
+    public final Setting<Integer> speed = this.register(new Setting<>("Speed", 0, 0, 4));
+    public final Setting<Boolean> offhand = this.register(new Setting<>("Offhand", true));
     public final Setting<Boolean> xp = this.register(new Setting<>("XP", false));
+    public final Setting<Boolean> fireworks = this.register(new Setting<>("Fireworks", false));
     public final Setting<Boolean> crystals = this.register(new Setting<>("Crystals", false));
     public final Setting<Boolean> blocks = this.register(new Setting<>("Blocks", false));
 
@@ -30,15 +32,19 @@ public class FastUse extends Module {
             this.ticks = 0;
         }
 
-        if (this.xp.getValue() && InventoryUtils.isHolding(Items.EXPERIENCE_BOTTLE)) {
+        if (this.xp.getValue() && InventoryUtils.isHolding(Items.EXPERIENCE_BOTTLE, this.offhand.getValue())) {
             mc.rightClickDelayTimer = this.speed.getValue();
         }
 
-        if (this.crystals.getValue() && InventoryUtils.isHolding(Items.END_CRYSTAL)) {
+        if (this.fireworks.getValue() && InventoryUtils.isHolding(Items.FIREWORKS, this.offhand.getValue())) {
             mc.rightClickDelayTimer = this.speed.getValue();
         }
 
-        if (this.blocks.getValue() && InventoryUtils.isHolding(ItemBlock.class)) {
+        if (this.crystals.getValue() && InventoryUtils.isHolding(Items.END_CRYSTAL, this.offhand.getValue())) {
+            mc.rightClickDelayTimer = this.speed.getValue();
+        }
+
+        if (this.blocks.getValue() && InventoryUtils.isHolding(ItemBlock.class, this.offhand.getValue())) {
             mc.rightClickDelayTimer = this.speed.getValue();
         }
     }
