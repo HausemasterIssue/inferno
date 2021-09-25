@@ -41,6 +41,7 @@ public class ModuleManager {
         this.modules.add(new ExtraTab());
         this.modules.add(new FakePlayer());
         this.modules.add(new InventorySaver());
+        this.modules.add(new Lawnmower());
         this.modules.add(new MiddleClick());
         this.modules.add(new MountBypass());
         this.modules.add(new NoEntityTrace());
