@@ -1,11 +1,9 @@
 package me.sxmurai.inferno.managers;
 
-import me.sxmurai.inferno.events.mc.UpdateEvent;
 import me.sxmurai.inferno.features.Feature;
 import me.sxmurai.inferno.utils.RotationUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.Vec3d;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class RotationManager extends Feature {
     private float yaw;
@@ -37,11 +35,5 @@ public class RotationManager extends Feature {
     public void look(Vec3d vec) {
         RotationUtils.Rotation rotation = RotationUtils.calcRotations(mc.player.getPositionEyes(mc.getRenderPartialTicks()), vec);
         this.setRotations(rotation.getYaw(), rotation.getPitch());
-    }
-
-    @SubscribeEvent
-    public void onUpdate(UpdateEvent event) {
-        mc.player.renderYawOffset = this.yaw;
-        mc.player.rotationYawHead = this.yaw;
     }
 }

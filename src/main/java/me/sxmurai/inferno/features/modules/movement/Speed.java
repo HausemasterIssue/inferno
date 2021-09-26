@@ -20,21 +20,21 @@ import java.util.Objects;
 @Module.Define(name = "Speed", description = "Speeds you up", category = Module.Category.MOVEMENT)
 public class Speed extends Module {
     public final Setting<Mode> mode = this.register(new Setting<>("Mode", Mode.STRAFE));
-    public final Setting<Integer> speed = this.register(new Setting<>("Speed", 30, 1, 50));
+    public final Setting<Integer> speed = this.register(new Setting<>("Speed", 30, 1, 50, (v) -> mode.getValue() != Mode.ONGROUND));
     public final Setting<Boolean> liquids = this.register(new Setting<>("Liquids", true));
     public final Setting<Boolean> webs = this.register(new Setting<>("Webs", true));
-    public final Setting<Boolean> hop = this.register(new Setting<>("Hop", true));
+    public final Setting<Boolean> hop = this.register(new Setting<>("Hop", true, (v) -> mode.getValue() == Mode.VANILLA));
 
     // strafe specific settings
     public final Setting<Boolean> strict = this.register(new Setting<>("Strict", false, (v) -> mode.getValue() == Mode.STRAFE));
     public final Setting<Integer> startStage = this.register(new Setting<>("Stage", 2, 0, 4, (v) -> mode.getValue() == Mode.STRAFE));
-    public final Setting<Boolean> limiter = this.register(new Setting<>("Limiter", false, (v) -> mode.getValue() == Mode.STRAFE));
-    public final Setting<Boolean> noLag = this.register(new Setting<>("NoLag", true, (v) -> mode.getValue() == Mode.STRAFE));
 
     private final Timer timer = new Timer();
     private int strafeStage = 1;
     private double strafeSpeed = 0.0;
     private double distance = 0.0;
+
+    private boolean goUp = false;
 
     @Override
     protected void onActivated() {
@@ -54,8 +54,8 @@ public class Speed extends Module {
 
     @SubscribeEvent
     public void onPacketReceive(PacketEvent.Receive event) {
-        if (!Module.fullNullCheck() && event.getPacket() instanceof SPacketPlayerPosLook && noLag.getValue() && mode.getValue() == Mode.STRAFE) {
-            strafeStage = 4;
+        if (!Module.fullNullCheck() && event.getPacket() instanceof SPacketPlayerPosLook && mode.getValue() == Mode.STRAFE) {
+            this.strafeStage = 4;
         }
     }
 
@@ -69,7 +69,11 @@ public class Speed extends Module {
             return;
         }
 
-        if (mode.getValue() == Mode.VANILLA) {
+        if (this.mode.getValue() == Mode.VANILLA) {
+            if (this.hop.getValue() && mc.player.onGround && (mc.player.moveForward != 0.0f || mc.player.moveStrafing != 0.0f)) {
+                mc.player.jump();
+            }
+
             RotationUtils.Rotation dir = RotationUtils.getDirectionalSpeed(speed.getValue() / 100.0);
 
             mc.player.motionX = dir.getYaw();
@@ -79,95 +83,122 @@ public class Speed extends Module {
 
     @SubscribeEvent
     public void onMoveUpdate(UpdateMoveEvent event) {
-        if (Module.fullNullCheck() && event.getEra() == UpdateMoveEvent.Era.PRE && mode.getValue() == Mode.STRAFE) {
-            EntityPlayerSP player = mc.player;
-            distance = Math.sqrt((player.posX - player.prevPosX) * (player.posX - player.prevPosX) + (player.posZ - player.prevPosZ) * (player.posZ - player.prevPosZ));
+        if (Module.fullNullCheck() && event.getEra() == UpdateMoveEvent.Era.PRE) {
+            if (this.mode.getValue() == Mode.STRAFE) {
+                EntityPlayerSP player = mc.player;
+                distance = Math.sqrt((player.posX - player.prevPosX) * (player.posX - player.prevPosX) + (player.posZ - player.prevPosZ) * (player.posZ - player.prevPosZ));
+            }
         }
     }
 
     @SubscribeEvent
     public void onMove(MoveEvent event) {
-        if (mode.getValue() != Mode.STRAFE || (!this.liquids.getValue() && (mc.player.isInWater() || mc.player.isInLava())) || (!this.webs.getValue() && mc.player.isInWeb) || shouldStop()) {
+        if (this.mode.getValue() == Mode.ONGROUND) {
+            if (mc.player.onGround) {
+                event.setX(event.getX() * 1.590000033378601);
+                event.setZ(event.getZ() * 1.590000033378601);
+
+                if (this.goUp) {
+                    event.setY(event.getY() + 0.4);
+                }
+
+                this.goUp = !this.goUp;
+            }
+
             return;
-        }
-
-        if (mc.player.ticksExisted < 20 && this.strict.getValue()) {
-            return;
-        }
-
-        if (mc.player.onGround && !this.limiter.getValue()) {
-            this.strafeStage = 2;
-        }
-
-        switch (strafeStage) {
-            case 0: {
-                ++this.strafeStage;
-                this.distance = 0.0;
-                break;
+        } else if (this.mode.getValue() == Mode.STRAFE) {
+            if ((!this.liquids.getValue() && (mc.player.isInWater() || mc.player.isInLava())) || (!this.webs.getValue() && mc.player.isInWeb) || shouldStop()) {
+                return;
             }
 
-            case 2: {
-                if (!this.hop.getValue()) {
+            if (mc.player.ticksExisted < 20 && this.strict.getValue()) {
+                return;
+            }
+
+            if (this.strict.getValue() && Math.round(mc.player.posY - (int) mc.player.posY) == 0.138) {
+                mc.player.motionY -= 0.08;
+                event.setY(event.getY() - 0.09316090325960147);
+                mc.player.posY -= 0.09316090325960147;
+            }
+
+            switch (strafeStage) {
+                case 0: {
+                    ++this.strafeStage;
+                    this.distance = 0.0;
                     break;
                 }
 
-                if (mc.player.moveForward == 0.0f && mc.player.moveStrafing == 0.0f || !mc.player.onGround) {
+                case 1: {
+                    ++this.strafeStage;
+                    if (mc.player.moveForward != 0.0f || mc.player.moveStrafing != 0.0f) {
+                        this.strafeSpeed = 1.35 * this.getBaseMoveSpeed() - 0.01;
+                    }
                     break;
                 }
 
-                if (this.strict.getValue() && !this.timer.passedMs(150L)) {
+                case 2: {
+                    if (!this.hop.getValue()) {
+                        break;
+                    }
+
+                    if (mc.player.moveForward == 0.0f && mc.player.moveStrafing == 0.0f || !mc.player.onGround) {
+                        break;
+                    }
+
+                    if (this.strict.getValue() && !this.timer.passedMs(150L)) {
+                        break;
+                    }
+                    this.timer.reset();
+
+                    double motionY = 0.399399995803833;
+                    if (mc.player.isPotionActive(MobEffects.JUMP_BOOST)) {
+                        motionY += (Objects.requireNonNull(mc.player.getActivePotionEffect(MobEffects.JUMP_BOOST)).getAmplifier() + 1) * 0.1;
+                    }
+
+                    event.setY(mc.player.motionY = motionY);
+                    this.strafeSpeed *= 2.149;
+
                     break;
                 }
-                this.timer.reset();
 
-                double motionY = 0.3994;
-                if (mc.player.isPotionActive(MobEffects.JUMP_BOOST)) {
-                    motionY += (Objects.requireNonNull(mc.player.getActivePotionEffect(MobEffects.JUMP_BOOST)).getAmplifier() + 1) * 0.1;
+                case 3: {
+                    this.strafeSpeed = this.distance - 0.66 * (this.distance - this.getBaseMoveSpeed());
+                    break;
                 }
 
-                event.setY(mc.player.motionY = motionY);
-                this.strafeSpeed *= 2.149;
+                default: {
+                    if (mc.world.getCollisionBoxes(mc.player, mc.player.getEntityBoundingBox().offset(0.0, mc.player.motionY, 0.0)).size() > 0 || mc.player.collidedVertically || strafeStage > 0) {
+                        this.strafeStage = (mc.player.moveForward != 0.0f && mc.player.moveStrafing != 0.0f) ? 1 : 0;
+                    }
 
-                break;
-            }
-
-            case 3: {
-                this.strafeSpeed = this.distance - 0.66 * (this.distance - this.getBaseMoveSpeed());
-                break;
-            }
-
-            default: {
-                if (mc.world.getCollisionBoxes(mc.player, mc.player.getEntityBoundingBox().offset(0.0, mc.player.motionY, 0.0)).size() > 0 || mc.player.collidedVertically || strafeStage > 0) {
-                    this.strafeStage = (mc.player.moveForward != 0.0f && mc.player.moveStrafing != 0.0f) ? 1 : 0;
+                    this.strafeSpeed = this.distance - this.distance / 159.0;
+                    break;
                 }
-
-                this.strafeSpeed = this.distance - this.distance / 159.0;
-                break;
             }
+
+            this.strafeSpeed = Math.max(this.strafeSpeed, this.getBaseMoveSpeed());
+
+            double forward = mc.player.movementInput.moveForward,
+                    strafe = mc.player.movementInput.moveStrafe,
+                    yaw = mc.player.rotationYaw;
+
+            if (forward == 0.0f && strafe == 0.0f) {
+                event.setX(0.0);
+                event.setZ(0.0);
+            } else if (forward != 0.0 && strafe != 0.0) {
+                forward *= Math.sin(0.7853981633974483);
+                strafe *= Math.cos(0.7853981633974483);
+            }
+
+            double radYaw = Math.toRadians(yaw),
+                    sin = Math.sin(radYaw),
+                    cos = Math.cos(radYaw);
+
+            event.setX(forward * this.strafeSpeed * -sin + strafe * this.strafeSpeed * cos * 0.99);
+            event.setZ(forward * this.strafeSpeed * cos - strafe * this.strafeSpeed * -sin * 0.99);
+
+            ++this.strafeStage;
         }
-
-        this.strafeSpeed = Math.max(this.strafeSpeed, this.getBaseMoveSpeed());
-
-        double forward = mc.player.movementInput.moveForward,
-                strafe = mc.player.movementInput.moveStrafe,
-                yaw = mc.player.rotationYaw;
-
-        if (forward == 0.0f && strafe == 0.0f) {
-            event.setX(0.0);
-            event.setZ(0.0);
-        } else if (forward != 0.0 && strafe != 0.0) {
-            forward *= Math.sin(0.7853981633974483);
-            strafe *= Math.cos(0.7853981633974483);
-        }
-
-        double radYaw = Math.toRadians(yaw),
-                sin = Math.sin(radYaw),
-                cos = Math.cos(radYaw);
-
-        event.setX(forward * this.strafeSpeed * -sin + strafe * this.strafeSpeed * cos * 0.99);
-        event.setZ(forward * this.strafeSpeed * cos - strafe * this.strafeSpeed * -sin * 0.99);
-
-        ++this.strafeStage;
     }
 
     private double getBaseMoveSpeed() {
