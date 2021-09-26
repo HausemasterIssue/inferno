@@ -6,7 +6,6 @@ import me.sxmurai.inferno.features.settings.Setting;
 import me.sxmurai.inferno.managers.modules.Module;
 import me.sxmurai.inferno.utils.EntityUtils;
 import me.sxmurai.inferno.utils.InventoryUtils;
-import me.sxmurai.inferno.utils.RotationUtils;
 import me.sxmurai.inferno.utils.timing.Timer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -14,18 +13,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemSword;
-import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.network.play.client.CPacketUseEntity;
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-// @todo fix
 @Module.Define(name = "Aura", description = "Attacks things around you", category = Module.Category.COMBAT)
 public class Aura extends Module {
     public final Setting<Priority> priority = this.register(new Setting<>("Priority", Priority.CLOSEST));
     public final Setting<Float> targetRange = this.register(new Setting<>("TargetRange", 5.0f, 1.0f, 10.0f));
-    public final Setting<Delay> delay = this.register(new Setting<>("Delay", Delay.VANILLA));
-    public final Setting<Float> customDelay = this.register(new Setting<>("CustomDelay", 0.0f, 0.0f, 2500.0f, (v) -> delay.getValue() == Delay.CUSTOM));
     public final Setting<Boolean> rotate = this.register(new Setting<>("Rotate", true));
     public final Setting<Boolean> swing = this.register(new Setting<>("Swing", true));
     public final Setting<Float> wallRange = this.register(new Setting<>("WallRange", 2.0f, 0.0f, 5.0f));
@@ -34,63 +29,61 @@ public class Aura extends Module {
     public final Setting<Boolean> invisible = this.register(new Setting<>("Invisible", false));
     public final Setting<Boolean> mobs = this.register(new Setting<>("Mobs", false));
     public final Setting<Boolean> passive = this.register(new Setting<>("Passive", false));
-    public final Setting<Boolean> tpsSync = this.register(new Setting<>("TPSSync", false)); // @todo
     public final Setting<Weapon> weapon = this.register(new Setting<>("Weapon", Weapon.NONE));
     public final Setting<Boolean> autoSwitch = this.register(new Setting<>("AutoSwitch", true, (v) -> weapon.getValue() != Weapon.NONE));
     public final Setting<Boolean> onlyWithWeapon = this.register(new Setting<>("OnlyWithWeapon", false));
 
     private Entity target = null;
-    private final Timer timer = new Timer();
     private int oldSlot = -1;
 
     @Override
     protected void onDeactivated() {
-        target = null;
-        timer.reset();
+        this.target = null;
 
-        if (!Module.fullNullCheck() && oldSlot != -1) {
-            mc.player.inventory.currentItem = oldSlot;
+        if (!Module.fullNullCheck() && this.oldSlot != -1) {
+            InventoryUtils.switchTo(this.oldSlot, false);
         }
 
-        oldSlot = -1;
+        this.oldSlot = -1;
     }
 
     @SubscribeEvent
     public void onUpdate(UpdateEvent event) {
         findTarget();
-        if (target == null || !canAttack()) {
+        if (target == null || mc.player.getCooledAttackStrength(0.0f) != 1.0f) {
+            if (this.oldSlot != -1) {
+                InventoryUtils.switchTo(this.oldSlot, false);
+            }
+
             return;
         }
 
-        if (weapon.getValue() != Weapon.NONE && autoSwitch.getValue() && !InventoryUtils.isHolding(weapon.getValue().clazzTool)) {
-            int slot = InventoryUtils.getHotbarItemSlot(weapon.getValue().clazzTool, false);
-            if (slot == -1 && onlyWithWeapon.getValue()) {
+        if (this.weapon.getValue() != Weapon.NONE && this.autoSwitch.getValue() && !InventoryUtils.isHolding(this.weapon.getValue().clazzTool)) {
+            int slot = InventoryUtils.getHotbarItemSlot(this.weapon.getValue().clazzTool, false);
+            if (slot == -1 && this.onlyWithWeapon.getValue()) {
                 return;
             }
 
             if (slot != -1) {
-                oldSlot = mc.player.inventory.currentItem;
+                this.oldSlot = mc.player.inventory.currentItem;
                 InventoryUtils.switchTo(slot, false);
             }
         }
 
-        if (rotate.getValue()) {
+        if (this.rotate.getValue()) {
             Inferno.rotationManager.look(this.target);
         }
 
-        if (packet.getValue()) {
-            mc.player.connection.sendPacket(new CPacketUseEntity(target));
+        if (this.packet.getValue()) {
+            mc.player.connection.sendPacket(new CPacketUseEntity(this.target));
+            mc.player.resetCooldown();
         } else {
-            mc.playerController.attackEntity(mc.player, target);
+            mc.playerController.attackEntity(mc.player, this.target);
         }
 
-        if (swing.getValue()) {
+        if (this.swing.getValue()) {
             mc.player.swingArm(EnumHand.MAIN_HAND);
         }
-    }
-
-    private boolean canAttack() {
-        return delay.getValue() == Delay.VANILLA ? mc.player.getCooledAttackStrength(0.0f) == 1.0f : delay.getValue() == Delay.CUSTOM && timer.passedMs(customDelay.getValue().longValue());
     }
 
     private void findTarget() {

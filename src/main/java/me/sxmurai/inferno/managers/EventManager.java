@@ -44,17 +44,6 @@ public class EventManager extends Feature {
         }
     }
 
-    @SubscribeEvent(priority = EventPriority.HIGHEST, receiveCanceled = true)
-    public void onUpdateMove(UpdateMoveEvent event) {
-        if (!Module.fullNullCheck()) {
-            if (event.getEra() == UpdateMoveEvent.Era.PRE) {
-                Inferno.rotationManager.update();
-            } else if (event.getEra() == UpdateMoveEvent.Era.POST) {
-                Inferno.rotationManager.reset();
-            }
-        }
-    }
-
     @SubscribeEvent
     public void onPacketReceive(PacketEvent.Receive event) {
         if (!Module.fullNullCheck()) {
