@@ -1,10 +1,14 @@
 package me.sxmurai.inferno.managers;
 
 import me.sxmurai.inferno.events.entity.UpdateMoveEvent;
+import me.sxmurai.inferno.events.mc.UpdateEvent;
+import me.sxmurai.inferno.events.network.PacketEvent;
 import me.sxmurai.inferno.features.Feature;
+import me.sxmurai.inferno.managers.modules.Module;
 import me.sxmurai.inferno.utils.RotationUtils;
 import me.sxmurai.inferno.utils.timing.Timer;
 import net.minecraft.entity.Entity;
+import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -12,6 +16,24 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class RotationManager extends Feature {
     private final RotationUtils.Rotation current = new RotationUtils.Rotation(0.0f, 0.0f);
     private final Timer timer = new Timer();
+
+    @SubscribeEvent
+    public void onUpdate(UpdateEvent event) {
+        if (this.current.getYaw() != mc.player.rotationYaw && this.current.getPitch() != mc.player.rotationPitch) {
+            mc.player.connection.sendPacket(new CPacketPlayer.Rotation(this.current.getYaw(), this.current.getPitch(), mc.player.onGround));
+        }
+    }
+
+    @SubscribeEvent
+    public void onPacketSend(PacketEvent.Send event) {
+        if (!Module.fullNullCheck() && event.getPacket() instanceof CPacketPlayer) {
+            CPacketPlayer packet = (CPacketPlayer) event.getPacket();
+            if (packet.rotating) {
+                packet.yaw = this.current.getYaw();
+                packet.pitch = this.current.getPitch();
+            }
+        }
+    }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onUpdateMove(UpdateMoveEvent event) {

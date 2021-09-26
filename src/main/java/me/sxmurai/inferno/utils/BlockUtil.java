@@ -1,5 +1,6 @@
 package me.sxmurai.inferno.utils;
 
+import me.sxmurai.inferno.Inferno;
 import me.sxmurai.inferno.features.Feature;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -120,10 +121,7 @@ public class BlockUtil extends Feature {
             Vec3d hitVec = new Vec3d(neighbor.x + 0.5, neighbor.y + 0.5, neighbor.z + 0.5).add(new Vec3d(facing.getOpposite().getDirectionVec()).scale(0.5));
 
             if (rotate) {
-                RotationUtils.Rotation rotation = RotationUtils.calcRotations(mc.player.getPositionEyes(mc.getRenderPartialTicks()), hitVec);
-                mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rotation.getYaw(), rotation.getPitch(), mc.player.onGround));
-                mc.player.rotationYawHead = rotation.getYaw();
-                mc.player.renderYawOffset = rotation.getYaw();
+                Inferno.rotationManager.look(hitVec);
             }
 
             if (packetPlace) {
@@ -155,8 +153,7 @@ public class BlockUtil extends Feature {
         }
 
         if (rotate) {
-            RotationUtils.Rotation rotation = RotationUtils.calcRotations(mc.player.getPositionEyes(mc.getRenderPartialTicks()), hitVec);
-            mc.player.connection.sendPacket(new CPacketPlayer.Rotation(rotation.getYaw(), rotation.getPitch(), mc.player.onGround));
+            Inferno.rotationManager.look(hitVec);
         }
 
         if (packetPlace) {
