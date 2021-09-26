@@ -37,7 +37,7 @@ public class RotationManager extends Feature {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onUpdateMove(UpdateMoveEvent event) {
-        if (event.getEra() == UpdateMoveEvent.Era.PRE && this.timer.passedMs(100L)) {
+        if (event.getEra() == UpdateMoveEvent.Era.PRE && this.timer.passedMs(250L)) {
             this.reset();
         }
     }
