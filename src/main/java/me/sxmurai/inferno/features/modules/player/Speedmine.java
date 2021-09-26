@@ -46,7 +46,7 @@ public class Speedmine extends Module {
 
     @SubscribeEvent
     public void onUpdate(UpdateEvent event) {
-        if (mc.player.getDistance(this.currentPos.x, this.currentPos.y, this.currentPos.z) > this.distance.getValue()) {
+        if (this.currentPos != null && mc.player.getDistance(this.currentPos.x, this.currentPos.y, this.currentPos.z) > this.distance.getValue()) {
             this.currentPos = null;
             this.doSwitchBack();
         }

@@ -268,11 +268,13 @@ public class AutoCrystal extends Module {
         this.cleanup();
 
         // update rotations
-        if (this.currentCrystal != null) {
-            this.look(this.currentCrystal.getPositionEyes(mc.getRenderPartialTicks()));
-        } else {
-            if (this.currentPos != null) {
-                this.look(new Vec3d((double) (this.currentPos.x) + 0.5, this.currentPos.y, (double) (this.currentPos.z) + 0.5));
+        if (this.rotating) {
+            if (this.currentCrystal != null) {
+                this.look(this.currentCrystal.getPositionEyes(mc.getRenderPartialTicks()));
+            } else {
+                if (this.currentPos != null) {
+                    this.look(new Vec3d(this.currentPos.x + 0.5, this.currentPos.y - 0.5, this.currentPos.z + 0.5));
+                }
             }
         }
 
@@ -294,21 +296,21 @@ public class AutoCrystal extends Module {
 
     private void doPlace(boolean cleanup) {
         while (!this.positions.isEmpty()) {
+            if (!this.placeTimer.passed(this.placeDelay.getValue())) {
+                break;
+            }
+
             BlockPos pos = this.positions.poll();
             if (pos == null) {
                 continue;
             }
 
+            this.placeTimer.reset();
+
             double dist = mc.player.getDistance(pos.x, pos.y, pos.z);
             if (dist > this.placeRange.getValue() || !BlockUtil.canSeePos(pos) && dist > this.placeWallRange.getValue()) {
                 continue;
             }
-
-            if (!this.placeTimer.passed(this.placeDelay.getValue())) {
-                break;
-            }
-
-            this.placeTimer.reset();
 
             if (this.extraCalc.getValue()) {
                 // @todo
@@ -388,7 +390,7 @@ public class AutoCrystal extends Module {
                         continue;
                     }
 
-                    if (!BlockUtil.canCrystalBePlacedAt(surroundingPos.up(), this.oneDot13.getValue())) {
+                    if (!BlockUtil.canCrystalBePlacedAt(surroundingPos, this.oneDot13.getValue())) {
                         continue;
                     }
 
@@ -587,8 +589,11 @@ public class AutoCrystal extends Module {
     }
 
     private void place(BlockPos pos) {
+        this.currentPos = pos;
+        this.currentCrystal = null;
+
         if (this.placeRotate.getValue()) {
-            this.look(new Vec3d((double) (pos.x) + 0.5, pos.y, (double) (pos.z) + 0.5));
+            this.look(new Vec3d(pos.x + 0.5, pos.y - 0.5, pos.z + 0.5));
         }
 
         BlockUtil.placeNormal(pos, this.hand, false, true, this.packetPlace.getValue(), false);
@@ -599,6 +604,9 @@ public class AutoCrystal extends Module {
     }
 
     private void hit(EntityEnderCrystal crystal) {
+        this.currentCrystal = crystal;
+        this.currentPos = null;
+
         if (this.hitRotate.getValue()) {
             this.look(crystal.getPositionEyes(mc.getRenderPartialTicks()));
         }
