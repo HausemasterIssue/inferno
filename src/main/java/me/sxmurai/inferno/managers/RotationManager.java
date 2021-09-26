@@ -9,6 +9,7 @@ import me.sxmurai.inferno.utils.RotationUtils;
 import me.sxmurai.inferno.utils.timing.Timer;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.play.client.CPacketPlayer;
+import net.minecraft.network.play.server.SPacketPlayerPosLook;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -20,7 +21,7 @@ public class RotationManager extends Feature {
     @SubscribeEvent
     public void onUpdate(UpdateEvent event) {
         if (this.current.getYaw() != mc.player.rotationYaw && this.current.getPitch() != mc.player.rotationPitch) {
-            mc.player.connection.sendPacket(new CPacketPlayer.Rotation(this.current.getYaw(), this.current.getPitch(), mc.player.onGround));
+            mc.player.connection.getNetworkManager().dispatchPacket(new CPacketPlayer.Rotation(this.current.getYaw(), this.current.getPitch(), mc.player.onGround), null);
         }
     }
 
@@ -35,9 +36,19 @@ public class RotationManager extends Feature {
         }
     }
 
+    @SubscribeEvent
+    public void onPacketReceive(PacketEvent.Receive event) {
+        if (!Module.fullNullCheck() && event.getPacket() instanceof SPacketPlayerPosLook) {
+            SPacketPlayerPosLook packet = (SPacketPlayerPosLook) event.getPacket();
+
+            this.current.setYaw(packet.getYaw());
+            this.current.setPitch(packet.getPitch());
+        }
+    }
+
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onUpdateMove(UpdateMoveEvent event) {
-        if (event.getEra() == UpdateMoveEvent.Era.PRE && this.timer.passedMs(250L)) {
+        if (event.getEra() == UpdateMoveEvent.Era.PRE && this.timer.passedMs(300L)) {
             this.reset();
         }
     }
