@@ -1,7 +1,6 @@
 package me.sxmurai.inferno.managers;
 
 import me.sxmurai.inferno.events.entity.UpdateMoveEvent;
-import me.sxmurai.inferno.events.mc.UpdateEvent;
 import me.sxmurai.inferno.events.network.PacketEvent;
 import me.sxmurai.inferno.features.Feature;
 import me.sxmurai.inferno.managers.modules.Module;
@@ -9,7 +8,6 @@ import me.sxmurai.inferno.utils.RotationUtils;
 import me.sxmurai.inferno.utils.timing.Timer;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.play.client.CPacketPlayer;
-import net.minecraft.network.play.server.SPacketPlayerPosLook;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -18,14 +16,7 @@ public class RotationManager extends Feature {
     private final RotationUtils.Rotation current = new RotationUtils.Rotation(0.0f, 0.0f);
     private final Timer timer = new Timer();
 
-    @SubscribeEvent
-    public void onUpdate(UpdateEvent event) {
-        if (this.current.getYaw() != mc.player.rotationYaw && this.current.getPitch() != mc.player.rotationPitch) {
-            mc.player.connection.getNetworkManager().dispatchPacket(new CPacketPlayer.Rotation(this.current.getYaw(), this.current.getPitch(), mc.player.onGround), null);
-        }
-    }
-
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onPacketSend(PacketEvent.Send event) {
         if (!Module.fullNullCheck() && event.getPacket() instanceof CPacketPlayer) {
             CPacketPlayer packet = (CPacketPlayer) event.getPacket();
@@ -36,19 +27,9 @@ public class RotationManager extends Feature {
         }
     }
 
-    @SubscribeEvent
-    public void onPacketReceive(PacketEvent.Receive event) {
-        if (!Module.fullNullCheck() && event.getPacket() instanceof SPacketPlayerPosLook) {
-            SPacketPlayerPosLook packet = (SPacketPlayerPosLook) event.getPacket();
-
-            this.current.setYaw(packet.getYaw());
-            this.current.setPitch(packet.getPitch());
-        }
-    }
-
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onUpdateMove(UpdateMoveEvent event) {
-        if (event.getEra() == UpdateMoveEvent.Era.PRE && this.timer.passedMs(300L)) {
+        if (event.getEra() == UpdateMoveEvent.Era.PRE && this.timer.passedMs(230L)) {
             this.reset();
         }
     }

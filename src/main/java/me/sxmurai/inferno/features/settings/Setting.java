@@ -9,7 +9,7 @@ public class Setting<T> {
     private final String name;
     private T value;
     private final T defaultValue;
-    private final Predicate<T> visibility;
+    private Predicate<T> visibility;
 
     private Number min;
     private Number max;
@@ -67,6 +67,11 @@ public class Setting<T> {
 
     public boolean hasRestriction() {
         return value instanceof Number && max != null && min != null;
+    }
+
+    public Setting setVisibility(Predicate<T> visibility) {
+        this.visibility = visibility;
+        return this;
     }
 
     public boolean isVisible() {
