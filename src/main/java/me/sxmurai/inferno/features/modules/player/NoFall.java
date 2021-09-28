@@ -9,6 +9,7 @@ import net.minecraft.init.Items;
 import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.util.math.BlockPos;
 
 @Module.Define(name = "NoFall", description = "Tries to negate fall damage", category = Module.Category.PLAYER)
 public class NoFall extends Module {
@@ -52,6 +53,11 @@ public class NoFall extends Module {
 
                     this.doWizardShit();
                 }
+                
+            } else if (this.mode.getValue() == Mode.RUBBERBAND) {
+                mc.player.fallDistance = 0;
+                mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX +420420, mc.player.posY, mc.player.posZ, false));
+                mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX, mc.player.posY + 1, mc.player.posZ, true));
             }
         }
 
@@ -84,6 +90,6 @@ public class NoFall extends Module {
     }
 
     public enum Mode {
-        PACKET, WATER_BUCKET, COBWEB
+        PACKET, WATER_BUCKET, COBWEB, RUBBERBAND
     }
 }
