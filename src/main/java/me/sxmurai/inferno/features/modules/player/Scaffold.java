@@ -58,12 +58,12 @@ public class Scaffold extends Module {
             timer.reset();
         }
 
-        pos = new BlockPos(mc.player.posX, mc.player.posY - 1.0, mc.player.posZ);
+        this.pos = new BlockPos(mc.player.posX, mc.player.posY - 1.0, mc.player.posZ);
         if (BlockUtil.getBlockFromPos(pos) == Blocks.AIR) {
             int oldSlot = mc.player.inventory.currentItem;
             EnumHand hand = EnumHand.MAIN_HAND;
             if (!InventoryUtils.isHolding(ItemBlock.class)) {
-                int slot = InventoryUtils.getHotbarItemSlot(ItemBlock.class, offhand.getValue());
+                int slot = InventoryUtils.getHotbarItemSlot(ItemBlock.class, this.offhand.getValue());
                 if (slot == -1) {
                     return;
                 }
@@ -75,7 +75,7 @@ public class Scaffold extends Module {
                 }
             }
 
-            Pair<BlockPos, EnumFacing> place = getPlacePos(pos);
+            Pair<BlockPos, EnumFacing> place = this.getPlacePos(pos);
             if (place == null) {
                 return;
             }
@@ -102,7 +102,7 @@ public class Scaffold extends Module {
                     }
                 }
 
-                BlockUtil.placeNormal(p, hand, swing.getValue(), false, packet.getValue(), this.rotate.getValue());
+                BlockUtil.place(p, hand, this.swing.getValue(), false, this.packet.getValue(), true);
             }
 
             if (hand == EnumHand.MAIN_HAND) {
