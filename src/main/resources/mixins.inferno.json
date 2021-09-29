@@ -23,6 +23,7 @@
     "render.gui.MixinGuiIngame",
     "render.gui.MixinGuiPlayerTabOverlay",
     "render.MixinItemRenderer",
+    "render.MixinLayerArmorBase",
     "render.MixinParticleManager",
 
     "world.blocks.MixinBlock",
