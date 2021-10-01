@@ -55,6 +55,7 @@ public class ModuleManager {
         this.modules.add(new EntityControl());
         this.modules.add(new NoSlow());
         this.modules.add(new ReverseStep());
+        this.modules.add(new SafeWalk());
         this.modules.add(new Speed());
         this.modules.add(new Sprint());
         this.modules.add(new Velocity());
