@@ -1,5 +1,6 @@
 package me.sxmurai.inferno.utils;
 
+import me.sxmurai.inferno.Inferno;
 import me.sxmurai.inferno.features.Feature;
 import net.minecraft.entity.*;
 import net.minecraft.entity.monster.EntityMob;
@@ -60,5 +61,25 @@ public class EntityUtils extends Feature {
 
     public static boolean isRiding(boolean controllerCheck) {
         return mc.player.isRiding() && (controllerCheck && mc.player.ridingEntity.getControllingPassenger() == mc.player);
+    }
+
+    public static EntityPlayer getClosest(EntityPlayer previous, float range, boolean friends) {
+        EntityPlayer player = previous;
+        for (EntityPlayer p : mc.world.playerEntities) {
+            if (p == null || p == mc.player || mc.player.getDistance(p) > range || (!friends && Inferno.friendManager.isFriend(p))) {
+                continue;
+            }
+
+            if (player == null) {
+                player = p;
+                continue;
+            }
+
+            if (mc.player.getDistance(player) > mc.player.getDistance(p)) {
+                player = p;
+            }
+        }
+
+        return player;
     }
 }

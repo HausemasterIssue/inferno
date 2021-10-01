@@ -204,4 +204,8 @@ public class BlockUtil extends Feature {
 
         return false;
     }
+
+    public static BlockPos compareClosest(BlockPos pos1, BlockPos pos2) {
+        return mc.player.getDistance(pos1.x, pos1.y, pos1.z) > mc.player.getDistance(pos2.x, pos2.y, pos2.z) ? pos1 : pos2;
+    }
 }

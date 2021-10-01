@@ -38,6 +38,7 @@ public class ModuleManager {
         this.modules.add(new Offhand());
         this.modules.add(new Surround());
         this.modules.add(new TotemPopNotifier());
+        this.modules.add(new Trap());
 
         // miscellaneous
         this.modules.add(new ExtraTab());
