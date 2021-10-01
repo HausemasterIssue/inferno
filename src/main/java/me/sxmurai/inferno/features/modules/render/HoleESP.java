@@ -16,7 +16,7 @@ public class HoleESP extends Module {
     public final Setting<Boolean> safe = this.register(new Setting<>("Safe", true));
     public final Setting<ColorUtils.Color> safeColor = this.register(new Setting<>("SafeColor", new ColorUtils.Color(0, 255, 0, 80), (v) -> safe.getValue()));
     public final Setting<Boolean> unsafe = this.register(new Setting<>("Unsafe", true));
-    public final Setting<ColorUtils.Color> unsafeColor = this.register(new Setting<>("UnsafeColor", new ColorUtils.Color(0, 255, 0, 80), (v) -> unsafe.getValue()));
+    public final Setting<ColorUtils.Color> unsafeColor = this.register(new Setting<>("UnsafeColor", new ColorUtils.Color(255, 0, 0, 80), (v) -> unsafe.getValue()));
     public final Setting<Float> height = this.register(new Setting<>("Height", 1.0f, -1.0f, 2.0f, (v) -> mode.getValue() != VoidESP.Mode.FLAT && mode.getValue() != VoidESP.Mode.FLAT_OUTLINE));
     public final Setting<Float> width = this.register(new Setting<>("Width", 1.0f, 0.1f, 5.0f, (v) -> mode.getValue() == VoidESP.Mode.FLAT_OUTLINE || mode.getValue() == VoidESP.Mode.FILLED_OUTLINE || mode.getValue() == VoidESP.Mode.OUTLINE));
 
