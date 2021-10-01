@@ -1,4 +1,4 @@
-package me.sxmurai.inferno.features.modules.player;
+package me.sxmurai.inferno.features.modules.miscellaneous;
 
 import me.sxmurai.inferno.events.network.PacketEvent;
 import me.sxmurai.inferno.managers.modules.Module;
@@ -9,7 +9,7 @@ import net.minecraft.network.play.server.SPacketBlockBreakAnim;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 // @todo test
-@Module.Define(name = "AntiSignFuck", description = "Attempts to stop you from getting kicked with the new sign kick method", category = Module.Category.PLAYER)
+@Module.Define(name = "AntiSignFuck", description = "Attempts to stop you from getting kicked with the new sign kick method")
 public class AntiSignFuck extends Module {
     @SubscribeEvent
     public void onPacketReceive(PacketEvent.Receive event) {
