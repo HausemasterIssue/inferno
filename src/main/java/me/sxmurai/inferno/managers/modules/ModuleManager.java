@@ -52,6 +52,7 @@ public class ModuleManager {
 
         // movement
         this.modules.add(new ElytraFly());
+        this.modules.add(new EntityControl());
         this.modules.add(new NoSlow());
         this.modules.add(new ReverseStep());
         this.modules.add(new Speed());

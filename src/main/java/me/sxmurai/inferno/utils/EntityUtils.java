@@ -57,4 +57,8 @@ public class EntityUtils extends Feature {
     public static boolean isMining() {
         return InventoryUtils.isHolding(Items.DIAMOND_PICKAXE) && mc.playerController.getIsHittingBlock();
     }
+
+    public static boolean isRiding(boolean controllerCheck) {
+        return mc.player.isRiding() && (controllerCheck && mc.player.ridingEntity.getControllingPassenger() == mc.player);
+    }
 }
