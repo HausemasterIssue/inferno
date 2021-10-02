@@ -5,6 +5,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 import java.util.function.Predicate;
 
+// @todo make it so the predicate doesnt need a param, another example of useless skidded code
 public class Setting<T> {
     private final String name;
     private T value;
