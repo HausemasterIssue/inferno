@@ -13,9 +13,9 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 @Module.Define(name = "BowSpam", description = "Becomes annoying and spams your bow", category = Module.Category.COMBAT)
 public class BowSpam extends Module {
-    public final Setting<Integer> amount = this.register(new Setting<>("Amount", 4, 0, 20));
-    public final Setting<Integer> delay = this.register(new Setting<>("Delay", 1, 0, 20));
-    public final Setting<Boolean> offhand = this.register(new Setting<>("Offhand", true));
+    public final Setting<Integer> amount = new Setting<>("Amount", 4, 0, 20);
+    public final Setting<Integer> delay = new Setting<>("Delay", 1, 0, 20);
+    public final Setting<Boolean> offhand = new Setting<>("Offhand", true);
 
     private final TickTimer timer = new TickTimer();
 

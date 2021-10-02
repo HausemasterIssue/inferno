@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 @Module.Define(name = "PingSpoof", description = "Spoofs ur ping lol")
 public class PingSpoof extends Module {
-    public final Setting<Float> delay = this.register(new Setting<>("Delay", 100.0f, 0.0f, 3000.0f));
+    public final Setting<Float> delay = new Setting<>("Delay", 100.0f, 0.0f, 3000.0f);
 
     private final Queue<CPacketKeepAlive> packets = new ConcurrentLinkedQueue<>();
     private boolean sending = false;

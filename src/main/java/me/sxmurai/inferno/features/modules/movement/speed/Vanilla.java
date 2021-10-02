@@ -8,8 +8,8 @@ import me.sxmurai.inferno.utils.RotationUtils;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class Vanilla extends Mode<Speed> {
-    public final Setting<Double> vanillaSpeed = this.register(new Setting<>("VanillaSpeed", 2.3, 0.1, 10.0));
-    public final Setting<Boolean> vanillaHop = this.register(new Setting<>("VanillaHop", false));
+    public final Setting<Double> vanillaSpeed = new Setting<>("VanillaSpeed", 2.3, 0.1, 10.0);
+    public final Setting<Boolean> vanillaHop = new Setting<>("VanillaHop", false);
 
     public Vanilla(Speed module, Enum<?> mode) {
         super(module, mode);

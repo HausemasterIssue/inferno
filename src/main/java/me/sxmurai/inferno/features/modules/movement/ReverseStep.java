@@ -10,11 +10,11 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "ReverseStep", description = "Makes you fall down faster", category = Module.Category.MOVEMENT)
 public class ReverseStep extends Module {
-    public final Setting<Double> height = this.register(new Setting<>("Height", 2.0, 0.0, 5.0));
-    public final Setting<Double> speed = this.register(new Setting<>("Speed", 1.0, 0.1, 2.0));
-    public final Setting<Boolean> liquids = this.register(new Setting<>("Liquids", false));
-    public final Setting<Boolean> strict = this.register(new Setting<>("Strict", false));
-    public final Setting<Boolean> sneak = this.register(new Setting<>("Sneak", false));
+    public final Setting<Double> height = new Setting<>("Height", 2.0, 0.0, 5.0);
+    public final Setting<Double> speed = new Setting<>("Speed", 1.0, 0.1, 2.0);
+    public final Setting<Boolean> liquids = new Setting<>("Liquids", false);
+    public final Setting<Boolean> strict = new Setting<>("Strict", false);
+    public final Setting<Boolean> sneak = new Setting<>("Sneak", false);
 
     @SubscribeEvent
     public void onUpdate(UpdateEvent event) {

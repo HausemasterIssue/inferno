@@ -11,11 +11,11 @@ import org.lwjgl.opengl.GL11;
 
 @Module.Define(name = "Wireframes", description = "Draws lines around each part of an entities model", category = Module.Category.RENDER)
 public class Wireframes extends Module {
-    public final Setting<Boolean> self = this.register(new Setting<>("Self", true));
-    public final Setting<Float> distance = this.register(new Setting<>("Distance", 50.0f, 1.0f, 300.0f));
-    public final Setting<Float> width = this.register(new Setting<>("Width", 0.5f, 0.1f, 5.0f));
-    public final Setting<Boolean> throughWalls = this.register(new Setting<>("ThroughWalls", true));
-    public final Setting<ColorUtils.Color> color = this.register(new Setting<>("Color", new ColorUtils.Color(255, 255, 255)));
+    public final Setting<Boolean> self = new Setting<>("Self", true);
+    public final Setting<Float> distance = new Setting<>("Distance", 50.0f, 1.0f, 300.0f);
+    public final Setting<Float> width = new Setting<>("Width", 0.5f, 0.1f, 5.0f);
+    public final Setting<Boolean> throughWalls = new Setting<>("ThroughWalls", true);
+    public final Setting<ColorUtils.Color> color = new Setting<>("Color", new ColorUtils.Color(255, 255, 255));
 
     @SubscribeEvent
     public void onModelRender(RenderModelEvent event) {

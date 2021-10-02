@@ -7,8 +7,8 @@ import me.sxmurai.inferno.managers.modules.Module;
 public class TotemPopNotifier extends Module {
     public static TotemPopNotifier INSTANCE;
 
-    public final Setting<Float> delay = this.register(new Setting<>("Delay", 2.5f, 0.0f, 10.0f));
-    public final Setting<Boolean> clearOnLog = this.register(new Setting<>("ClearOnLogout", false));
+    public final Setting<Float> delay = new Setting<>("Delay", 2.5f, 0.0f, 10.0f);
+    public final Setting<Boolean> clearOnLog = new Setting<>("ClearOnLogout", false);
 
     public TotemPopNotifier() {
         INSTANCE = this;

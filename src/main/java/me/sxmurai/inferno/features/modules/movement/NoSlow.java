@@ -29,13 +29,13 @@ public class NoSlow extends Module {
 
     public static NoSlow INSTANCE;
 
-    public final Setting<Boolean> items = this.register(new Setting<>("Items", true));
-    public final Setting<Boolean> soulsand = this.register(new Setting<>("SoulSand", false));
-    public final Setting<Boolean> slime = this.register(new Setting<>("Slime", false));
-    public final Setting<Boolean> strict = this.register(new Setting<>("Strict", false));
-    public final Setting<Boolean> sneak = this.register(new Setting<>("Sneak", true));
-    public final Setting<Boolean> guiMove = this.register(new Setting<>("GuiMove", false));
-    public final Setting<Float> lookSpeed = this.register(new Setting<>("LookSpeed", 3.0f, 0.1f, 15.0f, (v) -> guiMove.getValue()));
+    public final Setting<Boolean> items = new Setting<>("Items", true);
+    public final Setting<Boolean> soulsand = new Setting<>("SoulSand", false);
+    public final Setting<Boolean> slime = new Setting<>("Slime", false);
+    public final Setting<Boolean> strict = new Setting<>("Strict", false);
+    public final Setting<Boolean> sneak = new Setting<>("Sneak", true);
+    public final Setting<Boolean> guiMove = new Setting<>("GuiMove", false);
+    public final Setting<Float> lookSpeed = new Setting<>("LookSpeed", 3.0f, 0.1f, 15.0f, (v) -> guiMove.getValue());
 
     private boolean sneaking = false;
 

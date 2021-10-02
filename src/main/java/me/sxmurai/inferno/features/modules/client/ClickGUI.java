@@ -11,8 +11,8 @@ import org.lwjgl.input.Keyboard;
 public class ClickGUI extends Module {
     public static ClickGUI INSTANCE;
 
-    public final Setting<Integer> scrollSpeed = this.register(new Setting<>("ScrollSpeed", 10, 1, 25));
-    public final Setting<Boolean> pause = this.register(new Setting<>("Pause", false));
+    public final Setting<Integer> scrollSpeed = new Setting<>("ScrollSpeed", 10, 1, 25);
+    public final Setting<Boolean> pause = new Setting<>("Pause", false);
 
     public ClickGUI() {
         INSTANCE = this;

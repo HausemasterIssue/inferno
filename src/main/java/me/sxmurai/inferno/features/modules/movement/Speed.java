@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @Module.Define(name = "Speed", description = "Speeds you up", category = Module.Category.MOVEMENT)
 public class Speed extends Module {
-    public final Setting<M> mode = this.register(new Setting<>("Mode", M.STRAFE));
+    public final Setting<M> mode = new Setting<>("Mode", M.STRAFE);
 
     private final ArrayList<Mode> modes = new ArrayList<>();
     private Mode current = null;
@@ -29,7 +29,7 @@ public class Speed extends Module {
 
         for (Mode mode : this.modes) {
             for (Setting setting : mode.getSettings()) {
-                this.register(setting.setVisibility((v) -> this.mode.getValue() == mode.getMode()));
+                this.settings.add(setting.setVisibility((v) -> this.mode.getValue() == mode.getMode()));
             }
         }
     }

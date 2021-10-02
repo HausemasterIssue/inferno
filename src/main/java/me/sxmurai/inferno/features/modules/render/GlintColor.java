@@ -8,8 +8,8 @@ import me.sxmurai.inferno.utils.ColorUtils;
 public class GlintColor extends Module {
     public static GlintColor instance;
 
-    public final Setting<Boolean> rainbow = this.register(new Setting<>("Rainbow", false));
-    public final Setting<ColorUtils.Color> color = this.register(new Setting<>("Color", new ColorUtils.Color(255, 0, 0), (v) -> !rainbow.getValue()));
+    public final Setting<Boolean> rainbow = new Setting<>("Rainbow", false);
+    public final Setting<ColorUtils.Color> color = new Setting<>("Color", new ColorUtils.Color(255, 0, 0), (v) -> !rainbow.getValue());
 
     public GlintColor() {
         instance = this;

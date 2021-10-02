@@ -11,13 +11,13 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "FastUse", description = "Lets you use things fast", category = Module.Category.PLAYER)
 public class FastUse extends Module {
-    public final Setting<Integer> delay = this.register(new Setting<>("Delay", 0, 0, 20));
-    public final Setting<Integer> speed = this.register(new Setting<>("Speed", 0, 0, 4));
-    public final Setting<Boolean> offhand = this.register(new Setting<>("Offhand", true));
-    public final Setting<Boolean> xp = this.register(new Setting<>("XP", false));
-    public final Setting<Boolean> fireworks = this.register(new Setting<>("Fireworks", false));
-    public final Setting<Boolean> crystals = this.register(new Setting<>("Crystals", false));
-    public final Setting<Boolean> blocks = this.register(new Setting<>("Blocks", false));
+    public final Setting<Integer> delay = new Setting<>("Delay", 0, 0, 20);
+    public final Setting<Integer> speed = new Setting<>("Speed", 0, 0, 4);
+    public final Setting<Boolean> offhand = new Setting<>("Offhand", true);
+    public final Setting<Boolean> xp = new Setting<>("XP", false);
+    public final Setting<Boolean> fireworks = new Setting<>("Fireworks", false);
+    public final Setting<Boolean> crystals = new Setting<>("Crystals", false);
+    public final Setting<Boolean> blocks = new Setting<>("Blocks", false);
 
     private int ticks = 0;
 

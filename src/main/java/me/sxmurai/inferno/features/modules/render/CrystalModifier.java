@@ -13,13 +13,13 @@ import org.lwjgl.opengl.GL11;
 public class CrystalModifier extends Module {
     public static CrystalModifier INSTANCE;
 
-    public final Setting<Boolean> glint = this.register(new Setting<>("Glint", false));
-    public final Setting<Boolean> wireframe = this.register(new Setting<>("Wireframe", false));
-    public final Setting<Float> lineWidth = this.register(new Setting<>("LineWidth", 1.0f, 0.1f, 5.0f, (v) -> wireframe.getValue()));
-    public final Setting<Boolean> throughWalls = this.register(new Setting<>("ThroughWalls", false));
-    public final Setting<Float> scale = this.register(new Setting<>("Scale", 1.0f, 0.1, 10.0f));
-    public final Setting<Boolean> colored = this.register(new Setting<>("Colored", false));
-    public final Setting<ColorUtils.Color> color = this.register(new Setting<>("Color", new ColorUtils.Color(164, 66, 245, 135), (v) -> colored.getValue()));
+    public final Setting<Boolean> glint = new Setting<>("Glint", false);
+    public final Setting<Boolean> wireframe = new Setting<>("Wireframe", false);
+    public final Setting<Float> lineWidth = new Setting<>("LineWidth", 1.0f, 0.1f, 5.0f, (v) -> wireframe.getValue());
+    public final Setting<Boolean> throughWalls = new Setting<>("ThroughWalls", false);
+    public final Setting<Float> scale = new Setting<>("Scale", 1.0f, 0.1, 10.0f);
+    public final Setting<Boolean> colored = new Setting<>("Colored", false);
+    public final Setting<ColorUtils.Color> color = new Setting<>("Color", new ColorUtils.Color(164, 66, 245, 135), (v) -> colored.getValue());
 
     public CrystalModifier() {
         INSTANCE = this;

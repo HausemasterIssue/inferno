@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "Notifications", description = "Manages the clients notification manager", category = Module.Category.CLIENT)
 public class Notifications extends Module {
-    public final Setting<Boolean> moduleMessages = this.register(new Setting<>("ModuleMessages", true));
+    public final Setting<Boolean> moduleMessages = new Setting<>("ModuleMessages", true);
 
     @SubscribeEvent
     public void onModuleToggled(ModuleToggledEvent event) {

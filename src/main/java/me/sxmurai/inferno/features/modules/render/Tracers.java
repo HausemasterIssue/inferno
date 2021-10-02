@@ -15,16 +15,16 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "Tracers", description = "Draws lines to entities", category = Module.Category.RENDER)
 public class Tracers extends Module {
-    public final Setting<Float> distance = this.register(new Setting<>("Distance", 100.0f, 1.0f, 300.0f));
-    public final Setting<Float> width = this.register(new Setting<>("Width", 1.0f, 0.1f, 5.0f));
-    public final Setting<Target> target = this.register(new Setting<>("Target", Target.FEET));
-    public final Setting<Boolean> smooth = this.register(new Setting<>("Smooth", true));
-    public final Setting<Boolean> stem = this.register(new Setting<>("Stem", false));
-    public final Setting<Boolean> invisible = this.register(new Setting<>("Invisible", true));
-    public final Setting<Boolean> players = this.register(new Setting<>("Players", true));
-    public final Setting<Boolean> friends = this.register(new Setting<>("Friends", true, (v) -> players.getValue()));
-    public final Setting<Boolean> passive = this.register(new Setting<>("Passive", false));
-    public final Setting<Boolean> hostile = this.register(new Setting<>("Hostile", false));
+    public final Setting<Float> distance = new Setting<>("Distance", 100.0f, 1.0f, 300.0f);
+    public final Setting<Float> width = new Setting<>("Width", 1.0f, 0.1f, 5.0f);
+    public final Setting<Target> target = new Setting<>("Target", Target.FEET);
+    public final Setting<Boolean> smooth = new Setting<>("Smooth", true);
+    public final Setting<Boolean> stem = new Setting<>("Stem", false);
+    public final Setting<Boolean> invisible = new Setting<>("Invisible", true);
+    public final Setting<Boolean> players = new Setting<>("Players", true);
+    public final Setting<Boolean> friends = new Setting<>("Friends", true, (v) -> players.getValue());
+    public final Setting<Boolean> passive = new Setting<>("Passive", false);
+    public final Setting<Boolean> hostile = new Setting<>("Hostile", false);
 
     @SubscribeEvent
     public void onRender(RenderEvent event) {

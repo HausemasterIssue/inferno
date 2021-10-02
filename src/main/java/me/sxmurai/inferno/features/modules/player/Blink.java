@@ -16,11 +16,11 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 @Module.Define(name = "Blink", description = "Suspends movement packets until a criteria is met", category = Module.Category.PLAYER)
 public class Blink extends Module {
-    public final Setting<Mode> mode = this.register(new Setting<>("Mode", Mode.MANUAL));
-    public final Setting<Boolean> spawnFakePlayer = this.register(new Setting<>("SpawnFake", true));
-    public final Setting<Integer> time = this.register(new Setting<>("Time", 5, 1, 100, (v) -> mode.getValue() == Mode.TIME));
-    public final Setting<Integer> distance = this.register(new Setting<>("Distance", 8, 1, 100, (v) -> mode.getValue() == Mode.DISTANCE));
-    public final Setting<Integer> packets = this.register(new Setting<>("Packets", 20, 1, 100, (v) -> mode.getValue() == Mode.PACKETS));
+    public final Setting<Mode> mode = new Setting<>("Mode", Mode.MANUAL);
+    public final Setting<Boolean> spawnFakePlayer = new Setting<>("SpawnFake", true);
+    public final Setting<Integer> time = new Setting<>("Time", 5, 1, 100, (v) -> mode.getValue() == Mode.TIME);
+    public final Setting<Integer> distance = new Setting<>("Distance", 8, 1, 100, (v) -> mode.getValue() == Mode.DISTANCE);
+    public final Setting<Integer> packets = new Setting<>("Packets", 20, 1, 100, (v) -> mode.getValue() == Mode.PACKETS);
 
     private EntityOtherPlayerMP fakePlayer;
     private final Timer timer = new Timer();

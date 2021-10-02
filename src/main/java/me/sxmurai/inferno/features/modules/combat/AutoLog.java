@@ -15,14 +15,14 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "AutoLog", description = "Becomes cringe and allows you to log out on practice cpvp servers", category = Module.Category.COMBAT)
 public class AutoLog extends Module {
-    public final Setting<Boolean> shutdown = this.register(new Setting<>("Shutdown", false));
-    public final Setting<Boolean> toggle = this.register(new Setting<>("Toggle", true));
-    public final Setting<Boolean> health = this.register(new Setting<>("Health", true));
-    public final Setting<Float> healthAmount = this.register(new Setting<>("HealthAmount", 4.0f, 0.1f, 36.0f, (v) -> health.getValue()));
-    public final Setting<Boolean> totems = this.register(new Setting<>("Totems", false));
-    public final Setting<Float> totemAmount = this.register(new Setting<>("TotemAmount", 1, 0, 36, (v) -> totems.getValue()));
-    public final Setting<Boolean> newPlayer = this.register(new Setting<>("NewPlayer", false));
-    public final Setting<Boolean> ignoreFriends = this.register(new Setting<>("IgnoreFriends", true, (v) -> newPlayer.getValue()));
+    public final Setting<Boolean> shutdown = new Setting<>("Shutdown", false);
+    public final Setting<Boolean> toggle = new Setting<>("Toggle", true);
+    public final Setting<Boolean> health = new Setting<>("Health", true);
+    public final Setting<Float> healthAmount = new Setting<>("HealthAmount", 4.0f, 0.1f, 36.0f, (v) -> health.getValue());
+    public final Setting<Boolean> totems = new Setting<>("Totems", false);
+    public final Setting<Integer> totemAmount = new Setting<>("TotemAmount", 1, 0, 36, (v) -> totems.getValue());
+    public final Setting<Boolean> newPlayer = new Setting<>("NewPlayer", false);
+    public final Setting<Boolean> ignoreFriends = new Setting<>("IgnoreFriends", true, (v) -> newPlayer.getValue());
 
     @SubscribeEvent
     public void onEntitySpawn(EntitySpawnEvent event) {

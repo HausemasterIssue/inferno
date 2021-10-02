@@ -8,7 +8,7 @@ public class ExtraTab extends Module {
     public static ExtraTab INSTANCE;
 
     // 80 is the default according to the decompiled code
-    public final Setting<Integer> players = this.register(new Setting<>("Players", 80, 1, 1000));
+    public final Setting<Integer> players = new Setting<>("Players", 80, 1, 1000);
 
     public ExtraTab() {
         INSTANCE = this;

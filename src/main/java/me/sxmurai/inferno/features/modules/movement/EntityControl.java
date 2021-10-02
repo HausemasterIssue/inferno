@@ -11,17 +11,17 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class EntityControl extends Module {
     public static EntityControl INSTANCE;
 
-    public final Setting<Boolean> betterLook = this.register(new Setting<>("BetterLook", false));
-    public final Setting<Boolean> maxJumpPower = this.register(new Setting<>("MaxJumpPower", false));
-    public final Setting<Boolean> speedUp = this.register(new Setting<>("SpeedUp", false));
-    public final Setting<Double> speed = this.register(new Setting<>("Speed", 4.5, 0.1, 100.0));
+    public final Setting<Boolean> betterLook = new Setting<>("BetterLook", false);
+    public final Setting<Boolean> maxJumpPower = new Setting<>("MaxJumpPower", false);
+    public final Setting<Boolean> speedUp = new Setting<>("SpeedUp", false);
+    public final Setting<Double> speed = new Setting<>("Speed", 4.5, 0.1, 100.0);
 
     // entities
-    public final Setting<Boolean> horse = this.register(new Setting<>("Horse", true));
-    public final Setting<Boolean> donkey = this.register(new Setting<>("Donkey", true));
-    public final Setting<Boolean> mules = this.register(new Setting<>("Mules", false));
-    public final Setting<Boolean> llama = this.register(new Setting<>("Llama", true));
-    public final Setting<Boolean> pig = this.register(new Setting<>("Pig", false));
+    public final Setting<Boolean> horse = new Setting<>("Horse", true);
+    public final Setting<Boolean> donkey = new Setting<>("Donkey", true);
+    public final Setting<Boolean> mules = new Setting<>("Mules", false);
+    public final Setting<Boolean> llama = new Setting<>("Llama", true);
+    public final Setting<Boolean> pig = new Setting<>("Pig", false);
 
     public EntityControl() {
         INSTANCE = this;

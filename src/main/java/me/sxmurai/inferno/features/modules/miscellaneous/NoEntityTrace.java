@@ -8,8 +8,8 @@ import net.minecraft.item.ItemPickaxe;
 public class NoEntityTrace extends Module {
     public static NoEntityTrace INSTANCE;
 
-    public final Setting<Boolean> pickaxe = this.register(new Setting<>("Pickaxe", true));
-    public final Setting<Boolean> mining = this.register(new Setting<>("Mining", true));
+    public final Setting<Boolean> pickaxe = new Setting<>("Pickaxe", true);
+    public final Setting<Boolean> mining = new Setting<>("Mining", true);
 
     public NoEntityTrace() {
         INSTANCE = this;

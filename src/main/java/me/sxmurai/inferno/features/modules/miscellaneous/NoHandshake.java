@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 
 @Module.Define(name = "NoHandshake", description = "Stops forge from becoming 6ix9ine")
 public class NoHandshake extends Module {
-    public final Setting<Brand> brand = this.register(new Setting<>("Brand", Brand.FORGE));
+    public final Setting<Brand> brand = new Setting<>("Brand", Brand.FORGE);
 
     @SubscribeEvent
     public void onPacketSend(PacketEvent.Send event) {

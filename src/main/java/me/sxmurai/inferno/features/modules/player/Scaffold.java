@@ -5,7 +5,7 @@ import me.sxmurai.inferno.features.settings.Setting;
 import me.sxmurai.inferno.managers.modules.Module;
 import me.sxmurai.inferno.utils.BlockUtil;
 import me.sxmurai.inferno.utils.InventoryUtils;
-import me.sxmurai.inferno.utils.Pair;
+import me.sxmurai.inferno.utils.data.Pair;
 import me.sxmurai.inferno.utils.timing.Timer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
@@ -27,12 +27,12 @@ public class Scaffold extends Module {
             new BlockPos(0, 0, 1)
     };
 
-    public final Setting<Boolean> offhand = this.register(new Setting<>("Offhand", true));
-    public final Setting<Boolean> packet = this.register(new Setting<>("Packet", true));
-    public final Setting<Boolean> tower = this.register(new Setting<>("Tower", false));
-    public final Setting<Boolean> rotate = this.register(new Setting<>("Rotate", true));
-    public final Setting<Boolean> swing = this.register(new Setting<>("Swing", true));
-    public final Setting<Boolean> silentSwitch = this.register(new Setting<>("SilentSwitch", false));
+    public final Setting<Boolean> offhand = new Setting<>("Offhand", true);
+    public final Setting<Boolean> packet = new Setting<>("Packet", true);
+    public final Setting<Boolean> tower = new Setting<>("Tower", false);
+    public final Setting<Boolean> rotate = new Setting<>("Rotate", true);
+    public final Setting<Boolean> swing = new Setting<>("Swing", true);
+    public final Setting<Boolean> silentSwitch = new Setting<>("SilentSwitch", false);
 
     private final Timer timer = new Timer();
     private final Queue<Pair<BlockPos, EnumFacing>> blocks = new ConcurrentLinkedDeque<>();
@@ -102,7 +102,7 @@ public class Scaffold extends Module {
                     }
                 }
 
-                BlockUtil.place(p, hand, this.swing.getValue(), false, this.packet.getValue(), true);
+                BlockUtil.place(p, hand, this.swing.getValue(), false, this.packet.getValue(), this.rotate.getValue());
             }
 
             if (hand == EnumHand.MAIN_HAND) {

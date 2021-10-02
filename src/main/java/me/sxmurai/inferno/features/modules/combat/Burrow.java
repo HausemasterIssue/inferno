@@ -20,13 +20,13 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "Burrow", description = "becomes cringe and burrows", category = Module.Category.COMBAT)
 public class Burrow extends Module {
-    public final Setting<Mode> mode = this.register(new Setting<>("Mode", Mode.INSTANT));
-    public final Setting<Boolean> silentSwitch = this.register(new Setting<>("SilentSwitch", false));
-    public final Setting<BlockType> block = this.register(new Setting<>("Block", BlockType.OBSIDIAN));
-    public final Setting<Boolean> packetPlace = this.register(new Setting<>("PacketPlace", false));
-    public final Setting<Boolean> swing = this.register(new Setting<>("Swing", true));
-    public final Setting<Float> rubberband = this.register(new Setting<>("Rubberband", 3.0f, -5.0f, 5.0f));
-    public final Setting<Boolean> rotate = this.register(new Setting<>("Rotate", true));
+    public final Setting<Mode> mode = new Setting<>("Mode", Mode.INSTANT);
+    public final Setting<Boolean> silentSwitch = new Setting<>("SilentSwitch", false);
+    public final Setting<BlockType> block = new Setting<>("Block", BlockType.OBSIDIAN);
+    public final Setting<Boolean> packetPlace = new Setting<>("PacketPlace", false);
+    public final Setting<Boolean> swing = new Setting<>("Swing", true);
+    public final Setting<Float> rubberband = new Setting<>("Rubberband", 3.0f, -5.0f, 5.0f);
+    public final Setting<Boolean> rotate = new Setting<>("Rotate", true);
 
     private BlockPos origin;
     private int oldSlot;

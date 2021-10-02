@@ -23,11 +23,11 @@ public class AutoRespawn extends Module {
     private static final FileManager FILES = FileManager.getInstance();
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd 'at' HH:mm:ss z");
 
-    public final Setting<Boolean> noDeathScreen = this.register(new Setting<>("NoDeathScreen", true));
-    public final Setting<Float> delay = this.register(new Setting<>("Delay", 0.0f, 0.0f, 20.0f, (v) -> !noDeathScreen.getValue()));
-    public final Setting<Boolean> deathCoords = this.register(new Setting<>("DeathCoords", false));
-    public final Setting<Boolean> chat = this.register(new Setting<>("Chat", true, (v) -> deathCoords.getValue()));
-    public final Setting<Boolean> saveToFile = this.register(new Setting<>("SaveToFile", false, (v) -> deathCoords.getValue()));
+    public final Setting<Boolean> noDeathScreen = new Setting<>("NoDeathScreen", true);
+    public final Setting<Float> delay = new Setting<>("Delay", 0.0f, 0.0f, 20.0f, (v) -> !noDeathScreen.getValue());
+    public final Setting<Boolean> deathCoords = new Setting<>("DeathCoords", false);
+    public final Setting<Boolean> chat = new Setting<>("Chat", true, (v) -> deathCoords.getValue());
+    public final Setting<Boolean> saveToFile = new Setting<>("SaveToFile", false, (v) -> deathCoords.getValue());
 
     private final Path deathCoordsFolder = FILES.getClientFolder().resolve("death_coords");
     private final Timer timer = new Timer();

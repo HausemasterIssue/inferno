@@ -16,13 +16,13 @@ import java.util.stream.Collectors;
 public class AntiAFK extends Module {
     private static final Random RNG = new Random();
 
-    public final Setting<Boolean> rotate = this.register(new Setting<>("Rotate", true));
-    public final Setting<Boolean> punch = this.register(new Setting<>("Punch", true));
-    public final Setting<Boolean> jump = this.register(new Setting<>("Jump", true));
-    public final Setting<Boolean> sneak = this.register(new Setting<>("Sneak", true));
-    public final Setting<Boolean> message = this.register(new Setting<>("Message", false));
-    public final Setting<Integer> delay = this.register(new Setting<>("Delay", 1, 2, 10));
-    public final Setting<Integer> randomDelay = this.register(new Setting<>("RandomDelay", 5, 1, 30));
+    public final Setting<Boolean> rotate = new Setting<>("Rotate", true);
+    public final Setting<Boolean> punch = new Setting<>("Punch", true);
+    public final Setting<Boolean> jump = new Setting<>("Jump", true);
+    public final Setting<Boolean> sneak = new Setting<>("Sneak", true);
+    public final Setting<Boolean> message = new Setting<>("Message", false);
+    public final Setting<Integer> delay = new Setting<>("Delay", 1, 2, 10);
+    public final Setting<Integer> randomDelay = new Setting<>("RandomDelay", 5, 1, 30);
 
     private final Timer timer = new Timer();
     private int sneakTicks = 0;

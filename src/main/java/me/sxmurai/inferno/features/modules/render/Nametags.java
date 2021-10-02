@@ -24,20 +24,20 @@ public class Nametags extends Module {
     private static final Random RNG = new Random();
     public static Nametags INSTANCE;
 
-    public final Setting<Boolean> invisible = this.register(new Setting<>("Invisible", true));
-    public final Setting<Boolean> rectangle = this.register(new Setting<>("Rectangle", true));
-    public final Setting<Float> opacity = this.register(new Setting<>("Opacity", 0.5f, 0.0f, 1.0f, (v) -> rectangle.getValue()));
-    public final Setting<Float> scaling = this.register(new Setting<>("Scaling", 0.3f, 0.1f, 3.0f));
-    public final Setting<Boolean> nameProtect = this.register(new Setting<>("NameProtect", false));
-    public final Setting<Boolean> onlyFriends = this.register(new Setting<>("OnlyFriends", false, (v) -> nameProtect.getValue()));
-    public final Setting<Boolean> health = this.register(new Setting<>("Health", true));
-    public final Setting<Boolean> healthColors = this.register(new Setting<>("HealthColors", true, (v) -> health.getValue()));
-    public final Setting<Boolean> ping = this.register(new Setting<>("Ping", false));
-    public final Setting<Boolean> armor = this.register(new Setting<>("Armor", true));
-    public final Setting<Boolean> enchants = this.register(new Setting<>("Enchants", false, (v) -> armor.getValue()));
-    public final Setting<Boolean> reversed = this.register(new Setting<>("Reversed", false, (v) -> armor.getValue()));
-    public final Setting<Boolean> mainHand = this.register(new Setting<>("MainHand", true));
-    public final Setting<Boolean> offhand = this.register(new Setting<>("Offhand", true));
+    public final Setting<Boolean> invisible = new Setting<>("Invisible", true);
+    public final Setting<Boolean> rectangle = new Setting<>("Rectangle", true);
+    public final Setting<Float> opacity = new Setting<>("Opacity", 0.5f, 0.0f, 1.0f, (v) -> rectangle.getValue());
+    public final Setting<Float> scaling = new Setting<>("Scaling", 0.3f, 0.1f, 3.0f);
+    public final Setting<Boolean> nameProtect = new Setting<>("NameProtect", false);
+    public final Setting<Boolean> onlyFriends = new Setting<>("OnlyFriends", false, (v) -> nameProtect.getValue());
+    public final Setting<Boolean> health = new Setting<>("Health", true);
+    public final Setting<Boolean> healthColors = new Setting<>("HealthColors", true, (v) -> health.getValue());
+    public final Setting<Boolean> ping = new Setting<>("Ping", false);
+    public final Setting<Boolean> armor = new Setting<>("Armor", true);
+    public final Setting<Boolean> enchants = new Setting<>("Enchants", false, (v) -> armor.getValue());
+    public final Setting<Boolean> reversed = new Setting<>("Reversed", false, (v) -> armor.getValue());
+    public final Setting<Boolean> mainHand = new Setting<>("MainHand", true);
+    public final Setting<Boolean> offhand = new Setting<>("Offhand", true);
 
     public Nametags() {
         INSTANCE = this;

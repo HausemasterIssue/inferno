@@ -19,13 +19,13 @@ import java.util.stream.Collectors;
 
 @Module.Define(name = "VoidESP", description = "Shows where void holes are", category = Module.Category.RENDER)
 public class VoidESP extends Module {
-    public final Setting<Float> range = this.register(new Setting<>("Range", 10.0f, 1.0f, 50.0f));
-    public final Setting<Integer> delay = this.register(new Setting<>("Delay", 5, 0, 100));
+    public final Setting<Float> range = new Setting<>("Range", 10.0f, 1.0f, 50.0f);
+    public final Setting<Integer> delay = new Setting<>("Delay", 5, 0, 100);
 
-    public final Setting<Mode> mode = this.register(new Setting<>("Mode", Mode.FILLED));
-    public final Setting<ColorUtils.Color> color = this.register(new Setting<>("Color", new ColorUtils.Color(255, 0, 0, 80)));
-    public final Setting<Float> height = this.register(new Setting<>("Height", 1.0f, -1.0f, 2.0f, (v) -> mode.getValue() != Mode.FLAT && mode.getValue() != Mode.FLAT_OUTLINE));
-    public final Setting<Float> width = this.register(new Setting<>("Width", 1.0f, 0.1f, 5.0f, (v) -> mode.getValue() == Mode.FLAT_OUTLINE || mode.getValue() == Mode.FILLED_OUTLINE || mode.getValue() == Mode.OUTLINE));
+    public final Setting<Mode> mode = new Setting<>("Mode", Mode.FILLED);
+    public final Setting<ColorUtils.Color> color = new Setting<>("Color", new ColorUtils.Color(255, 0, 0, 80));
+    public final Setting<Float> height = new Setting<>("Height", 1.0f, -1.0f, 2.0f, (v) -> mode.getValue() != Mode.FLAT && mode.getValue() != Mode.FLAT_OUTLINE);
+    public final Setting<Float> width = new Setting<>("Width", 1.0f, 0.1f, 5.0f, (v) -> mode.getValue() == Mode.FLAT_OUTLINE || mode.getValue() == Mode.FILLED_OUTLINE || mode.getValue() == Mode.OUTLINE);
 
     private final TickTimer timer = new TickTimer();
     private List<BlockPos> voidHoles = new ArrayList<>();

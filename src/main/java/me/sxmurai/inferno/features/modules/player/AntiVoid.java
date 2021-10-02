@@ -8,11 +8,11 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "AntiVoid", description = "Tries to get you out of the void", category = Module.Category.PLAYER)
 public class AntiVoid extends Module {
-    public final Setting<Mode> mode = this.register(new Setting<>("Mode", Mode.FLOAT));
-    public final Setting<Boolean> onGround = this.register(new Setting<>("OnGround", false));
-    public final Setting<Float> floatAmount = this.register(new Setting<>("FloatAmount", 0.2f, 0.1, 1.0f, (v) -> mode.getValue() == Mode.FLOAT));
-    public final Setting<Boolean> packet = this.register(new Setting<>("Packet", true, (v) -> mode.getValue() == Mode.TELEPORT));
-    public final Setting<Integer> teleportAmount = this.register(new Setting<>("TeleportAmount", 2, 1, 10, (v) -> mode.getValue() == Mode.TELEPORT));
+    public final Setting<Mode> mode = new Setting<>("Mode", Mode.FLOAT);
+    public final Setting<Boolean> onGround = new Setting<>("OnGround", false);
+    public final Setting<Float> floatAmount = new Setting<>("FloatAmount", 0.2f, 0.1, 1.0f, (v) -> mode.getValue() == Mode.FLOAT);
+    public final Setting<Boolean> packet = new Setting<>("Packet", true, (v) -> mode.getValue() == Mode.TELEPORT);
+    public final Setting<Integer> teleportAmount = new Setting<>("TeleportAmount", 2, 1, 10, (v) -> mode.getValue() == Mode.TELEPORT);
 
     @SubscribeEvent
     public void onUpdate(UpdateEvent event) {

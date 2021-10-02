@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "AntiLevitation", description = "Stops you from levitating lol", category = Module.Category.PLAYER)
 public class AntiLevitation extends Module {
-    public final Setting<Mode> mode = this.register(new Setting<>("Mode", Mode.REMOVE));
+    public final Setting<Mode> mode = new Setting<>("Mode", Mode.REMOVE);
 
     @SubscribeEvent
     public void onUpdate(UpdateEvent event) {

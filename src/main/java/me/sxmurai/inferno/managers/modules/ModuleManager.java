@@ -96,6 +96,7 @@ public class ModuleManager {
         this.modules.add(new Xray());
 
         Inferno.LOGGER.info("Loaded {} modules!", this.modules.size());
+        this.modules.forEach(Module::registerSettings);
 
         Inferno.LOGGER.info("Loading configurations for {} modules...", this.modules.size());
         config = new ModulesConfig(this);

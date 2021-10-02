@@ -15,12 +15,12 @@ import org.lwjgl.input.Mouse;
 
 @Module.Define(name = "MiddleClick", description = "Does various things upon a middle click")
 public class MiddleClick extends Module {
-    public final Setting<OverPlayer> overPlayer = this.register(new Setting<>("OverPlayer", OverPlayer.NOTHING));
-    public final Setting<Boolean> unfriend = this.register(new Setting<>("Unfriend", true, (v) -> overPlayer.getValue() == OverPlayer.FRIEND));
-    public final Setting<Boolean> notify = this.register(new Setting<>("Notify", true, (v) -> overPlayer.getValue() == OverPlayer.FRIEND));
-    public final Setting<Boolean> pearl = this.register(new Setting<>("Pearl", false));
-    public final Setting<Boolean> offhand = this.register(new Setting<>("Offhand", true, (v) -> pearl.getValue()));
-    public final Setting<Boolean> silentSwitch = this.register(new Setting<>("SilentSwitch", false, (v) -> pearl.getValue()));
+    public final Setting<OverPlayer> overPlayer = new Setting<>("OverPlayer", OverPlayer.NOTHING);
+    public final Setting<Boolean> unfriend = new Setting<>("Unfriend", true, (v) -> overPlayer.getValue() == OverPlayer.FRIEND);
+    public final Setting<Boolean> notify = new Setting<>("Notify", true, (v) -> overPlayer.getValue() == OverPlayer.FRIEND);
+    public final Setting<Boolean> pearl = new Setting<>("Pearl", false);
+    public final Setting<Boolean> offhand = new Setting<>("Offhand", true, (v) -> pearl.getValue());
+    public final Setting<Boolean> silentSwitch = new Setting<>("SilentSwitch", false, (v) -> pearl.getValue());
 
     @SubscribeEvent
     public void onMouseInput(InputEvent.MouseInputEvent event) {

@@ -8,8 +8,8 @@ import me.sxmurai.inferno.utils.ColorUtils;
 public class Chams extends Module {
     public static Chams INSTANCE;
 
-    public final Setting<Mode> mode = this.register(new Setting<>("Mode", Mode.NORMAL));
-    public final Setting<ColorUtils.Color> color = this.register(new Setting<>("Color", new ColorUtils.Color(255, 0, 0), (v) -> mode.getValue() == Mode.WALLHACK));
+    public final Setting<Mode> mode = new Setting<>("Mode", Mode.NORMAL);
+    public final Setting<ColorUtils.Color> color = new Setting<>("Color", new ColorUtils.Color(255, 0, 0), (v) -> mode.getValue() == Mode.WALLHACK);
 
     public Chams() {
         INSTANCE = this;

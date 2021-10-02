@@ -2,17 +2,11 @@ package me.sxmurai.inferno.utils;
 
 import me.sxmurai.inferno.Inferno;
 import me.sxmurai.inferno.features.Feature;
-import net.minecraft.entity.*;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.EntitySlime;
-import net.minecraft.entity.passive.EntityAmbientCreature;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntitySquid;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
-import net.minecraft.item.EnumAction;
-import org.lwjgl.input.Mouse;
 
 public class EntityUtils extends Feature {
     public static boolean isPlayer(Entity entity) {
@@ -35,28 +29,12 @@ public class EntityUtils extends Feature {
         return entity.isInvisibleToPlayer(mc.player) && entity.isPotionActive(MobEffects.INVISIBILITY);
     }
 
-    public static boolean isProjectile(Entity entity) {
-        return entity instanceof IProjectile;
-    }
-
     public static float getHealth(Entity entity) {
         if (!isLiving(entity)) {
             return 0.0f;
         }
 
         return ((EntityLivingBase) entity).getHealth() + ((EntityLivingBase) entity).getAbsorptionAmount();
-    }
-    
-    public static boolean isEating() {
-        return mc.player.getHeldItemMainhand().getItemUseAction().equals(EnumAction.EAT) || mc.player.getHeldItemMainhand().getItemUseAction().equals(EnumAction.DRINK);
-    }
-
-    public static boolean isMending() {
-        return InventoryUtils.isHolding(Items.EXPERIENCE_BOTTLE) && Mouse.isButtonDown(1);
-    }
-
-    public static boolean isMining() {
-        return InventoryUtils.isHolding(Items.DIAMOND_PICKAXE) && mc.playerController.getIsHittingBlock();
     }
 
     public static boolean isRiding(boolean controllerCheck) {

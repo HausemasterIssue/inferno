@@ -9,12 +9,12 @@ import java.awt.*;
 public class CustomFont extends Module {
     public static CustomFont INSTANCE;
 
-    public final Setting<String> font = this.register(new Setting<>("Font", "Verdana"));
-    public final Setting<Boolean> shadow = this.register(new Setting<>("Shadow", true));
-    public final Setting<Style> style = this.register(new Setting<>("Style", Style.PLAIN));
-    public final Setting<Integer> size = this.register(new Setting<>("Size", 18));
-    public final Setting<Boolean> antiAliasing = this.register(new Setting<>("AntiAliasing", true));
-    public final Setting<Boolean> fractionalMetrics = this.register(new Setting<>("FractionMetrics", false));
+    public final Setting<String> font = new Setting<>("Font", "Verdana");
+    public final Setting<Boolean> shadow = new Setting<>("Shadow", true);
+    public final Setting<Style> style = new Setting<>("Style", Style.PLAIN);
+    public final Setting<Integer> size = new Setting<>("Size", 18);
+    public final Setting<Boolean> antiAliasing = new Setting<>("AntiAliasing", true);
+    public final Setting<Boolean> fractionalMetrics = new Setting<>("FractionMetrics", false);
 
     public CustomFont() {
         INSTANCE = this;

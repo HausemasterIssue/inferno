@@ -18,13 +18,13 @@ import java.util.ArrayList;
 
 @Module.Define(name = "HoleFiller", description = "(cringe) Fills in safe holes", category = Module.Category.COMBAT)
 public class HoleFiller extends Module {
-    public final Setting<Float> range = this.register(new Setting<>("Range", 4.0f, 1.0f, 6.5f));
-    public final Setting<Integer> blocksPerTick = this.register(new Setting<>("BlocksPerTick", 1, 1, 6));
-    public final Setting<Boolean> silent = this.register(new Setting<>("Silent", false));
-    public final Setting<Boolean> packet = this.register(new Setting<>("Packet", false));
-    public final Setting<Boolean> rotate = this.register(new Setting<>("Rotate", true));
-    public final Setting<Boolean> swing = this.register(new Setting<>("Swing", true));
-    public final Setting<Boolean> sneak = this.register(new Setting<>("Sneak", false));
+    public final Setting<Float> range = new Setting<>("Range", 4.0f, 1.0f, 6.5f);
+    public final Setting<Integer> blocksPerTick = new Setting<>("BlocksPerTick", 1, 1, 6);
+    public final Setting<Boolean> silent = new Setting<>("Silent", false);
+    public final Setting<Boolean> packet = new Setting<>("Packet", false);
+    public final Setting<Boolean> rotate = new Setting<>("Rotate", true);
+    public final Setting<Boolean> swing = new Setting<>("Swing", true);
+    public final Setting<Boolean> sneak = new Setting<>("Sneak", false);
 
     private final ArrayList<BlockPos> blocks = new ArrayList<>();
     private int oldSlot = -1;

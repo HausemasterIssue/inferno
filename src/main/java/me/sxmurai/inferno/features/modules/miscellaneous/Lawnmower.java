@@ -20,13 +20,13 @@ import java.util.List;
 
 @Module.Define(name = "Lawnmower", description = "It does what you think it does lmao")
 public class Lawnmower extends Module {
-    public final Setting<Float> range = this.register(new Setting<>("Range", 5.0f, 1.0f, 8.0f));
-    public final Setting<Integer> delay = this.register(new Setting<>("Delay", 1, 0, 10));
-    public final Setting<Boolean> rotate = this.register(new Setting<>("Rotate", true));
-    public final Setting<Boolean> swing = this.register(new Setting<>("Swing", true));
-    public final Setting<Boolean> shears = this.register(new Setting<>("Shears", false));
-    public final Setting<Boolean> silent = this.register(new Setting<>("Silent", false, (v) -> shears.getValue()));
-    public final Setting<Boolean> flowers = this.register(new Setting<>("Flowers", true));
+    public final Setting<Float> range = new Setting<>("Range", 5.0f, 1.0f, 8.0f);
+    public final Setting<Integer> delay = new Setting<>("Delay", 1, 0, 10);
+    public final Setting<Boolean> rotate = new Setting<>("Rotate", true);
+    public final Setting<Boolean> swing = new Setting<>("Swing", true);
+    public final Setting<Boolean> shears = new Setting<>("Shears", false);
+    public final Setting<Boolean> silent = new Setting<>("Silent", false, (v) -> shears.getValue());
+    public final Setting<Boolean> flowers = new Setting<>("Flowers", true);
 
     private final ArrayList<BlockPos> blocks = new ArrayList<>();
     private final TickTimer timer = new TickTimer();

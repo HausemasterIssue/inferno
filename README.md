@@ -45,6 +45,20 @@ These are clients/people who have helped with the development of the client
 - [Sxmurai](https://github.com/Sxmurai) - Main Developer
 - [HausemasterIssue](https://github.com/HausemasterIssue) - Contributor
 
+## Todo
+
+- Rewrite ClickGUI (it looks like ass)
+- Make Settings registration use reflections
+- Rewrite RenderUtils
+- Better rotation manager
+- Remove skidded code
+- Possibly remove access transformers and upgrade to forgegradle 3?
+- Rewrite some render modules
+- Rewrite AutoCrystal
+- Rewrite Block placements (theyre skidded from cosmos)
+- Comment the code
+- Remove and rewrite skidded mixins
+
 ---
 
 <h5>Sxmurai - 2021</h5>

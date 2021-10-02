@@ -9,8 +9,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "Inventory", description = "Does shit with ur inventory", category = Module.Category.PLAYER)
 public class Inventory extends Module {
-    public final Setting<Boolean> xCarry = this.register(new Setting<>("XCarry", false));
-    public final Setting<Boolean> bypass = this.register(new Setting<>("Bypass", false));
+    public final Setting<Boolean> xCarry = new Setting<>("XCarry", false);
+    public final Setting<Boolean> bypass = new Setting<>("Bypass", false);
 
     @SubscribeEvent
     public void onPacketSend(PacketEvent.Send event) {

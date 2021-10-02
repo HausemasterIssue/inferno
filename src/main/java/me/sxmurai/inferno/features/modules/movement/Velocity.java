@@ -12,14 +12,14 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "Velocity", description = "Stops knockback and shit", category = Module.Category.MOVEMENT)
 public class Velocity extends Module {
-    public final Setting<Float> vertical = this.register(new Setting<>("Vertical", 0.0f, 0.0f, 100.0f));
-    public final Setting<Float> horizontal = this.register(new Setting<>("Horizontal", 0.0f, 0.0f, 100.0f));
-    public final Setting<Boolean> explosions = this.register(new Setting<>("Explosions", false));
-    public final Setting<Boolean> knockback = this.register(new Setting<>("Knockback", false));
-    public final Setting<Boolean> push = this.register(new Setting<>("Push", false));
-    public final Setting<Boolean> blocks = this.register(new Setting<>("Blocks", false));
-    public final Setting<Boolean> liquid = this.register(new Setting<>("Liquids", false));
-    public final Setting<Boolean> bobbers = this.register(new Setting<>("Bobbers", false));
+    public final Setting<Float> vertical = new Setting<>("Vertical", 0.0f, 0.0f, 100.0f);
+    public final Setting<Float> horizontal = new Setting<>("Horizontal", 0.0f, 0.0f, 100.0f);
+    public final Setting<Boolean> explosions = new Setting<>("Explosions", false);
+    public final Setting<Boolean> knockback = new Setting<>("Knockback", false);
+    public final Setting<Boolean> push = new Setting<>("Push", false);
+    public final Setting<Boolean> blocks = new Setting<>("Blocks", false);
+    public final Setting<Boolean> liquid = new Setting<>("Liquids", false);
+    public final Setting<Boolean> bobbers = new Setting<>("Bobbers", false);
 
     @SubscribeEvent
     public void onPacketReceive(PacketEvent.Receive event) {

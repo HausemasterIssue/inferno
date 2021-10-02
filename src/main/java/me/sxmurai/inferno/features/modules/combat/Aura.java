@@ -19,19 +19,19 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "Aura", description = "Attacks things around you", category = Module.Category.COMBAT)
 public class Aura extends Module {
-    public final Setting<Priority> priority = this.register(new Setting<>("Priority", Priority.CLOSEST));
-    public final Setting<Float> targetRange = this.register(new Setting<>("TargetRange", 5.0f, 1.0f, 10.0f));
-    public final Setting<Boolean> rotate = this.register(new Setting<>("Rotate", true));
-    public final Setting<Boolean> swing = this.register(new Setting<>("Swing", true));
-    public final Setting<Float> wallRange = this.register(new Setting<>("WallRange", 2.0f, 0.0f, 5.0f));
-    public final Setting<Boolean> packet = this.register(new Setting<>("Packet", false));
-    public final Setting<Boolean> players = this.register(new Setting<>("Players", true));
-    public final Setting<Boolean> invisible = this.register(new Setting<>("Invisible", false));
-    public final Setting<Boolean> mobs = this.register(new Setting<>("Mobs", false));
-    public final Setting<Boolean> passive = this.register(new Setting<>("Passive", false));
-    public final Setting<Weapon> weapon = this.register(new Setting<>("Weapon", Weapon.NONE));
-    public final Setting<Boolean> autoSwitch = this.register(new Setting<>("AutoSwitch", true, (v) -> weapon.getValue() != Weapon.NONE));
-    public final Setting<Boolean> onlyWithWeapon = this.register(new Setting<>("OnlyWithWeapon", false));
+    public final Setting<Priority> priority = new Setting<>("Priority", Priority.CLOSEST);
+    public final Setting<Float> targetRange = new Setting<>("TargetRange", 5.0f, 1.0f, 10.0f);
+    public final Setting<Boolean> rotate = new Setting<>("Rotate", true);
+    public final Setting<Boolean> swing = new Setting<>("Swing", true);
+    public final Setting<Float> wallRange = new Setting<>("WallRange", 2.0f, 0.0f, 5.0f);
+    public final Setting<Boolean> packet = new Setting<>("Packet", false);
+    public final Setting<Boolean> players = new Setting<>("Players", true);
+    public final Setting<Boolean> invisible = new Setting<>("Invisible", false);
+    public final Setting<Boolean> mobs = new Setting<>("Mobs", false);
+    public final Setting<Boolean> passive = new Setting<>("Passive", false);
+    public final Setting<Weapon> weapon = new Setting<>("Weapon", Weapon.NONE);
+    public final Setting<Boolean> autoSwitch = new Setting<>("AutoSwitch", true, (v) -> weapon.getValue() != Weapon.NONE);
+    public final Setting<Boolean> onlyWithWeapon = new Setting<>("OnlyWithWeapon", false);
 
     private Entity target = null;
     private int oldSlot = -1;

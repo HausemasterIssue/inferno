@@ -12,8 +12,8 @@ import org.lwjgl.input.Keyboard;
 
 @Module.Define(name = "InventorySaver", description = "Allows you to interact with inventories after closing them")
 public class InventorySaver extends Module {
-    public final Setting<Access> access = this.register(new Setting<>("Access", Access.TOGGLED));
-    public final Setting<Bind> accessBind = this.register(new Bind("AccessBind", Keyboard.KEY_NONE));
+    public final Setting<Access> access = new Setting<>("Access", Access.TOGGLED);
+    public final Bind accessBind = new Bind("AccessBind", Keyboard.KEY_NONE);
 
     private GuiContainer gui;
 
@@ -37,7 +37,7 @@ public class InventorySaver extends Module {
     public void onKeyInput(InputEvent.KeyInputEvent event) {
         int code = Keyboard.getEventKey();
         if (!Module.fullNullCheck() && !Keyboard.getEventKeyState() && code != Keyboard.KEY_NONE) {
-            if (this.access.getValue() == Access.BIND && code == accessBind.getValue().getValue() && this.gui != null) {
+            if (this.access.getValue() == Access.BIND && code == accessBind.getValue() && this.gui != null) {
                 mc.displayGuiScreen(this.gui);
             }
         }

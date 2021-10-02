@@ -9,9 +9,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "AntiHunger", description = "Attempts to stop you from loosing hunger", category = Module.Category.PLAYER)
 public class AntiHunger extends Module {
-    public final Setting<Boolean> ground = this.register(new Setting<>("Ground", true));
-    public final Setting<Boolean> fallCheck = this.register(new Setting<>("FallCheck", true, (v) -> ground.getValue()));
-    public final Setting<Boolean> sprint = this.register(new Setting<>("Sprint", false));
+    public final Setting<Boolean> ground = new Setting<>("Ground", true);
+    public final Setting<Boolean> fallCheck = new Setting<>("FallCheck", true, (v) -> ground.getValue());
+    public final Setting<Boolean> sprint = new Setting<>("Sprint", false);
 
     @SubscribeEvent
     public void onPacketSend(PacketEvent.Send event) {

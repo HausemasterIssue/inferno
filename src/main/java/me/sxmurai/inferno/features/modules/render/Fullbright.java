@@ -11,8 +11,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class Fullbright extends Module {
     public static float oldGamma = -1.0f;
 
-    public final Setting<Mode> mode = this.register(new Setting<>("Mode", Mode.GAMMA));
-    public final Setting<Float> gamma = this.register(new Setting<>("Gamma", 100.0f, 1.0f, 100.0f, (v) -> mode.getValue() == Mode.GAMMA));
+    public final Setting<Mode> mode = new Setting<>("Mode", Mode.GAMMA);
+    public final Setting<Float> gamma = new Setting<>("Gamma", 100.0f, 1.0f, 100.0f, (v) -> mode.getValue() == Mode.GAMMA);
 
     @Override
     protected void onDeactivated() {

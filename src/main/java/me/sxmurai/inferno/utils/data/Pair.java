@@ -1,4 +1,4 @@
-package me.sxmurai.inferno.utils;
+package me.sxmurai.inferno.utils.data;
 
 public class Pair<K, V> {
     private K key;

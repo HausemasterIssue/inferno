@@ -7,10 +7,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "Yaw", description = "Forces you to look in a certain direction", category = Module.Category.PLAYER)
 public class Yaw extends Module {
-    public final Setting<Direction> direction = this.register(new Setting<>("Direction", Direction.CUSTOM));
-    public final Setting<Float> yaw = this.register(new Setting<>("Yaw", 0.0f, 0.0f, 360.0f, (v) -> direction.getValue() == Direction.CUSTOM));
-    public final Setting<Boolean> lockPitch = this.register(new Setting<>("LockPitch", false));
-    public final Setting<Float> pitch = this.register(new Setting<>("Pitch", 0.0f, -90.0f, 90.0f, (v) -> lockPitch.getValue()));
+    public final Setting<Direction> direction = new Setting<>("Direction", Direction.CUSTOM);
+    public final Setting<Float> yaw = new Setting<>("Yaw", 0.0f, 0.0f, 360.0f, (v) -> direction.getValue() == Direction.CUSTOM);
+    public final Setting<Boolean> lockPitch = new Setting<>("LockPitch", false);
+    public final Setting<Float> pitch = new Setting<>("Pitch", 0.0f, -90.0f, 90.0f, (v) -> lockPitch.getValue());
 
     @SubscribeEvent
     public void onUpdate(UpdateEvent event) {

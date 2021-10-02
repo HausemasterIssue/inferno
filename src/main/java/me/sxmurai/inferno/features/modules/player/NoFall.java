@@ -12,9 +12,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "NoFall", description = "Tries to negate fall damage", category = Module.Category.PLAYER)
 public class NoFall extends Module {
-    public final Setting<Mode> mode = this.register(new Setting<>("Mode", Mode.PACKET));
-    public final Setting<Boolean> packetLook = this.register(new Setting<>("PacketLook", false, (v) -> mode.getValue() != Mode.PACKET));
-    public final Setting<Float> distance = this.register(new Setting<>("Distance", 3.0f, 1.0f, 100.0f));
+    public final Setting<Mode> mode = new Setting<>("Mode", Mode.PACKET);
+    public final Setting<Boolean> packetLook = new Setting<>("PacketLook", false, (v) -> mode.getValue() != Mode.PACKET);
+    public final Setting<Float> distance = new Setting<>("Distance", 3.0f, 1.0f, 100.0f);
 
     private int oldSlot = -1;
     private EnumHand hand;

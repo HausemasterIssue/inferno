@@ -11,8 +11,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "Criticals", description = "Applies critical hits", category = Module.Category.COMBAT)
 public class Criticals extends Module {
-    public final Setting<Mode> mode = this.register(new Setting<>("Mode", Mode.PACKET));
-    public final Setting<Boolean> entityCheck = this.register(new Setting<>("EntityCheck", false));
+    public final Setting<Mode> mode = new Setting<>("Mode", Mode.PACKET);
+    public final Setting<Boolean> entityCheck = new Setting<>("EntityCheck", false);
 
     @SubscribeEvent
     public void onPacketSend(PacketEvent.Send event) {

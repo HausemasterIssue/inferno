@@ -19,15 +19,15 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "Speedmine", description = "Goes vroom vroom when fucking someone", category = Module.Category.PLAYER)
 public class Speedmine extends Module {
-    public final Setting<Mode> mode = this.register(new Setting<>("Mode", Mode.PACKET));
-    public final Setting<Float> distance = this.register(new Setting<>("Distance", 4.5f, 1.0f, 10.0f));
-    public final Setting<Boolean> reset = this.register(new Setting<>("Reset", false));
-    public final Setting<Boolean> swing = this.register(new Setting<>("Swing", true));
-    public final Setting<Boolean> doublePacket = this.register(new Setting<>("Double", false));
-    public final Setting<Boolean> pickaxe = this.register(new Setting<>("Pickaxe", true));
-    public final Setting<Boolean> switchTo = this.register(new Setting<>("AutoSwitch", false, (v) -> pickaxe.getValue()));
-    public final Setting<Boolean> silent = this.register(new Setting<>("Silent", false, (v) -> pickaxe.getValue() && switchTo.getValue()));
-    public final Setting<Boolean> render = this.register(new Setting<>("Render", true));
+    public final Setting<Mode> mode = new Setting<>("Mode", Mode.PACKET);
+    public final Setting<Float> distance = new Setting<>("Distance", 4.5f, 1.0f, 10.0f);
+    public final Setting<Boolean> reset = new Setting<>("Reset", false);
+    public final Setting<Boolean> swing = new Setting<>("Swing", true);
+    public final Setting<Boolean> doublePacket = new Setting<>("Double", false);
+    public final Setting<Boolean> pickaxe = new Setting<>("Pickaxe", true);
+    public final Setting<Boolean> switchTo = new Setting<>("AutoSwitch", false, (v) -> pickaxe.getValue());
+    public final Setting<Boolean> silent = new Setting<>("Silent", false, (v) -> pickaxe.getValue() && switchTo.getValue());
+    public final Setting<Boolean> render = new Setting<>("Render", true);
 
     private int oldSlot = -1;
     private BlockPos currentPos = null;

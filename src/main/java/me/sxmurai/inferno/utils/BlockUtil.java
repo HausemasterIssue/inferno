@@ -5,10 +5,8 @@ import me.sxmurai.inferno.features.Feature;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityEnderCrystal;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.network.play.client.CPacketEntityAction;
-import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.network.play.client.CPacketPlayerTryUseItemOnBlock;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -52,25 +50,32 @@ public class BlockUtil extends Feature {
     }
 
     public static List<BlockPos> getCrystalPlacePositions(Vec3d pos, int range, boolean oneDotThirteen) {
+        // we get a sphere of blocks around a player within a range, we filter out the places where it cannot be placed, and we return that list of blocks
         return getSphere(new BlockPos(pos), range, range, false, true, 0)
                 .stream()
                 .filter(blockPos -> canCrystalBePlacedAt(blockPos, oneDotThirteen))
                 .collect(Collectors.toList());
     }
 
+    // @todo rewrite
     public static boolean canCrystalBePlacedAt(BlockPos blockPos, boolean oneDotThirteen) {
         try {
+            // if the block the crystal is being placed on is not bedrock or obsidian, we cant place there
             if (!isValidCrystalPlaceBlock(getBlockFromPos(blockPos))) {
                 return false;
             }
 
+            // we get the position from one up
             BlockPos pos = blockPos.add(0.0, 1.0, 0.0);
+            // we get the position from two up
             BlockPos pos1 = blockPos.add(0.0, 2.0, 0.0);
 
+            // if no 1.13 placements and the block above the block isnt air, or the first block above isnt air, we cant place because of non 1.13 placements
             if ((!oneDotThirteen && getBlockFromPos(pos1) != Blocks.AIR) || getBlockFromPos(pos) != Blocks.AIR) {
                 return false;
             }
 
+            // make sure theres no entities to interfere with placements
             for (Entity entity : mc.world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(pos))) {
                 if (entity.isDead || entity instanceof EntityEnderCrystal) {
                     continue;
@@ -79,6 +84,7 @@ public class BlockUtil extends Feature {
                 return false;
             }
 
+            // if no 1.13 place, we have to also check two blocks above
             if (!oneDotThirteen) {
                 for (Entity entity : mc.world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(pos1))) {
                     if (entity.isDead || entity instanceof EntityEnderCrystal) {
@@ -100,40 +106,53 @@ public class BlockUtil extends Feature {
     }
 
     public static Block getBlockFromPos(BlockPos pos) {
+        // get the block type from a pos
         return mc.world.getBlockState(pos).getBlock();
     }
 
     public static boolean canSeePos(BlockPos pos) {
+        // this is basically taken from the minecraft decompiled code, but just modified for block positions instead of entities
         return mc.world.rayTraceBlocks(new Vec3d(mc.player.posX, mc.player.posY + mc.player.getEyeHeight(), mc.player.posZ), new Vec3d(pos), false, true, false) == null;
     }
 
-    public static void place(BlockPos pos, EnumHand hand, boolean swing, boolean sneak, boolean packetPlace, boolean rotate) {
-        for (EnumFacing facing : EnumFacing.values()) {
-            BlockPos neighbor = pos.offset(facing);
+    public static void place(BlockPos pos, EnumHand hand, boolean swing, boolean sneak, boolean packet, boolean rotate) {
+        for (EnumFacing direction : EnumFacing.values()) {
+            // get the neighboring block of "pos"
+            BlockPos neighbor = pos.offset(direction);
+            // if we cannot replace the block (isnt a liquid, isnt air, etc) or entities intersect with the neighboring pos, continue
             if (mc.world.isAirBlock(neighbor) || intersectsWith(neighbor)) {
                 continue;
             }
 
+            // if we get past the above if statement, we can use this direction to place the block
+
+            // sneak if provided as true
             if (sneak) {
                 mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.START_SNEAKING));
             }
 
-            Vec3d hitVec = new Vec3d(neighbor.x + 0.5, neighbor.y + 0.5, neighbor.z + 0.5).add(new Vec3d(facing.getOpposite().getDirectionVec()).scale(0.5));
-
+            // rotate
             if (rotate) {
-                Inferno.rotationManager.look(hitVec);
+                Inferno.rotationManager.look(new Vec3d(neighbor.x + 0.5, neighbor.y - 0.5, neighbor.z + 0.5));
             }
 
-            if (packetPlace) {
-                mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(neighbor, facing.getOpposite(), hand, (float) (hitVec.x - pos.x), (float) (hitVec.y - pos.y), (float) (hitVec.z - pos.z)));
+            // the hitvec, i need to learn more about this
+            Vec3d hitVec = new Vec3d(neighbor.x + 0.5, neighbor.y + 0.5, neighbor.z + 0.5).add(new Vec3d(direction.getOpposite().getDirectionVec()).scale(0.5));
+
+            // we want to place the block on the neighboring block so that it places where we want. we also want the direction facing to be opposite because if the facing block is
+            // lets say south, thats not where we're facing. so we'd need th opposite of that
+            if (packet) {
+                mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(neighbor, direction.getOpposite(), hand, (float) (hitVec.x - pos.x), (float) (hitVec.y - pos.y), (float) (hitVec.z - pos.z)));
             } else {
-                mc.playerController.processRightClickBlock(mc.player, mc.world, neighbor, facing.getOpposite(), hitVec, hand);
+                mc.playerController.processRightClickBlock(mc.player, mc.world, neighbor, direction.getOpposite(), hitVec, hand);
             }
 
+            // swing
             if (swing) {
                 mc.player.swingArm(hand);
             }
 
+            // if we had sneak on, we had already sent a START_SNEAKING packet, so we need to stop sneaking
             if (sneak) {
                 mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.STOP_SNEAKING));
             }
@@ -142,35 +161,7 @@ public class BlockUtil extends Feature {
         }
     }
 
-    public static void placeNormal(BlockPos pos, EnumHand hand, boolean swing, boolean sneak, boolean packetPlace, boolean rotate) {
-        RayTraceResult result = mc.world.rayTraceBlocks(new Vec3d(mc.player.posX, mc.player.posY + mc.player.getEyeHeight(), mc.player.posZ), new Vec3d(pos.x + 0.5, pos.y + 0.5, pos.z + 0.5));
-
-        EnumFacing facing = result == null || result.sideHit == null ? getFacing(pos) : result.sideHit;
-        Vec3d hitVec = result == null ? new Vec3d(pos.offset(facing)).add(0.5, 0.5, 0.5).add(new Vec3d(facing.getOpposite().getDirectionVec()).scale(0.5)) : result.hitVec;
-
-        if (sneak) {
-            mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.START_SNEAKING));
-        }
-
-        if (rotate) {
-            Inferno.rotationManager.look(hitVec);
-        }
-
-        if (packetPlace) {
-            mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(pos, facing, hand, (float) (hitVec.x - pos.x), (float) (hitVec.y - pos.y), (float) (hitVec.z - pos.z)));
-        } else {
-            mc.playerController.processRightClickBlock(mc.player, mc.world, pos, facing, hitVec, hand);
-        }
-
-        if (swing) {
-            mc.player.swingArm(hand);
-        }
-
-        if (sneak) {
-            mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.STOP_SNEAKING));
-        }
-    }
-
+    // @todo rewrite
     public static EnumFacing getFacing(BlockPos pos) {
         for (EnumFacing direction : EnumFacing.values()) {
             RayTraceResult result = mc.world.rayTraceBlocks(
@@ -196,16 +187,6 @@ public class BlockUtil extends Feature {
     }
 
     public static boolean intersectsWith(BlockPos pos) {
-        for (Entity entity : mc.world.loadedEntityList) {
-            if (new AxisAlignedBB(pos).intersects(entity.getEntityBoundingBox())) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public static BlockPos compareClosest(BlockPos pos1, BlockPos pos2) {
-        return mc.player.getDistance(pos1.x, pos1.y, pos1.z) > mc.player.getDistance(pos2.x, pos2.y, pos2.z) ? pos1 : pos2;
+        return !mc.world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(pos), (v) -> v != null && !v.isDead).isEmpty();
     }
 }

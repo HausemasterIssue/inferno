@@ -13,8 +13,8 @@ import org.lwjgl.input.Keyboard;
 
 @Module.Define(name = "Freecam", description = "Moves around out of your main player", category = Module.Category.PLAYER)
 public class Freecam extends Module {
-    public final Setting<Boolean> copy = this.register(new Setting<>("Copy", true));
-    public final Setting<Float> speed = this.register(new Setting<>("Speed", 2.0f, 1.0f, 10.0f));
+    public final Setting<Boolean> copy = new Setting<>("Copy", true);
+    public final Setting<Float> speed = new Setting<>("Speed", 2.0f, 1.0f, 10.0f);
 
     private EntityOtherPlayerMP fake = null;
     private Vec3d oldPos = null;

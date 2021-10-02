@@ -7,9 +7,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "Sprint", description = "Makes you automatically sprint", category = Module.Category.MOVEMENT)
 public class Sprint extends Module {
-    public final Setting<Mode> mode = this.register(new Setting<>("Mode", Mode.LEGIT));
-    public final Setting<Boolean> hungerCheck = this.register(new Setting<>("HungerCheck", false));
-    public final Setting<Boolean> strict = this.register(new Setting<>("Strict", false));
+    public final Setting<Mode> mode = new Setting<>("Mode", Mode.LEGIT);
+    public final Setting<Boolean> hungerCheck = new Setting<>("HungerCheck", false);
+    public final Setting<Boolean> strict = new Setting<>("Strict", false);
 
     @SubscribeEvent
     public void onUpdate(UpdateEvent event) {

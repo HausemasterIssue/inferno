@@ -8,8 +8,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "Timer", description = "Makes the game go zoom zoom", category = Module.Category.PLAYER)
 public class Timer extends Module {
-    public final Setting<Boolean> sync = this.register(new Setting<>("TPSSync", false));
-    public final Setting<Float> speed = this.register(new Setting<>("ClientTPS", 2.0f, 0.1f, 20.0f, (v) -> !sync.getValue()));
+    public final Setting<Boolean> sync = new Setting<>("Sync", false);
+    public final Setting<Float> speed = new Setting<>("Speed", 2.0f, 0.1f, 20.0f, (v) -> !sync.getValue());
 
     @Override
     protected void onDeactivated() {

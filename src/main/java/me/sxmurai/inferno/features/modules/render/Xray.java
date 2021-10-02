@@ -10,7 +10,7 @@ public class Xray extends Module {
     public static Xray INSTANCE;
 
     // @todo i legit have no idea wtf to do here
-    public final Setting<Integer> opacity = this.register(new Setting<>("Opacity", 125, 0, 255));
+    public final Setting<Integer> opacity = new Setting<>("Opacity", 125, 0, 255);
 
     private boolean shouldReload = false;
 
