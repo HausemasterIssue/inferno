@@ -7,7 +7,7 @@ import me.sxmurai.inferno.managers.modules.Module;
 public class ViewClip extends Module {
     public static ViewClip INSTANCE;
 
-    public final Setting<Float> distance = new Setting<>("Distance", 5.0f, 1.0f, 50.0f);
+    public final Setting<Double> distance = new Setting<>("Distance", 5.0, 1.0, 50.0);
 
     public ViewClip() {
         INSTANCE = this;

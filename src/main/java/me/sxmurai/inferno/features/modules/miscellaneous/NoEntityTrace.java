@@ -14,8 +14,4 @@ public class NoEntityTrace extends Module {
     public NoEntityTrace() {
         INSTANCE = this;
     }
-
-    public static boolean shouldBlock() {
-        return (!INSTANCE.pickaxe.getValue() || mc.player.getHeldItemMainhand().getItem() instanceof ItemPickaxe) && (INSTANCE.mining.getValue() && mc.playerController.getIsHittingBlock());
-    }
 }

@@ -27,6 +27,8 @@ public class MixinRenderEnderCrystal {
         if (CrystalModifier.INSTANCE.isToggled()) {
             GlStateManager.scale(CrystalModifier.INSTANCE.scale.getValue(), CrystalModifier.INSTANCE.scale.getValue(), CrystalModifier.INSTANCE.scale.getValue());
 
+            boolean didSomething = false;
+
             if (CrystalModifier.INSTANCE.wireframe.getValue()) {
                 MinecraftForge.EVENT_BUS.post(new RenderModelEvent(modelBase, entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale));
             }
@@ -54,6 +56,8 @@ public class MixinRenderEnderCrystal {
                     GL11.glDepthMask(true);
                     GL11.glEnable(2929);
                 }
+
+                didSomething = true;
             }
 
             GL11.glEnable(3042);
@@ -71,6 +75,10 @@ public class MixinRenderEnderCrystal {
                 GlStateManager.disableAlpha();
                 GL11.glEnable(2929);
                 GL11.glDepthMask(true);
+            }
+
+            if (!didSomething) {
+                modelBase.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
             }
         } else {
             modelBase.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);

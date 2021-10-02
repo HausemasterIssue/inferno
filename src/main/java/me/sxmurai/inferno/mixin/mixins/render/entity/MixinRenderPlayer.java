@@ -29,17 +29,21 @@ public class MixinRenderPlayer {
     @Inject(method = "doRender", at = @At("HEAD"))
     public void doRenderPre(AbstractClientPlayer player, double x, double y, double z, float entityYaw, float partialTicks, CallbackInfo info) {
         if (player == Inferno.mc.player) {
-            this.prevRenderHeadYaw = player.prevRotationYawHead;
-            this.prevRenderPitch = player.prevRotationPitch;
             this.renderPitch = player.rotationPitch;
             this.renderYaw = player.rotationYaw;
+
             this.renderHeadYaw = player.rotationYawHead;
 
+            this.prevRenderHeadYaw = player.prevRotationYawHead;
+            this.prevRenderPitch = player.prevRotationPitch;
+
             player.rotationPitch = Inferno.rotationManager.getPitch();
-            player.prevRotationPitch = this.lastRenderPitch;
             player.rotationYaw = Inferno.rotationManager.getYaw();
+
             player.rotationYawHead = Inferno.rotationManager.getYaw();
+
             player.prevRotationYawHead = this.lastRenderHeadYaw;
+            player.prevRotationPitch = this.lastRenderPitch;
         }
     }
 
@@ -51,9 +55,11 @@ public class MixinRenderPlayer {
 
             player.rotationPitch = this.renderPitch;
             player.rotationYaw = this.renderYaw;
+
+            player.prevRotationPitch = this.prevRenderPitch;
+
             player.rotationYawHead = this.renderHeadYaw;
             player.prevRotationYawHead = this.prevRenderHeadYaw;
-            player.prevRotationPitch = this.prevRenderPitch;
         }
     }
 }
