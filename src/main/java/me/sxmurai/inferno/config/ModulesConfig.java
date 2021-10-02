@@ -23,9 +23,7 @@ public class ModulesConfig extends BaseConfig {
         JSONObject base = new JSONObject();
 
         for (Module module : this.modules.getModules()) {
-            JSONObject mod = new JSONObject()
-                    .put("toggled", module.isToggled())
-                    .put("bind", module.getBind());
+            JSONObject mod = new JSONObject().put("toggled", module.isToggled());
 
             JSONObject settings = new JSONObject();
             for (Setting setting : module.getSettings()) {
@@ -69,8 +67,6 @@ public class ModulesConfig extends BaseConfig {
             if (this.get(module, "toggled", false)) {
                 mod.toggle();
             }
-
-            mod.setBind(this.get(module, "bind", Keyboard.KEY_NONE));
 
             JSONObject settings = this.get(module, "settings");
             if (settings == null) {

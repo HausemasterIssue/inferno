@@ -133,7 +133,7 @@ public class BlockUtil extends Feature {
 
             // rotate
             if (rotate) {
-                Inferno.rotationManager.look(new Vec3d(neighbor.x + 0.5, neighbor.y - 0.5, neighbor.z + 0.5));
+                Inferno.rotationManager.look(new Vec3d(neighbor.x + 0.5, neighbor.y + 0.5, neighbor.z + 0.5));
             }
 
             // the hitvec, i need to learn more about this
