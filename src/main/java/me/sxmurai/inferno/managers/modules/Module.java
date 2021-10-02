@@ -5,12 +5,10 @@ import me.sxmurai.inferno.features.Feature;
 import me.sxmurai.inferno.features.settings.Bind;
 import me.sxmurai.inferno.features.settings.Setting;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.eventhandler.IContextSetter;
 import org.lwjgl.input.Keyboard;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -96,6 +94,10 @@ public class Module extends Feature {
     protected void onDeactivated() { }
 
     public void toggle() {
+        this.toggle(false);
+    }
+
+    public void toggle(boolean silent) {
         this.toggled = !this.toggled;
 
         if (this.toggled) {
@@ -106,7 +108,9 @@ public class Module extends Feature {
             onDeactivated();
         }
 
-        MinecraftForge.EVENT_BUS.post(new ModuleToggledEvent(this));
+        if (!silent) {
+            MinecraftForge.EVENT_BUS.post(new ModuleToggledEvent(this));
+        }
     }
 
     public boolean isToggled() {

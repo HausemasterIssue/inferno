@@ -37,9 +37,8 @@ Look in the builds/libs folder, and use the one with the -release tag at the end
 These are clients/people who have helped with the development of the client
 
 #### Clients:
-- Phobos 1.9.0 - Original access transformers + CrystalChams + Custom Font renderer
+- Phobos 1.9.0 - CrystalChams + Custom Font renderer
 - Cosmos 1.0.0 - 2b2t Criticals bypass
-- CookieClient 1.0.1 - AntiAFK ideas + TPS Sync timer idea aswell
 
 #### People
 - [Sxmurai](https://github.com/Sxmurai) - Main Developer
@@ -50,12 +49,12 @@ These are clients/people who have helped with the development of the client
 - Rewrite ClickGUI (it looks like ass)
 - ~~Make Settings registration use reflections~~
 - Rewrite RenderUtils
-- Better rotation manager
+- ~~Better rotation manager~~ (this should be fine)
 - Remove skidded code
 - Possibly remove access transformers and upgrade to forgegradle 3?
 - Rewrite some render modules
 - Rewrite AutoCrystal
-- Rewrite Block placements (theyre skidded from cosmos) - [Done, needs to be tested on a server]
+- ~~Rewrite Block placements~~
 - Comment the code [In progress]
 - Remove and rewrite skidded mixins
 - Better CustomFont renderer (soon:tm:)

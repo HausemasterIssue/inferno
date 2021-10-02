@@ -4,6 +4,7 @@ import me.sxmurai.inferno.events.network.PacketEvent;
 import me.sxmurai.inferno.features.Feature;
 import me.sxmurai.inferno.features.commands.Bind;
 import me.sxmurai.inferno.features.commands.Ping;
+import me.sxmurai.inferno.features.commands.Unload;
 import me.sxmurai.inferno.managers.commands.exceptions.BaseException;
 import me.sxmurai.inferno.managers.commands.text.ChatColor;
 import me.sxmurai.inferno.managers.commands.text.TextBuilder;
@@ -21,6 +22,7 @@ public class CommandManager extends Feature {
     public CommandManager() {
         this.commands.add(new Bind());
         this.commands.add(new Ping());
+        this.commands.add(new Unload());
     }
 
     @SubscribeEvent

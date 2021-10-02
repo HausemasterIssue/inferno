@@ -142,5 +142,10 @@ public class ModuleManager {
 
     public void unload() {
         this.config.stop();
+        this.getModules().forEach(mod -> {
+            if (mod.isToggled()) {
+                mod.toggle(true);
+            }
+        });
     }
 }

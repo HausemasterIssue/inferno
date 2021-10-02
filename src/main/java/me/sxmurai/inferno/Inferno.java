@@ -97,6 +97,8 @@ public class Inferno {
         MinecraftForge.EVENT_BUS.register(holeManager);
         MinecraftForge.EVENT_BUS.register(rotationManager);
 
+        MinecraftForge.EVENT_BUS.register(new UnloadManager());
+
         LOGGER.info("Loaded {} v{}!", MOD_NAME, MOD_VER);
 
         state = State.LOADED;
@@ -112,7 +114,6 @@ public class Inferno {
         LOGGER.info("Unloading managers and saving configurations...");
 
         textManager = null;
-        friendManager = null; // @todo save this
         altManager = null; // @todo save this
         xrayManager = null; // @todo save this
 
@@ -123,14 +124,18 @@ public class Inferno {
         MinecraftForge.EVENT_BUS.unregister(commandManager);
         commandManager = null;
 
+        friendManager.unload();
+        MinecraftForge.EVENT_BUS.unregister(friendManager);
+        friendManager = null;
+
         MinecraftForge.EVENT_BUS.unregister(totemPopManager);
         totemPopManager = null;
 
         MinecraftForge.EVENT_BUS.unregister(eventHelperManager);
         eventHelperManager = null;
 
-        MinecraftForge.EVENT_BUS.unregister(macroManager);
         macroManager.unload();
+        MinecraftForge.EVENT_BUS.unregister(macroManager);
         macroManager = null;
 
         MinecraftForge.EVENT_BUS.unregister(rotationManager);
