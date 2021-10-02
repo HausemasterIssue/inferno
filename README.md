@@ -58,6 +58,7 @@ These are clients/people who have helped with the development of the client
 - Rewrite Block placements (theyre skidded from cosmos)
 - Comment the code
 - Remove and rewrite skidded mixins
+- Better CustomFont renderer (soon:tm:)
 
 ---
 
