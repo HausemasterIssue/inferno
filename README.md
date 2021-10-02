@@ -50,13 +50,13 @@ These are clients/people who have helped with the development of the client
 - ~~Make Settings registration use reflections~~
 - Rewrite RenderUtils
 - ~~Better rotation manager~~ (this should be fine)
-- Remove skidded code
+- ~~Remove skidded code~~
 - Possibly remove access transformers and upgrade to forgegradle 3?
 - Rewrite some render modules
 - Rewrite AutoCrystal
 - ~~Rewrite Block placements~~
 - Comment the code [In progress]
-- Remove and rewrite skidded mixins
+- ~~Remove and rewrite skidded mixins~~
 - Better CustomFont renderer (soon:tm:)
 
 ---
