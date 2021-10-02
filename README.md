@@ -48,15 +48,15 @@ These are clients/people who have helped with the development of the client
 ## Todo
 
 - Rewrite ClickGUI (it looks like ass)
-- Make Settings registration use reflections
+- ~~Make Settings registration use reflections~~
 - Rewrite RenderUtils
 - Better rotation manager
 - Remove skidded code
 - Possibly remove access transformers and upgrade to forgegradle 3?
 - Rewrite some render modules
 - Rewrite AutoCrystal
-- Rewrite Block placements (theyre skidded from cosmos)
-- Comment the code
+- Rewrite Block placements (theyre skidded from cosmos) - [Done, needs to be tested on a server]
+- Comment the code [In progress]
 - Remove and rewrite skidded mixins
 - Better CustomFont renderer (soon:tm:)
 
