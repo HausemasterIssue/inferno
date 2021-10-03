@@ -97,12 +97,11 @@ public class Offhand extends Module {
         }
 
         InventoryUtils.TaskGroup group = new InventoryUtils.TaskGroup();
-        boolean hadItem = !mc.player.getHeldItemOffhand().isEmpty();
 
         group.add(new InventoryUtils.Task(slot, this.update.getValue(), false));
         group.add(new InventoryUtils.Task(InventoryUtils.OFFHAND_SLOT, this.update.getValue(), false));
 
-        if (hadItem) {
+        if (!mc.player.getHeldItemOffhand().isEmpty()) {
             group.add(new InventoryUtils.Task(slot, this.update.getValue(), false));
         }
 
