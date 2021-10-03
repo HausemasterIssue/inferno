@@ -30,6 +30,13 @@ public class InventoryUtils extends Feature {
         return clazz.isInstance(mc.player.getHeldItemMainhand().getItem()) || (offhand && clazz.isInstance(mc.player.getHeldItemOffhand().getItem()));
     }
 
+    public static boolean isHolding(Block block, boolean offhand) {
+        ItemStack main = mc.player.getHeldItemMainhand();
+        ItemStack off = mc.player.getHeldItemOffhand();
+        return (main.getItem() instanceof ItemBlock && ((ItemBlock) main.getItem()).getBlock() == block) ||
+                (offhand && off.getItem() instanceof ItemBlock && ((ItemBlock) off.getItem()).getBlock() == block);
+    }
+
     public static int getHotbarItemSlot(Item item, boolean offhand) {
         if (offhand && mc.player.getHeldItemOffhand().item == item) {
             return 45;
@@ -61,13 +68,13 @@ public class InventoryUtils extends Feature {
     }
 
     public static int getHotbarBlockSlot(Block block, boolean offhand) {
-        if (offhand && mc.player.getHeldItemOffhand().item instanceof ItemBlock && ((ItemBlock) mc.player.getHeldItemOffhand().item).block == block) {
+        if (offhand && mc.player.getHeldItemOffhand().getItem() instanceof ItemBlock && ((ItemBlock) mc.player.getHeldItemOffhand().item).getBlock() == block) {
             return 45;
         }
 
         for (int i = 0; i < 9; ++i) {
             ItemStack stack = mc.player.inventory.getStackInSlot(i);
-            if (!stack.isEmpty && stack.item instanceof ItemBlock && ((ItemBlock) stack.item).block == block) {
+            if (!stack.isEmpty && stack.getItem() instanceof ItemBlock && ((ItemBlock) stack.getItem()).getBlock() == block) {
                 return i;
             }
         }
