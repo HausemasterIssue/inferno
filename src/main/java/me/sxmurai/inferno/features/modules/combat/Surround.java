@@ -8,6 +8,7 @@ import me.sxmurai.inferno.utils.BlockUtil;
 import me.sxmurai.inferno.utils.InventoryUtils;
 import net.minecraft.init.Blocks;
 import net.minecraft.network.play.client.CPacketPlayer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -24,6 +25,7 @@ public class Surround extends Module {
     public final Setting<Boolean> swing = new Setting<>("Swing", true);
     public final Setting<Boolean> silent = new Setting<>("Silent", false);
     public final Setting<Boolean> center = new Setting<>("Center", false);
+    public final Setting<Boolean> helpers = new Setting<>("Helpers", true);
     public final Setting<Integer> blocks = new Setting<>("Blocks", 1, 1, 5);
     public final Setting<Boolean> feet = new Setting<>("Feet", true);
     public final Setting<Disable> disable = new Setting<>("Disable", Disable.FINISHED);
@@ -122,6 +124,12 @@ public class Surround extends Module {
                 }
 
                 BlockUtil.place(pos, this.hand, this.swing.getValue(), this.sneak.getValue(), this.packet.getValue(), this.rotate.getValue());
+
+                if (mc.world.isAirBlock(pos) && this.helpers.getValue()) {
+                    this.positions.add(pos.add(0.0, -1.0, 0.0)); // @todo loop through directions and find best facing
+                    this.positions.add(pos);
+                }
+
                 ++this.placed;
             }
         }
