@@ -57,6 +57,9 @@ public class Freecam extends Module {
             RotationUtils.Rotation yes = RotationUtils.getDirectionalSpeed(this.speed.getValue() / 10.0);
             mc.player.motionX = yes.getYaw();
             mc.player.motionZ = yes.getPitch();
+        } else {
+            mc.player.motionX = 0.0;
+            mc.player.motionZ = 0.0;
         }
 
         if (Keyboard.isKeyDown(mc.gameSettings.keyBindSneak.keyCode)) {
