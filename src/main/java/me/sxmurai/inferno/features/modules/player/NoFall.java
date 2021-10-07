@@ -56,8 +56,13 @@ public class NoFall extends Module {
         }
 
         if (mc.player.onGround && (this.mode.getValue() == Mode.WATER_BUCKET || this.mode.getValue() == Mode.COBWEB)) {
-            if (this.oldPitch != -1.0f && !this.packetLook.getValue()) {
-                mc.player.rotationPitch = this.oldPitch;
+            if (this.oldPitch != -1.0f) {
+                if (this.packetLook.getValue()) {
+                    mc.player.connection.sendPacket(new CPacketPlayer.Rotation(mc.player.rotationYaw, this.oldPitch, false));
+                } else {
+                    mc.player.rotationPitch = this.oldPitch;
+                }
+
                 this.oldPitch = -1.0f;
             }
 
