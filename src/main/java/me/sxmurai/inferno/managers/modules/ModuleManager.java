@@ -85,7 +85,6 @@ public class ModuleManager {
         this.modules.add(new Chams());
         this.modules.add(new CrystalModifier());
         this.modules.add(new Fullbright());
-        this.modules.add(new GlintColor());
         this.modules.add(new HandModifier());
         this.modules.add(new HoleESP());
         this.modules.add(new Nametags());
