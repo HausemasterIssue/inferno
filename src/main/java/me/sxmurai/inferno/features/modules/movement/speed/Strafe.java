@@ -1,26 +1,18 @@
 package me.sxmurai.inferno.features.modules.movement.speed;
 
 import me.sxmurai.inferno.events.entity.MoveEvent;
-import me.sxmurai.inferno.events.mc.UpdateEvent;
 import me.sxmurai.inferno.features.modules.movement.Speed;
 import me.sxmurai.inferno.managers.modules.Mode;
+import me.sxmurai.inferno.utils.timing.Timer;
 import net.minecraft.init.MobEffects;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class Strafe extends Mode<Speed> {
+    private boolean hopped = false;
+    private final Timer timer = new Timer();
+
     public Strafe(Speed module, Enum<?> mode) {
         super(module, mode);
-    }
-
-    @SubscribeEvent
-    public void onUpdate(UpdateEvent event) {
-        if (mc.player.moveForward != 0.0f || mc.player.moveStrafing != 0.0f) {
-            if (mc.player.onGround) {
-                float yaw = this.getYaw();
-                mc.player.motionX -= Math.sin(yaw) * 0.2f;
-                mc.player.motionZ += Math.cos(yaw) * 0.2f;
-            }
-        }
     }
 
     @SubscribeEvent
@@ -30,17 +22,27 @@ public class Strafe extends Mode<Speed> {
                 strafe = mc.player.movementInput.moveStrafe,
                 yaw = mc.player.rotationYaw;
 
-        if ((mc.player.moveForward != 0.0f || mc.player.moveStrafing != 0.0f) && mc.player.onGround) {
-            double hop = 0.4050000011920929;
+        if ((mc.player.moveForward != 0.0f || mc.player.moveStrafing != 0.0f) && mc.player.onGround && this.timer.passedMs(200L)) {
+            double hop = 0.40123128;
             if (mc.player.isPotionActive(MobEffects.JUMP_BOOST)) {
                 hop += (mc.player.getActivePotionEffect(MobEffects.JUMP_BOOST).getAmplifier() + 1) * 0.1;
             }
 
             event.setY(mc.player.motionY = hop);
-            speed *= 2.149;
+            speed *= this.getBaseSpeed() * (mc.player.isInWater() || mc.player.collidedHorizontally ? 0.9: 1.901);
+
+            this.hopped = true;
+            this.timer.reset();
+        } else {
+            if (this.hopped || mc.player.collidedHorizontally) {
+                speed -= 0.45 * this.getBaseSpeed();
+                this.hopped = false;
+            } else {
+                speed -= speed / 159.0;
+            }
         }
 
-        speed *= 1.0064;
+        speed = Math.max(speed, this.getBaseSpeed());
 
         if (forward == 0.0f && strafe == 0.0f) {
             event.setX(0.0);
@@ -58,33 +60,8 @@ public class Strafe extends Mode<Speed> {
         event.setZ((forward * speed * cos - strafe * speed * -sin) * 0.99);
     }
 
-    private float getYaw() {
-        float forward = mc.player.movementInput.moveForward,
-                strafe = mc.player.movementInput.moveStrafe,
-                yaw = mc.player.rotationYaw;
-
-        if (forward < 0.0f) {
-            yaw += 180.0f;
-        }
-
-        float offset = 1.0f;
-        if (forward < 0.0f) {
-            offset = -0.5f;
-        } else if (forward > 0.0f) {
-            offset = 0.5f;
-        }
-
-        if (strafe > 0.0f) {
-            yaw -= 90.0f * offset;
-        } else if (strafe < 0.0f) {
-            yaw += 90.0f * offset;
-        }
-
-        return yaw * 0.017453292f;
-    }
-
     private double getBaseSpeed() {
-        double speed = 0.2872;
+        double speed = 0.2873;
         if (mc.player.isPotionActive(MobEffects.SPEED)) {
             speed *= 1.0 + 0.2 * (mc.player.getActivePotionEffect(MobEffects.SPEED).getAmplifier() + 1);
         }

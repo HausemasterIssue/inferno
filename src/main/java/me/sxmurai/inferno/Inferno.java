@@ -38,6 +38,7 @@ public class Inferno {
 
     public static RotationManager rotationManager;
     public static ServerManager serverManager;
+    public static SpeedManager speedManager;
     public static HoleManager holeManager;
     public static TotemPopManager totemPopManager;
     private static EventManager eventHelperManager;
@@ -84,6 +85,7 @@ public class Inferno {
         rotationManager = new RotationManager();
 
         serverManager = new ServerManager();
+        speedManager = new SpeedManager();
         holeManager = new HoleManager();
         totemPopManager = new TotemPopManager();
         eventHelperManager = new EventManager();

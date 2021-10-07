@@ -2,6 +2,7 @@ package me.sxmurai.inferno.features.gui.hud;
 
 import me.sxmurai.inferno.features.gui.click.components.Container;
 import me.sxmurai.inferno.features.gui.hud.components.HudElementButton;
+import me.sxmurai.inferno.features.hud.SpeedHudComponent;
 import me.sxmurai.inferno.features.hud.TpsHudComponent;
 import me.sxmurai.inferno.features.hud.WatermarkHudComponent;
 import me.sxmurai.inferno.utils.ColorUtils;
@@ -23,6 +24,7 @@ public class HUDEditorGuiScreen extends GuiScreen {
     private float x2, y2;
 
     public HUDEditorGuiScreen() {
+        this.components.add(new SpeedHudComponent());
         this.components.add(new TpsHudComponent());
         this.components.add(new WatermarkHudComponent());
 

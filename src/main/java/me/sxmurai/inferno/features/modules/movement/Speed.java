@@ -27,9 +27,9 @@ public class Speed extends Module {
         this.modes.add(new StrafeStrict(this, M.STRAFE_STRICT));
         this.modes.add(new Vanilla(this, M.VANILLA));
 
-        for (Mode mode : this.modes) {
-            for (Setting setting : mode.getSettings()) {
-                this.settings.add(setting.setVisibility((v) -> this.mode.getValue() == mode.getMode()));
+        for (Mode m : this.modes) {
+            for (Setting setting : m.getSettings()) {
+                this.settings.add(setting.setVisibility((v) -> this.mode.getValue() == m.getMode()));
             }
         }
     }
