@@ -1,37 +1,67 @@
 package me.sxmurai.inferno.managers;
 
+import com.google.common.collect.Lists;
+import me.sxmurai.inferno.config.XrayConfig;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 
 import java.util.ArrayList;
+import java.util.List;
 
 // @todo config saving
 public class XrayManager {
     private final ArrayList<Block> blocks = new ArrayList<>();
+    private final XrayConfig config;
 
     public XrayManager() {
-        blocks.add(Blocks.COAL_ORE);
-        blocks.add(Blocks.GOLD_ORE);
-        blocks.add(Blocks.IRON_ORE);
-        blocks.add(Blocks.REDSTONE_ORE);
-        blocks.add(Blocks.LAPIS_ORE);
-        blocks.add(Blocks.DIAMOND_ORE);
+        this.config = new XrayConfig(this);
+        this.config.load();
+    }
 
-        blocks.add(Blocks.COAL_BLOCK);
-        blocks.add(Blocks.GOLD_BLOCK);
-        blocks.add(Blocks.IRON_BLOCK);
-        blocks.add(Blocks.REDSTONE_BLOCK);
-        blocks.add(Blocks.LAPIS_BLOCK);
-        blocks.add(Blocks.DIAMOND_BLOCK);
+    public static List<Block> defaultBlocks() {
+        return Lists.newArrayList(
+                // ores
+                Blocks.COAL_ORE,
+                Blocks.GOLD_ORE,
+                Blocks.IRON_ORE,
+                Blocks.REDSTONE_ORE,
+                Blocks.LAPIS_ORE,
+                Blocks.DIAMOND_ORE,
 
-        blocks.add(Blocks.END_PORTAL_FRAME);
-        blocks.add(Blocks.END_PORTAL);
-        blocks.add(Blocks.IRON_BARS);
-        blocks.add(Blocks.IRON_DOOR);
-        blocks.add(Blocks.OBSIDIAN);
+                // ore blocks
+                Blocks.COAL_BLOCK,
+                Blocks.GOLD_BLOCK,
+                Blocks.IRON_BLOCK,
+                Blocks.REDSTONE_BLOCK,
+                Blocks.LAPIS_BLOCK,
+                Blocks.DIAMOND_BLOCK,
+
+                // other useful shit
+                Blocks.END_PORTAL_FRAME,
+                Blocks.END_PORTAL,
+                Blocks.IRON_BARS,
+                Blocks.IRON_DOOR,
+                Blocks.OBSIDIAN
+        );
+    }
+
+    public void add(Block block) {
+        this.blocks.add(block);
+    }
+
+    public void remove(Block block) {
+        this.blocks.remove(block);
+    }
+
+    public ArrayList<Block> getBlocks() {
+        return blocks;
     }
 
     public boolean isXrayBlock(Block block) {
-        return blocks.contains(block);
+        return this.blocks.contains(block);
+    }
+
+    public void unload() {
+        this.config.stop();
     }
 }

@@ -117,7 +117,6 @@ public class Inferno {
 
         textManager = null;
         altManager = null; // @todo save this
-        xrayManager = null; // @todo save this
 
         moduleManager.unload();
         MinecraftForge.EVENT_BUS.unregister(moduleManager);
@@ -142,6 +141,9 @@ public class Inferno {
 
         MinecraftForge.EVENT_BUS.unregister(rotationManager);
         rotationManager = null;
+
+        xrayManager.unload();
+        xrayManager = null;
 
         state = State.UNLOADED;
     }
