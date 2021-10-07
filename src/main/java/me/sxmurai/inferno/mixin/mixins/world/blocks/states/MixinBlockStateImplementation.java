@@ -1,4 +1,4 @@
-package me.sxmurai.inferno.mixin.mixins.world.blocks;
+package me.sxmurai.inferno.mixin.mixins.world.blocks.states;
 
 import me.sxmurai.inferno.Inferno;
 import me.sxmurai.inferno.features.modules.render.Xray;

@@ -8,8 +8,9 @@
   "refmap": "mixins.inferno.refmap.json",
   "verbose": true,
   "mixins": [
-    "entity.MixinEntityPlayer",
-    "entity.MixinEntityPlayerSP",
+    "entity.player.MixinEntityPlayer",
+    "entity.player.MixinEntityPlayerSP",
+    "entity.ridden.MixinEntityHorse",
 
     "input.MixinKeyBinding",
     "input.MixinPlayerControllerMP",
@@ -26,12 +27,12 @@
     "render.MixinLayerArmorBase",
     "render.MixinParticleManager",
 
+    "world.blocks.states.MixinBlockStateImplementation",
     "world.blocks.MixinBlock",
     "world.blocks.MixinBlockCactus",
     "world.blocks.MixinBlockFire",
     "world.blocks.MixinBlockSlime",
     "world.blocks.MixinBlockSoulSand",
-    "world.blocks.MixinBlockStateImplementation",
     "world.sounds.MixinElytraSound",
     "world.MixinWorldClient",
 

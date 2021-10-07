@@ -1,4 +1,4 @@
-package me.sxmurai.inferno.mixin.mixins.entity;
+package me.sxmurai.inferno.mixin.mixins.entity.player;
 
 import me.sxmurai.inferno.events.entity.JumpEvent;
 import me.sxmurai.inferno.events.entity.PushEvent;

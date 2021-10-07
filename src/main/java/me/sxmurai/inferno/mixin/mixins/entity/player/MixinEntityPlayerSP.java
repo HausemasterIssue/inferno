@@ -1,4 +1,4 @@
-package me.sxmurai.inferno.mixin.mixins.entity;
+package me.sxmurai.inferno.mixin.mixins.entity.player;
 
 import com.mojang.authlib.GameProfile;
 import me.sxmurai.inferno.events.entity.MoveEvent;
