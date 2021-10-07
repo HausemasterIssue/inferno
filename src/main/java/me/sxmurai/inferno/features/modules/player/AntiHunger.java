@@ -22,7 +22,7 @@ public class AntiHunger extends Module {
                         return;
                     }
 
-                    ((CPacketPlayer) event.getPacket()).onGround = false;
+                    ((CPacketPlayer) event.getPacket()).onGround = true;
                 }
             } else if (event.getPacket() instanceof CPacketEntityAction) {
                 CPacketEntityAction packet = (CPacketEntityAction) event.getPacket();
