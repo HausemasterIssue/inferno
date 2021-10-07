@@ -14,8 +14,13 @@ public class NoRender extends Module {
     public final Setting<Boolean> scoreboard = new Setting<>("Scoreboard", false);
     public final Setting<Boolean> particles = new Setting<>("Particles", false);
     public final Setting<Boolean> totemAnimation = new Setting<>("TotemAnimation", false);
+    public final Setting<Armor> armor = new Setting<>("Armor", Armor.NONE);
 
     public NoRender() {
         INSTANCE = this;
+    }
+
+    public enum Armor {
+        NONE, ALL, GLINT
     }
 }
