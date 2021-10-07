@@ -9,6 +9,7 @@ public class ExtraTab extends Module {
 
     // 80 is the default according to the decompiled code
     public final Setting<Integer> players = new Setting<>("Players", 80, 1, 1000);
+    public final Setting<Boolean> friendHighlight = new Setting<>("FriendHighlight", true);
 
     public ExtraTab() {
         INSTANCE = this;
