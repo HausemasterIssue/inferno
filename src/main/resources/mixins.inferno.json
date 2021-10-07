@@ -17,6 +17,7 @@
 
     "network.MixinNetworkManager",
 
+    "render.entity.tile.MixinTileEntitySignRenderer",
     "render.entity.MixinEntityRenderer",
     "render.entity.MixinRenderEnderCrystal",
     "render.entity.MixinRenderLivingBase",

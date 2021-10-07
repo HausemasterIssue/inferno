@@ -15,6 +15,7 @@ public class NoRender extends Module {
     public final Setting<Boolean> particles = new Setting<>("Particles", false);
     public final Setting<Boolean> totemAnimation = new Setting<>("TotemAnimation", false);
     public final Setting<Armor> armor = new Setting<>("Armor", Armor.NONE);
+    public final Setting<Boolean> signText = new Setting<>("SignText", false);
 
     public NoRender() {
         INSTANCE = this;
