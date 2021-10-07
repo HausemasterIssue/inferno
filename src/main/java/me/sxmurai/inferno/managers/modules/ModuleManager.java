@@ -42,6 +42,7 @@ public class ModuleManager {
 
         // miscellaneous
         this.modules.add(new AntiSignFuck());
+        this.modules.add(new Avoid());
         this.modules.add(new ExtraTab());
         this.modules.add(new FakePlayer());
         this.modules.add(new Lawnmower());

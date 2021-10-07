@@ -27,6 +27,8 @@
     "render.MixinParticleManager",
 
     "world.blocks.MixinBlock",
+    "world.blocks.MixinBlockCactus",
+    "world.blocks.MixinBlockFire",
     "world.blocks.MixinBlockSlime",
     "world.blocks.MixinBlockSoulSand",
     "world.blocks.MixinBlockStateImplementation",
