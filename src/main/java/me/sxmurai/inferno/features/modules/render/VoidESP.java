@@ -58,18 +58,18 @@ public class VoidESP extends Module {
 
                 switch (this.mode.getValue()) {
                     case FILLED: {
-                        RenderUtils.drawFilledBox(box.setMaxY(this.height.getValue()).offset(RenderUtils.screen()), colour);
+                        RenderUtils.drawFilledBox(box.setMaxY(box.maxY - this.height.getValue()).offset(RenderUtils.screen()), colour);
                         break;
                     }
 
                     case OUTLINE: {
-                        RenderUtils.drawOutlinedBox(box.setMaxY(this.height.getValue()).offset(RenderUtils.screen()), this.width.getValue(), colour);
+                        RenderUtils.drawOutlinedBox(box.setMaxY(box.maxY - this.height.getValue()).offset(RenderUtils.screen()), this.width.getValue(), colour);
                         break;
                     }
 
                     case FILLED_OUTLINE: {
-                        RenderUtils.drawFilledBox(box.setMaxY(this.height.getValue()).offset(RenderUtils.screen()), colour);
-                        RenderUtils.drawOutlinedBox(box.setMaxY(this.height.getValue()).offset(RenderUtils.screen()), this.width.getValue(), colour);
+                        RenderUtils.drawFilledBox(box.setMaxY(box.maxY - this.height.getValue()).offset(RenderUtils.screen()), colour);
+                        RenderUtils.drawOutlinedBox(box.setMaxY(box.maxY - this.height.getValue()).offset(RenderUtils.screen()), this.width.getValue(), colour);
                         break;
                     }
 
