@@ -22,6 +22,7 @@ public class MixinRenderPlayer {
     @Inject(method = "renderEntityName", at = @At("HEAD"), cancellable = true)
     public void onRenderEntityName(AbstractClientPlayer entityIn, double x, double y, double z, String name, double distanceSq, CallbackInfo info) {
         if (Nametags.INSTANCE.isToggled()) {
+            Nametags.INSTANCE.renderNametags(entityIn, x, y, z);
             info.cancel();
         }
     }

@@ -1,7 +1,6 @@
 package me.sxmurai.inferno.features.modules.render;
 
 import me.sxmurai.inferno.Inferno;
-import me.sxmurai.inferno.events.render.RenderEvent;
 import me.sxmurai.inferno.features.settings.Setting;
 import me.sxmurai.inferno.managers.commands.text.ChatColor;
 import me.sxmurai.inferno.managers.friends.Friend;
@@ -13,7 +12,6 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,30 +41,17 @@ public class Nametags extends Module {
         INSTANCE = this;
     }
 
-    @SubscribeEvent
-    public void onRender(RenderEvent event) {
-        if (!Module.fullNullCheck()) {
-            for (EntityPlayer player : mc.world.playerEntities) {
-                if (player == null || player == mc.player || (!this.invisible.getValue() && EntityUtils.isInvisible(player))) {
-                    continue;
-                }
-
-                double x = RenderUtils.interpolate(player.lastTickPosX, player.posX) - mc.renderManager.renderPosX;
-                double y = RenderUtils.interpolate(player.lastTickPosY, player.posY) - mc.renderManager.renderPosY;
-                double z = RenderUtils.interpolate(player.lastTickPosZ, player.posZ) - mc.renderManager.renderPosZ;
-
-                this.renderNametags(player, x, y, z);
-            }
-        }
-    }
-
     public void renderNametags(EntityPlayer player, double x, double y, double z) {
+        if (player == null || player == mc.player || (!this.invisible.getValue() && EntityUtils.isInvisible(player))) {
+            return;
+        }
+
         double yOffset = y + (player.isSneaking() ? 0.5 : 0.7);
 
         RenderManager manager = mc.renderManager;
 
         double dist = mc.renderViewEntity.getDistance(x + manager.viewerPosX, y + manager.viewerPosY, z + manager.viewerPosZ);
-        double scale = (0.0018 + this.scaling.getValue() * dist) / 50.0;
+        double scale = (this.scaling.getValue() * dist) / 50.0;
 
         GlStateManager.pushMatrix();
         RenderHelper.enableStandardItemLighting();
@@ -121,15 +106,11 @@ public class Nametags extends Module {
 
         if (this.mainHand.getValue()) {
             if (!player.getHeldItemMainhand().isEmpty) {
-                GlStateManager.pushMatrix();
                 this.renderItemStack(player.getHeldItemMainhand(), xOffset, -26);
-                GlStateManager.popMatrix();
             }
         }
 
         if (this.armor.getValue()) {
-            GlStateManager.pushMatrix();
-
             ArrayList<ItemStack> armorPieces = new ArrayList<>(player.inventory.armorInventory);
             if (this.reversed.getValue()) {
                 Collections.reverse(armorPieces);
@@ -143,8 +124,6 @@ public class Nametags extends Module {
 
                 xOffset += 16;
             }
-
-            GlStateManager.popMatrix();
         }
 
         if (this.offhand.getValue()) {
@@ -170,7 +149,7 @@ public class Nametags extends Module {
     private void renderItemStack(ItemStack stack, int x, int y) {
         GlStateManager.pushMatrix();
         GlStateManager.depthMask(true);
-        GlStateManager.clear(256);
+        // GlStateManager.clear(256);
         RenderHelper.enableStandardItemLighting();
         mc.renderItem.zLevel = -150.0f;
         GlStateManager.disableAlpha();
