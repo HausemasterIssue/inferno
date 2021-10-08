@@ -37,8 +37,8 @@ public class EntityControl extends Module {
         if (this.speedUp.getValue() && EntityUtils.isRiding(true)) {
             RotationUtils.Rotation rotation = RotationUtils.getDirectionalSpeed(this.speed.getValue() / 10.0);
 
-            mc.player.motionX = rotation.getYaw();
-            mc.player.motionZ = rotation.getPitch();
+            mc.player.ridingEntity.motionX = rotation.getYaw();
+            mc.player.ridingEntity.motionZ = rotation.getPitch();
         }
 
         if (this.betterLook.getValue() && EntityUtils.isRiding(true)) {

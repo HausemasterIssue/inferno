@@ -10,7 +10,9 @@
   "mixins": [
     "entity.player.MixinEntityPlayer",
     "entity.player.MixinEntityPlayerSP",
-    "entity.ridden.MixinEntityHorse",
+    "entity.ridden.MixinAbstractHorse",
+    "entity.ridden.MixinEntityLlama",
+    "entity.ridden.MixinEntityPig",
 
     "input.MixinKeyBinding",
     "input.MixinPlayerControllerMP",
