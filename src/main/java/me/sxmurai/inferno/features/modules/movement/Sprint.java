@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Module.Define(name = "Sprint", description = "Makes you automatically sprint", category = Module.Category.MOVEMENT)
 public class Sprint extends Module {
     public final Setting<Mode> mode = new Setting<>("Mode", Mode.LEGIT);
+
     @SubscribeEvent
     public void onUpdate(UpdateEvent event) {
         if (mode.getValue() == Mode.LEGIT) {
