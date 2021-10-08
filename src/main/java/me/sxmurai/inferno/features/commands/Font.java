@@ -25,7 +25,7 @@ public class Font extends Command {
                 continue;
             }
 
-            TextManager.customFontRenderer = new CustomFontRenderer(font, CustomFont.INSTANCE.antiAliasing.getValue(), CustomFont.INSTANCE.fractionalMetrics.getValue());
+            CustomFont.INSTANCE.font.setValue(font.getName());
 
             Command.send(new TextBuilder()
                     .append(ChatColor.Dark_Gray, "Changed font to")

@@ -11,7 +11,7 @@ public class TextManager {
     private static final CustomFont fontMod = CustomFont.INSTANCE;
 
     public static final FontRenderer defaultFontRenderer = Inferno.mc.fontRenderer;
-    public static CustomFontRenderer customFontRenderer = new CustomFontRenderer(new Font(fontMod.font.getValue(), fontMod.style.getValue().getStyle(), fontMod.size.getValue()), fontMod.antiAliasing.getValue(), fontMod.fractionalMetrics.getValue());
+    public static CustomFontRenderer customFontRenderer;
 
     public void editCustomFont(String name, int style, int size, boolean antiAlias, boolean fractionalMetrics) {
         customFontRenderer = new CustomFontRenderer(new Font(name, style, size), antiAlias, fractionalMetrics);

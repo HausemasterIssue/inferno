@@ -1,7 +1,11 @@
 package me.sxmurai.inferno.features.modules.client;
 
+import me.sxmurai.inferno.events.inferno.SettingChangeEvent;
+import me.sxmurai.inferno.features.gui.font.CustomFontRenderer;
 import me.sxmurai.inferno.features.settings.Setting;
+import me.sxmurai.inferno.managers.TextManager;
 import me.sxmurai.inferno.managers.modules.Module;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.awt.*;
 
@@ -18,6 +22,26 @@ public class CustomFont extends Module {
 
     public CustomFont() {
         INSTANCE = this;
+    }
+
+    @Override
+    protected void onActivated() {
+        this.createCustomFontInstance();
+    }
+
+    @SubscribeEvent
+    public void onSettingChange(SettingChangeEvent event) {
+        if (event.getConfigurable() instanceof CustomFont) {
+            this.createCustomFontInstance();
+        }
+    }
+
+    private void createCustomFontInstance() {
+        TextManager.customFontRenderer = new CustomFontRenderer(
+                new Font(this.font.getValue(), this.style.getValue().getStyle(), this.size.getValue()),
+                this.antiAliasing.getValue(),
+                this.fractionalMetrics.getValue()
+        );
     }
 
     public enum Style {
