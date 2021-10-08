@@ -90,7 +90,6 @@ public class ModuleManager {
         this.modules.add(new NoRender());
         this.modules.add(new Tracers());
         this.modules.add(new ViewClip());
-        this.modules.add(new VoidESP());
         this.modules.add(new Wireframes());
         this.modules.add(new Xray());
 
