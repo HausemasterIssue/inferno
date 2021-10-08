@@ -7,6 +7,8 @@ import java.util.function.Predicate;
 
 // @todo make it so the predicate doesnt need a param, another example of useless skidded code
 public class Setting<T> {
+    private Configurable configurable = null;
+
     private final String name;
     private T value;
     private final T defaultValue;
@@ -47,7 +49,7 @@ public class Setting<T> {
 
     public void setValue(T value) {
         this.value = value;
-        MinecraftForge.EVENT_BUS.post(new SettingChangeEvent(this));
+        MinecraftForge.EVENT_BUS.post(new SettingChangeEvent(this, this.configurable));
     }
 
     public T getDefaultValue() {
@@ -77,5 +79,14 @@ public class Setting<T> {
 
     public boolean isVisible() {
         return visibility == null || visibility.test(value);
+    }
+
+    public Setting setConfigurable(Configurable configurable) {
+        this.configurable = configurable;
+        return this;
+    }
+
+    public Configurable getConfigurable() {
+        return configurable;
     }
 }

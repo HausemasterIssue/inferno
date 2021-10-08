@@ -1,23 +1,20 @@
 package me.sxmurai.inferno.managers.modules;
 
 import me.sxmurai.inferno.events.inferno.ModuleToggledEvent;
-import me.sxmurai.inferno.features.Feature;
 import me.sxmurai.inferno.features.settings.Bind;
+import me.sxmurai.inferno.features.settings.Configurable;
 import me.sxmurai.inferno.features.settings.Setting;
 import net.minecraftforge.common.MinecraftForge;
 import org.lwjgl.input.Keyboard;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.util.ArrayList;
-import java.util.Arrays;
 
-public class Module extends Feature {
+public class Module extends Configurable {
     private final String name;
     private final String description;
     private final Category category;
 
-    protected final ArrayList<Setting> settings = new ArrayList<>();
     private final Bind bind = new Bind("Bind", Keyboard.KEY_NONE);
     private final Setting<Boolean> visible = new Setting<>("Visible", true);
 
@@ -33,19 +30,6 @@ public class Module extends Feature {
         this.bind.setValue(definition.bind());
         this.settings.add(this.bind);
         this.settings.add(this.visible);
-    }
-
-    public void registerSettings() {
-        Arrays.stream(this.getClass().getDeclaredFields())
-                .filter(field -> Setting.class.isAssignableFrom(field.getType()))
-                .forEach((field) -> {
-                    try {
-                        field.setAccessible(true);
-                        this.settings.add((Setting) field.get(this));
-                    } catch (IllegalAccessException | IllegalArgumentException e) {
-                        e.printStackTrace();
-                    }
-                });
     }
 
     public String getName() {
@@ -74,20 +58,6 @@ public class Module extends Feature {
 
     public void setVisible(boolean visible) {
         this.visible.setValue(visible);
-    }
-
-    public ArrayList<Setting> getSettings() {
-        return settings;
-    }
-
-    public <T> Setting<T> getSetting(String name) {
-        for (Setting setting : this.settings) {
-            if (setting.getName().equalsIgnoreCase(name)) {
-                return setting;
-            }
-        }
-
-        return null;
     }
 
     protected void onActivated() { }
