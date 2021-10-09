@@ -1,4 +1,4 @@
-package me.sxmurai.inferno.features.modules.player;
+package me.sxmurai.inferno.features.modules.miscellaneous;
 
 import me.sxmurai.inferno.events.mc.GuiChangeEvent;
 import me.sxmurai.inferno.events.mc.UpdateEvent;
@@ -18,8 +18,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
-@Module.Define(name = "AutoRespawn", description = "Does shit upon ur death", category = Module.Category.PLAYER)
-public class AutoRespawn extends Module {
+@Module.Define(name = "Respawn", description = "Automatically respawns you")
+public class Respawn extends Module {
     private static final FileManager FILES = FileManager.getInstance();
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd 'at' HH:mm:ss z");
 
@@ -32,7 +32,7 @@ public class AutoRespawn extends Module {
     private final Path deathCoordsFolder = FILES.getClientFolder().resolve("death_coords");
     private final Timer timer = new Timer();
 
-    public AutoRespawn() {
+    public Respawn() {
         if (!FILES.exists(this.deathCoordsFolder)) {
             FILES.mkDir(this.deathCoordsFolder, false);
         }

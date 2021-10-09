@@ -68,7 +68,7 @@ public class ModuleManager {
         this.modules.add(new AntiHunger());
         this.modules.add(new AntiLevitation());
         this.modules.add(new AntiVoid());
-        this.modules.add(new AutoRespawn());
+        this.modules.add(new Respawn());
         this.modules.add(new Blink());
         this.modules.add(new FastUse());
         this.modules.add(new Freecam());
