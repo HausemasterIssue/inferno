@@ -52,6 +52,7 @@ public class ModuleManager {
         this.modules.add(new PingSpoof());
 
         // movement
+        this.modules.add(new AutoWalk());
         this.modules.add(new ElytraFly());
         this.modules.add(new EntityControl());
         this.modules.add(new NoSlow());
