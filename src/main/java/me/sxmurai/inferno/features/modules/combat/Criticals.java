@@ -24,7 +24,14 @@ public class Criticals extends Module {
                 switch (mode.getValue()) {
                     case JUMP: {
                         mc.player.jump();
-                        mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX, mc.player.posY - 0.05, mc.player.posZ, false));
+                        mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX, mc.player.posY - 0.055, mc.player.posZ, false));
+                        mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX, mc.player.posY, mc.player.posZ, false));
+                        break;
+                    }
+
+                    case MINIJUMP: {
+                        mc.player.motionY = 0.2;
+                        mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX, mc.player.posY - 0.02, mc.player.posZ, false));
                         mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX, mc.player.posY, mc.player.posZ, false));
                         break;
                     }
@@ -48,6 +55,6 @@ public class Criticals extends Module {
     }
 
     public enum Mode {
-        PACKET, JUMP, BYPASS
+        PACKET, MINIJUMP, JUMP, BYPASS
     }
 }
