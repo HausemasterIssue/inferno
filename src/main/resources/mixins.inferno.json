@@ -24,6 +24,7 @@
     "render.entity.MixinRenderEnderCrystal",
     "render.entity.MixinRenderLivingBase",
     "render.entity.MixinRenderPlayer",
+    "render.gui.MixinGuiDisconnected",
     "render.gui.MixinGuiIngame",
     "render.gui.MixinGuiPlayerTabOverlay",
     "render.MixinItemRenderer",

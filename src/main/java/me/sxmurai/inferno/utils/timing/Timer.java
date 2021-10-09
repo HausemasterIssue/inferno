@@ -15,12 +15,16 @@ public class Timer {
         return System.nanoTime() - this.time >= ns;
     }
 
+    public long convertToNS(long time) {
+        return time * 1000000L;
+    }
+
+    public long getPassedTimeMs() {
+        return (System.nanoTime() - this.time) / 1000000L;
+    }
+
     public Timer reset() {
         this.time = System.nanoTime();
         return this;
-    }
-
-    public long convertToNS(long time) {
-        return time * 1000000L;
     }
 }

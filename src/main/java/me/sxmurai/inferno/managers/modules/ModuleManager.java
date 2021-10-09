@@ -50,6 +50,7 @@ public class ModuleManager {
         this.modules.add(new NoEntityTrace());
         this.modules.add(new NoHandshake());
         this.modules.add(new PingSpoof());
+        this.modules.add(new Reconnect());
 
         // movement
         this.modules.add(new AutoWalk());
