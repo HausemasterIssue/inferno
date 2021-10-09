@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MixinElytraSound {
     @Inject(method = "update", at = @At("HEAD"), cancellable = true)
     public void onUpdate(CallbackInfo info) {
-        if (ElytraFly.INSTANCE.isToggled() && !ElytraFly.INSTANCE.elytraSounds.getValue()) {
+        if (ElytraFly.INSTANCE.isToggled() && !ElytraFly.INSTANCE.sounds.getValue()) {
             info.cancel();
         }
     }

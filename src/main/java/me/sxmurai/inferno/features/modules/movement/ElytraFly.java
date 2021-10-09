@@ -1,5 +1,6 @@
 package me.sxmurai.inferno.features.modules.movement;
 
+import me.sxmurai.inferno.Inferno;
 import me.sxmurai.inferno.events.entity.MoveEvent;
 import me.sxmurai.inferno.events.entity.UpdateMoveEvent;
 import me.sxmurai.inferno.events.network.PacketEvent;
@@ -26,8 +27,8 @@ public class ElytraFly extends Module {
     public final Setting<Float> takeOffTimerAmount = new Setting<>("TakeOffTimer", 0.1f, 0.1f, 1.0f, (v) -> takeOff.getValue());
     public final Setting<Up> up = new Setting<>("GoUp", Up.MOTION);
     public final Setting<Float> fireworkDelay = new Setting<>("FireworkDelay", 2.0f, 1.0f, 5.0f, (v) -> this.up.getValue() == Up.FIREWORK);
-    public final Setting<Boolean> infiniteElytra = new Setting<>("InfiniteElytra", false);
-    public final Setting<Boolean> elytraSounds = new Setting<>("Sounds", true);
+    public final Setting<Boolean> infinite = new Setting<>("InfiniteElytra", false);
+    public final Setting<Boolean> sounds = new Setting<>("Sounds", true);
 
     private State state = State.IDLE;
     private boolean timerState = false;
@@ -112,9 +113,11 @@ public class ElytraFly extends Module {
                     return;
                 }
 
-                RotationUtils.Rotation rotation = RotationUtils.getDirectionalSpeed(speed.getValue());
-                mc.player.motionX = rotation.getYaw();
-                mc.player.motionZ = rotation.getPitch();
+                if (Inferno.speedManager.getSpeedKmh(true) <= this.speedLimit.getValue()) {
+                    RotationUtils.Rotation rotation = RotationUtils.getDirectionalSpeed(speed.getValue());
+                    mc.player.motionX = rotation.getYaw();
+                    mc.player.motionZ = rotation.getPitch();
+                }
 
                 if (mc.gameSettings.keyBindJump.isKeyDown()) {
                     if (this.up.getValue() == Up.MOTION) {
@@ -128,7 +131,7 @@ public class ElytraFly extends Module {
                 mc.player.connection.sendPacket(new CPacketPlayer.PositionRotation(pos.x, pos.y, pos.z, mc.player.rotationYaw, mc.player.rotationPitch, mc.player.onGround));
                 mc.player.setPosition(pos.x, pos.y, pos.z);
 
-                if (this.infiniteElytra.getValue()) {
+                if (this.infinite.getValue()) {
                     mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.START_FALL_FLYING));
                 }
             }
