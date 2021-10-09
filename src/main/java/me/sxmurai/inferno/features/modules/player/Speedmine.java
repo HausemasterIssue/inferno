@@ -4,6 +4,7 @@ import me.sxmurai.inferno.events.mc.UpdateEvent;
 import me.sxmurai.inferno.events.render.RenderEvent;
 import me.sxmurai.inferno.events.world.BlockDestroyEvent;
 import me.sxmurai.inferno.events.world.BlockHitEvent;
+import me.sxmurai.inferno.features.modules.miscellaneous.AutoEChestMiner;
 import me.sxmurai.inferno.features.settings.Setting;
 import me.sxmurai.inferno.managers.modules.Module;
 import me.sxmurai.inferno.utils.ColorUtils;
@@ -19,6 +20,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "Speedmine", description = "Goes vroom vroom when fucking someone", category = Module.Category.PLAYER)
 public class Speedmine extends Module {
+    public static Speedmine INSTANCE;
+
     public final Setting<Mode> mode = new Setting<>("Mode", Mode.PACKET);
     public final Setting<Float> distance = new Setting<>("Distance", 4.5f, 1.0f, 10.0f);
     public final Setting<Boolean> reset = new Setting<>("Reset", false);
@@ -32,6 +35,10 @@ public class Speedmine extends Module {
     private int oldSlot = -1;
     private BlockPos currentPos = null;
     private final Timer timer = new Timer();
+
+    public Speedmine() {
+        INSTANCE = this;
+    }
 
     @Override
     protected void onDeactivated() {
@@ -67,6 +74,13 @@ public class Speedmine extends Module {
 
     @SubscribeEvent
     public void onBlockHit(BlockHitEvent event) {
+        if (AutoEChestMiner.INSTANCE.isToggled()) {
+            AutoEChestMiner instance = AutoEChestMiner.INSTANCE;
+            if (instance.eChestPos != null && instance.eChestPos.equals(event.getPos()) && instance.mine.getValue() != AutoEChestMiner.Mine.PACKET) {
+                return;
+            }
+        }
+
         mc.playerController.isHittingBlock = this.reset.getValue();
 
         if (this.pickaxe.getValue() && !InventoryUtils.isHolding(ItemPickaxe.class, false)) {
