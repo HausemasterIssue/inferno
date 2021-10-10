@@ -27,7 +27,7 @@ minecraft {
     version = "1.12.2-14.23.5.2847"
     runDir = "run"
     mappings = "stable_39"
-    coreMod = "me.sxmurai.inferno.mixin.ForgeMixinLoader"
+    coreMod = "me.sxmurai.inferno.loader.ForgeMixinLoader"
     makeObfSourceJar = false
 }
 
@@ -84,7 +84,7 @@ jar {
                 'tweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
                 'TweakOrder': 0,
                 // 'FMLCorePluginContainsFMLMod': 'true',
-                'FMLCorePlugin': 'me.sxmurai.inferno.mixin.ForgeMixinLoader',
+                'FMLCorePlugin': 'me.sxmurai.inferno.loader.ForgeMixinLoader',
                 'ForceLoadAsMod': 'true',
                 'FMLAT': 'inferno_at.cfg'
         )
