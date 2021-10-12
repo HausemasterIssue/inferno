@@ -1,7 +1,7 @@
 package me.sxmurai.inferno.loader.mixins.render.entity;
 
 import me.sxmurai.inferno.client.Inferno;
-import me.sxmurai.inferno.client.modules.render.Nametags;
+import me.sxmurai.inferno.client.features.modules.render.Nametags;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import org.spongepowered.asm.mixin.Mixin;

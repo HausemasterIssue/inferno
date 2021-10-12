@@ -1,6 +1,6 @@
 package me.sxmurai.inferno.loader.mixins.world.blocks;
 
-import me.sxmurai.inferno.client.modules.movement.NoSlow;
+import me.sxmurai.inferno.client.features.modules.movement.NoSlow;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSoulSand;
 import net.minecraft.block.material.MapColor;

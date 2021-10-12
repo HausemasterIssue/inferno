@@ -2,7 +2,7 @@ package me.sxmurai.inferno.loader.mixins.input;
 
 import me.sxmurai.inferno.client.Inferno;
 import me.sxmurai.inferno.api.utils.Wrapper;
-import me.sxmurai.inferno.client.modules.movement.NoSlow;
+import me.sxmurai.inferno.client.features.modules.movement.NoSlow;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.settings.KeyBinding;
 import org.spongepowered.asm.mixin.Mixin;

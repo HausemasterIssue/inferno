@@ -1,7 +1,7 @@
 package me.sxmurai.inferno.loader.mixins.render.entity;
 
 import me.sxmurai.inferno.api.events.render.RenderModelEvent;
-import me.sxmurai.inferno.client.modules.render.CrystalModifier;
+import me.sxmurai.inferno.client.features.modules.render.CrystalModifier;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderEnderCrystal;

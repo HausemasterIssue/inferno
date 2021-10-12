@@ -2,7 +2,7 @@ package me.sxmurai.inferno.loader.mixins;
 
 import me.sxmurai.inferno.client.Inferno;
 import me.sxmurai.inferno.api.events.mc.GuiChangeEvent;
-import me.sxmurai.inferno.client.modules.player.MultiTask;
+import me.sxmurai.inferno.client.features.modules.player.MultiTask;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiScreen;

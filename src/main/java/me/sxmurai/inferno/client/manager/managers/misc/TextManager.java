@@ -1,8 +1,8 @@
 package me.sxmurai.inferno.client.manager.managers.misc;
 
 import me.sxmurai.inferno.client.Inferno;
-import me.sxmurai.inferno.client.gui.font.CustomFontRenderer;
-import me.sxmurai.inferno.client.modules.client.CustomFont;
+import me.sxmurai.inferno.client.features.gui.font.CustomFontRenderer;
+import me.sxmurai.inferno.client.features.modules.client.CustomFont;
 import me.sxmurai.inferno.client.manager.Manager;
 import net.minecraft.client.gui.FontRenderer;
 

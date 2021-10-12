@@ -2,9 +2,9 @@ package me.sxmurai.inferno.loader.mixins.render.entity;
 
 import com.google.common.base.Predicate;
 import me.sxmurai.inferno.client.Inferno;
-import me.sxmurai.inferno.client.modules.miscellaneous.NoEntityTrace;
-import me.sxmurai.inferno.client.modules.render.NoRender;
-import me.sxmurai.inferno.client.modules.render.ViewClip;
+import me.sxmurai.inferno.client.features.modules.miscellaneous.NoEntityTrace;
+import me.sxmurai.inferno.client.features.modules.render.NoRender;
+import me.sxmurai.inferno.client.features.modules.render.ViewClip;
 import me.sxmurai.inferno.api.utils.InventoryUtils;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.EntityRenderer;

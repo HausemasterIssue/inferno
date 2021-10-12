@@ -1,7 +1,7 @@
 package me.sxmurai.inferno.loader.mixins.world.blocks;
 
 import me.sxmurai.inferno.client.Inferno;
-import me.sxmurai.inferno.client.modules.miscellaneous.Avoid;
+import me.sxmurai.inferno.client.features.modules.miscellaneous.Avoid;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFire;
 import net.minecraft.block.material.Material;

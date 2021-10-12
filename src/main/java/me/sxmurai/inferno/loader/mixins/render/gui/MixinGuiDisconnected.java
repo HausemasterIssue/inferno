@@ -1,6 +1,6 @@
 package me.sxmurai.inferno.loader.mixins.render.gui;
 
-import me.sxmurai.inferno.client.modules.miscellaneous.Reconnect;
+import me.sxmurai.inferno.client.features.modules.miscellaneous.Reconnect;
 import me.sxmurai.inferno.client.manager.managers.commands.text.ChatColor;
 import me.sxmurai.inferno.api.utils.timing.Timer;
 import net.minecraft.client.gui.GuiButton;

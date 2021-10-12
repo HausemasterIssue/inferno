@@ -1,7 +1,7 @@
 package me.sxmurai.inferno.loader.mixins.render.gui;
 
 import me.sxmurai.inferno.client.Inferno;
-import me.sxmurai.inferno.client.modules.miscellaneous.ExtraTab;
+import me.sxmurai.inferno.client.features.modules.miscellaneous.ExtraTab;
 import me.sxmurai.inferno.client.manager.managers.commands.text.ChatColor;
 import net.minecraft.client.gui.GuiPlayerTabOverlay;
 import net.minecraft.client.network.NetworkPlayerInfo;

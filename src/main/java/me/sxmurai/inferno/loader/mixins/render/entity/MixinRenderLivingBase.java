@@ -1,7 +1,7 @@
 package me.sxmurai.inferno.loader.mixins.render.entity;
 
 import me.sxmurai.inferno.api.events.render.RenderModelEvent;
-import me.sxmurai.inferno.client.modules.render.Chams;
+import me.sxmurai.inferno.client.features.modules.render.Chams;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLivingBase;

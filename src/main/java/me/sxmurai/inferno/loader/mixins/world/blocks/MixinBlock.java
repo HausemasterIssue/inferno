@@ -1,7 +1,7 @@
 package me.sxmurai.inferno.loader.mixins.world.blocks;
 
 import me.sxmurai.inferno.client.Inferno;
-import me.sxmurai.inferno.client.modules.render.Xray;
+import me.sxmurai.inferno.client.features.modules.render.Xray;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;

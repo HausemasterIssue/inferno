@@ -2,7 +2,7 @@ package me.sxmurai.inferno.loader.mixins.input;
 
 import me.sxmurai.inferno.api.events.world.BlockDestroyEvent;
 import me.sxmurai.inferno.api.events.world.BlockHitEvent;
-import me.sxmurai.inferno.client.modules.player.Reach;
+import me.sxmurai.inferno.client.features.modules.player.Reach;
 import net.minecraft.client.multiplayer.PlayerControllerMP;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;

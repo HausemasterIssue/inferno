@@ -1,6 +1,6 @@
 package me.sxmurai.inferno.loader.mixins.world.sounds;
 
-import me.sxmurai.inferno.client.modules.movement.ElytraFly;
+import me.sxmurai.inferno.client.features.modules.movement.ElytraFly;
 import net.minecraft.client.audio.ElytraSound;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

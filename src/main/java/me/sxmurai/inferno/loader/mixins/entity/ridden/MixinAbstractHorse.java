@@ -1,6 +1,6 @@
 package me.sxmurai.inferno.loader.mixins.entity.ridden;
 
-import me.sxmurai.inferno.client.modules.movement.EntityControl;
+import me.sxmurai.inferno.client.features.modules.movement.EntityControl;
 import net.minecraft.entity.passive.AbstractHorse;
 import net.minecraft.entity.passive.EntityDonkey;
 import net.minecraft.entity.passive.EntityHorse;

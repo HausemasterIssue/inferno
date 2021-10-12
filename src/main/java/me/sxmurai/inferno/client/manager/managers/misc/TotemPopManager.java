@@ -6,7 +6,7 @@ import me.sxmurai.inferno.api.events.entity.TotemPopEvent;
 import me.sxmurai.inferno.api.events.mc.UpdateEvent;
 import me.sxmurai.inferno.api.events.network.ConnectionEvent;
 import me.sxmurai.inferno.api.events.network.SelfConnectionEvent;
-import me.sxmurai.inferno.client.modules.client.Notifications;
+import me.sxmurai.inferno.client.features.modules.client.Notifications;
 import me.sxmurai.inferno.client.manager.Manager;
 import me.sxmurai.inferno.client.manager.managers.commands.Command;
 import me.sxmurai.inferno.client.manager.managers.commands.text.ChatColor;

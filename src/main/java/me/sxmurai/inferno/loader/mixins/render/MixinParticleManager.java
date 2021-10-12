@@ -1,6 +1,6 @@
 package me.sxmurai.inferno.loader.mixins.render;
 
-import me.sxmurai.inferno.client.modules.render.NoRender;
+import me.sxmurai.inferno.client.features.modules.render.NoRender;
 import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;

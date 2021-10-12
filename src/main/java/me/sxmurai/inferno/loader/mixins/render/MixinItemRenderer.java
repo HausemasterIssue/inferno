@@ -1,7 +1,7 @@
 package me.sxmurai.inferno.loader.mixins.render;
 
-import me.sxmurai.inferno.client.modules.render.HandModifier;
-import me.sxmurai.inferno.client.modules.render.NoRender;
+import me.sxmurai.inferno.client.features.modules.render.HandModifier;
+import me.sxmurai.inferno.client.features.modules.render.NoRender;
 import me.sxmurai.inferno.api.utils.ColorUtils;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.GlStateManager;

@@ -1,6 +1,6 @@
 package me.sxmurai.inferno.loader.mixins.entity.ridden;
 
-import me.sxmurai.inferno.client.modules.movement.EntityControl;
+import me.sxmurai.inferno.client.features.modules.movement.EntityControl;
 import net.minecraft.entity.passive.EntityPig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

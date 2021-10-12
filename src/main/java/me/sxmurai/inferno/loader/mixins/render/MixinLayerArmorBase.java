@@ -1,6 +1,6 @@
 package me.sxmurai.inferno.loader.mixins.render;
 
-import me.sxmurai.inferno.client.modules.render.NoRender;
+import me.sxmurai.inferno.client.features.modules.render.NoRender;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.LayerArmorBase;
