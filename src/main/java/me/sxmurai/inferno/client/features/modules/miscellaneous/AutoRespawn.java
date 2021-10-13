@@ -19,7 +19,7 @@ import java.util.Date;
 import java.util.Objects;
 
 @Module.Define(name = "Respawn", description = "Automatically respawns you")
-public class Respawn extends Module {
+public class AutoRespawn extends Module {
     private static final FileManager FILES = FileManager.getInstance();
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd 'at' HH:mm:ss z");
 
@@ -32,7 +32,7 @@ public class Respawn extends Module {
     private final Path deathCoordsFolder = FILES.getClientFolder().resolve("death_coords");
     private final Timer timer = new Timer();
 
-    public Respawn() {
+    public AutoRespawn() {
         if (!FILES.exists(this.deathCoordsFolder)) {
             FILES.mkDir(this.deathCoordsFolder, false);
         }

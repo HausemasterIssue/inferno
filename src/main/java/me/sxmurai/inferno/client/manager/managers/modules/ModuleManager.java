@@ -67,7 +67,7 @@ public class ModuleManager extends ConfigurableManager<Module> {
         this.items.add(new AntiHunger());
         this.items.add(new AntiLevitation());
         this.items.add(new AntiVoid());
-        this.items.add(new Respawn());
+        this.items.add(new AutoRespawn());
         this.items.add(new Blink());
         this.items.add(new FastUse());
         this.items.add(new Freecam());
