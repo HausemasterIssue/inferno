@@ -42,8 +42,8 @@ public class Speed extends Module {
         }
     }
 
-    @SubscribeEvent
-    public void onUpdate(UpdateEvent event) {
+    @Override
+    public void onUpdate() {
         if (this.current == null || this.current.getMode() != this.mode.getValue()) {
             Optional<Mode> m = this.modes.stream().filter((mo) -> mo.getMode().equals(this.mode.getValue())).findFirst();
             if (m.isPresent()) {

@@ -2,7 +2,6 @@ package me.sxmurai.inferno.client.features.modules.combat;
 
 import me.sxmurai.inferno.client.Inferno;
 import me.sxmurai.inferno.api.events.entity.EntitySpawnEvent;
-import me.sxmurai.inferno.api.events.mc.UpdateEvent;
 import me.sxmurai.inferno.api.values.Value;
 import me.sxmurai.inferno.client.manager.managers.commands.text.ChatColor;
 import me.sxmurai.inferno.client.manager.managers.commands.text.TextBuilder;
@@ -35,8 +34,8 @@ public class AutoLog extends Module {
         }
     }
 
-    @SubscribeEvent
-    public void onUpdate(UpdateEvent event) {
+    @Override
+    public void onUpdate() {
         if (this.totems.getValue() && InventoryUtils.getCount(Items.TOTEM_OF_UNDYING, true, true) < this.totemAmount.getValue()) {
             this.log("You had less than " + this.totemAmount.getValue() + " totems!");
             return;

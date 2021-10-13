@@ -1,15 +1,13 @@
 package me.sxmurai.inferno.client.features.modules.combat;
 
-import me.sxmurai.inferno.api.values.Value;
-import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import me.sxmurai.inferno.api.utils.InventoryUtils;
 import me.sxmurai.inferno.api.utils.timing.TickTimer;
+import me.sxmurai.inferno.api.values.Value;
+import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.client.CPacketPlayerDigging;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 @Module.Define(name = "BowSpam", description = "Becomes annoying and spams your bow", category = Module.Category.COMBAT)
 public class BowSpam extends Module {
@@ -19,12 +17,8 @@ public class BowSpam extends Module {
 
     private final TickTimer timer = new TickTimer();
 
-    @SubscribeEvent
-    public void onTick(TickEvent.ClientTickEvent event) {
-        if (Module.fullNullCheck()) {
-            return;
-        }
-
+    @Override
+    public void onTick() {
         this.timer.tick();
 
         ItemStack active = mc.player.getActiveItemStack();

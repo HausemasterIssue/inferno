@@ -27,8 +27,8 @@ public class EntityControl extends Module {
         INSTANCE = this;
     }
 
-    @SubscribeEvent
-    public void onUpdate(UpdateEvent event) {
+    @Override
+    public void onUpdate() {
         if (this.maxJumpPower.getValue()) {
             mc.player.horseJumpPower = 1.0f;
             mc.player.horseJumpPowerCounter = -10;

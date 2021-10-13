@@ -1,13 +1,11 @@
 package me.sxmurai.inferno.client.features.modules.player;
 
-import me.sxmurai.inferno.api.values.Value;
-import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import me.sxmurai.inferno.api.utils.InventoryUtils;
 import me.sxmurai.inferno.api.utils.timing.TickTimer;
+import me.sxmurai.inferno.api.values.Value;
+import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 @Module.Define(name = "FastUse", description = "Lets you use things fast", category = Module.Category.PLAYER)
 public class FastUse extends Module {
@@ -21,12 +19,8 @@ public class FastUse extends Module {
 
     private final TickTimer timer = new TickTimer();
 
-    @SubscribeEvent
-    public void onTick(TickEvent.ClientTickEvent event) {
-        if (Module.fullNullCheck()) {
-            return;
-        }
-
+    @Override
+    public void onTick() {
         this.timer.tick();
         if (!this.timer.passed(this.delay.getValue())) {
             return;

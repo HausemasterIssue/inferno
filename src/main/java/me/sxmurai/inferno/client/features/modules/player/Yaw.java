@@ -1,9 +1,7 @@
 package me.sxmurai.inferno.client.features.modules.player;
 
-import me.sxmurai.inferno.api.events.mc.UpdateEvent;
 import me.sxmurai.inferno.api.values.Value;
 import me.sxmurai.inferno.client.manager.managers.modules.Module;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "Yaw", description = "Forces you to look in a certain direction", category = Module.Category.PLAYER)
 public class Yaw extends Module {
@@ -12,8 +10,8 @@ public class Yaw extends Module {
     public final Value<Boolean> lockPitch = new Value<>("LockPitch", false);
     public final Value<Float> pitch = new Value<>("Pitch", 0.0f, -90.0f, 90.0f, (v) -> lockPitch.getValue());
 
-    @SubscribeEvent
-    public void onUpdate(UpdateEvent event) {
+    @Override
+    public void onUpdate() {
         mc.player.rotationYaw = this.direction.getValue() != Direction.CUSTOM ?
                 this.direction.getValue().yaw :
                 this.yaw.getValue();

@@ -15,8 +15,8 @@ public class ReverseStep extends Module {
     public final Value<Boolean> liquids = new Value<>("Liquids", false);
     public final Value<Boolean> strict = new Value<>("Strict", false);
 
-    @SubscribeEvent
-    public void onUpdate(UpdateEvent event) {
+    @Override
+    public void onUpdate() {
         if (mc.player.onGround && !this.shouldStop()) {
             if (!this.liquids.getValue() && (mc.player.isInWater() || mc.player.isInLava())) {
                 return;

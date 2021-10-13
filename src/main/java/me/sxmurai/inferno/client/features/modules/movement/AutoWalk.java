@@ -18,8 +18,8 @@ public class AutoWalk extends Module {
         }
     }
 
-    @SubscribeEvent
-    public void onUpdate(UpdateEvent event) {
+    @Override
+    public void onUpdate() {
         if (this.mode.getValue() == Mode.VANILLA) {
             KeyBinding.setKeyBindState(mc.gameSettings.keyBindForward.keyCode, true);
         }

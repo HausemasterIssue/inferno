@@ -33,12 +33,8 @@ public class Offhand extends Module {
 
     private Item offhandItem;
 
-    @SubscribeEvent
-    public void onTick(TickEvent.ClientTickEvent event) {
-        if (Module.fullNullCheck()) {
-            return;
-        }
-
+    @Override
+    public void onTick() {
         this.timer.tick();
         if (this.timer.passed(this.delay.getValue()) && !this.groups.isEmpty()) {
             if (!this.guis.getValue() && mc.currentScreen != null) {

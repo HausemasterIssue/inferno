@@ -39,8 +39,8 @@ public class AntiAFK extends Module {
         this.requiredSneakTicks = 0;
     }
 
-    @SubscribeEvent
-    public void onUpdate(UpdateEvent event) {
+    @Override
+    public void onUpdate() {
         if (this.sneak.getValue()) {
             ++this.sneakTicks;
             if (this.sneakTicks >= this.requiredSneakTicks) {

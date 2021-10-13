@@ -57,12 +57,8 @@ public class Surround extends Module {
         }
     }
 
-    @SubscribeEvent
-    public void onTick(TickEvent.ClientTickEvent event) {
-        if (Module.fullNullCheck()) {
-            return;
-        }
-
+    @Override
+    public void onTick() {
         if (this.placed >= this.blocks.getValue()) {
             this.placed = 0;
         }

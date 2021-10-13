@@ -1,6 +1,5 @@
 package me.sxmurai.inferno.client.features.modules.player;
 
-import me.sxmurai.inferno.api.events.mc.UpdateEvent;
 import me.sxmurai.inferno.api.events.network.PacketEvent;
 import me.sxmurai.inferno.api.events.network.SelfConnectionEvent;
 import me.sxmurai.inferno.api.values.Value;
@@ -63,8 +62,8 @@ public class Blink extends Module {
         }
     }
 
-    @SubscribeEvent
-    public void onUpdate(UpdateEvent event) {
+    @Override
+    public void onUpdate() {
         switch (mode.getValue()) {
             case TIME: {
                 if (timer.passedS(time.getValue().doubleValue())) {

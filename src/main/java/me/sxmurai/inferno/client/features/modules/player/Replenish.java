@@ -8,7 +8,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.Map;
 import java.util.Queue;
@@ -37,12 +36,8 @@ public class Replenish extends Module {
         this.hotbar.clear();
     }
 
-    @SubscribeEvent
-    public void onTick(TickEvent.ClientTickEvent event) {
-        if (Module.fullNullCheck()) {
-            return;
-        }
-
+    @Override
+    public void onTick() {
         this.timer.tick();
         if (this.timer.passed(this.delay.getValue()) && !this.groups.isEmpty()) {
             if (!this.guis.getValue() && mc.currentScreen != null) {

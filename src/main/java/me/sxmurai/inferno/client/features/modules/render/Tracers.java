@@ -25,52 +25,50 @@ public class Tracers extends Module {
     public final Value<Boolean> passive = new Value<>("Passive", false);
     public final Value<Boolean> hostile = new Value<>("Hostile", false);
 
-    @SubscribeEvent
-    public void onRender(RenderEvent event) {
-        if (!Module.fullNullCheck() && event.getType() == RenderEvent.Type.WORLD) {
-            for (Entity entity : mc.world.loadedEntityList) {
-                if (!EntityUtils.isLiving(entity) || entity == mc.player || mc.player.getDistance(entity) > distance.getValue()) {
-                    continue;
-                }
-
-                if (invisible.getValue() && EntityUtils.isInvisible((EntityLivingBase) entity)) {
-                    continue;
-                }
-
-                if (EntityUtils.isPlayer(entity)) {
-                    if (!players.getValue()) {
-                        continue;
-                    }
-
-                    if (!friends.getValue() && Inferno.friendManager.isFriend((EntityPlayer) entity)) {
-                        continue;
-                    }
-                }
-
-                if (!passive.getValue() && EntityUtils.isPassive(entity)) {
-                    continue;
-                }
-
-                if (!hostile.getValue() && EntityUtils.isHostile(entity)) {
-                    continue;
-                }
-
-                float r, g, b;
-                if (entity instanceof EntityPlayer && Inferno.friendManager.isFriend((EntityPlayer) entity)) {
-                    r = 0.0f;
-                    g = 0.5f;
-                    b = 1.0f;
-                } else  {
-                    float distance = mc.player.getDistance(entity) / 20.0f;
-                    r = 2.0f - distance;
-                    g = distance;
-                    b = 0.0f;
-                }
-
-                GlStateManager.pushMatrix();
-                RenderUtils.drawTracer(entity, target.getValue().run(entity), width.getValue(), r, g, b, 1.0f, smooth.getValue(), stem.getValue());
-                GlStateManager.popMatrix();
+    @Override
+    public void onRender3D(float partialTicks) {
+        for (Entity entity : mc.world.loadedEntityList) {
+            if (!EntityUtils.isLiving(entity) || entity == mc.player || mc.player.getDistance(entity) > distance.getValue()) {
+                continue;
             }
+
+            if (invisible.getValue() && EntityUtils.isInvisible((EntityLivingBase) entity)) {
+                continue;
+            }
+
+            if (EntityUtils.isPlayer(entity)) {
+                if (!players.getValue()) {
+                    continue;
+                }
+
+                if (!friends.getValue() && Inferno.friendManager.isFriend((EntityPlayer) entity)) {
+                    continue;
+                }
+            }
+
+            if (!passive.getValue() && EntityUtils.isPassive(entity)) {
+                continue;
+            }
+
+            if (!hostile.getValue() && EntityUtils.isHostile(entity)) {
+                continue;
+            }
+
+            float r, g, b;
+            if (entity instanceof EntityPlayer && Inferno.friendManager.isFriend((EntityPlayer) entity)) {
+                r = 0.0f;
+                g = 0.5f;
+                b = 1.0f;
+            } else  {
+                float distance = mc.player.getDistance(entity) / 20.0f;
+                r = 2.0f - distance;
+                g = distance;
+                b = 0.0f;
+            }
+
+            GlStateManager.pushMatrix();
+            RenderUtils.drawTracer(entity, target.getValue().run(entity), width.getValue(), r, g, b, 1.0f, smooth.getValue(), stem.getValue());
+            GlStateManager.popMatrix();
         }
     }
 

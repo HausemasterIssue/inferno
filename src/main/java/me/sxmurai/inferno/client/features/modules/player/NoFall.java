@@ -1,14 +1,12 @@
 package me.sxmurai.inferno.client.features.modules.player;
 
-import me.sxmurai.inferno.api.events.mc.UpdateEvent;
+import me.sxmurai.inferno.api.utils.InventoryUtils;
 import me.sxmurai.inferno.api.values.Value;
 import me.sxmurai.inferno.client.manager.managers.modules.Module;
-import me.sxmurai.inferno.api.utils.InventoryUtils;
 import net.minecraft.block.BlockWeb;
 import net.minecraft.init.Items;
 import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.util.EnumHand;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "NoFall", description = "Tries to negate fall damage", category = Module.Category.PLAYER)
 public class NoFall extends Module {
@@ -27,8 +25,8 @@ public class NoFall extends Module {
         this.oldPitch = -1.0f;
     }
 
-    @SubscribeEvent
-    public void onUpdate(UpdateEvent event) {
+    @Override
+    public void onUpdate() {
         if (mc.player.fallDistance > this.distance.getValue()) {
             if (this.mode.getValue() == Mode.PACKET) {
                 mc.player.connection.sendPacket(new CPacketPlayer(true));

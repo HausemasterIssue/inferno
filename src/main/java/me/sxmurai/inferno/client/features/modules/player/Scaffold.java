@@ -1,18 +1,16 @@
 package me.sxmurai.inferno.client.features.modules.player;
 
-import me.sxmurai.inferno.api.events.mc.UpdateEvent;
-import me.sxmurai.inferno.api.values.Value;
-import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import me.sxmurai.inferno.api.utils.BlockUtil;
 import me.sxmurai.inferno.api.utils.InventoryUtils;
 import me.sxmurai.inferno.api.utils.data.Pair;
 import me.sxmurai.inferno.api.utils.timing.Timer;
+import me.sxmurai.inferno.api.values.Value;
+import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedDeque;
@@ -52,8 +50,8 @@ public class Scaffold extends Module {
         blocks.clear();
     }
 
-    @SubscribeEvent
-    public void onUpdate(UpdateEvent event) {
+    @Override
+    public void onUpdate() {
         if (!mc.gameSettings.keyBindJump.pressed) {
             timer.reset();
         }

@@ -18,8 +18,8 @@ public class Timer extends Module {
         }
     }
 
-    @SubscribeEvent
-    public void onUpdate(UpdateEvent event) {
+    @Override
+    public void onUpdate() {
     	if (sync.getValue()) {
             mc.timer.tickLength = 1000.0f / Inferno.serverManager.getTps();
     	} else {

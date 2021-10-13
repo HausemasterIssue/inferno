@@ -9,6 +9,7 @@ import me.sxmurai.inferno.api.events.network.PacketEvent;
 import me.sxmurai.inferno.api.events.network.SelfConnectionEvent;
 import me.sxmurai.inferno.api.events.render.RenderEvent;
 import me.sxmurai.inferno.api.utils.Wrapper;
+import me.sxmurai.inferno.client.Inferno;
 import me.sxmurai.inferno.client.manager.Manager;
 import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import net.minecraft.client.renderer.GlStateManager;
@@ -21,6 +22,7 @@ import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent;
 import org.lwjgl.opengl.GL11;
 
@@ -39,6 +41,27 @@ public class EventManager extends Manager {
     public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         if (!Wrapper.fullNullCheck() && event.getEntityLiving() == mc.player) {
             MinecraftForge.EVENT_BUS.post(new UpdateEvent());
+
+            for (Module module : Inferno.moduleManager.getModules()) {
+                if (!module.isToggled()) {
+                    continue;
+                }
+
+                module.onUpdate();
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onTick(TickEvent.ClientTickEvent event) {
+        if (!Wrapper.fullNullCheck()) {
+            for (Module module : Inferno.moduleManager.getModules()) {
+                if (!module.isToggled()) {
+                    continue;
+                }
+
+                module.onTick();
+            }
         }
     }
 
@@ -88,6 +111,16 @@ public class EventManager extends Manager {
         GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
         GlStateManager.shadeModel(GL11.GL_SMOOTH);
         GlStateManager.disableDepth();
+
+        for (Module module : Inferno.moduleManager.getModules()) {
+            if (!module.isToggled()) {
+                continue;
+            }
+
+            mc.profiler.startSection("rw_" + module.getName());
+            module.onRender3D(event.getPartialTicks());
+            mc.profiler.endStartSection("rw_" + module.getName());
+        }
 
         MinecraftForge.EVENT_BUS.post(new RenderEvent(RenderEvent.Type.WORLD));
 

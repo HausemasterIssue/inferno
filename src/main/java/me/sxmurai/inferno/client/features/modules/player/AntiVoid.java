@@ -1,10 +1,8 @@
 package me.sxmurai.inferno.client.features.modules.player;
 
-import me.sxmurai.inferno.api.events.mc.UpdateEvent;
 import me.sxmurai.inferno.api.values.Value;
 import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import net.minecraft.network.play.client.CPacketPlayer;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "AntiVoid", description = "Tries to get you out of the void", category = Module.Category.PLAYER)
 public class AntiVoid extends Module {
@@ -14,8 +12,8 @@ public class AntiVoid extends Module {
     public final Value<Boolean> packet = new Value<>("Packet", true, (v) -> mode.getValue() == Mode.TELEPORT);
     public final Value<Integer> teleportAmount = new Value<>("TeleportAmount", 2, 1, 10, (v) -> mode.getValue() == Mode.TELEPORT);
 
-    @SubscribeEvent
-    public void onUpdate(UpdateEvent event) {
+    @Override
+    public void onUpdate() {
         if (mc.player.posY <= 0.0) {
             switch (this.mode.getValue()) {
                 case FLOAT: {

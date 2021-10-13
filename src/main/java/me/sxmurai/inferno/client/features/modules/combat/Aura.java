@@ -1,11 +1,10 @@
 package me.sxmurai.inferno.client.features.modules.combat;
 
-import me.sxmurai.inferno.client.Inferno;
-import me.sxmurai.inferno.api.events.mc.UpdateEvent;
-import me.sxmurai.inferno.api.values.Value;
-import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import me.sxmurai.inferno.api.utils.EntityUtils;
 import me.sxmurai.inferno.api.utils.InventoryUtils;
+import me.sxmurai.inferno.api.values.Value;
+import me.sxmurai.inferno.client.Inferno;
+import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,7 +13,6 @@ import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemSword;
 import net.minecraft.network.play.client.CPacketUseEntity;
 import net.minecraft.util.EnumHand;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "Aura", description = "Attacks things around you", category = Module.Category.COMBAT)
 public class Aura extends Module {
@@ -46,10 +44,10 @@ public class Aura extends Module {
         this.oldSlot = -1;
     }
 
-    @SubscribeEvent
-    public void onUpdate(UpdateEvent event) {
-        findTarget();
-        if (target == null || mc.player.getCooledAttackStrength(0.0f) != 1.0f) {
+    @Override
+    public void onUpdate() {
+        this.findTarget();
+        if (target == null) {
             if (this.oldSlot != -1) {
                 InventoryUtils.switchTo(this.oldSlot, false);
             }
@@ -73,15 +71,17 @@ public class Aura extends Module {
             Inferno.rotationManager.look(this.target);
         }
 
-        if (this.packet.getValue()) {
-            mc.player.connection.sendPacket(new CPacketUseEntity(this.target));
-            mc.player.resetCooldown();
-        } else {
-            mc.playerController.attackEntity(mc.player, this.target);
-        }
+        if (mc.player.getCooledAttackStrength(0.0f) != 1.0f) {
+            if (this.packet.getValue()) {
+                mc.player.connection.sendPacket(new CPacketUseEntity(this.target));
+                mc.player.resetCooldown();
+            } else {
+                mc.playerController.attackEntity(mc.player, this.target);
+            }
 
-        if (this.swing.getValue()) {
-            mc.player.swingArm(EnumHand.MAIN_HAND);
+            if (this.swing.getValue()) {
+                mc.player.swingArm(EnumHand.MAIN_HAND);
+            }
         }
     }
 

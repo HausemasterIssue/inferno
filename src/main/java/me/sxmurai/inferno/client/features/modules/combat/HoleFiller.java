@@ -39,8 +39,8 @@ public class HoleFiller extends Module {
         this.blocks.clear();
     }
 
-    @SubscribeEvent
-    public void onUpdate(UpdateEvent event) {
+    @Override
+    public void onTick() {
         int slot = InventoryUtils.getHotbarBlockSlot(Blocks.OBSIDIAN, false);
         if (slot == -1) {
             this.toggle();

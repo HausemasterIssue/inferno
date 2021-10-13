@@ -48,8 +48,8 @@ public class Freecam extends Module {
         }
     }
 
-    @SubscribeEvent
-    public void onUpdate(UpdateEvent event) {
+    @Override
+    public void onUpdate() {
         mc.player.capabilities.isFlying = true;
         mc.player.noClip = true;
 

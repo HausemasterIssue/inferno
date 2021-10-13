@@ -4,6 +4,7 @@ import me.sxmurai.inferno.api.events.inferno.ModuleToggledEvent;
 import me.sxmurai.inferno.api.values.Bind;
 import me.sxmurai.inferno.api.values.Configurable;
 import me.sxmurai.inferno.api.values.Value;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraftforge.common.MinecraftForge;
 import org.lwjgl.input.Keyboard;
 
@@ -86,6 +87,10 @@ public class Module extends Configurable {
     public boolean isToggled() {
         return toggled;
     }
+
+    public void onTick() { }
+    public void onUpdate() { }
+    public void onRender3D(float partialTicks) { }
 
     @Retention(RetentionPolicy.RUNTIME)
     public @interface Define {

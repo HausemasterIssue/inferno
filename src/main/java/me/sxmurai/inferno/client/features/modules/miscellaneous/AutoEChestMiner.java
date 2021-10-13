@@ -1,20 +1,18 @@
 package me.sxmurai.inferno.client.features.modules.miscellaneous;
 
-import me.sxmurai.inferno.client.Inferno;
-import me.sxmurai.inferno.api.events.mc.UpdateEvent;
-import me.sxmurai.inferno.client.features.modules.player.Speedmine;
-import me.sxmurai.inferno.api.values.Value;
-import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import me.sxmurai.inferno.api.utils.BlockUtil;
 import me.sxmurai.inferno.api.utils.InventoryUtils;
 import me.sxmurai.inferno.api.utils.RotationUtils;
 import me.sxmurai.inferno.api.utils.timing.TickTimer;
+import me.sxmurai.inferno.api.values.Value;
+import me.sxmurai.inferno.client.Inferno;
+import me.sxmurai.inferno.client.features.modules.player.Speedmine;
+import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.List;
 
@@ -44,8 +42,8 @@ public class AutoEChestMiner extends Module {
         this.timer.reset();
     }
 
-    @SubscribeEvent
-    public void onUpdate(UpdateEvent event) {
+    @Override
+    public void onTick() {
         this.timer.tick();
 
         if (this.eChestPos != null) {

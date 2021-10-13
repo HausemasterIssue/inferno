@@ -1,16 +1,14 @@
 package me.sxmurai.inferno.client.features.modules.player;
 
-import me.sxmurai.inferno.api.events.mc.UpdateEvent;
-import me.sxmurai.inferno.api.events.render.RenderEvent;
 import me.sxmurai.inferno.api.events.world.BlockDestroyEvent;
 import me.sxmurai.inferno.api.events.world.BlockHitEvent;
-import me.sxmurai.inferno.client.features.modules.miscellaneous.AutoEChestMiner;
-import me.sxmurai.inferno.api.values.Value;
-import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import me.sxmurai.inferno.api.utils.ColorUtils;
 import me.sxmurai.inferno.api.utils.InventoryUtils;
 import me.sxmurai.inferno.api.utils.RenderUtils;
 import me.sxmurai.inferno.api.utils.timing.Timer;
+import me.sxmurai.inferno.api.values.Value;
+import me.sxmurai.inferno.client.features.modules.miscellaneous.AutoEChestMiner;
+import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.network.play.client.CPacketPlayerDigging;
 import net.minecraft.util.EnumHand;
@@ -51,8 +49,8 @@ public class Speedmine extends Module {
         this.timer.reset();
     }
 
-    @SubscribeEvent
-    public void onUpdate(UpdateEvent event) {
+    @Override
+    public void onUpdate() {
         if (this.currentPos != null && mc.player.getDistance(this.currentPos.x, this.currentPos.y, this.currentPos.z) > this.distance.getValue()) {
             this.currentPos = null;
             this.doSwitchBack();
@@ -64,8 +62,8 @@ public class Speedmine extends Module {
         }
     }
 
-    @SubscribeEvent
-    public void onRender(RenderEvent event) {
+    @Override
+    public void onRender3D(float partialTicks) {
         if (!Module.fullNullCheck() && this.currentPos != null && this.render.getValue()) {
             boolean passed = this.timer.passedMs(2000L);
             RenderUtils.drawFilledBox(new AxisAlignedBB(this.currentPos).offset(RenderUtils.screen()), ColorUtils.toRGBA(passed ? 0 : 255, passed ? 255 : 0, 0, 80));

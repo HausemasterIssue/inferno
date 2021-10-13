@@ -19,8 +19,8 @@ public class PingSpoof extends Module {
     private final Timer timer = new Timer();
     private boolean pause = false;
 
-    @SubscribeEvent
-    public void onUpdate(UpdateEvent event) {
+    @Override
+    public void onUpdate() {
         if (this.timer.passedS(this.delay.getValue())) {
             this.timer.reset();
             this.pause = true;

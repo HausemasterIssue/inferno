@@ -78,8 +78,8 @@ public class Burrow extends Module {
         hand = EnumHand.MAIN_HAND;
     }
 
-    @SubscribeEvent
-    public void onUpdate(UpdateEvent event) {
+    @Override
+    public void onUpdate() {
         if (origin != null) {
             switch (mode.getValue()) {
                 case INSTANT: {

@@ -1,19 +1,16 @@
 package me.sxmurai.inferno.client.features.modules.render;
 
-import me.sxmurai.inferno.client.Inferno;
-import me.sxmurai.inferno.api.events.mc.UpdateEvent;
-import me.sxmurai.inferno.api.events.render.RenderEvent;
-import me.sxmurai.inferno.api.values.Value;
-import me.sxmurai.inferno.client.manager.managers.misc.HoleManager;
-import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import me.sxmurai.inferno.api.utils.BlockUtil;
 import me.sxmurai.inferno.api.utils.ColorUtils;
 import me.sxmurai.inferno.api.utils.RenderUtils;
 import me.sxmurai.inferno.api.utils.timing.TickTimer;
+import me.sxmurai.inferno.api.values.Value;
+import me.sxmurai.inferno.client.Inferno;
+import me.sxmurai.inferno.client.manager.managers.misc.HoleManager;
+import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +36,8 @@ public class HoleESP extends Module {
     private final TickTimer timer = new TickTimer();
     private List<BlockPos> voids = new ArrayList<>();
 
-    @SubscribeEvent
-    public void onUpdate(UpdateEvent event) {
+    @Override
+    public void onUpdate() {
         if (this.voidHoles.getValue()) {
             this.timer.tick();
 
@@ -56,8 +53,8 @@ public class HoleESP extends Module {
         }
     }
 
-    @SubscribeEvent
-    public void onRender(RenderEvent event) {
+    @Override
+    public void onRender3D(float partialTicks) {
         if (!Module.fullNullCheck()) {
             if (!Inferno.holeManager.getHoles().isEmpty()) {
                 for (HoleManager.Hole hole : Inferno.holeManager.getHoles()) {
