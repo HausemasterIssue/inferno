@@ -12,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemFood;
+import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.network.play.server.SPacketDestroyEntities;
 import net.minecraft.network.play.server.SPacketSoundEffect;
 import net.minecraft.util.EnumHand;
@@ -81,6 +82,15 @@ public class AutoCrystal extends Module {
     private EnumHand hand = EnumHand.MAIN_HAND;
 
     @SubscribeEvent
+    public void onPacketSend(PacketEvent.Send event) {
+        if (!Module.fullNullCheck() && event.getPacket() instanceof CPacketPlayer) {
+            if (((CPacketPlayer) event.getPacket()).rotating) {
+                Inferno.rotationManager.setRotations(this.rotation.getYaw(), this.rotation.getPitch());
+            }
+        }
+    }
+
+    @SubscribeEvent
     public void onPacketReceive(PacketEvent.Receive event) {
         if (!Module.fullNullCheck() && this.inhibit.getValue()) {
             if (event.getPacket() instanceof SPacketSoundEffect) {
@@ -131,115 +141,6 @@ public class AutoCrystal extends Module {
             return;
         }
 
-        this.doAutoCrystal();
-    }
-
-    private void doAutoCrystal() {
-        if (this.placeTimer.passed(this.placeDelay.getValue())) {
-            this.doPlace();
-        }
-
-        if (this.destroyTimer.passed(this.destroyDelay.getValue())) {
-            this.doDestroy();
-        }
-    }
-
-    private void doPlace() {
-        while (!this.positions.isEmpty()) {
-            BlockPos pos = this.positions.poll();
-            if (pos == null) {
-                break;
-            }
-
-            double dist = mc.player.getDistance(pos.x, pos.y, pos.z);
-            if (dist > this.placeRange.getValue() || !BlockUtil.canSeePos(pos) && dist > this.placeWallRange.getValue()) {
-                continue;
-            }
-
-            if (!BlockUtil.canCrystalBePlacedAt(pos, this.placeType.getValue() == Place.PROTOCOL)) {
-                continue;
-            }
-
-            Result result = this.calculatePlace(pos, this.target);
-            if (result == null) {
-                continue;
-            }
-
-            this.placeTimer.reset();
-            this.place(this.currentPos = pos);
-        }
-    }
-
-    private void place(BlockPos pos) {
-        if (this.rotate.getValue() == Rotate.PLACE || this.rotate.getValue() == Rotate.BOTH) {
-            RotationUtils.Rotation rotation = RotationUtils.calcRotations(mc.player.getPositionEyes(mc.getRenderPartialTicks()), new Vec3d(pos.x + 0.5, pos.y - 0.5, pos.z + 0.5));
-
-            this.rotation.setYaw(rotation.getYaw());
-            this.rotation.setPitch(rotation.getPitch());
-        }
-
-
-    }
-
-    private void doDestroy() {
-
-    }
-
-    private void destroy(EntityEnderCrystal crystal) {
-
-    }
-
-    private Result calculatePlace(BlockPos pos, EntityPlayer currentTarget) {
-        EntityPlayer t = currentTarget;
-        float damage = 0.0f;
-
-        float selfDamage = DamageUtils.calculateDamage(pos.x + 0.5, pos.y + 1.0, pos.z + 0.5, 6.0f, false, mc.player);
-        if (!this.suicide.getValue()) {
-            if (selfDamage + 0.5f > EntityUtils.getHealth(mc.player) || selfDamage + 0.5f > this.placeMaxLocal.getValue()) {
-                return null;
-            }
-        }
-
-        float targetDamage = 0.0f;
-        if (t != null) {
-            targetDamage = DamageUtils.calculateDamage(pos.x + 0.5, pos.y + 1.0, pos.z + 0.5, 6.0f, false, t);
-            if (targetDamage < this.placeMinDamage.getValue() || selfDamage < targetDamage) {
-                if (this.priority.getValue() != Priority.DAMAGE) {
-                    return null;
-                }
-            }
-        }
-
-        for (EntityPlayer player : mc.world.playerEntities) {
-            if (player == null || player == mc.player || mc.player.getDistance(player) > this.targetRange.getValue() || Inferno.friendManager.isFriend(player)) {
-                continue;
-            }
-
-            float playerDamage = DamageUtils.calculateDamage(pos.x + 0.5, pos.y + 1.0, pos.z + 0.5, 6.0f, false, player);
-
-            if (Inferno.friendManager.isFriend(player)) {
-                if (this.noFriendPop.getValue() == NoFriendPop.PLACE || this.noFriendPop.getValue() == NoFriendPop.BOTH) {
-                    if (!Inferno.friendManager.isFriend(player)) {
-                        continue;
-                    }
-
-                    if (playerDamage + 0.5f > targetDamage || playerDamage + 0.5f > EntityUtils.getHealth(player)) {
-                        continue;
-                    }
-                }
-            } else {
-                if (this.priority.getValue() != Priority.DAMAGE) {
-                    continue;
-                }
-
-                if (playerDamage > EntityUtils.getHealth(player) || playerDamage < targetDamage) {
-                    t = player;
-                    targetDamage = playerDamage;
-                }
-            }
-        }
-
-        return new Result(pos, t, damage);
     }
 
     private boolean check() {
