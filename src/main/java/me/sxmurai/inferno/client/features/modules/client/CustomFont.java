@@ -18,7 +18,7 @@ public class CustomFont extends Module {
     public final Value<Style> style = new Value<>("Style", Style.PLAIN);
     public final Value<Integer> size = new Value<>("Size", 18);
     public final Value<Boolean> antiAliasing = new Value<>("AntiAliasing", true);
-    public final Value<Boolean> fractionalMetrics = new Value<>("FractionMetrics", false);
+    public final Value<Boolean> fractionalMetrics = new Value<>("FractionMetrics", true);
 
     public CustomFont() {
         INSTANCE = this;
