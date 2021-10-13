@@ -1,25 +1,22 @@
-package me.sxmurai.inferno.client.features.gui.hud;
+package me.sxmurai.inferno.client.manager.managers.hud;
 
-import me.sxmurai.inferno.api.utils.Wrapper;
+import me.sxmurai.inferno.api.values.Configurable;
 import me.sxmurai.inferno.api.values.Value;
 import net.minecraft.client.gui.ScaledResolution;
 
-import java.util.ArrayList;
-
-public abstract class HUDComponent extends Wrapper {
+public abstract class HudComponent extends Configurable {
     protected final String name;
-    protected float x = -1.0f, y = -1.0f;
+    protected float x = 2.0f, y = 2.0f;
     protected float width, height;
-    protected boolean hidden = true;
 
-    private final ArrayList<Value> values = new ArrayList<>();
+    protected Value<Boolean> visible = new Value<>("Visible", true);
 
-    public HUDComponent(String name) {
+    public HudComponent(String name) {
         this.name = name;
     }
 
     public abstract void draw();
-    public abstract void update(ScaledResolution resolution);
+    public void update(ScaledResolution resolution) { }
 
     public String getName() {
         return name;
@@ -49,21 +46,8 @@ public abstract class HUDComponent extends Wrapper {
         return height;
     }
 
-    public void setHidden(boolean hidden) {
-        this.hidden = hidden;
-    }
-
-    public boolean isHidden() {
-        return hidden;
-    }
-
-    public <T> T register(Value value) {
-        this.values.add(value);
-        return (T) value;
-    }
-
-    public ArrayList<Value> getSettings() {
-        return values;
+    public boolean isVisible() {
+        return this.visible.getValue();
     }
 
     public boolean isMouseInBounds(int mouseX, int mouseY) {

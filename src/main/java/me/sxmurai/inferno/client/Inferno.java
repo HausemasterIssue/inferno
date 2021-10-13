@@ -3,6 +3,7 @@ package me.sxmurai.inferno.client;
 import me.sxmurai.inferno.client.manager.managers.alts.AltManager;
 import me.sxmurai.inferno.client.manager.managers.commands.CommandManager;
 import me.sxmurai.inferno.client.manager.managers.friends.FriendManager;
+import me.sxmurai.inferno.client.manager.managers.hud.HudManager;
 import me.sxmurai.inferno.client.manager.managers.macros.MacroManager;
 import me.sxmurai.inferno.client.manager.managers.misc.*;
 import me.sxmurai.inferno.client.manager.managers.modules.ModuleManager;
@@ -48,6 +49,8 @@ public class Inferno {
     public static XrayManager xrayManager;
 
     public static FileManager fileManager;
+
+    public static HudManager hudManager;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -101,6 +104,8 @@ public class Inferno {
 
         xrayManager = new XrayManager();
         xrayManager.load();
+
+        hudManager = new HudManager();
 
         MinecraftForge.EVENT_BUS.register(eventHelperManager);
         MinecraftForge.EVENT_BUS.register(moduleManager);

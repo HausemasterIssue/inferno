@@ -19,6 +19,7 @@ public class ModuleManager extends ConfigurableManager<Module> {
     public ModuleManager() {
         // client
         this.items.add(new ClickGUI());
+        this.items.add(new Colors());
         this.items.add(new CustomFont());
         this.items.add(new HUD());
         this.items.add(new HudEditor());

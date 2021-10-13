@@ -1,7 +1,7 @@
 package me.sxmurai.inferno.client.features.modules.client;
 
-import me.sxmurai.inferno.client.features.gui.hud.HUDComponent;
-import me.sxmurai.inferno.client.features.gui.hud.HUDEditorGuiScreen;
+import me.sxmurai.inferno.client.Inferno;
+import me.sxmurai.inferno.client.manager.managers.hud.HudComponent;
 import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -11,17 +11,14 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class HUD extends Module {
     @SubscribeEvent
     public void onHudRender(RenderGameOverlayEvent.Text event) {
-        GlStateManager.pushMatrix();
-
-        for (HUDComponent component : HUDEditorGuiScreen.getInstance().getComponents()) {
-            if (component.isHidden()) {
+        for (HudComponent component : Inferno.hudManager.getComponents()) {
+            if (!component.isVisible()) {
                 continue;
             }
 
-            component.update(event.getResolution());
+            GlStateManager.pushMatrix();
             component.draw();
+            GlStateManager.popMatrix();
         }
-
-        GlStateManager.popMatrix();
     }
 }
