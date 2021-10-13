@@ -32,8 +32,8 @@ public class NoSlow extends Module {
     public final Value<Boolean> items = new Value<>("Items", true);
     public final Value<Boolean> soulsand = new Value<>("SoulSand", false);
     public final Value<Boolean> slime = new Value<>("Slime", false);
-    public final Value<Boolean> strict = new Value<>("Strict", false);
-    public final Value<Boolean> sneak = new Value<>("Sneak", true);
+    public final Value<Boolean> strict = new Value<>("Strict", true);
+    public final Value<Boolean> sneak = new Value<>("Sneak", false);
     public final Value<Boolean> guiMove = new Value<>("GuiMove", false);
     public final Value<Float> lookSpeed = new Value<>("LookSpeed", 3.0f, 0.1f, 15.0f, (v) -> guiMove.getValue());
 
