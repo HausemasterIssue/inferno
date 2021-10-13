@@ -2,18 +2,13 @@ package me.sxmurai.inferno.client.features.modules.player;
 
 import me.sxmurai.inferno.api.utils.BlockUtil;
 import me.sxmurai.inferno.api.utils.InventoryUtils;
-import me.sxmurai.inferno.api.utils.data.Pair;
 import me.sxmurai.inferno.api.utils.timing.Timer;
 import me.sxmurai.inferno.api.values.Value;
 import me.sxmurai.inferno.client.manager.managers.modules.Module;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedDeque;
 
 @Module.Define(name = "Scaffold", description = "Places blocks under you", category = Module.Category.PLAYER)
 public class Scaffold extends Module {
@@ -25,106 +20,102 @@ public class Scaffold extends Module {
             new BlockPos(0, 0, 1)
     };
 
-    public final Value<Boolean> offhand = new Value<>("Offhand", true);
-    public final Value<Boolean> packet = new Value<>("Packet", true);
-    public final Value<Boolean> tower = new Value<>("Tower", false);
+    public final Value<Boolean> tower = new Value<>("Tower", true);
+    public final Value<Boolean> stopMotion = new Value<>("StopMotion", true);
     public final Value<Boolean> rotate = new Value<>("Rotate", true);
+    public final Value<Boolean> packet = new Value<>("Packet", false);
+    public final Value<Boolean> sneak = new Value<>("Sneak", false);
     public final Value<Boolean> swing = new Value<>("Swing", true);
-    public final Value<Boolean> silentSwitch = new Value<>("SilentSwitch", false);
+    public final Value<Switch> switchTo = new Value<>("Switch", Switch.LEGIT);
 
     private final Timer timer = new Timer();
-    private final Queue<Pair<BlockPos, EnumFacing>> blocks = new ConcurrentLinkedDeque<>();
-    private BlockPos pos;
 
     @Override
-    protected void onActivated() {
-        timer.reset();
-        pos = null;
-        blocks.clear();
-    }
-
-    @Override
-    protected void onDeactivated() {
-        timer.reset();
-        pos = null;
-        blocks.clear();
-    }
-
-    @Override
-    public void onUpdate() {
-        if (!mc.gameSettings.keyBindJump.pressed) {
-            timer.reset();
+    public void onTick() {
+        if (!mc.gameSettings.keyBindJump.isKeyDown() && this.tower.getValue()) {
+            this.timer.reset();
         }
 
-        this.pos = new BlockPos(mc.player.posX, mc.player.posY - 1.0, mc.player.posZ);
-        if (BlockUtil.getBlockFromPos(pos) == Blocks.AIR) {
-            int oldSlot = mc.player.inventory.currentItem;
-            EnumHand hand = EnumHand.MAIN_HAND;
-            if (!InventoryUtils.isHolding(ItemBlock.class)) {
-                int slot = InventoryUtils.getHotbarItemSlot(ItemBlock.class, this.offhand.getValue());
+        BlockPos base = new BlockPos(mc.player.posX, mc.player.posY - 1.0, mc.player.posZ);
+        if (mc.world.isAirBlock(base)) {
+            EnumHand hand;
+            int oldSlot = -1;
+
+            if (this.switchTo.getValue() != Switch.NONE) {
+                int slot = InventoryUtils.getHotbarItemSlot(ItemBlock.class, true);
                 if (slot == -1) {
                     return;
                 }
 
-                if (slot == 45) {
-                    hand = EnumHand.OFF_HAND;
-                } else {
-                    InventoryUtils.switchTo(slot, silentSwitch.getValue());
+                hand = slot == 45 ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND;
+                if (hand == EnumHand.MAIN_HAND) {
+                    oldSlot = mc.player.inventory.currentItem;
+                    InventoryUtils.switchTo(slot, this.switchTo.getValue() == Switch.SILENT);
                 }
+            } else {
+                if (!InventoryUtils.isHolding(ItemBlock.class, true)) {
+                    return;
+                }
+
+                hand = mc.player.getHeldItemMainhand().getItem() instanceof ItemBlock ?
+                        EnumHand.MAIN_HAND :
+                        mc.player.getHeldItemOffhand().getItem() instanceof ItemBlock ?
+                                EnumHand.OFF_HAND :
+                                null;
             }
 
-            Pair<BlockPos, EnumFacing> place = this.getPlacePos(pos);
-            if (place == null) {
+            if (hand == null) {
                 return;
             }
 
-            while (!blocks.isEmpty()) {
-                Pair<BlockPos, EnumFacing> data = blocks.poll();
-                BlockPos p = data.getKey();
-                if (p == null) {
-                    break;
-                }
+            mc.player.setActiveHand(hand);
 
-                if (mc.player.getDistance(p.x, p.y, p.z) > 2.0f) {
-                    continue;
-                }
+            BlockPos placePos = this.getPos(base);
+            if (placePos == null) {
+                return;
+            }
 
-                if (mc.gameSettings.keyBindJump.isKeyDown() && tower.getValue()) {
+            BlockUtil.place(placePos, hand, this.swing.getValue(), this.sneak.getValue(), this.packet.getValue(), this.rotate.getValue());
+            if (placePos.equals(base)) {
+                if (!mc.world.isAirBlock(placePos) && mc.gameSettings.keyBindJump.isKeyDown()) {
                     mc.player.motionX *= 0.3;
                     mc.player.motionZ *= 0.3;
                     mc.player.jump();
 
-                    if (timer.passedMs(1500L)) {
-                        mc.player.motionY -= 0.28;
-                        timer.reset();
+                    if (this.timer.passedMs(1200L)) {
+                        this.timer.reset();
+                        mc.player.motionY = -0.28;
                     }
                 }
-
-                BlockUtil.place(p, hand, this.swing.getValue(), false, this.packet.getValue(), this.rotate.getValue());
+            } else {
+                if (this.stopMotion.getValue()) {
+                    mc.player.motionX = 0.0;
+                    mc.player.motionZ = 0.0;
+                    mc.player.movementInput.moveForward = 0.0f;
+                }
             }
 
-            if (hand == EnumHand.MAIN_HAND) {
-                InventoryUtils.switchTo(oldSlot, silentSwitch.getValue());
+            if (oldSlot != -1) {
+                InventoryUtils.switchTo(oldSlot, this.switchTo.getValue() == Switch.SILENT);
             }
         }
     }
 
-    private Pair<BlockPos, EnumFacing> getPlacePos(BlockPos origin) {
-        if (BlockUtil.getBlockFromPos(origin) != Blocks.AIR) {
+    private BlockPos getPos(BlockPos base) {
+        if (!mc.world.isAirBlock(base)) {
             return null;
         }
 
-        for (BlockPos offset : DIRECTION_OFFSETS) {
+        for (BlockPos offset : Scaffold.DIRECTION_OFFSETS) {
             for (EnumFacing facing : EnumFacing.values()) {
-                if (facing == EnumFacing.DOWN) {
+                if (facing == EnumFacing.UP) {
                     continue;
                 }
 
-                BlockPos pos = origin.add(offset);
-                if (facing == EnumFacing.UP) {
-                    return add(new Pair<>(pos, EnumFacing.UP));
+                if (facing == EnumFacing.DOWN) {
+                    return base;
                 } else {
-                    return add(new Pair<>(pos.add(facing.getDirectionVec()), facing));
+                    return base.add(offset);
                 }
             }
         }
@@ -132,8 +123,7 @@ public class Scaffold extends Module {
         return null;
     }
 
-    public Pair<BlockPos, EnumFacing> add(Pair<BlockPos, EnumFacing> pair) {
-        blocks.add(pair);
-        return pair;
+    public enum Switch {
+        NONE, LEGIT, SILENT
     }
 }
