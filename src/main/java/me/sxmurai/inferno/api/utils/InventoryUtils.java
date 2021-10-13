@@ -107,6 +107,17 @@ public class InventoryUtils extends Wrapper {
         return -1;
     }
 
+    public static int getInventoryBlockSlot(Block block, boolean hotbar) {
+        for (int i = hotbar ? 0 : 9; i < 39; ++i) {
+            ItemStack stack = mc.player.inventory.getStackInSlot(i);
+            if (!stack.isEmpty && stack.getItem() instanceof ItemBlock && ((ItemBlock) stack.getItem()).getBlock() == block) {
+                return i < 9 ? i + 36 : i;
+            }
+        }
+
+        return -1;
+    }
+
     public static int getCount(Item item, boolean offhand, boolean hotbar) {
         int count = 0;
         if (offhand && mc.player.getHeldItemOffhand().item == item) {
