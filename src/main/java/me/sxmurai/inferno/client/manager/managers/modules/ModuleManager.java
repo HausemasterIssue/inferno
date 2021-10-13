@@ -49,7 +49,7 @@ public class ModuleManager extends ConfigurableManager<Module> {
         this.items.add(new NoEntityTrace());
         this.items.add(new NoHandshake());
         this.items.add(new PingSpoof());
-        this.items.add(new Reconnect());
+        this.items.add(new AutoReconnect());
 
         // movement
         this.items.add(new AutoWalk());

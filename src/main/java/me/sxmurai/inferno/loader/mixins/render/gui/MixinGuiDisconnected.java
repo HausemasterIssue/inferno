@@ -1,6 +1,6 @@
 package me.sxmurai.inferno.loader.mixins.render.gui;
 
-import me.sxmurai.inferno.client.features.modules.miscellaneous.Reconnect;
+import me.sxmurai.inferno.client.features.modules.miscellaneous.AutoReconnect;
 import me.sxmurai.inferno.client.manager.managers.commands.text.ChatColor;
 import me.sxmurai.inferno.api.utils.timing.Timer;
 import net.minecraft.client.gui.GuiButton;
@@ -23,11 +23,11 @@ public class MixinGuiDisconnected extends GuiScreen {
 
     @Inject(method = "initGui", at = @At("RETURN"))
     public void onInit(CallbackInfo info) {
-        if (Reconnect.INSTANCE.serverData != null) {
+        if (AutoReconnect.INSTANCE.serverData != null) {
             int y = Math.min(this.height / 2 + this.textHeight / 2 + this.fontRenderer.FONT_HEIGHT + 25, this.height - 10);
             this.timer.reset();
 
-            this.addButton(this.reconnectToggle = new GuiButton(1, this.width / 2 - 100, y,  "Reconnect " + (Reconnect.INSTANCE.isToggled() ? ChatColor.Green.text(this.toReadable()) : ChatColor.Red.text("N/A"))));
+            this.addButton(this.reconnectToggle = new GuiButton(1, this.width / 2 - 100, y,  "Reconnect " + (AutoReconnect.INSTANCE.isToggled() ? ChatColor.Green.text(this.toReadable()) : ChatColor.Red.text("N/A"))));
             this.addButton(new GuiButton(2, this.width / 2 - 100, y + 25, "Reconnect Now"));
         }
     }
@@ -36,26 +36,26 @@ public class MixinGuiDisconnected extends GuiScreen {
     public void onActionPerformed(GuiButton button, CallbackInfo info) {
         if (button.id == 1) {
             this.timer.reset();
-            Reconnect.INSTANCE.toggle();
+            AutoReconnect.INSTANCE.toggle();
         } else if (button.id == 2) {
-            mc.displayGuiScreen(new GuiConnecting((GuiDisconnected) (Object) this, mc, Reconnect.INSTANCE.serverData));
+            mc.displayGuiScreen(new GuiConnecting((GuiDisconnected) (Object) this, mc, AutoReconnect.INSTANCE.serverData));
         }
     }
 
     @Inject(method = "drawScreen", at = @At("RETURN"))
     public void onDrawScreen(int mouseX, int mouseY, float partialTicks, CallbackInfo info) {
-        if (Reconnect.INSTANCE.serverData != null) {
-            this.reconnectToggle.displayString = "Reconnect " + (Reconnect.INSTANCE.isToggled() ? ChatColor.Green.text(this.toReadable()) : ChatColor.Red.text("N/A"));
+        if (AutoReconnect.INSTANCE.serverData != null) {
+            this.reconnectToggle.displayString = "Reconnect " + (AutoReconnect.INSTANCE.isToggled() ? ChatColor.Green.text(this.toReadable()) : ChatColor.Red.text("N/A"));
 
-            if (Reconnect.INSTANCE.isToggled()) {
-                if (this.timer.passedS(Reconnect.INSTANCE.delay.getValue())) {
-                    mc.displayGuiScreen(new GuiConnecting((GuiDisconnected) (Object) this, mc, Reconnect.INSTANCE.serverData));
+            if (AutoReconnect.INSTANCE.isToggled()) {
+                if (this.timer.passedS(AutoReconnect.INSTANCE.delay.getValue())) {
+                    mc.displayGuiScreen(new GuiConnecting((GuiDisconnected) (Object) this, mc, AutoReconnect.INSTANCE.serverData));
                 }
             }
         }
     }
 
     private String toReadable() {
-        return Math.round((10.0 * ((Reconnect.INSTANCE.delay.getValue() * 1000.0) - this.timer.getPassedTimeMs())) / 1000.0) / 10.0 + "s";
+        return Math.round((10.0 * ((AutoReconnect.INSTANCE.delay.getValue() * 1000.0) - this.timer.getPassedTimeMs())) / 1000.0) / 10.0 + "s";
     }
 }
