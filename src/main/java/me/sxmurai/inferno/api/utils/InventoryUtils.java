@@ -36,6 +36,13 @@ public class InventoryUtils extends Wrapper {
                 (offhand && off.getItem() instanceof ItemBlock && ((ItemBlock) off.getItem()).getBlock() == block);
     }
 
+    public static boolean isHoldingBlock(Class<? extends Block> clazz, boolean offhand) {
+        ItemStack main = mc.player.getHeldItemMainhand();
+        ItemStack off = mc.player.getHeldItemOffhand();
+        return (main.getItem() instanceof ItemBlock && clazz.isInstance(((ItemBlock) main.getItem()).getBlock())) ||
+                (offhand && off.getItem() instanceof ItemBlock && clazz.isInstance(((ItemBlock) off.getItem()).getBlock()));
+    }
+
     public static int getHotbarItemSlot(Item item, boolean offhand) {
         if (offhand && mc.player.getHeldItemOffhand().item == item) {
             return 45;
