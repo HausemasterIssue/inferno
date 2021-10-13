@@ -1,8 +1,8 @@
 package me.sxmurai.inferno.client.features.modules.client;
 
-import me.sxmurai.inferno.client.Inferno;
 import me.sxmurai.inferno.api.events.inferno.ModuleToggledEvent;
 import me.sxmurai.inferno.api.values.Value;
+import me.sxmurai.inferno.client.Inferno;
 import me.sxmurai.inferno.client.manager.managers.commands.text.ChatColor;
 import me.sxmurai.inferno.client.manager.managers.commands.text.TextBuilder;
 import me.sxmurai.inferno.client.manager.managers.modules.Module;

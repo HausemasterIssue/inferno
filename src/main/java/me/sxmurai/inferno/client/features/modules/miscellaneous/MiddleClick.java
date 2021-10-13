@@ -1,10 +1,10 @@
 package me.sxmurai.inferno.client.features.modules.miscellaneous;
 
-import me.sxmurai.inferno.client.Inferno;
+import me.sxmurai.inferno.api.utils.InventoryUtils;
 import me.sxmurai.inferno.api.values.Value;
+import me.sxmurai.inferno.client.Inferno;
 import me.sxmurai.inferno.client.manager.managers.commands.Command;
 import me.sxmurai.inferno.client.manager.managers.modules.Module;
-import me.sxmurai.inferno.api.utils.InventoryUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.util.EnumHand;

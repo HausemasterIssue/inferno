@@ -1,11 +1,9 @@
 package me.sxmurai.inferno.client.features.modules.render;
 
-import me.sxmurai.inferno.api.events.mc.UpdateEvent;
 import me.sxmurai.inferno.api.values.Value;
 import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "Fullbright", description = "Makes the game... brigther... tf else?", category = Module.Category.RENDER)
 public class Fullbright extends Module {
@@ -26,8 +24,8 @@ public class Fullbright extends Module {
         }
     }
 
-    @SubscribeEvent
-    public void onUpdate(UpdateEvent event) {
+    @Override
+    public void onUpdate() {
         if (mode.getValue() == Mode.GAMMA) {
             if (oldGamma == -1.0f) {
                 oldGamma = mc.gameSettings.gammaSetting;

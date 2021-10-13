@@ -1,18 +1,16 @@
 package me.sxmurai.inferno.client.features.modules.combat;
 
-import me.sxmurai.inferno.client.Inferno;
-import me.sxmurai.inferno.api.events.mc.UpdateEvent;
-import me.sxmurai.inferno.api.values.Value;
-import me.sxmurai.inferno.client.manager.managers.misc.HoleManager;
-import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import me.sxmurai.inferno.api.utils.BlockUtil;
 import me.sxmurai.inferno.api.utils.InventoryUtils;
 import me.sxmurai.inferno.api.utils.RotationUtils;
+import me.sxmurai.inferno.api.values.Value;
+import me.sxmurai.inferno.client.Inferno;
+import me.sxmurai.inferno.client.manager.managers.misc.HoleManager;
+import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.ArrayList;
 

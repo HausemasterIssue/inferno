@@ -1,12 +1,10 @@
 package me.sxmurai.inferno.client.features.modules.player;
 
-import me.sxmurai.inferno.api.events.mc.UpdateEvent;
+import me.sxmurai.inferno.api.utils.timing.Timer;
 import me.sxmurai.inferno.api.values.Value;
 import me.sxmurai.inferno.client.manager.managers.modules.Module;
-import me.sxmurai.inferno.api.utils.timing.Timer;
 import net.minecraft.network.play.client.CPacketEntityAction;
 import net.minecraft.util.EnumHand;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Arrays;
 import java.util.Random;

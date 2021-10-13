@@ -1,8 +1,8 @@
 package me.sxmurai.inferno.client.features.modules.client;
 
 import me.sxmurai.inferno.api.events.mc.UpdateEvent;
-import me.sxmurai.inferno.client.features.gui.click.InfernoClickGUIScreen;
 import me.sxmurai.inferno.api.values.Value;
+import me.sxmurai.inferno.client.features.gui.click.InfernoClickGUIScreen;
 import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.lwjgl.input.Keyboard;

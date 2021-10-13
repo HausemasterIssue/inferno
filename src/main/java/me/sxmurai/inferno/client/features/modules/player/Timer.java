@@ -1,10 +1,8 @@
 package me.sxmurai.inferno.client.features.modules.player;
 
-import me.sxmurai.inferno.client.Inferno;
-import me.sxmurai.inferno.api.events.mc.UpdateEvent;
 import me.sxmurai.inferno.api.values.Value;
+import me.sxmurai.inferno.client.Inferno;
 import me.sxmurai.inferno.client.manager.managers.modules.Module;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "Timer", description = "Makes the game go zoom zoom", category = Module.Category.PLAYER)
 public class Timer extends Module {

@@ -1,8 +1,8 @@
 package me.sxmurai.inferno.client.features.modules.client;
 
 import me.sxmurai.inferno.api.events.inferno.SettingChangeEvent;
-import me.sxmurai.inferno.client.features.gui.font.CustomFontRenderer;
 import me.sxmurai.inferno.api.values.Value;
+import me.sxmurai.inferno.client.features.gui.font.CustomFontRenderer;
 import me.sxmurai.inferno.client.manager.managers.misc.TextManager;
 import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

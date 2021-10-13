@@ -1,13 +1,13 @@
 package me.sxmurai.inferno.client.features.modules.movement;
 
-import me.sxmurai.inferno.client.Inferno;
 import me.sxmurai.inferno.api.events.entity.MoveEvent;
 import me.sxmurai.inferno.api.events.entity.UpdateMoveEvent;
 import me.sxmurai.inferno.api.events.network.PacketEvent;
-import me.sxmurai.inferno.api.values.Value;
-import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import me.sxmurai.inferno.api.utils.RotationUtils;
 import me.sxmurai.inferno.api.utils.timing.Timer;
+import me.sxmurai.inferno.api.values.Value;
+import me.sxmurai.inferno.client.Inferno;
+import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.network.play.client.CPacketConfirmTeleport;

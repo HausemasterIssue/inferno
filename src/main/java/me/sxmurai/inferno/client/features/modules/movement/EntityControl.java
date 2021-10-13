@@ -1,11 +1,9 @@
 package me.sxmurai.inferno.client.features.modules.movement;
 
-import me.sxmurai.inferno.api.events.mc.UpdateEvent;
-import me.sxmurai.inferno.api.values.Value;
-import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import me.sxmurai.inferno.api.utils.EntityUtils;
 import me.sxmurai.inferno.api.utils.RotationUtils;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import me.sxmurai.inferno.api.values.Value;
+import me.sxmurai.inferno.client.manager.managers.modules.Module;
 
 @Module.Define(name = "EntityControl", description = "Controls ridden entities", category = Module.Category.MOVEMENT)
 public class EntityControl extends Module {

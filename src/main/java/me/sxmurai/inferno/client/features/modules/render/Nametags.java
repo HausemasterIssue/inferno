@@ -1,12 +1,12 @@
 package me.sxmurai.inferno.client.features.modules.render;
 
-import me.sxmurai.inferno.client.Inferno;
+import me.sxmurai.inferno.api.utils.EntityUtils;
+import me.sxmurai.inferno.api.utils.RenderUtils;
 import me.sxmurai.inferno.api.values.Value;
+import me.sxmurai.inferno.client.Inferno;
 import me.sxmurai.inferno.client.manager.managers.commands.text.ChatColor;
 import me.sxmurai.inferno.client.manager.managers.friends.Friend;
 import me.sxmurai.inferno.client.manager.managers.modules.Module;
-import me.sxmurai.inferno.api.utils.EntityUtils;
-import me.sxmurai.inferno.api.utils.RenderUtils;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderManager;

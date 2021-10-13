@@ -1,9 +1,9 @@
 package me.sxmurai.inferno.client.features.modules.render;
 
 import me.sxmurai.inferno.api.events.render.RenderModelEvent;
+import me.sxmurai.inferno.api.utils.ColorUtils;
 import me.sxmurai.inferno.api.values.Value;
 import me.sxmurai.inferno.client.manager.managers.modules.Module;
-import me.sxmurai.inferno.api.utils.ColorUtils;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

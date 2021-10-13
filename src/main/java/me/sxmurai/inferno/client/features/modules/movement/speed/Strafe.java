@@ -1,9 +1,9 @@
 package me.sxmurai.inferno.client.features.modules.movement.speed;
 
 import me.sxmurai.inferno.api.events.entity.MoveEvent;
+import me.sxmurai.inferno.api.utils.timing.Timer;
 import me.sxmurai.inferno.client.features.modules.movement.Speed;
 import me.sxmurai.inferno.client.manager.managers.modules.Mode;
-import me.sxmurai.inferno.api.utils.timing.Timer;
 import net.minecraft.init.MobEffects;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 

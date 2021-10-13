@@ -1,16 +1,14 @@
 package me.sxmurai.inferno.client.features.modules.render;
 
-import me.sxmurai.inferno.client.Inferno;
-import me.sxmurai.inferno.api.events.render.RenderEvent;
-import me.sxmurai.inferno.api.values.Value;
-import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import me.sxmurai.inferno.api.utils.EntityUtils;
 import me.sxmurai.inferno.api.utils.RenderUtils;
+import me.sxmurai.inferno.api.values.Value;
+import me.sxmurai.inferno.client.Inferno;
+import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "Tracers", description = "Draws lines to entities", category = Module.Category.RENDER)
 public class Tracers extends Module {

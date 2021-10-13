@@ -1,14 +1,13 @@
 package me.sxmurai.inferno.client.features.modules.miscellaneous;
 
 import me.sxmurai.inferno.api.events.mc.GuiChangeEvent;
-import me.sxmurai.inferno.api.events.mc.UpdateEvent;
+import me.sxmurai.inferno.api.utils.timing.Timer;
 import me.sxmurai.inferno.api.values.Value;
-import me.sxmurai.inferno.client.manager.managers.misc.FileManager;
 import me.sxmurai.inferno.client.manager.managers.commands.Command;
 import me.sxmurai.inferno.client.manager.managers.commands.text.ChatColor;
 import me.sxmurai.inferno.client.manager.managers.commands.text.TextBuilder;
+import me.sxmurai.inferno.client.manager.managers.misc.FileManager;
 import me.sxmurai.inferno.client.manager.managers.modules.Module;
-import me.sxmurai.inferno.api.utils.timing.Timer;
 import net.minecraft.client.gui.GuiGameOver;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -71,8 +70,8 @@ public class AutoRespawn extends Module {
         }
     }
 
-    @SubscribeEvent
-    public void onUpdate(UpdateEvent event) {
+    @Override
+    public void onUpdate() {
         if (mc.currentScreen instanceof GuiGameOver && !this.noDeathScreen.getValue() && this.timer.passedMs(this.delay.getValue().longValue())) {
             this.timer.reset();
             mc.player.respawnPlayer();

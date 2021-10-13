@@ -1,6 +1,5 @@
 package me.sxmurai.inferno.client.features.modules.miscellaneous;
 
-import me.sxmurai.inferno.api.events.mc.UpdateEvent;
 import me.sxmurai.inferno.api.events.network.PacketEvent;
 import me.sxmurai.inferno.api.utils.timing.Timer;
 import me.sxmurai.inferno.api.values.Value;

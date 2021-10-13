@@ -1,17 +1,16 @@
 package me.sxmurai.inferno.client.features.modules.combat;
 
 import me.sxmurai.inferno.api.events.entity.JumpEvent;
+import me.sxmurai.inferno.api.utils.BlockUtil;
+import me.sxmurai.inferno.api.utils.InventoryUtils;
 import me.sxmurai.inferno.api.values.Value;
 import me.sxmurai.inferno.client.manager.managers.misc.HoleManager;
 import me.sxmurai.inferno.client.manager.managers.modules.Module;
-import me.sxmurai.inferno.api.utils.BlockUtil;
-import me.sxmurai.inferno.api.utils.InventoryUtils;
 import net.minecraft.init.Blocks;
 import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;

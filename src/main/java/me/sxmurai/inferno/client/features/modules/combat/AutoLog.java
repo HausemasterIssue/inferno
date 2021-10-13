@@ -1,13 +1,13 @@
 package me.sxmurai.inferno.client.features.modules.combat;
 
-import me.sxmurai.inferno.client.Inferno;
 import me.sxmurai.inferno.api.events.entity.EntitySpawnEvent;
+import me.sxmurai.inferno.api.utils.EntityUtils;
+import me.sxmurai.inferno.api.utils.InventoryUtils;
 import me.sxmurai.inferno.api.values.Value;
+import me.sxmurai.inferno.client.Inferno;
 import me.sxmurai.inferno.client.manager.managers.commands.text.ChatColor;
 import me.sxmurai.inferno.client.manager.managers.commands.text.TextBuilder;
 import me.sxmurai.inferno.client.manager.managers.modules.Module;
-import me.sxmurai.inferno.api.utils.EntityUtils;
-import me.sxmurai.inferno.api.utils.InventoryUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

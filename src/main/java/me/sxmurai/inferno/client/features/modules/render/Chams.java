@@ -1,8 +1,8 @@
 package me.sxmurai.inferno.client.features.modules.render;
 
+import me.sxmurai.inferno.api.utils.ColorUtils;
 import me.sxmurai.inferno.api.values.Value;
 import me.sxmurai.inferno.client.manager.managers.modules.Module;
-import me.sxmurai.inferno.api.utils.ColorUtils;
 
 @Module.Define(name = "Chams", description = "Allows you to see entities through walls", category = Module.Category.RENDER)
 public class Chams extends Module {

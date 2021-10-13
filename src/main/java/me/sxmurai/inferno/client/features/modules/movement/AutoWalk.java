@@ -1,10 +1,8 @@
 package me.sxmurai.inferno.client.features.modules.movement;
 
-import me.sxmurai.inferno.api.events.mc.UpdateEvent;
 import me.sxmurai.inferno.api.values.Value;
 import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "AutoWalk", description = "Automatically makes you walk", category = Module.Category.MOVEMENT)
 public class AutoWalk extends Module {

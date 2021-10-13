@@ -1,11 +1,9 @@
 package me.sxmurai.inferno.client.features.modules.movement;
 
-import me.sxmurai.inferno.client.Inferno;
-import me.sxmurai.inferno.api.events.mc.UpdateEvent;
-import me.sxmurai.inferno.client.features.modules.player.Freecam;
 import me.sxmurai.inferno.api.values.Value;
+import me.sxmurai.inferno.client.Inferno;
+import me.sxmurai.inferno.client.features.modules.player.Freecam;
 import me.sxmurai.inferno.client.manager.managers.modules.Module;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 // @todo remove skidded shit
 @Module.Define(name = "ReverseStep", description = "Makes you fall down faster", category = Module.Category.MOVEMENT)

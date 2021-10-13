@@ -1,15 +1,13 @@
 package me.sxmurai.inferno.client.features.modules.movement;
 
-import me.sxmurai.inferno.api.events.mc.UpdateEvent;
+import me.sxmurai.inferno.api.values.Value;
 import me.sxmurai.inferno.client.features.modules.movement.speed.OnGround;
 import me.sxmurai.inferno.client.features.modules.movement.speed.Strafe;
 import me.sxmurai.inferno.client.features.modules.movement.speed.StrafeStrict;
 import me.sxmurai.inferno.client.features.modules.movement.speed.Vanilla;
-import me.sxmurai.inferno.api.values.Value;
 import me.sxmurai.inferno.client.manager.managers.modules.Mode;
 import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.ArrayList;
 import java.util.Optional;

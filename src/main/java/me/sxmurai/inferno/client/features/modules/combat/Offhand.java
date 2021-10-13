@@ -1,15 +1,13 @@
 package me.sxmurai.inferno.client.features.modules.combat;
 
-import me.sxmurai.inferno.api.values.Value;
-import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import me.sxmurai.inferno.api.utils.EntityUtils;
 import me.sxmurai.inferno.api.utils.InventoryUtils;
 import me.sxmurai.inferno.api.utils.timing.TickTimer;
+import me.sxmurai.inferno.api.values.Value;
+import me.sxmurai.inferno.client.manager.managers.modules.Module;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemSword;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;

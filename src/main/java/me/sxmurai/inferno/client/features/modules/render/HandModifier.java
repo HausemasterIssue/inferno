@@ -1,8 +1,8 @@
 package me.sxmurai.inferno.client.features.modules.render;
 
+import me.sxmurai.inferno.api.utils.ColorUtils;
 import me.sxmurai.inferno.api.values.Value;
 import me.sxmurai.inferno.client.manager.managers.modules.Module;
-import me.sxmurai.inferno.api.utils.ColorUtils;
 
 @Module.Define(name = "HandModifier", description = "Changes hand rendering", category = Module.Category.RENDER)
 public class HandModifier extends Module {

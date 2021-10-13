@@ -1,13 +1,12 @@
 package me.sxmurai.inferno.client.features.modules.combat;
 
-import me.sxmurai.inferno.api.events.mc.UpdateEvent;
+import me.sxmurai.inferno.api.utils.BlockUtil;
+import me.sxmurai.inferno.api.utils.InventoryUtils;
 import me.sxmurai.inferno.api.values.Value;
 import me.sxmurai.inferno.client.manager.managers.commands.Command;
 import me.sxmurai.inferno.client.manager.managers.commands.text.ChatColor;
 import me.sxmurai.inferno.client.manager.managers.commands.text.TextBuilder;
 import me.sxmurai.inferno.client.manager.managers.modules.Module;
-import me.sxmurai.inferno.api.utils.BlockUtil;
-import me.sxmurai.inferno.api.utils.InventoryUtils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -16,7 +15,6 @@ import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Module.Define(name = "Burrow", description = "becomes cringe and burrows", category = Module.Category.COMBAT)
 public class Burrow extends Module {
