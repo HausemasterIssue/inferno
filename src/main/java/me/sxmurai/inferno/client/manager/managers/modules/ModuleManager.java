@@ -120,7 +120,7 @@ public class ModuleManager extends ConfigurableManager<Module> {
     @SubscribeEvent
     public void onKey(InputEvent.KeyInputEvent event) {
         int key = Keyboard.getEventKey();
-        if (!Keyboard.getEventKeyState() && key != Keyboard.KEY_NONE) {
+        if (!Keyboard.getEventKeyState() && key != Keyboard.KEY_NONE && mc.currentScreen == null) {
             for (Module module : this.items) {
                 if (module.getBind() == key) {
                     module.toggle();
