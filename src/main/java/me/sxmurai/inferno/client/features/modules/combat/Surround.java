@@ -62,23 +62,6 @@ public class Surround extends Module {
             this.placed = 0;
         }
 
-        if ((this.oldSlot == -1 || this.hand != EnumHand.OFF_HAND) && !InventoryUtils.isHolding(Blocks.OBSIDIAN, true)) {
-            int slot = InventoryUtils.getHotbarBlockSlot(Blocks.OBSIDIAN, true);
-            if (slot == -1) {
-                return;
-            }
-
-            if (slot == 45) {
-                this.hand = EnumHand.OFF_HAND;
-            } else {
-                this.hand = EnumHand.MAIN_HAND;
-                this.oldSlot = mc.player.inventory.currentItem;
-                InventoryUtils.switchTo(slot, this.silent.getValue());
-            }
-
-            mc.player.setActiveHand(this.hand);
-        }
-
         if (this.positions.isEmpty()) {
             BlockPos base = new BlockPos(mc.player.posX, mc.player.posY, mc.player.posZ);
             for (BlockPos surroundPosition : HoleManager.SURROUND_POSITIONS) {
@@ -99,6 +82,23 @@ public class Surround extends Module {
                 }
             }
         } else {
+            if ((this.oldSlot == -1 || this.hand != EnumHand.OFF_HAND) && !InventoryUtils.isHolding(Blocks.OBSIDIAN, true)) {
+                int slot = InventoryUtils.getHotbarBlockSlot(Blocks.OBSIDIAN, true);
+                if (slot == -1) {
+                    return;
+                }
+
+                if (slot == 45) {
+                    this.hand = EnumHand.OFF_HAND;
+                } else {
+                    this.hand = EnumHand.MAIN_HAND;
+                    this.oldSlot = mc.player.inventory.currentItem;
+                    InventoryUtils.switchTo(slot, this.silent.getValue());
+                }
+
+                mc.player.setActiveHand(this.hand);
+            }
+
             if (this.center.getValue()) {
                 BlockPos centered = new BlockPos(Math.floor(mc.player.posX) + 0.5, mc.player.posY, Math.floor(mc.player.posZ) + 0.5);
                 if (Math.abs(centered.x - mc.player.posX) <= 0.1 || Math.abs(centered.z - mc.player.posZ) <= 0.1) {
