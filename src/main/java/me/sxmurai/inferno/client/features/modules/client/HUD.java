@@ -18,6 +18,7 @@ public class HUD extends Module {
 
             GlStateManager.pushMatrix();
             component.draw();
+            component.update(event.getResolution());
             GlStateManager.popMatrix();
         }
     }

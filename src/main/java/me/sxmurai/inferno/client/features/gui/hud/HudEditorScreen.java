@@ -6,6 +6,8 @@ import me.sxmurai.inferno.client.Inferno;
 import me.sxmurai.inferno.client.manager.managers.hud.HudComponent;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec2f;
 
 import java.io.IOException;
 
@@ -21,8 +23,9 @@ public class HudEditorScreen extends GuiScreen {
         this.drawDefaultBackground();
 
         if (this.current != null) {
-            this.current.setX(this.x2 + mouseX);
-            this.current.setY(this.y2 + mouseY);
+            Vec2f bounds = this.stopClipping(this.x2 + mouseX, this.y2 + mouseY, this.current.getWidth(), this.current.getHeight());
+            this.current.setX(bounds.x);
+            this.current.setY(bounds.y);
         }
 
         for (HudComponent component : Inferno.hudManager.getComponents()) {
@@ -65,11 +68,23 @@ public class HudEditorScreen extends GuiScreen {
 
     @Override
     public void updateScreen() {
-        ScaledResolution resolution = new ScaledResolution(mc);
         for (HudComponent component : Inferno.hudManager.getComponents()) {
-            component.setX(Math.min(component.getX(), resolution.getScaledWidth()));
-            component.setY(Math.min(component.getY(), resolution.getScaledHeight()));
+            this.stopClipping(component);
         }
+    }
+
+    private void stopClipping(HudComponent component) {
+        Vec2f bounds = this.stopClipping(component.getX(), component.getY(), component.getWidth(), component.getHeight());
+        component.setX(bounds.x);
+        component.setY(bounds.y);
+    }
+
+    private Vec2f stopClipping(float x, float y, float w, float h) {
+        ScaledResolution resolution = new ScaledResolution(mc);
+        return new Vec2f(
+                MathHelper.clamp(x, 0.0f, resolution.getScaledWidth() - w),
+                MathHelper.clamp(y, 0.0f, resolution.getScaledHeight() - h)
+        );
     }
 
     public static HudEditorScreen getInstance() {
