@@ -30,7 +30,7 @@ public class ModuleManager extends ConfigurableManager<Module> {
         this.items.add(new AutoCrystal());
         this.items.add(new AutoLog());
         this.items.add(new BowSpam());
-        this.items.add(new Burrow());
+        this.items.add(new SelfFill());
         this.items.add(new ChorusPredict());
         this.items.add(new Criticals());
         this.items.add(new HoleFiller());
