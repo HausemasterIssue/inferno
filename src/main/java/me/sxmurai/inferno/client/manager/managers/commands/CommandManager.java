@@ -2,10 +2,7 @@ package me.sxmurai.inferno.client.manager.managers.commands;
 
 import me.sxmurai.inferno.api.events.network.PacketEvent;
 import me.sxmurai.inferno.client.Inferno;
-import me.sxmurai.inferno.client.features.commands.Bind;
-import me.sxmurai.inferno.client.features.commands.Font;
-import me.sxmurai.inferno.client.features.commands.Ping;
-import me.sxmurai.inferno.client.features.commands.Unload;
+import me.sxmurai.inferno.client.features.commands.*;
 import me.sxmurai.inferno.client.manager.AbstractManager;
 import me.sxmurai.inferno.client.manager.managers.commands.exceptions.BaseException;
 import me.sxmurai.inferno.client.manager.managers.commands.text.ChatColor;
@@ -24,6 +21,7 @@ public class CommandManager extends AbstractManager<Command> {
         this.items.add(new Font());
         this.items.add(new Ping());
         this.items.add(new Unload());
+        this.items.add(new XRay());
 
         Inferno.LOGGER.info("Loaded {} commands.", this.items.size());
     }
