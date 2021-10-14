@@ -117,6 +117,8 @@ public class Inferno {
 
         MinecraftForge.EVENT_BUS.register(new UnloadManager());
 
+        Runtime.getRuntime().addShutdownHook(new Thread(Inferno::unload, MOD_NAME + " Shutdown Thread"));
+
         LOGGER.info("Loaded {} v{}!", MOD_NAME, MOD_VER);
 
         state = State.LOADED;
