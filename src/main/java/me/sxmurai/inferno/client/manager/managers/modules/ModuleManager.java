@@ -35,6 +35,7 @@ public class ModuleManager extends ConfigurableManager<Module> {
         this.items.add(new HoleFiller());
         this.items.add(new Offhand());
         this.items.add(new SelfFill());
+        this.items.add(new StrengthDetector());
         this.items.add(new Surround());
         this.items.add(new Trap());
 
