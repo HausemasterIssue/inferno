@@ -42,6 +42,8 @@ public class ModuleManager extends ConfigurableManager<Module> {
         // miscellaneous
         this.items.add(new AntiSignFuck());
         this.items.add(new AutoEChestMiner());
+        this.items.add(new AutoReconnect());
+        this.items.add(new AutoRespawn());
         this.items.add(new Avoid());
         this.items.add(new ExtraTab());
         this.items.add(new FakePlayer());
@@ -50,7 +52,6 @@ public class ModuleManager extends ConfigurableManager<Module> {
         this.items.add(new NoEntityTrace());
         this.items.add(new NoHandshake());
         this.items.add(new PingSpoof());
-        this.items.add(new AutoReconnect());
 
         // movement
         this.items.add(new AutoWalk());
@@ -68,7 +69,6 @@ public class ModuleManager extends ConfigurableManager<Module> {
         this.items.add(new AntiHunger());
         this.items.add(new AntiLevitation());
         this.items.add(new AntiVoid());
-        this.items.add(new AutoRespawn());
         this.items.add(new Blink());
         this.items.add(new FastUse());
         this.items.add(new Freecam());
