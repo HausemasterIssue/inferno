@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
-@Module.Define(name = "Respawn", description = "Automatically respawns you")
+@Module.Define(name = "AutoRespawn", description = "Automatically respawns you")
 public class AutoRespawn extends Module {
     private static final FileManager FILES = FileManager.getInstance();
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd 'at' HH:mm:ss z");
