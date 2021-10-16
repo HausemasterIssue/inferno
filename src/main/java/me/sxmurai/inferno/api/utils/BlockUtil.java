@@ -160,6 +160,17 @@ public class BlockUtil extends Wrapper {
         }
     }
 
+    public static void placeCrystal(BlockPos pos, EnumHand hand, boolean swing) {
+        RayTraceResult result = mc.world.rayTraceBlocks(new Vec3d(mc.player.posX, mc.player.posY + mc.player.getEyeHeight(), mc.player.posZ), new Vec3d(pos.x + 0.5, pos.y - 0.5, pos.z + 0.5));
+        EnumFacing facing = result == null || result.sideHit == null ? EnumFacing.UP : result.sideHit;
+
+        mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(pos, facing, hand, 0.0f, 0.0f, 0.0f));
+
+        if (swing) {
+            mc.player.swingArm(hand);
+        }
+    }
+
     // @todo rewrite
     public static EnumFacing getFacing(BlockPos pos) {
         for (EnumFacing direction : EnumFacing.values()) {
