@@ -3,32 +3,25 @@
 
 A re-done version of my very very very old anarchy Minecraft client using Forge 1.12.2
 
-This isn't fully done, so if you want to use it you can either find a JAR in the releases, but I barely add new things there. So, you should [build](#building) it yourself.
+This is nowhere near completion, and I have much to learn and do with this client. It'll eventually get there, but it's 100% a WIP client.
 
-This is also meant for Anarchy Environments, I do not encourage you to use this on non anarchy servers.
+If for some reason you'd like to run the client, you can download a pre compiled release, or build it yourself for the latest build.
 
 ---
 
 ## Building
 
-You need Java 8 installed to build the client. I personally use Java 8u101, but any version of Java 8 should work just fine with building the client.
+You need any version over Java 8u101, because forgegradle doesn't want you using anything less, although you could try. You can then download the code and run the following three commands in a command prompt:
 
-Download the code and run these commands in a terminal opened in the directory where you downloaded the code:
+If you are on MacOS or Linux, run the commands below prefixed by `./` so that you can run these gradle tasks.
 
-For Windows:
 ```
 gradlew setupDecompWorkspace
 gradlew clean
 gradlew build
 ```
-For Mac:
-```
-./gradlew setupDecompWorkspace
-./gradlew clean
-./gradlew build
-```
 
-Look in the builds/libs folder, and use the one with the -release tag at the end of it before the .jar file extension.
+Your jar will be under `build/libs/inferno-1.0.0-release.jar`
 
 ---
 
@@ -36,28 +29,19 @@ Look in the builds/libs folder, and use the one with the -release tag at the end
 
 These are clients/people who have helped with the development of the client
 
+I'm going to be honest, this is one of the first serious clients I'm making, and I don't know how to do alot of stuff. I'm definitely learning, but some modules could be paritally or even fully skidded from clients. I do plan to remove them with my own code soon, but just know that some things are not made by me and I try to keep the credits updated as much as I remember.
+
+If you feel as I took your code and completely ripped it without crediting you properly, please open an issue and tell me what code was stolen and what client or how to credit you.
+
 #### Clients:
-- Phobos 1.9.0 - CrystalChams + Custom Font renderer
-- Cosmos 1.0.0 - 2b2t Criticals bypass
+- Phobos 1.9.0 - CrystalChams + Custom Font renderer, probably alot more shit. Need to remove alot of that though
+- GameSense - NCP Step bypass packets
+- Cosmos 1.0.0 - 2b2t Criticals bypass, ReverseStep shit
 
 #### People
 - [Sxmurai](https://github.com/Sxmurai) - Main Developer
 - [HausemasterIssue](https://github.com/HausemasterIssue) - Contributor
-
-## Todo
-
-- Rewrite ClickGUI (it looks like ass)
-- ~~Make Settings registration use reflections~~
-- Rewrite RenderUtils
-- ~~Better rotation manager~~ (this should be fine)
-- ~~Remove skidded code~~
-- Possibly remove access transformers and upgrade to forgegradle 3?
-- Rewrite some render modules
-- Rewrite AutoCrystal
-- ~~Rewrite Block placements~~
-- Comment the code [In progress]
-- ~~Remove and rewrite skidded mixins~~
-- Better CustomFont renderer (soon:tm:)
+- [linustouchtips](https://github.com/linustouchtips/) - Telling me to get this client's shit together (which im almost done doing)
 
 ---
 
