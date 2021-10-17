@@ -62,6 +62,7 @@ public class ModuleManager extends ConfigurableManager<Module> {
         this.items.add(new SafeWalk());
         this.items.add(new Speed());
         this.items.add(new Sprint());
+        this.items.add(new Step());
         this.items.add(new Velocity());
 
         // player
