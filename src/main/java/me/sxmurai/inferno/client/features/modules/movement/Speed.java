@@ -61,6 +61,7 @@ public class Speed extends Module {
 
                 switch (this.stage) {
                     case 0: {
+                        this.moveSpeed = this.mode.getValue() == Mode.STRICT_STRAFE ? 0.33119999999999994 : 1.29 * this.getBaseNCPSpeed();
                         this.lastDistance = 0.0;
                         ++this.stage;
                         break;
@@ -80,7 +81,7 @@ public class Speed extends Module {
                     }
 
                     case 3: {
-                        this.moveSpeed = this.lastDistance - 0.86 * (this.lastDistance - (this.mode.getValue() == Mode.STRICT_STRAFE ? 0.23 : this.getBaseNCPSpeed()));
+                        this.moveSpeed = this.lastDistance - 0.76 * (this.lastDistance - (this.mode.getValue() == Mode.STRICT_STRAFE ? 0.2372 : this.getBaseNCPSpeed()));
                         break;
                     }
 
@@ -170,7 +171,7 @@ public class Speed extends Module {
     }
 
     private double getBaseNCPSpeed() {
-        double baseSpeed = 0.272;
+        double baseSpeed = 0.2873;
         if (mc.player.isPotionActive(MobEffects.SPEED)) {
             baseSpeed *= 1.0 + 0.2 * (mc.player.getActivePotionEffect(MobEffects.SPEED).getAmplifier() + 1);
         }
