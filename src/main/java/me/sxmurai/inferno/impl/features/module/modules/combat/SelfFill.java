@@ -12,10 +12,9 @@ import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import org.lwjgl.input.Keyboard;
 
 @Module.Define(name = "SelfFill", category = Module.Category.Combat)
-@Module.Info(description = "Lags you back into a block", bind = Keyboard.KEY_B)
+@Module.Info(description = "Lags you back into a block")
 public class SelfFill extends Module {
     public final Option<Type> type = new Option<>("Type", Type.Obsidian);
     public final Option<Boolean> offhand = new Option<>("Offhand", true);
