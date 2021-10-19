@@ -57,6 +57,16 @@ public class InfernoGUI extends GuiScreen {
     }
 
     @Override
+    protected void keyTyped(char typedChar, int keyCode) throws IOException {
+        super.keyTyped(typedChar, keyCode);
+        this.barRenderer.keyTyped(typedChar, keyCode);
+
+        if (this.current != null) {
+            this.current.keyTyped(typedChar, keyCode);
+        }
+    }
+
+    @Override
     public boolean doesGuiPauseGame() {
         return GUI.pause.getValue();
     }
