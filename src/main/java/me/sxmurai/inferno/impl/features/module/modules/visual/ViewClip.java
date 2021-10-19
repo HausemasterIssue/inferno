@@ -8,7 +8,7 @@ import me.sxmurai.inferno.impl.option.Option;
 public class ViewClip extends Module {
     public static ViewClip INSTANCE;
 
-    public static final Option<Double> distance = new Option<>("Distance", 1.0, 4.5, 10.0);
+    public static final Option<Double> distance = new Option<>("Distance", 4.5, 1.0, 10.0);
 
     public ViewClip() {
         INSTANCE = this;
