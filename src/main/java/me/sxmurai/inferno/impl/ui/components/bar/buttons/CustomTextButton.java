@@ -1,0 +1,45 @@
+package me.sxmurai.inferno.impl.ui.components.bar.buttons;
+
+import me.sxmurai.inferno.api.util.RenderUtil;
+import me.sxmurai.inferno.api.util.Timer;
+import me.sxmurai.inferno.impl.ui.components.widgets.button.buttons.TextButton;
+
+public class CustomTextButton extends TextButton {
+    private final Timer progressTimer = new Timer();
+    private float progress = 0.0f;
+
+    public CustomTextButton(String name) {
+        super(name);
+    }
+
+    @Override
+    public void render(int mouseX, int mouseY) {
+        super.render(mouseX, mouseY);
+
+        int width = mc.fontRenderer.getStringWidth(this.name);
+        if (this.progressTimer.passedMs(100L)) {
+            this.progressTimer.reset();
+
+            if (this.isMouseInBounds(mouseX, mouseY)) {
+                if (progress < width + 2.0) {
+                    progress += 1.0f;
+                }
+            } else {
+                if (progress != 0.0f) {
+                    progress -= 1.0f;
+                }
+            }
+        }
+
+        if (progress != 0.0f) {
+            double posY = this.y + mc.fontRenderer.FONT_HEIGHT + 1.5;
+            RenderUtil.drawLine(this.x - 2.0, posY, this.x + this.progress, posY, 1.5f, -1);
+        }
+    }
+
+    @Override
+    public void update() {
+        this.width = mc.fontRenderer.getStringWidth(this.name);
+        this.height = 12.0;
+    }
+}

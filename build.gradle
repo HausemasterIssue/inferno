@@ -16,7 +16,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'com.github.johnrengelman.shadow'
 
-version = "1.0.0"
+version = "b1.1.0"
 group = "me.sxmurai.inferno"
 archivesBaseName = "inferno"
 
@@ -27,7 +27,7 @@ minecraft {
     version = "1.12.2-14.23.5.2847"
     runDir = "run"
     mappings = "stable_39"
-    coreMod = "me.sxmurai.inferno.loader.ForgeMixinLoader"
+    coreMod = "me.sxmurai.inferno.asm.MixinLoader"
     makeObfSourceJar = false
 }
 
@@ -84,7 +84,7 @@ jar {
                 'tweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
                 'TweakOrder': 0,
                 // 'FMLCorePluginContainsFMLMod': 'true',
-                'FMLCorePlugin': 'me.sxmurai.inferno.loader.ForgeMixinLoader',
+                'FMLCorePlugin': 'me.sxmurai.inferno.asm.MixinLoader',
                 'ForceLoadAsMod': 'true',
                 'FMLAT': 'inferno_at.cfg'
         )

@@ -4,41 +4,16 @@
   "mixinPriority": 2147483647,
   "minVersion": "0.7-SNAPSHOT",
   "compatibilityLevel": "JAVA_8",
-  "package": "me.sxmurai.inferno.loader.mixins",
+  "package": "me.sxmurai.inferno.asm.mixins",
   "refmap": "mixins.inferno.refmap.json",
   "verbose": true,
   "mixins": [
-    "entity.player.MixinEntityPlayer",
-    "entity.player.MixinEntityPlayerSP",
-    "entity.ridden.MixinAbstractHorse",
-    "entity.ridden.MixinEntityLlama",
-    "entity.ridden.MixinEntityPig",
-
-    "input.MixinKeyBinding",
     "input.MixinPlayerControllerMP",
 
     "network.MixinNetworkManager",
 
-    "render.entity.tile.MixinTileEntitySignRenderer",
-    "render.entity.MixinEntityRenderer",
-    "render.entity.MixinRenderEnderCrystal",
-    "render.entity.MixinRenderLivingBase",
-    "render.entity.MixinRenderPlayer",
-    "render.gui.MixinGuiDisconnected",
-    "render.gui.MixinGuiIngame",
-    "render.gui.MixinGuiPlayerTabOverlay",
-    "render.MixinItemRenderer",
-    "render.MixinLayerArmorBase",
-    "render.MixinParticleManager",
-
-    "world.blocks.states.MixinBlockStateImplementation",
-    "world.blocks.MixinBlock",
-    "world.blocks.MixinBlockCactus",
-    "world.blocks.MixinBlockFire",
     "world.blocks.MixinBlockSlime",
     "world.blocks.MixinBlockSoulSand",
-    "world.sounds.MixinElytraSound",
-    "world.MixinWorldClient",
 
     "MixinMinecraft"
   ],
