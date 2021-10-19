@@ -26,6 +26,21 @@ public class InventoryUtil implements Util {
         return -1;
     }
 
+    public static int getHotbarItemSlot(Class<? extends Item> clazz, boolean offhand) {
+        if (offhand && clazz.isInstance(getHeld(EnumHand.OFF_HAND).getItem())) {
+            return OFFHAND_SLOT;
+        }
+
+        for (int i = 0; i < 9; ++i) {
+            ItemStack stack = mc.player.inventory.getStackInSlot(i);
+            if (!stack.isEmpty && clazz.isInstance(stack.getItem())) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
     public static boolean isHolding(Item item, boolean offhand) {
         return getHeld(EnumHand.MAIN_HAND).getItem() == item || (offhand && getHeld(EnumHand.OFF_HAND).getItem() == item);
     }
