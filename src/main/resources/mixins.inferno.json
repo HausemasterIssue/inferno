@@ -12,6 +12,8 @@
 
     "network.MixinNetworkManager",
 
+    "render.MixinEntityRenderer",
+
     "world.blocks.MixinBlockSlime",
     "world.blocks.MixinBlockSoulSand",
 

@@ -11,6 +11,7 @@ import me.sxmurai.inferno.impl.features.module.modules.movement.Sprint;
 import me.sxmurai.inferno.impl.features.module.modules.player.FastUse;
 import me.sxmurai.inferno.impl.features.module.modules.player.Reach;
 import me.sxmurai.inferno.impl.features.module.modules.visual.Brightness;
+import me.sxmurai.inferno.impl.features.module.modules.visual.ViewClip;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import org.lwjgl.input.Keyboard;
@@ -41,7 +42,8 @@ public class ModuleManager {
                 new Reach(),
 
                 // visual
-                new Brightness()
+                new Brightness(),
+                new ViewClip()
         );
 
         this.modules.forEach(Module::registerAllOptions);
