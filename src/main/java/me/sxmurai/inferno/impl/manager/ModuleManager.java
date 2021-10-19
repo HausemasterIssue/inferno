@@ -43,6 +43,8 @@ public class ModuleManager {
                 // visual
                 new Brightness()
         );
+
+        this.modules.forEach(Module::registerAllOptions);
     }
 
     @SubscribeEvent

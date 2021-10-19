@@ -53,6 +53,12 @@ public class ClickGUIComponent extends Component {
         this.panels.forEach((button) -> button.mouseReleased(mouseX, mouseY, state));
     }
 
+    @Override
+    public void keyTyped(char character, int code) {
+        super.keyTyped(character, code);
+        this.panels.forEach((button) -> button.keyTyped(character, code));
+    }
+
     public static ClickGUIComponent getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new ClickGUIComponent();

@@ -1,6 +1,8 @@
 package me.sxmurai.inferno.api.util;
 
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class RenderUtil implements Util {
@@ -70,6 +72,16 @@ public class RenderUtil implements Util {
         GL11.glEnd();
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL11.GL_BLEND);
+    }
+
+    public static void drawTexture(ResourceLocation location, int x, int y, int width, int height) {
+        GL11.glPushMatrix();
+        GL11.glColor4d(1.0, 1.0, 1.0, 1.0);
+
+        mc.getTextureManager().bindTexture(location);
+        Gui.drawModalRectWithCustomSizedTexture(x, y, 0, 0, width, height, width, height);
+
+        GL11.glPopMatrix();
     }
 
     public static void drawLine(double startX, double startY, double endX, double endY, float width, int hex) {

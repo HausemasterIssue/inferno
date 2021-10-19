@@ -62,4 +62,8 @@ public class Component implements Wrapper {
     public boolean isMouseInBounds(int mouseX, int mouseY) {
         return mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height;
     }
+
+    public boolean isVisible() {
+        return true;
+    }
 }

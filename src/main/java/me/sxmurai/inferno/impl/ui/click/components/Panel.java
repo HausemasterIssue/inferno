@@ -4,6 +4,7 @@ import me.sxmurai.inferno.api.util.RenderUtil;
 import me.sxmurai.inferno.api.util.ScaleUtil;
 import me.sxmurai.inferno.impl.ui.click.components.button.ModuleButton;
 import me.sxmurai.inferno.impl.ui.components.Component;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
@@ -40,6 +41,19 @@ public class Panel extends Component {
 
         if (this.resizing) {
             this.height = Math.max(this.h2 + mouseY, this.y + 16.0);
+        }
+
+        if (this.isMouseInBounds(mouseX, mouseY)) {
+            int scroll = Mouse.getDWheel();
+            if (scroll < 0) {
+                if (this.buttons.get(0).getY() + 10.0 < this.y + 16.0) {
+                    this.buttons.forEach((button) -> button.setY(button.getY() - 10.0));
+                }
+            } else if (scroll > 0) {
+                if (this.buttons.get(this.buttons.size() - 1).getY() - 10.0 < this.y + this.height) {
+                    this.buttons.forEach((button) -> button.setY(button.getY() + 10.0));
+                }
+            }
         }
 
         GL11.glPushAttrib(GL11.GL_SCISSOR_BIT);
@@ -105,6 +119,11 @@ public class Panel extends Component {
         }
 
         this.buttons.forEach((b) -> b.mouseReleased(mouseX, mouseY, state));
+    }
+
+    @Override
+    public void keyTyped(char character, int code) {
+        this.buttons.forEach((b) -> b.keyTyped(character, code));
     }
 
     private boolean isMouseWithinBounds(int mouseX, int mouseY, double x, double y, double w, double h) {

@@ -1,5 +1,6 @@
 package me.sxmurai.inferno.impl.features.module;
 
+import com.google.common.collect.Lists;
 import me.sxmurai.inferno.impl.features.Wrapper;
 import me.sxmurai.inferno.impl.option.Bind;
 import me.sxmurai.inferno.impl.option.Option;
@@ -7,6 +8,8 @@ import net.minecraftforge.common.MinecraftForge;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Module implements Wrapper {
     private final String name;
@@ -16,6 +19,8 @@ public class Module implements Wrapper {
 
     private final Bind bind = new Bind("Bind", -1);
     private final Option<Boolean> drawn = new Option<>("Drawn", true);
+
+    private final ArrayList<Option> options = new ArrayList<>();
 
     private boolean toggled = false;
 
@@ -30,6 +35,22 @@ public class Module implements Wrapper {
         this.description = info == null ? "No description provided." : info.description();
         this.bind.setValue(info == null ? -1 : info.bind());
         this.drawn.setValue(info == null || info.drawn());
+
+        this.options.add(this.bind);
+        this.options.add(this.drawn);
+    }
+
+    public void registerAllOptions() {
+        Arrays.stream(this.getClass().getDeclaredFields())
+                .filter((field) -> Option.class.isAssignableFrom(field.getType()))
+                .forEach((field) -> {
+                    try {
+                        field.setAccessible(true);
+                        this.options.add((Option) field.get(this));
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+                });
     }
 
     public String getName() {
@@ -94,6 +115,10 @@ public class Module implements Wrapper {
     public void onUpdate() { }
     public void onTick() { }
     public void onRenderWorld() { }
+
+    public ArrayList<Option> getOptions() {
+        return options;
+    }
 
     @Retention(RetentionPolicy.RUNTIME)
     public @interface Define {
