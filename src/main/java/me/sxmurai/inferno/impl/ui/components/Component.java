@@ -6,7 +6,7 @@ import net.minecraft.init.SoundEvents;
 
 public class Component implements Wrapper {
     protected final String name;
-    protected double x, y;
+    protected double x = 0.0, y = 0.0;
     protected double width, height;
 
     public Component(String name) {

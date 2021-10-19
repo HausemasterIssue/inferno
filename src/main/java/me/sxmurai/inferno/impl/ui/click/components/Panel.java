@@ -42,19 +42,19 @@ public class Panel extends Component {
         if (this.resizing) {
             this.height = Math.max(this.h2 + mouseY, this.y + 16.0);
         }
-
-        if (this.isMouseInBounds(mouseX, mouseY)) {
-            int scroll = Mouse.getDWheel();
-            if (scroll < 0) {
-                if (this.buttons.get(0).getY() + 10.0 < this.y + 16.0) {
-                    this.buttons.forEach((button) -> button.setY(button.getY() - 10.0));
-                }
-            } else if (scroll > 0) {
-                if (this.buttons.get(this.buttons.size() - 1).getY() - 10.0 < this.y + this.height) {
-                    this.buttons.forEach((button) -> button.setY(button.getY() + 10.0));
-                }
-            }
-        }
+// @todo this is broken
+//        if (this.isMouseInBounds(mouseX, mouseY)) {
+//            int scroll = Mouse.getDWheel();
+//            if (scroll < 0) {
+//                if (this.buttons.get(this.buttons.size() - 1).getY() - 10.0 > this.y + 15.0) {
+//                    this.buttons.forEach((button) -> button.setY(button.getY() - 10.0));
+//                }
+//            } else if (scroll > 0) {
+//                if (this.buttons.get(this.buttons.size() - 1).getY() + 10.0 < this.y + this.height) {
+//                    this.buttons.forEach((button) -> button.setY(button.getY() + 10.0));
+//                }
+//            }
+//        }
 
         GL11.glPushAttrib(GL11.GL_SCISSOR_BIT);
         RenderUtil.scissor((int) this.x, (int) this.y, (int) (this.x + this.width), (int) (this.y + this.height));
@@ -70,7 +70,8 @@ public class Panel extends Component {
                 -1
         );
 
-        double buttonY = (this.y + 14.0) + 1.5;
+        double firstButtonY = this.buttons.get(0).getY();
+        double buttonY = firstButtonY == 0.0 ? (this.y + 14.0) + 1.5 : firstButtonY;
         for (ModuleButton button : this.buttons) {
             button.setX(this.x + 2.0);
             button.setY(buttonY);
