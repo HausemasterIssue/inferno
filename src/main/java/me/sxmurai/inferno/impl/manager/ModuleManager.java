@@ -6,6 +6,7 @@ import me.sxmurai.inferno.impl.features.module.modules.client.GUI;
 import me.sxmurai.inferno.impl.features.module.modules.combat.BowSpam;
 import me.sxmurai.inferno.impl.features.module.modules.combat.Critcals;
 import me.sxmurai.inferno.impl.features.module.modules.combat.SelfFill;
+import me.sxmurai.inferno.impl.features.module.modules.miscellaneous.FakePlayer;
 import me.sxmurai.inferno.impl.features.module.modules.movement.NoSlow;
 import me.sxmurai.inferno.impl.features.module.modules.movement.Sprint;
 import me.sxmurai.inferno.impl.features.module.modules.player.FastUse;
@@ -32,6 +33,7 @@ public class ModuleManager {
                 new SelfFill(),
 
                 // miscellaneous
+                new FakePlayer(),
 
                 // movement
                 new NoSlow(),
