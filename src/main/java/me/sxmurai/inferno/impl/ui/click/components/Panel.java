@@ -22,7 +22,7 @@ public class Panel extends Component {
     public Panel(String name, double x, double y) {
         super(name);
 
-        this.width = 90.0;
+        this.width = 94.0;
         this.height = 235.0;
         this.x = x;
         this.y = y;

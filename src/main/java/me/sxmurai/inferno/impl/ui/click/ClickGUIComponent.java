@@ -31,7 +31,7 @@ public class ClickGUIComponent extends Component {
                 }
             });
 
-            x += 94.0;
+            x += 98.0;
         }
     }
 

@@ -4,6 +4,7 @@ import me.sxmurai.inferno.api.util.ScaleUtil;
 import me.sxmurai.inferno.impl.features.module.Module;
 import me.sxmurai.inferno.impl.option.Bind;
 import me.sxmurai.inferno.impl.option.Option;
+import me.sxmurai.inferno.impl.ui.click.components.other.Slider;
 import me.sxmurai.inferno.impl.ui.components.Component;
 import me.sxmurai.inferno.impl.ui.components.widgets.button.Button;
 import net.minecraft.client.gui.GuiScreen;
@@ -37,6 +38,12 @@ public class ModuleButton extends Button {
                 this.components.add(new BooleanButton(option));
             } else if (option.getValue() instanceof Enum) {
                 this.components.add(new EnumButton(option));
+            } else if (option.getValue() instanceof Number) {
+                if (!option.isNumberSetting()) {
+                    continue;
+                }
+
+                this.components.add(new Slider(option));
             }
         }
     }
@@ -57,9 +64,9 @@ public class ModuleButton extends Button {
                     continue;
                 }
 
-                component.setX(this.x + 4.0);
+                component.setX(this.x + 2.0);
                 component.setY(this.y + (posY += component.getHeight() + 1.0));
-                component.setWidth(this.width - 4.0);
+                component.setWidth(this.width - 2.0);
                 component.setHeight(13.0);
 
                 component.render(mouseX, mouseY);

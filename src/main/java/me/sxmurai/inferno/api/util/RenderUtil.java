@@ -74,6 +74,28 @@ public class RenderUtil implements Util {
         GL11.glDisable(GL11.GL_BLEND);
     }
 
+    public static void drawCircle(double x, double y, double radius, int hex) {
+        ColorUtil.Color color = ColorUtil.getColor(hex);
+
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glColor4f(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
+        GL11.glEnable(GL11.GL_LINE_SMOOTH);
+
+
+
+        GL11.glBegin(GL11.GL_TRIANGLE_FAN);
+
+            for (double angle = 0.0; angle < 2.0 * Math.PI; angle += 0.1) {
+                GL11.glVertex2d(x + Math.sin(angle) * radius, y + Math.cos(angle) * radius);
+            }
+
+        GL11.glEnd();
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glDisable(GL11.GL_LINE_SMOOTH);
+    }
+
     public static void drawTexture(ResourceLocation location, int x, int y, int width, int height) {
         GL11.glPushMatrix();
         GL11.glColor4d(1.0, 1.0, 1.0, 1.0);
