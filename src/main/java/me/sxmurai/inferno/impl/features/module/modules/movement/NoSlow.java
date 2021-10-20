@@ -54,8 +54,6 @@ public class NoSlow extends Module {
     @Override
     public void onUpdate() {
         if (this.guiMove.getValue() && mc.currentScreen != null && !(mc.currentScreen instanceof GuiChat)) {
-            mc.currentScreen.allowUserInput = true;
-
             for (KeyBinding binding : NoSlow.MOVEMENT_KEYS) {
                 KeyBinding.setKeyBindState(binding.keyCode, Keyboard.isKeyDown(binding.keyCode));
             }

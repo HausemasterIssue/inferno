@@ -12,6 +12,7 @@
     "entity.MixinEntityPlayer",
     "entity.MixinEntityPlayerSP",
 
+    "input.MixinKeyBinding",
     "input.MixinPlayerControllerMP",
 
     "network.MixinNetworkManager",
