@@ -7,9 +7,9 @@ import me.sxmurai.inferno.impl.option.Option;
 import net.minecraft.init.Items;
 import net.minecraft.network.play.client.CPacketPlayerDigging;
 
-@Module.Define(name = "BowSpam", category = Module.Category.Combat)
+@Module.Define(name = "AutoBowRelease", category = Module.Category.Combat)
 @Module.Info(description = "Automatically releases your bow for you")
-public class BowSpam extends Module {
+public class AutoBowRelease extends Module {
     public final Option<Boolean> offhand = new Option<>("Offhand", true);
     public final Option<Integer> amount = new Option<>("Amount", 4, 1, 30);
     public final Option<Integer> delay = new Option<>("Delay", 1, 0, 10);

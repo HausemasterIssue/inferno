@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import me.sxmurai.inferno.impl.features.module.Module;
 import me.sxmurai.inferno.impl.features.module.modules.client.GUI;
 import me.sxmurai.inferno.impl.features.module.modules.client.Notifier;
-import me.sxmurai.inferno.impl.features.module.modules.combat.BowSpam;
+import me.sxmurai.inferno.impl.features.module.modules.combat.AutoBowRelease;
 import me.sxmurai.inferno.impl.features.module.modules.combat.Critcals;
 import me.sxmurai.inferno.impl.features.module.modules.combat.SelfFill;
 import me.sxmurai.inferno.impl.features.module.modules.miscellaneous.FakePlayer;
@@ -33,7 +33,7 @@ public class ModuleManager {
                 new Notifier(),
 
                 // combat
-                new BowSpam(),
+                new AutoBowRelease(),
                 new Critcals(),
                 new SelfFill(),
 
