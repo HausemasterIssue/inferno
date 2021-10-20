@@ -71,6 +71,14 @@ public class InfernoGUI extends GuiScreen {
         return GUI.pause.getValue();
     }
 
+    @Override
+    public void onGuiClosed() {
+        super.onGuiClosed();
+        if (GUI.INSTANCE.isOn()) {
+            GUI.INSTANCE.toggle();
+        }
+    }
+
     public void setCurrentComponent(Component component) {
         this.current = component;
     }

@@ -8,7 +8,13 @@ import org.lwjgl.input.Keyboard;
 @Module.Define(name = "GUI", category = Module.Category.Client)
 @Module.Info(description = "Displays the clients GUI", bind = Keyboard.KEY_R)
 public class GUI extends Module {
+    public static GUI INSTANCE;
+
     public static Option<Boolean> pause = new Option<>("Pause", false);
+
+    public GUI() {
+        INSTANCE = this;
+    }
 
     @Override
     protected void onActivated() {
