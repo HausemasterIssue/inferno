@@ -15,6 +15,7 @@ import me.sxmurai.inferno.impl.features.module.modules.player.FastUse;
 import me.sxmurai.inferno.impl.features.module.modules.player.Reach;
 import me.sxmurai.inferno.impl.features.module.modules.player.Scaffold;
 import me.sxmurai.inferno.impl.features.module.modules.visual.Brightness;
+import me.sxmurai.inferno.impl.features.module.modules.visual.NoRender;
 import me.sxmurai.inferno.impl.features.module.modules.visual.ViewClip;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
@@ -51,6 +52,7 @@ public class ModuleManager {
 
                 // visual
                 new Brightness(),
+                new NoRender(),
                 new ViewClip()
         );
 

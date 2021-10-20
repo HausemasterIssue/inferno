@@ -18,7 +18,12 @@
     "network.MixinNetworkManager",
 
     "render.MixinEntityRenderer",
+    "render.MixinGuiIngame",
+    "render.MixinItemRenderer",
+    "render.MixinLayerArmorBase",
+    "render.MixinParticleManager",
     "render.MixinRenderPlayer",
+    "render.MixinRenderXPOrb",
 
     "world.blocks.MixinBlockSlime",
     "world.blocks.MixinBlockSoulSand",
