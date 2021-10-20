@@ -8,11 +8,14 @@
   "refmap": "mixins.inferno.refmap.json",
   "verbose": true,
   "mixins": [
+    "entity.MixinEntityPlayerSP",
+
     "input.MixinPlayerControllerMP",
 
     "network.MixinNetworkManager",
 
     "render.MixinEntityRenderer",
+    "render.MixinRenderPlayer",
 
     "world.blocks.MixinBlockSlime",
     "world.blocks.MixinBlockSoulSand",

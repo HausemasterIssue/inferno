@@ -3,6 +3,7 @@ package me.sxmurai.inferno;
 import me.sxmurai.inferno.impl.manager.ConfigManager;
 import me.sxmurai.inferno.impl.manager.EventManager;
 import me.sxmurai.inferno.impl.manager.ModuleManager;
+import me.sxmurai.inferno.impl.manager.RotationManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -24,6 +25,7 @@ public class Inferno {
 
     public static ConfigManager configManager;
     public static ModuleManager moduleManager;
+    public static RotationManager rotationManager;
 
     @SubscribeEvent
     public void onPreInit(FMLPreInitializationEvent event) {
@@ -38,9 +40,11 @@ public class Inferno {
 
         moduleManager = new ModuleManager();
         configManager = ConfigManager.getInstance();
+        rotationManager = new RotationManager();
 
         MinecraftForge.EVENT_BUS.register(new EventManager());
         MinecraftForge.EVENT_BUS.register(Inferno.moduleManager);
+        MinecraftForge.EVENT_BUS.register(Inferno.rotationManager);
 
         LOGGER.info("Initialized {} {}. Welcome!", Inferno.NAME, Inferno.VERSION);
     }

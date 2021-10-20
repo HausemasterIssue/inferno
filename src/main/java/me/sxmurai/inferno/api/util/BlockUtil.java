@@ -1,5 +1,6 @@
 package me.sxmurai.inferno.api.util;
 
+import me.sxmurai.inferno.Inferno;
 import me.sxmurai.inferno.impl.features.Wrapper;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.play.client.CPacketEntityAction;
@@ -24,7 +25,7 @@ public class BlockUtil implements Wrapper {
         }
 
         if (rotate) {
-            // @todo RotationManager
+            Inferno.rotationManager.look(neighbor);
         }
 
         Vec3d hitVec = new Vec3d(neighbor.x + 0.5, neighbor.y + 0.5, neighbor.z + 0.5).add(new Vec3d(facing.getOpposite().getDirectionVec()).scale(0.5));
