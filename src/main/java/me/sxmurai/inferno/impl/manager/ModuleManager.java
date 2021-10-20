@@ -3,6 +3,7 @@ package me.sxmurai.inferno.impl.manager;
 import com.google.common.collect.Lists;
 import me.sxmurai.inferno.impl.features.module.Module;
 import me.sxmurai.inferno.impl.features.module.modules.client.GUI;
+import me.sxmurai.inferno.impl.features.module.modules.client.Notifier;
 import me.sxmurai.inferno.impl.features.module.modules.combat.BowSpam;
 import me.sxmurai.inferno.impl.features.module.modules.combat.Critcals;
 import me.sxmurai.inferno.impl.features.module.modules.combat.SelfFill;
@@ -28,6 +29,7 @@ public class ModuleManager {
         this.modules = Lists.newArrayList(
                 // client
                 new GUI(),
+                new Notifier(),
 
                 // combat
                 new BowSpam(),

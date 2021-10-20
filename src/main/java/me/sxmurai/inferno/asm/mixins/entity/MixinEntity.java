@@ -1,6 +1,6 @@
 package me.sxmurai.inferno.asm.mixins.entity;
 
-import me.sxmurai.inferno.api.entity.PushEvent;
+import me.sxmurai.inferno.api.event.entity.PushEvent;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Mixin;

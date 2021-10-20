@@ -1,6 +1,6 @@
 package me.sxmurai.inferno.impl.manager;
 
-import me.sxmurai.inferno.api.entity.UpdateWalkingPlayerEvent;
+import me.sxmurai.inferno.api.event.entity.UpdateWalkingPlayerEvent;
 import me.sxmurai.inferno.api.event.network.PacketEvent;
 import me.sxmurai.inferno.api.util.RotationUtil;
 import me.sxmurai.inferno.api.util.Timer;

@@ -22,6 +22,7 @@
 
     "world.blocks.MixinBlockSlime",
     "world.blocks.MixinBlockSoulSand",
+    "world.MixinWorldClient",
 
     "MixinMinecraft"
   ],

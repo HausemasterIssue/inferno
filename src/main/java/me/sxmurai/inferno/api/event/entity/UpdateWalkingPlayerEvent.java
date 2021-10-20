@@ -1,4 +1,4 @@
-package me.sxmurai.inferno.api.entity;
+package me.sxmurai.inferno.api.event.entity;
 
 import net.minecraftforge.fml.common.eventhandler.Event;
 

@@ -1,6 +1,6 @@
 package me.sxmurai.inferno.impl.features.module.modules.movement;
 
-import me.sxmurai.inferno.api.entity.PushEvent;
+import me.sxmurai.inferno.api.event.entity.PushEvent;
 import me.sxmurai.inferno.api.event.network.PacketEvent;
 import me.sxmurai.inferno.impl.features.module.Module;
 import me.sxmurai.inferno.impl.option.Option;
