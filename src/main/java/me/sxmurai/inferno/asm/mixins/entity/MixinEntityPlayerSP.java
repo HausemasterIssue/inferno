@@ -1,8 +1,10 @@
 package me.sxmurai.inferno.asm.mixins.entity;
 
+import me.sxmurai.inferno.api.entity.PushEvent;
 import me.sxmurai.inferno.api.entity.UpdateWalkingPlayerEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.entity.Entity;
 import net.minecraft.network.play.client.CPacketEntityAction;
 import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Mixin;
@@ -10,6 +12,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(EntityPlayerSP.class)
 public class MixinEntityPlayerSP {
@@ -29,6 +32,15 @@ public class MixinEntityPlayerSP {
     @Inject(method = "onUpdateWalkingPlayer", at = @At("RETURN"))
     public void onUpdateWalkingPlayerPost(CallbackInfo info) {
         MinecraftForge.EVENT_BUS.post(new UpdateWalkingPlayerEvent(UpdateWalkingPlayerEvent.Era.POST));
+    }
+
+    @Inject(method = "pushOutOfBlocks", at = @At("HEAD"), cancellable = true)
+    public void onPushOutOfBlocks(double x, double y, double z, CallbackInfoReturnable<Boolean> info) {
+        PushEvent event = new PushEvent(PushEvent.Type.BLOCKS, (Entity) (Object) this);
+        MinecraftForge.EVENT_BUS.post(event);
+        if (event.isCanceled()) {
+            info.setReturnValue(false);
+        }
     }
 
     private void handlePositioning() {

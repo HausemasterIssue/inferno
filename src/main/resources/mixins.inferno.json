@@ -8,6 +8,8 @@
   "refmap": "mixins.inferno.refmap.json",
   "verbose": true,
   "mixins": [
+    "entity.MixinEntity",
+    "entity.MixinEntityPlayer",
     "entity.MixinEntityPlayerSP",
 
     "input.MixinPlayerControllerMP",
