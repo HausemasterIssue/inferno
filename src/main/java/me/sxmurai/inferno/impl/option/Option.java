@@ -1,5 +1,8 @@
 package me.sxmurai.inferno.impl.option;
 
+import me.sxmurai.inferno.api.event.inferno.OptionChangeEvent;
+import net.minecraftforge.common.MinecraftForge;
+
 import java.util.function.Supplier;
 
 public class Option<T> {
@@ -43,6 +46,7 @@ public class Option<T> {
 
     public void setValue(T value) {
         this.value = value;
+        MinecraftForge.EVENT_BUS.post(new OptionChangeEvent(this));
     }
 
     public T getDefaultValue() {

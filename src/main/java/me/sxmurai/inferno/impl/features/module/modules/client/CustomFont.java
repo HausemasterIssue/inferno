@@ -1,7 +1,10 @@
 package me.sxmurai.inferno.impl.features.module.modules.client;
 
+import me.sxmurai.inferno.Inferno;
+import me.sxmurai.inferno.api.event.inferno.OptionChangeEvent;
 import me.sxmurai.inferno.impl.features.module.Module;
 import me.sxmurai.inferno.impl.option.Option;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.awt.*;
 
@@ -20,6 +23,13 @@ public class CustomFont extends Module {
 
     public CustomFont() {
         INSTANCE = this;
+    }
+
+    @SubscribeEvent
+    public void onOptionChange(OptionChangeEvent event) {
+        if (this.getOptions().stream().anyMatch((o) -> event.getOption().equals(o))) {
+            Inferno.fontManager.resetCustomFont();
+        }
     }
 
     public enum Style {
