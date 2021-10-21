@@ -29,6 +29,8 @@ public class TotemPopManager implements Wrapper {
                         player.entityId,
                         player.getName() + " has popped " + ChatFormatting.GREEN + totems + ChatFormatting.RESET + " totems."
                 );
+
+                this.toAnnounce.remove(player);
             }
         }
     }
