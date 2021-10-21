@@ -11,10 +11,7 @@ import me.sxmurai.inferno.impl.features.module.modules.movement.FastFall;
 import me.sxmurai.inferno.impl.features.module.modules.movement.NoSlow;
 import me.sxmurai.inferno.impl.features.module.modules.movement.Sprint;
 import me.sxmurai.inferno.impl.features.module.modules.movement.Velocity;
-import me.sxmurai.inferno.impl.features.module.modules.player.FastUse;
-import me.sxmurai.inferno.impl.features.module.modules.player.Reach;
-import me.sxmurai.inferno.impl.features.module.modules.player.Scaffold;
-import me.sxmurai.inferno.impl.features.module.modules.player.Speedmine;
+import me.sxmurai.inferno.impl.features.module.modules.player.*;
 import me.sxmurai.inferno.impl.features.module.modules.visual.Brightness;
 import me.sxmurai.inferno.impl.features.module.modules.visual.NoRender;
 import me.sxmurai.inferno.impl.features.module.modules.visual.ViewClip;
@@ -55,6 +52,7 @@ public class ModuleManager {
                 new Reach(),
                 new Scaffold(),
                 new Speedmine(),
+                new Timer(),
 
                 // visual
                 new Brightness(),
