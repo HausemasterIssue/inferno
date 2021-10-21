@@ -22,18 +22,18 @@ public class NoRender extends Module {
     public static Option<Boolean> xp = new Option<>("XP", false);
     public static Option<Boolean> portals = new Option<>("Portals", false);
     public static Option<Boolean> fov = new Option<>("FOV", false);
-    public static Option<Armor> armor = new Option<>("Armor", Armor.NONE);
-    public static Option<Bossbar> bossbar = new Option<>("Bossbar", Bossbar.NONE);
+    public static Option<Armor> armor = new Option<>("Armor", Armor.None);
+    public static Option<Bossbar> bossbar = new Option<>("Bossbar", Bossbar.None);
 
     public NoRender() {
         INSTANCE = this;
     }
 
     public enum Armor {
-        NONE, GLINT, REMOVE
+        None, Glint, Remove
     }
 
     public enum Bossbar {
-        NONE, REMOVE, STACK
+        None, Remove, Stack
     }
 }
