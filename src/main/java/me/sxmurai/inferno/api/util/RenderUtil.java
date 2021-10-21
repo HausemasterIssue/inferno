@@ -2,6 +2,7 @@ package me.sxmurai.inferno.api.util;
 
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
@@ -20,7 +21,7 @@ public class RenderUtil implements Util {
         width = (width * 2.0) + x;
         height = (height * 2.0) + y;
 
-        GL11.glEnable(GL11.GL_BLEND);
+        GlStateManager.enableBlend();
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glColor4f(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
         GL11.glEnable(GL11.GL_LINE_SMOOTH);
@@ -50,6 +51,7 @@ public class RenderUtil implements Util {
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL11.GL_LINE_SMOOTH);
+        GlStateManager.disableBlend();
 
         GL11.glScaled(2.0, 2.0, 0.0);
         GL11.glPopAttrib();
@@ -58,7 +60,7 @@ public class RenderUtil implements Util {
     public static void drawRectangle(double x, double y, double width, double height, int hex) {
         ColorUtil.Color color = ColorUtil.getColor(hex);
 
-        GL11.glEnable(GL11.GL_BLEND);
+        GlStateManager.enableBlend();
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glColor4f(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
 
@@ -72,12 +74,13 @@ public class RenderUtil implements Util {
         GL11.glEnd();
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GlStateManager.disableBlend();
     }
 
     public static void drawCircle(double x, double y, double radius, int hex) {
         ColorUtil.Color color = ColorUtil.getColor(hex);
 
-        GL11.glEnable(GL11.GL_BLEND);
+        GlStateManager.enableBlend();
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glColor4f(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
         GL11.glEnable(GL11.GL_LINE_SMOOTH);
@@ -92,6 +95,7 @@ public class RenderUtil implements Util {
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL11.GL_LINE_SMOOTH);
+        GlStateManager.disableBlend();
     }
 
     public static void drawTexture(ResourceLocation location, int x, int y, int width, int height) {
@@ -108,7 +112,7 @@ public class RenderUtil implements Util {
         ColorUtil.Color color = ColorUtil.getColor(hex);
 
         GL11.glPushMatrix();
-        GL11.glEnable(GL11.GL_BLEND);
+        GlStateManager.enableBlend();
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glColor4f(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
         GL11.glLineWidth(width);
@@ -125,6 +129,7 @@ public class RenderUtil implements Util {
         GL11.glLineWidth(1.0f);
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GlStateManager.disableBlend();
         GL11.glDisable(GL11.GL_LINE_SMOOTH);
         GL11.glPopMatrix();
     }
