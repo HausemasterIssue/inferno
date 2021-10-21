@@ -28,7 +28,7 @@ Once that is all completed successfully and done, your jar file will be under `b
 
 ## Upcoming Things
 
-You can join the unmaintained and dead [discord](https://discord.gg/j9jxrw7xez ), but your best bet is to check the projects tab. The most recently updated one is at [Project b1.1.0](https://github.com/Sxmurai/inferno/projects/1)
+You can join the unmaintained and dead [discord](https://discord.gg/2WFgNZtAUq), but your best bet is to check the projects tab. The most recently updated one is at [Project b1.1.0](https://github.com/Sxmurai/inferno/projects/1)
 
 [Issues made by me](https://github.com/Sxmurai/inferno/issues/created_by/Sxmurai) can also give a good pointer as to what's coming up.
 
