@@ -5,6 +5,7 @@ import me.sxmurai.inferno.impl.features.module.Module;
 import me.sxmurai.inferno.impl.features.module.modules.client.GUI;
 import me.sxmurai.inferno.impl.features.module.modules.client.Notifier;
 import me.sxmurai.inferno.impl.features.module.modules.combat.AutoBowRelease;
+import me.sxmurai.inferno.impl.features.module.modules.combat.AutoObsidian;
 import me.sxmurai.inferno.impl.features.module.modules.combat.Critcals;
 import me.sxmurai.inferno.impl.features.module.modules.combat.SelfFill;
 import me.sxmurai.inferno.impl.features.module.modules.miscellaneous.FakePlayer;
@@ -34,6 +35,7 @@ public class ModuleManager {
 
                 // combat
                 new AutoBowRelease(),
+                new AutoObsidian(),
                 new Critcals(),
                 new SelfFill(),
 
