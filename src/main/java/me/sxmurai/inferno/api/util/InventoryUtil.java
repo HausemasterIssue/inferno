@@ -1,11 +1,15 @@
 package me.sxmurai.inferno.api.util;
 
 import net.minecraft.block.Block;
+import net.minecraft.inventory.ClickType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.client.CPacketHeldItemChange;
 import net.minecraft.util.EnumHand;
+
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class InventoryUtil implements Util {
     public static final int OFFHAND_SLOT = 45;
@@ -61,5 +65,48 @@ public class InventoryUtil implements Util {
         }
 
         mc.playerController.updateController();
+    }
+
+    public static class Task {
+        private final int slot;
+        private final boolean update;
+        private final boolean shiftClick;
+
+        public Task(int slot, boolean update, boolean shiftClick) {
+            this.slot = slot;
+            this.update = update;
+            this.shiftClick = shiftClick;
+        }
+
+        public void run() {
+            mc.playerController.windowClick(0, this.slot, 0, this.shiftClick ? ClickType.QUICK_MOVE : ClickType.PICKUP, mc.player);
+            if (this.update) {
+                mc.playerController.updateController();
+            }
+        }
+    }
+
+    public static class TaskHandler {
+        private final Queue<Task> tasks = new ConcurrentLinkedQueue<>();
+        private final TickTimer timer = new TickTimer();
+
+        public void run(int ticks, int actions) {
+            if (this.timer.passed(ticks)) {
+                this.timer.reset();
+
+                for (int i = 0; i < actions; ++i) {
+                    Task task = this.tasks.poll();
+                    if (task == null) {
+                        break;
+                    }
+
+                    task.run();
+                }
+            }
+        }
+
+        public void add(Task task) {
+            this.tasks.add(task);
+        }
     }
 }

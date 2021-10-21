@@ -4,10 +4,7 @@ import com.google.common.collect.Lists;
 import me.sxmurai.inferno.impl.features.module.Module;
 import me.sxmurai.inferno.impl.features.module.modules.client.GUI;
 import me.sxmurai.inferno.impl.features.module.modules.client.Notifier;
-import me.sxmurai.inferno.impl.features.module.modules.combat.AutoBowRelease;
-import me.sxmurai.inferno.impl.features.module.modules.combat.AutoObsidian;
-import me.sxmurai.inferno.impl.features.module.modules.combat.Critcals;
-import me.sxmurai.inferno.impl.features.module.modules.combat.SelfFill;
+import me.sxmurai.inferno.impl.features.module.modules.combat.*;
 import me.sxmurai.inferno.impl.features.module.modules.miscellaneous.FakePlayer;
 import me.sxmurai.inferno.impl.features.module.modules.movement.FastFall;
 import me.sxmurai.inferno.impl.features.module.modules.movement.NoSlow;
@@ -39,6 +36,7 @@ public class ModuleManager {
                 new AutoBowRelease(),
                 new AutoObsidian(),
                 new Critcals(),
+                new Quiver(),
                 new SelfFill(),
 
                 // miscellaneous
