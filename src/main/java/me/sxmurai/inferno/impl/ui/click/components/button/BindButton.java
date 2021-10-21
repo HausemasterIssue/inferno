@@ -1,5 +1,6 @@
 package me.sxmurai.inferno.impl.ui.click.components.button;
 
+import me.sxmurai.inferno.Inferno;
 import me.sxmurai.inferno.api.util.ScaleUtil;
 import me.sxmurai.inferno.impl.features.module.Module;
 import me.sxmurai.inferno.impl.ui.components.widgets.button.Button;
@@ -17,7 +18,7 @@ public class BindButton extends Button {
     @Override
     public void render(int mouseX, int mouseY) {
         String text = this.waiting ? "Listening..." : ("Bind: " + (this.module.getBind() == -1 ? "None" : Keyboard.getKeyName(this.module.getBind())));
-        mc.fontRenderer.drawStringWithShadow(text, (float) (this.x) + 2.3f, ScaleUtil.centerTextY((float) this.y, (float) this.height), -1);
+        Inferno.fontManager.drawCorrectString(text, (float) (this.x) + 2.3f, ScaleUtil.centerTextY((float) this.y, (float) this.height), -1);
     }
 
     @Override

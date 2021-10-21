@@ -1,5 +1,6 @@
 package me.sxmurai.inferno.impl.ui.click.components.button;
 
+import me.sxmurai.inferno.Inferno;
 import me.sxmurai.inferno.api.util.ScaleUtil;
 import me.sxmurai.inferno.impl.option.EnumConverter;
 import me.sxmurai.inferno.impl.option.Option;
@@ -15,7 +16,7 @@ public class EnumButton extends Button {
 
     @Override
     public void render(int mouseX, int mouseY) {
-        mc.fontRenderer.drawStringWithShadow(this.name + ": " + this.option.getValue().name(), (float) (this.x) + 2.3f, ScaleUtil.centerTextY((float) this.y, (float) this.height), -1);
+        Inferno.fontManager.drawCorrectString(this.name + ": " + this.option.getValue().name(), (float) (this.x) + 2.3f, ScaleUtil.centerTextY((float) this.y, (float) this.height), -1);
     }
 
     @Override

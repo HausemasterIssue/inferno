@@ -1,5 +1,6 @@
 package me.sxmurai.inferno.impl.ui.click.components.button;
 
+import me.sxmurai.inferno.Inferno;
 import me.sxmurai.inferno.api.util.ScaleUtil;
 import me.sxmurai.inferno.impl.option.Option;
 import me.sxmurai.inferno.impl.ui.components.widgets.button.Button;
@@ -14,7 +15,7 @@ public class BooleanButton extends Button {
 
     @Override
     public void render(int mouseX, int mouseY) {
-        mc.fontRenderer.drawStringWithShadow(this.name, (float) (this.x) + 2.3f, ScaleUtil.centerTextY((float) this.y, (float) this.height), this.option.getValue() ? -1 : -5592406);
+        Inferno.fontManager.drawCorrectString(this.name, (float) (this.x) + 2.3f, ScaleUtil.centerTextY((float) this.y, (float) this.height), this.option.getValue() ? -1 : -5592406);
     }
 
     @Override

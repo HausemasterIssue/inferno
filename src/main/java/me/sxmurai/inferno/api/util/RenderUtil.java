@@ -47,8 +47,8 @@ public class RenderUtil implements Util {
             }
 
         GL11.glEnd();
+        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
-        GL11.glDisable(GL11.GL_BLEND);
         GL11.glDisable(GL11.GL_LINE_SMOOTH);
 
         GL11.glScaled(2.0, 2.0, 0.0);
@@ -70,8 +70,8 @@ public class RenderUtil implements Util {
             GL11.glVertex2d(x, y);
 
         GL11.glEnd();
+        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
-        GL11.glDisable(GL11.GL_BLEND);
     }
 
     public static void drawCircle(double x, double y, double radius, int hex) {
@@ -82,8 +82,6 @@ public class RenderUtil implements Util {
         GL11.glColor4f(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
         GL11.glEnable(GL11.GL_LINE_SMOOTH);
 
-
-
         GL11.glBegin(GL11.GL_TRIANGLE_FAN);
 
             for (double angle = 0.0; angle < 2.0 * Math.PI; angle += 0.1) {
@@ -91,8 +89,8 @@ public class RenderUtil implements Util {
             }
 
         GL11.glEnd();
+        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
-        GL11.glDisable(GL11.GL_BLEND);
         GL11.glDisable(GL11.GL_LINE_SMOOTH);
     }
 
@@ -109,6 +107,7 @@ public class RenderUtil implements Util {
     public static void drawLine(double startX, double startY, double endX, double endY, float width, int hex) {
         ColorUtil.Color color = ColorUtil.getColor(hex);
 
+        GL11.glPushMatrix();
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glColor4f(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
@@ -124,9 +123,10 @@ public class RenderUtil implements Util {
 
         GL11.glEnd();
         GL11.glLineWidth(1.0f);
+        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
-        GL11.glDisable(GL11.GL_BLEND);
         GL11.glDisable(GL11.GL_LINE_SMOOTH);
+        GL11.glPopMatrix();
     }
 
     public static void scissor(int x, int y, int width, int height) {

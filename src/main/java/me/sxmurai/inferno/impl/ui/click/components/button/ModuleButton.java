@@ -1,5 +1,6 @@
 package me.sxmurai.inferno.impl.ui.click.components.button;
 
+import me.sxmurai.inferno.Inferno;
 import me.sxmurai.inferno.api.util.ScaleUtil;
 import me.sxmurai.inferno.impl.features.module.Module;
 import me.sxmurai.inferno.impl.option.Bind;
@@ -50,11 +51,11 @@ public class ModuleButton extends Button {
 
     @Override
     public void render(int mouseX, int mouseY) {
-        mc.fontRenderer.drawStringWithShadow(this.name, ((float) this.x) + 2.3f, ScaleUtil.centerTextY((float) this.y, (float) this.height), this.module.isOn() ? -1 : -5592406);
+        Inferno.fontManager.drawCorrectString(this.name, ((float) this.x) + 2.3f, ScaleUtil.centerTextY((float) this.y, (float) this.height), this.module.isOn() ? -1 : -5592406);
 
         if (this.module.getOptions().size() > 2) { // has more than the two default already added settings
-            int width = mc.fontRenderer.getStringWidth("...");
-            mc.fontRenderer.drawStringWithShadow("...", (float) (this.x + this.width - 2.0) - width, ScaleUtil.centerTextY((float) this.y, (float) this.height), -1);
+            int width = Inferno.fontManager.getWidth("...");
+            Inferno.fontManager.drawCorrectString("...", (float) (this.x + this.width - 2.0) - width, ScaleUtil.centerTextY((float) this.y, (float) this.height), -1);
         }
 
         if (this.expanded) {

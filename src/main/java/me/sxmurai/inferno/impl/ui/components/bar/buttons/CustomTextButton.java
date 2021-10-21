@@ -1,5 +1,6 @@
 package me.sxmurai.inferno.impl.ui.components.bar.buttons;
 
+import me.sxmurai.inferno.Inferno;
 import me.sxmurai.inferno.api.util.RenderUtil;
 import me.sxmurai.inferno.api.util.Timer;
 import me.sxmurai.inferno.impl.ui.components.widgets.button.buttons.TextButton;
@@ -16,7 +17,7 @@ public class CustomTextButton extends TextButton {
     public void render(int mouseX, int mouseY) {
         super.render(mouseX, mouseY);
 
-        int width = mc.fontRenderer.getStringWidth(this.name);
+        int width = Inferno.fontManager.getWidth(this.name);
         if (this.progressTimer.passedMs(100L)) {
             this.progressTimer.reset();
 
@@ -32,14 +33,14 @@ public class CustomTextButton extends TextButton {
         }
 
         if (progress != 0.0f) {
-            double posY = this.y + mc.fontRenderer.FONT_HEIGHT + 1.5;
+            double posY = this.y + Inferno.fontManager.getHeight() + 1.5;
             RenderUtil.drawLine(this.x - 2.0, posY, this.x + this.progress, posY, 1.5f, -1);
         }
     }
 
     @Override
     public void update() {
-        this.width = mc.fontRenderer.getStringWidth(this.name);
+        this.width = Inferno.fontManager.getWidth(this.name);
         this.height = 12.0;
     }
 }

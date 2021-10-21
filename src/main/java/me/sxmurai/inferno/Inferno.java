@@ -25,6 +25,7 @@ public class Inferno {
     public static NotificationManager notificationManager;
     public static RotationManager rotationManager;
     public static TotemPopManager totemPopManager;
+    public static FontManager fontManager;
 
     @SubscribeEvent
     public void onPreInit(FMLPreInitializationEvent event) {
@@ -42,6 +43,7 @@ public class Inferno {
         configManager = ConfigManager.getInstance();
         rotationManager = new RotationManager();
         totemPopManager = new TotemPopManager();
+        fontManager = new FontManager();
 
         MinecraftForge.EVENT_BUS.register(new EventManager());
         MinecraftForge.EVENT_BUS.register(Inferno.moduleManager);

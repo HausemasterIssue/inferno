@@ -1,5 +1,6 @@
 package me.sxmurai.inferno.impl.ui.click.components.other;
 
+import me.sxmurai.inferno.Inferno;
 import me.sxmurai.inferno.api.util.RenderUtil;
 import me.sxmurai.inferno.api.util.ScaleUtil;
 import me.sxmurai.inferno.impl.option.Option;
@@ -27,10 +28,10 @@ public class Slider extends Component {
 
         float center = ScaleUtil.centerTextY((float) this.y, (float) this.height);
 
-        mc.fontRenderer.drawStringWithShadow(this.name + ": " + this.option.getValue(), (float) (this.x) + 2.3f, center - 2.0f, -1);
+        Inferno.fontManager.drawCorrectString(this.name + ": " + this.option.getValue(), (float) (this.x) + 2.3f, center - 2.0f, -1);
 
         double endX = this.x + (this.option.getValue().floatValue() <= this.option.getMin().floatValue() ? 0.0 : this.width * this.partialMultiplier());
-        double posY = this.y + mc.fontRenderer.FONT_HEIGHT + 2.0;
+        double posY = this.y + Inferno.fontManager.getHeight() + 2.0;
 
         RenderUtil.drawLine(this.x + 2.3, posY, endX - 1.0, posY,1.55f, new Color(253, 31, 31).getRGB());
         RenderUtil.drawCircle(endX, posY, 1.55, new Color(253, 31, 31).getRGB());
