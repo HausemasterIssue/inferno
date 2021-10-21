@@ -9,6 +9,7 @@ import me.sxmurai.inferno.impl.features.module.modules.combat.AutoObsidian;
 import me.sxmurai.inferno.impl.features.module.modules.combat.Critcals;
 import me.sxmurai.inferno.impl.features.module.modules.combat.SelfFill;
 import me.sxmurai.inferno.impl.features.module.modules.miscellaneous.FakePlayer;
+import me.sxmurai.inferno.impl.features.module.modules.movement.FastFall;
 import me.sxmurai.inferno.impl.features.module.modules.movement.NoSlow;
 import me.sxmurai.inferno.impl.features.module.modules.movement.Sprint;
 import me.sxmurai.inferno.impl.features.module.modules.movement.Velocity;
@@ -43,6 +44,7 @@ public class ModuleManager {
                 new FakePlayer(),
 
                 // movement
+                new FastFall(),
                 new NoSlow(),
                 new Sprint(),
                 new Velocity(),

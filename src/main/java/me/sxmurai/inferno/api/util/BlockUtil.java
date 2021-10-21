@@ -2,6 +2,8 @@ package me.sxmurai.inferno.api.util;
 
 import me.sxmurai.inferno.Inferno;
 import me.sxmurai.inferno.impl.features.Wrapper;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.play.client.CPacketEntityAction;
 import net.minecraft.network.play.client.CPacketPlayerTryUseItemOnBlock;
@@ -60,5 +62,9 @@ public class BlockUtil implements Wrapper {
 
     public static boolean intersects(BlockPos pos) {
         return !mc.world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(pos), (v) -> v != null && !v.isDead).isEmpty();
+    }
+
+    public static boolean isInLiquid() {
+        return mc.player.isInWater() || mc.player.isInLava();
     }
 }
