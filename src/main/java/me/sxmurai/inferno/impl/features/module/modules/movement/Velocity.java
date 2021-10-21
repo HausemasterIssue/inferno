@@ -76,9 +76,9 @@ public class Velocity extends Module {
                     return;
                 }
 
-                actualEvent.setX(-actualEvent.getX() * this.horizontal.getValue().doubleValue());
-                actualEvent.setY(-actualEvent.getY() * this.vertical.getValue().doubleValue());
-                actualEvent.setZ(-actualEvent.getZ() * this.horizontal.getValue().doubleValue());
+                actualEvent.setX(actualEvent.getX() * this.horizontal.getValue().doubleValue());
+                actualEvent.setY(actualEvent.getY() * this.vertical.getValue().doubleValue());
+                actualEvent.setZ(actualEvent.getZ() * this.horizontal.getValue().doubleValue());
             } else {
                 if (event.getMaterial() == PushEvent.Type.BLOCKS) {
                     event.setCanceled(this.blocks.getValue());
