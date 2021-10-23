@@ -7,6 +7,7 @@ import me.sxmurai.inferno.impl.features.module.modules.client.GUI;
 import me.sxmurai.inferno.impl.features.module.modules.client.Notifier;
 import me.sxmurai.inferno.impl.features.module.modules.combat.*;
 import me.sxmurai.inferno.impl.features.module.modules.miscellaneous.FakePlayer;
+import me.sxmurai.inferno.impl.features.module.modules.miscellaneous.NoHandshake;
 import me.sxmurai.inferno.impl.features.module.modules.miscellaneous.NoRotate;
 import me.sxmurai.inferno.impl.features.module.modules.movement.FastFall;
 import me.sxmurai.inferno.impl.features.module.modules.movement.NoSlow;
@@ -42,6 +43,7 @@ public class ModuleManager {
 
                 // miscellaneous
                 new FakePlayer(),
+                new NoHandshake(),
                 new NoRotate(),
 
                 // movement
