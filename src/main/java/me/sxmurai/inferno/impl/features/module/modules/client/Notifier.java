@@ -1,6 +1,7 @@
 package me.sxmurai.inferno.impl.features.module.modules.client;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
+import io.netty.util.internal.ConcurrentSet;
 import me.sxmurai.inferno.Inferno;
 import me.sxmurai.inferno.api.event.entity.EntityRemoveEvent;
 import me.sxmurai.inferno.api.event.entity.EntitySpawnEvent;
@@ -11,11 +12,14 @@ import me.sxmurai.inferno.impl.features.module.Module;
 import me.sxmurai.inferno.impl.option.Option;
 import net.minecraft.entity.item.EntityEnderPearl;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.network.play.server.SPacketSoundEffect;
+import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Comparator;
+import java.util.Set;
 
 @Module.Define(name = "Notifier", category = Module.Category.Client)
 @Module.Info(description = "Notifies you when things happen")
@@ -28,9 +32,34 @@ public class Notifier extends Module {
     public final Option<Boolean> chorus = new Option<>("Chorus", false);
     public final Option<Boolean> visualRange = new Option<>("VisualRange", false);
     public final Option<Boolean> friends = new Option<>("Friends", false, this.visualRange::getValue);
+    public final Option<Boolean> strength = new Option<>("Strength", false);
+
+    private final Set<EntityPlayer> strengthCunts = new ConcurrentSet<>();
 
     public Notifier() {
         INSTANCE = this;
+    }
+
+    @Override
+    protected void onDeactivated() {
+        this.strengthCunts.clear();
+    }
+
+    @Override
+    public void onUpdate() {
+        if (!this.strengthCunts.isEmpty()) {
+            if (!this.strength.getValue()) {
+                this.strengthCunts.clear();
+                return;
+            }
+
+            for (EntityPlayer player : this.strengthCunts) {
+                if (!player.isPotionActive(MobEffects.STRENGTH)) {
+                    Command.send(player.getName() + " no longer has strength!");
+                    this.strengthCunts.remove(player);
+                }
+            }
+        }
     }
 
     @SubscribeEvent
@@ -78,6 +107,19 @@ public class Notifier extends Module {
                 double y = packet.getY();
                 double z = packet.getZ();
                 Command.send("A player ate a chorus fruit at " + ChatFormatting.RED + "X: " + x + ", Y: " + y + ", Z: " + z + ChatFormatting.RESET);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onPotionAdded(PotionEvent.PotionAddedEvent event) {
+        if (event.getPotionEffect().getPotion() == MobEffects.STRENGTH && this.strength.getValue()) {
+            if (event.getEntity() instanceof EntityPlayer) {
+                EntityPlayer player = (EntityPlayer) event.getEntity();
+                if (!this.strengthCunts.contains(player)) {
+                    this.strengthCunts.add(player);
+                    Command.send(player.getName() + " has strength!");
+                }
             }
         }
     }
