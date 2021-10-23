@@ -55,7 +55,7 @@ public class Scaffold extends Module {
 
             mc.player.setActiveHand(hand);
             
-            if(stopSprint.getValue() && !mc.world.isAirBlock(next)) {
+            if(stopSprint.getValue() && !mc.world.isAirBlock(next) && mc.player.isSprinting()) {
                 mc.player.setSprinting(false);
             }
 
