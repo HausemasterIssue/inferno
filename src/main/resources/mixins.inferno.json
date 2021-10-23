@@ -22,6 +22,7 @@
     "render.MixinItemRenderer",
     "render.MixinLayerArmorBase",
     "render.MixinParticleManager",
+    "render.MixinRenderLivingBase",
     "render.MixinRenderPlayer",
     "render.MixinRenderXPOrb",
 
