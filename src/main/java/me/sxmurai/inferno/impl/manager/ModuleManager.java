@@ -14,10 +14,7 @@ import me.sxmurai.inferno.impl.features.module.modules.movement.NoSlow;
 import me.sxmurai.inferno.impl.features.module.modules.movement.Sprint;
 import me.sxmurai.inferno.impl.features.module.modules.movement.Velocity;
 import me.sxmurai.inferno.impl.features.module.modules.player.*;
-import me.sxmurai.inferno.impl.features.module.modules.visual.Brightness;
-import me.sxmurai.inferno.impl.features.module.modules.visual.NoRender;
-import me.sxmurai.inferno.impl.features.module.modules.visual.PopChams;
-import me.sxmurai.inferno.impl.features.module.modules.visual.ViewClip;
+import me.sxmurai.inferno.impl.features.module.modules.visual.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import org.lwjgl.input.Keyboard;
@@ -63,6 +60,7 @@ public class ModuleManager {
 
                 // visual
                 new Brightness(),
+                new Chams(),
                 new NoRender(),
                 new PopChams(),
                 new ViewClip()
