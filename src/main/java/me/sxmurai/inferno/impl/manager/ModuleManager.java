@@ -33,6 +33,7 @@ public class ModuleManager {
                 new Notifier(),
 
                 // combat
+                new Aura(),
                 new AutoBowRelease(),
                 new AutoObsidian(),
                 new Critcals(),
