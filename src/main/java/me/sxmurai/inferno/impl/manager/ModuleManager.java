@@ -49,6 +49,7 @@ public class ModuleManager {
 
                 // player
                 new FastUse(),
+                new MultiTask(),
                 new Reach(),
                 new Scaffold(),
                 new Speedmine(),
