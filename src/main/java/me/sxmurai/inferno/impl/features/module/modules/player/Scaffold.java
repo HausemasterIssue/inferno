@@ -9,7 +9,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.client.settings.KeyBinding;
 
 @Module.Define(name = "Scaffold", category = Module.Category.Player)
 @Module.Info(description = "Places blocks under your feet")
@@ -56,10 +55,8 @@ public class Scaffold extends Module {
 
             mc.player.setActiveHand(hand);
             
-            if(stopSprint.getValue()) {
-                if(mc.gameSettings.keyBindSprint.isKeyDown()) {
-                    KeyBinding.setKeyBindState(mc.gameSettings.keyBindSprint.keyCode, false);
-                }
+            if(stopSprint.getValue() && !mc.world.isAirBlock(next)) {
+                mc.player.setSprinting(false);
             }
 
             BlockUtil.place(next, hand, this.place.getValue() == Place.Packet, this.sneak.getValue(), this.swing.getValue(), this.rotate.getValue());
