@@ -142,7 +142,7 @@ public class Aura extends Module {
                 return false;
             }
 
-            if (!this.passive.getValue() && EntityUtil.isPlayer(e)) {
+            if (!this.passive.getValue() && EntityUtil.isPassive(e)) {
                 return false;
             }
 
