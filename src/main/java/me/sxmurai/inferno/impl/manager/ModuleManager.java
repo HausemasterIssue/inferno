@@ -53,6 +53,7 @@ public class ModuleManager {
 
                 // player
                 new FastUse(),
+                new HotbarRefill(),
                 new MultiTask(),
                 new Reach(),
                 new Scaffold(),
