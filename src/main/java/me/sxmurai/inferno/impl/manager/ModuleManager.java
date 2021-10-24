@@ -34,6 +34,7 @@ public class ModuleManager {
                 // combat
                 new Aura(),
                 new AutoBowRelease(),
+                new AutoCrystal(),
                 new AutoObsidian(),
                 new Critcals(),
                 new Quiver(),

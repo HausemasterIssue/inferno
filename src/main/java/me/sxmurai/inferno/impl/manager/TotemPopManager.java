@@ -24,7 +24,12 @@ public class TotemPopManager implements Wrapper {
     public void onUpdate(LivingEvent.LivingUpdateEvent event) {
         if (event.getEntityLiving() == mc.player && fullNullCheck() && !this.toAnnounce.isEmpty() && Notifier.INSTANCE.isOn() && Notifier.totems.getValue()) {
             for (EntityPlayer player : this.toAnnounce) {
-                int totems = this.pops.get(player);
+                Integer totems = this.pops.get(player);
+                if (totems == null) {
+                    this.toAnnounce.remove(player);
+                    continue;
+                }
+
                 Inferno.notificationManager.notify(
                         player.entityId,
                         player.getName() + " has popped " + ChatFormatting.GREEN + totems + ChatFormatting.RESET + " totems."
