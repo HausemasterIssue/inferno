@@ -52,7 +52,7 @@ public class PopChams extends Module {
 
     @SubscribeEvent
     public void onTotemPop(TotemPopEvent event) {
-        if (event.getPlayer() == mc.player) {
+        if (event.getPlayer() != mc.player) {
             EntityPlayer popper = event.getPlayer();
             if (mc.player.getDistance(popper) > this.range.getValue()) {
                 return;
