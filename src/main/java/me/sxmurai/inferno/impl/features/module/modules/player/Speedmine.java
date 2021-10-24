@@ -2,11 +2,15 @@ package me.sxmurai.inferno.impl.features.module.modules.player;
 
 import me.sxmurai.inferno.api.event.world.DamageBlockEvent;
 import me.sxmurai.inferno.api.event.world.DestroyBlockEvent;
+import me.sxmurai.inferno.api.util.ColorUtil;
 import me.sxmurai.inferno.api.util.InventoryUtil;
+import me.sxmurai.inferno.api.util.RenderUtil;
+import me.sxmurai.inferno.api.util.Timer;
 import me.sxmurai.inferno.impl.features.module.Module;
 import me.sxmurai.inferno.impl.option.Option;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.network.play.client.CPacketPlayerDigging;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -19,7 +23,12 @@ public class Speedmine extends Module {
     public final Option<Boolean> doublePacket = new Option<>("Double", false);
     public final Option<Float> range = new Option<>("Range", 5.0f, 1.0f, 10.0f);
     public final Option<Switch> switchTo = new Option<>("Switch", Switch.None);
+    public final Option<Boolean> render = new Option<>("Render", true);
+    public final Option<Boolean> filled = new Option<>("Filled", true, render::getValue);
+    public final Option<Boolean> outlined = new Option<>("Outlined", true, render::getValue);
+    public final Option<Float> lineWidth = new Option<>("Width", 1.0f, 0.1f, 5.0f, () -> render.getValue() && outlined.getValue());
 
+    private final Timer timer = new Timer();
     private BlockPos current = null;
     private int oldSlot = -1;
 
@@ -27,6 +36,17 @@ public class Speedmine extends Module {
     protected void onDeactivated() {
         this.current = null;
         this.switchBack();
+    }
+
+    @Override
+    public void onRenderWorld() {
+        if (this.current != null && this.render.getValue()) {
+            boolean passed = this.timer.passedMs(2000L);
+            int red = passed ? 0 : 255;
+            int green = passed ? 255 : 0;
+
+            RenderUtil.drawEsp(RenderUtil.toScreen(new AxisAlignedBB(this.current)), this.filled.getValue(), this.outlined.getValue(), this.lineWidth.getValue(), ColorUtil.getColor(red, green, 0, 80));
+        }
     }
 
     @Override
@@ -51,6 +71,8 @@ public class Speedmine extends Module {
                 InventoryUtil.switchTo(slot, this.switchTo.getValue() == Switch.Silent);
             }
         }
+
+        this.timer.reset();
 
         switch (this.mode.getValue()) {
             case Packet: {

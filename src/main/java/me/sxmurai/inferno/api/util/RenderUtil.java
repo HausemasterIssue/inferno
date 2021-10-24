@@ -3,7 +3,10 @@ package me.sxmurai.inferno.api.util;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.Vec3d;
 import org.lwjgl.opengl.GL11;
 
 public class RenderUtil implements Util {
@@ -142,5 +145,71 @@ public class RenderUtil implements Util {
                 (width - x) * resolution.getScaleFactor(),
                 (height - y) * resolution.getScaleFactor()
         );
+    }
+
+    public static void drawFilledBox(AxisAlignedBB box, int hex) {
+        GL11.glPushMatrix();
+        GlStateManager.enableBlend();
+        GL11.glDisable(GL11.GL_DEPTH);
+        GlStateManager.tryBlendFuncSeparate(770, 771, 0, 1);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glDepthMask(false);
+        GL11.glEnable(GL11.GL_LINE_SMOOTH);
+        GL11.glHint(GL11.GL_LINE_SMOOTH_HINT, GL11.GL_NICEST);
+
+        ColorUtil.Color color = ColorUtil.getColor(hex);
+        RenderGlobal.renderFilledBox(box, color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
+
+        GL11.glDisable(GL11.GL_LINE_SMOOTH);
+        GL11.glDepthMask(true);
+        GL11.glEnable(GL11.GL_DEPTH);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GlStateManager.disableBlend();
+        GL11.glPopMatrix();
+    }
+
+    public static void drawOutlinedBox(AxisAlignedBB box, float width, int hex) {
+        GL11.glPushMatrix();
+        GlStateManager.enableBlend();
+        GL11.glDisable(GL11.GL_DEPTH);
+        GlStateManager.tryBlendFuncSeparate(770, 771, 0, 1);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glDepthMask(false);
+        GL11.glEnable(GL11.GL_LINE_SMOOTH);
+        GL11.glHint(GL11.GL_LINE_SMOOTH_HINT, GL11.GL_NICEST);
+        GL11.glLineWidth(width);
+
+        ColorUtil.Color color = ColorUtil.getColor(hex);
+        RenderGlobal.drawBoundingBox(box.minX, box.minY, box.minZ, box.maxX, box.maxY, box.maxZ, color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
+
+        GL11.glLineWidth(1.0f);
+        GL11.glDisable(GL11.GL_LINE_SMOOTH);
+        GL11.glDepthMask(true);
+        GL11.glEnable(GL11.GL_DEPTH);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GlStateManager.disableBlend();
+        GL11.glPopMatrix();
+    }
+
+    public static void drawEsp(AxisAlignedBB box, boolean filled, boolean outline, float width, int hex) {
+        if (filled) {
+            drawFilledBox(box, hex);
+        }
+
+        if (outline) {
+            drawOutlinedBox(box, width, hex);
+        }
+    }
+
+    public static double interpolate(double start, double end) {
+        return end + (start - end) * mc.getRenderPartialTicks();
+    }
+
+    public static Vec3d getScreen() {
+        return new Vec3d(-mc.renderManager.renderPosX, -mc.renderManager.renderPosY, -mc.renderManager.renderPosZ);
+    }
+
+    public static AxisAlignedBB toScreen(AxisAlignedBB box) {
+        return box.offset(getScreen());
     }
 }
