@@ -17,6 +17,7 @@
 
     "network.MixinNetworkManager",
 
+    "render.MixinBufferBuilder",
     "render.MixinEntityRenderer",
     "render.MixinGuiIngame",
     "render.MixinItemRenderer",
@@ -26,6 +27,7 @@
     "render.MixinRenderPlayer",
     "render.MixinRenderXPOrb",
 
+    "world.blocks.MixinBlock",
     "world.blocks.MixinBlockSlime",
     "world.blocks.MixinBlockSoulSand",
     "world.MixinWorldClient",

@@ -67,7 +67,8 @@ public class ModuleManager {
                 new Chams(),
                 new NoRender(),
                 new PopChams(),
-                new ViewClip()
+                new ViewClip(),
+                new Wallhack()
         );
 
         this.modules.forEach(Module::registerAllOptions);
