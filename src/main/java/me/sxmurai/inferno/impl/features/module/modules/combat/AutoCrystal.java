@@ -169,6 +169,20 @@ public class AutoCrystal extends Module {
     }
 
     @Override
+    public void onRenderWorld() {
+        if (this.placePos != null) {
+            int c = ColorUtil.getColor(255, 255, 255, 80);
+            if (this.crystal != null) {
+                if (this.placePos.equals(this.crystal.getPosition().down())) {
+                    c = ColorUtil.getColor(0, 255, 0, 80);
+                }
+            }
+
+            RenderUtil.drawFilledBox(RenderUtil.toScreen(new AxisAlignedBB(this.placePos)), c);
+        }
+    }
+
+    @Override
     public void onTick() {
         if (!this.check()) {
             return;
