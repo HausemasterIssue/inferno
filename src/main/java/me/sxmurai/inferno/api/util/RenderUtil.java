@@ -60,6 +60,54 @@ public class RenderUtil implements Util {
         GL11.glPopAttrib();
     }
 
+    public static void drawHalfRoundedRectangle(double x, double y, double width, double height, double radius, int hex) {
+        ColorUtil.Color color = ColorUtil.getColor(hex);
+
+        GL11.glPushAttrib(GL11.GL_POINTS);
+        GL11.glScaled(0.5, 0.5, 0.5);
+
+        x *= 2.0;
+        y *= 2.0;
+
+        width = (width * 2.0) + x;
+        height = (height * 2.0) + y;
+
+        GlStateManager.enableBlend();
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glColor4f(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
+        GL11.glEnable(GL11.GL_LINE_SMOOTH);
+
+        GL11.glBegin(GL11.GL_POLYGON);
+
+        double pi = Math.PI;
+
+        int i;
+        for (i = 0; i <= 90; ++i) {
+            GL11.glVertex2d(x + radius + Math.sin(i * pi / 180.0) * radius * -1.0, y + radius + Math.cos(i * pi / 180.0) * radius * -1.0);
+        }
+
+        for (i = 90; i <= 180; ++i) {
+            GL11.glVertex2d((x + 1.0) + Math.sin(i * pi / 180.0) * -1.0, (height - 1.0) + Math.cos(i * pi / 180.0) * -1.0);
+        }
+
+        for (i = 0; i <= 90; ++i) {
+            GL11.glVertex2d((width - 1.0) + Math.sin(i * pi / 180.0), (height - 1.0) + Math.cos(i * pi / 180.0));
+        }
+
+        for (i = 90; i <= 180; ++i) {
+            GL11.glVertex2d(width - radius + Math.sin(i * pi / 180.0) * radius, y + radius + Math.cos(i * pi / 180.0) * radius);
+        }
+
+        GL11.glEnd();
+        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glDisable(GL11.GL_LINE_SMOOTH);
+        GlStateManager.disableBlend();
+
+        GL11.glScaled(2.0, 2.0, 0.0);
+        GL11.glPopAttrib();
+    }
+
     public static void drawRectangle(double x, double y, double width, double height, int hex) {
         ColorUtil.Color color = ColorUtil.getColor(hex);
 

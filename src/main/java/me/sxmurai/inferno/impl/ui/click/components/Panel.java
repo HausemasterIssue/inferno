@@ -43,33 +43,32 @@ public class Panel extends Component {
         if (this.resizing) {
             this.height = Math.max(this.h2 + mouseY, this.y + 16.0);
         }
-// @todo this is broken
-//        if (this.isMouseInBounds(mouseX, mouseY)) {
-//            int scroll = Mouse.getDWheel();
-//            if (scroll < 0) {
-//                if (this.buttons.get(this.buttons.size() - 1).getY() - 10.0 > this.y + 15.0) {
-//                    this.buttons.forEach((button) -> button.setY(button.getY() - 10.0));
-//                }
-//            } else if (scroll > 0) {
-//                if (this.buttons.get(this.buttons.size() - 1).getY() + 10.0 < this.y + this.height) {
-//                    this.buttons.forEach((button) -> button.setY(button.getY() + 10.0));
-//                }
-//            }
-//        }
 
-        GL11.glPushAttrib(GL11.GL_SCISSOR_BIT);
-        RenderUtil.scissor((int) this.x, (int) this.y, (int) (this.x + this.width), (int) (this.y + this.height));
-        GL11.glEnable(GL11.GL_SCISSOR_TEST);
+        if (this.isMouseInBounds(mouseX, mouseY)) {
+            int scroll = Mouse.getDWheel();
+            if (scroll < 0) {
+                this.buttons.forEach((button) -> button.setY(button.getY() - 10.0));
+            } else if (scroll > 0) {
+                this.buttons.forEach((button) -> button.setY(button.getY() + 10.0));
+            }
+        }
 
-        RenderUtil.drawRoundedRectangle(this.x, this.y, this.width, this.height, 15.0, new Color(35, 39, 42).getRGB());
-        RenderUtil.drawLine(this.x, this.y + 15.0, this.x + this.width, this.y + 15.0, 2.0f, new Color(253, 31, 31).getRGB());
-
+        // title bar
+        RenderUtil.drawHalfRoundedRectangle(this.x, this.y, this.width, 16.0, 15.0, new Color(35, 39, 42).getRGB());
         Inferno.fontManager.drawCorrectString(
                 this.name,
                 ScaleUtil.centerTextX((float) this.x, (float) this.width, mc.fontRenderer.getStringWidth(this.name)),
                 ScaleUtil.centerTextY((float) this.y, 14.0f) + 2.5f,
                 -1
         );
+
+        GL11.glPushAttrib(GL11.GL_SCISSOR_BIT);
+        RenderUtil.scissor((int) this.x, (int) (this.y) + 15, (int) (this.x + this.width), (int) (this.y + this.height));
+        GL11.glEnable(GL11.GL_SCISSOR_TEST);
+
+        // rest
+        RenderUtil.drawRoundedRectangle(this.x, this.y, this.width, this.height, 15.0, new Color(35, 39, 42).getRGB());
+        RenderUtil.drawLine(this.x, this.y + 15.0, this.x + this.width, this.y + 15.0, 2.0f, new Color(253, 31, 31).getRGB());
 
         double firstButtonY = this.buttons.get(0).getY();
         double buttonY = firstButtonY == 0.0 ? (this.y + 14.0) + 1.5 : firstButtonY;
