@@ -96,13 +96,12 @@ public class EventManager implements Wrapper {
 
     @SubscribeEvent
     public void onRenderWorldLast(RenderWorldLastEvent event) {
-        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GlStateManager.disableTexture2D();
         GlStateManager.enableBlend();
-        GL11.glDisable(GL11.GL_ALPHA);
+        GlStateManager.disableAlpha();
         GlStateManager.tryBlendFuncSeparate(770, 771, 0, 1);
-        GL11.glShadeModel(GL11.GL_SMOOTH);
+        GlStateManager.shadeModel(GL11.GL_SMOOTH);
         GlStateManager.disableDepth();
-        GL11.glDepthMask(false);
 
             for (Module module : Inferno.moduleManager.getModules()) {
                 if (module.isOn()) {
@@ -112,13 +111,12 @@ public class EventManager implements Wrapper {
                 }
             }
 
-        GL11.glLineWidth(1.0f);
-        GL11.glShadeModel(GL11.GL_FLAT);
+        GlStateManager.glLineWidth(1.0f);
+        GlStateManager.shadeModel(GL11.GL_FLAT);
         GlStateManager.disableBlend();
-        GL11.glEnable(GL11.GL_ALPHA);
-        GL11.glEnable(GL11.GL_TEXTURE_2D);
-        GlStateManager.disableDepth();
-        GL11.glDepthMask(true);
+        GlStateManager.enableAlpha();
+        GlStateManager.enableTexture2D();
+        GlStateManager.enableDepth();
         GlStateManager.enableCull();
     }
 }
