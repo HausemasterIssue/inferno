@@ -1,4 +1,4 @@
-package me.sxmurai.inferno.api.event.world;
+package me.sxmurai.inferno.impl.event.world;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.eventhandler.Event;

@@ -1,4 +1,4 @@
-package me.sxmurai.inferno.api.event.network;
+package me.sxmurai.inferno.impl.event.network;
 
 import net.minecraft.network.Packet;
 import net.minecraftforge.fml.common.eventhandler.Cancelable;

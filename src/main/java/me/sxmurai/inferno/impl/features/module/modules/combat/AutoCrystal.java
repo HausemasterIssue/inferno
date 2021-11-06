@@ -1,9 +1,16 @@
 package me.sxmurai.inferno.impl.features.module.modules.combat;
 
 import me.sxmurai.inferno.Inferno;
-import me.sxmurai.inferno.api.event.entity.EntityRemoveEvent;
-import me.sxmurai.inferno.api.event.network.PacketEvent;
-import me.sxmurai.inferno.api.util.*;
+import me.sxmurai.inferno.api.entity.CrystalUtil;
+import me.sxmurai.inferno.api.entity.EntityUtil;
+import me.sxmurai.inferno.api.entity.InventoryUtil;
+import me.sxmurai.inferno.api.entity.RotationUtil;
+import me.sxmurai.inferno.api.render.ColorUtil;
+import me.sxmurai.inferno.api.render.RenderUtil;
+import me.sxmurai.inferno.api.timing.TickTimer;
+import me.sxmurai.inferno.api.world.BlockUtil;
+import me.sxmurai.inferno.impl.event.entity.EntityRemoveEvent;
+import me.sxmurai.inferno.impl.event.network.PacketEvent;
 import me.sxmurai.inferno.impl.features.module.Module;
 import me.sxmurai.inferno.impl.option.Option;
 import net.minecraft.entity.Entity;

@@ -1,7 +1,7 @@
 package me.sxmurai.inferno.impl.features.module.modules.miscellaneous;
 
 import me.sxmurai.inferno.Inferno;
-import me.sxmurai.inferno.api.event.network.PacketEvent;
+import me.sxmurai.inferno.impl.event.network.PacketEvent;
 import me.sxmurai.inferno.impl.features.module.Module;
 import net.minecraft.network.play.server.SPacketPlayerPosLook;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;

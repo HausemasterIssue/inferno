@@ -1,7 +1,7 @@
 package me.sxmurai.inferno.asm.mixins.entity;
 
-import me.sxmurai.inferno.api.event.entity.PushEvent;
-import me.sxmurai.inferno.api.event.entity.UpdateWalkingPlayerEvent;
+import me.sxmurai.inferno.impl.event.entity.PushEvent;
+import me.sxmurai.inferno.impl.event.entity.UpdateWalkingPlayerEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;

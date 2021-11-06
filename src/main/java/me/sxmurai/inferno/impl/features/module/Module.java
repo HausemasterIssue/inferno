@@ -1,7 +1,6 @@
 package me.sxmurai.inferno.impl.features.module;
 
-import com.google.common.collect.Lists;
-import me.sxmurai.inferno.api.event.inferno.ModuleToggledEvent;
+import me.sxmurai.inferno.impl.event.inferno.ModuleToggledEvent;
 import me.sxmurai.inferno.impl.features.Wrapper;
 import me.sxmurai.inferno.impl.option.Bind;
 import me.sxmurai.inferno.impl.option.Option;

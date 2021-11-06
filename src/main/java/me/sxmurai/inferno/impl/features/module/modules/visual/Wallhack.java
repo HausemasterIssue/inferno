@@ -1,7 +1,7 @@
 package me.sxmurai.inferno.impl.features.module.modules.visual;
 
 import com.google.common.collect.Lists;
-import me.sxmurai.inferno.api.event.inferno.OptionChangeEvent;
+import me.sxmurai.inferno.impl.event.inferno.OptionChangeEvent;
 import me.sxmurai.inferno.impl.features.module.Module;
 import me.sxmurai.inferno.impl.option.Option;
 import net.minecraft.block.Block;

@@ -1,7 +1,7 @@
 package me.sxmurai.inferno.asm.mixins.input;
 
-import me.sxmurai.inferno.api.event.world.DamageBlockEvent;
-import me.sxmurai.inferno.api.event.world.DestroyBlockEvent;
+import me.sxmurai.inferno.impl.event.world.DamageBlockEvent;
+import me.sxmurai.inferno.impl.event.world.DestroyBlockEvent;
 import me.sxmurai.inferno.impl.features.module.modules.player.Reach;
 import net.minecraft.client.multiplayer.PlayerControllerMP;
 import net.minecraft.util.EnumFacing;

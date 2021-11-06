@@ -1,7 +1,7 @@
 package me.sxmurai.inferno.asm.mixins.entity;
 
-import me.sxmurai.inferno.api.event.entity.JumpEvent;
-import me.sxmurai.inferno.api.event.entity.PushEvent;
+import me.sxmurai.inferno.impl.event.entity.JumpEvent;
+import me.sxmurai.inferno.impl.event.entity.PushEvent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;

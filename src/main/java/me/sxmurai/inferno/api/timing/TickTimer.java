@@ -1,4 +1,4 @@
-package me.sxmurai.inferno.api.util;
+package me.sxmurai.inferno.api.timing;
 
 public class TickTimer {
     // precision shit

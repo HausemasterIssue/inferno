@@ -1,4 +1,4 @@
-package me.sxmurai.inferno.api.util;
+package me.sxmurai.inferno.api.entity;
 
 import me.sxmurai.inferno.impl.features.Wrapper;
 import net.minecraft.client.renderer.culling.Frustum;

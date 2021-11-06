@@ -1,7 +1,7 @@
 package me.sxmurai.inferno.impl.features.module.modules.combat;
 
-import me.sxmurai.inferno.api.util.BlockUtil;
-import me.sxmurai.inferno.api.util.InventoryUtil;
+import me.sxmurai.inferno.api.world.BlockUtil;
+import me.sxmurai.inferno.api.entity.InventoryUtil;
 import me.sxmurai.inferno.impl.features.module.Module;
 import me.sxmurai.inferno.impl.option.Option;
 import net.minecraft.block.Block;

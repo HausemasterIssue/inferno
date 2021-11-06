@@ -2,14 +2,13 @@ package me.sxmurai.inferno.impl.manager;
 
 import com.google.common.base.Strings;
 import me.sxmurai.inferno.Inferno;
-import me.sxmurai.inferno.api.event.entity.DeathEvent;
-import me.sxmurai.inferno.api.event.entity.TotemPopEvent;
-import me.sxmurai.inferno.api.event.network.ConnectionEvent;
-import me.sxmurai.inferno.api.event.network.PacketEvent;
+import me.sxmurai.inferno.impl.event.entity.DeathEvent;
+import me.sxmurai.inferno.impl.event.entity.TotemPopEvent;
+import me.sxmurai.inferno.impl.event.network.ConnectionEvent;
+import me.sxmurai.inferno.impl.event.network.PacketEvent;
 import me.sxmurai.inferno.impl.features.Wrapper;
 import me.sxmurai.inferno.impl.features.module.Module;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.RenderWolf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.play.server.SPacketEntityMetadata;
@@ -20,7 +19,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import org.apache.logging.log4j.core.layout.GelfLayout;
 import org.lwjgl.opengl.GL11;
 
 import java.util.UUID;

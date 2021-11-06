@@ -1,7 +1,7 @@
 package me.sxmurai.inferno.impl.features.module.modules.miscellaneous;
 
 import io.netty.buffer.Unpooled;
-import me.sxmurai.inferno.api.event.network.PacketEvent;
+import me.sxmurai.inferno.impl.event.network.PacketEvent;
 import me.sxmurai.inferno.impl.features.module.Module;
 import me.sxmurai.inferno.impl.option.Option;
 import net.minecraft.network.PacketBuffer;

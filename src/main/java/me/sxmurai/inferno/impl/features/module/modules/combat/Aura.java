@@ -1,9 +1,9 @@
 package me.sxmurai.inferno.impl.features.module.modules.combat;
 
 import me.sxmurai.inferno.Inferno;
-import me.sxmurai.inferno.api.util.EntityUtil;
-import me.sxmurai.inferno.api.util.InventoryUtil;
-import me.sxmurai.inferno.api.util.TickTimer;
+import me.sxmurai.inferno.api.entity.EntityUtil;
+import me.sxmurai.inferno.api.entity.InventoryUtil;
+import me.sxmurai.inferno.api.timing.TickTimer;
 import me.sxmurai.inferno.impl.features.module.Module;
 import me.sxmurai.inferno.impl.option.Option;
 import net.minecraft.entity.Entity;

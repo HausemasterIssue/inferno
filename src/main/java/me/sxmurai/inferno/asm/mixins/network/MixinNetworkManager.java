@@ -1,7 +1,7 @@
 package me.sxmurai.inferno.asm.mixins.network;
 
 import io.netty.channel.ChannelHandlerContext;
-import me.sxmurai.inferno.api.event.network.PacketEvent;
+import me.sxmurai.inferno.impl.event.network.PacketEvent;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraftforge.common.MinecraftForge;

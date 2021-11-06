@@ -1,4 +1,4 @@
-package me.sxmurai.inferno.api.event.network;
+package me.sxmurai.inferno.impl.event.network;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.eventhandler.Event;

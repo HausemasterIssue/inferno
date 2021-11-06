@@ -1,16 +1,14 @@
 package me.sxmurai.inferno.impl.ui.click.components.button;
 
 import me.sxmurai.inferno.Inferno;
-import me.sxmurai.inferno.api.util.ScaleUtil;
+import me.sxmurai.inferno.api.render.ScaleUtil;
 import me.sxmurai.inferno.impl.features.module.Module;
 import me.sxmurai.inferno.impl.option.Bind;
 import me.sxmurai.inferno.impl.option.Option;
 import me.sxmurai.inferno.impl.ui.click.components.other.Slider;
 import me.sxmurai.inferno.impl.ui.components.Component;
 import me.sxmurai.inferno.impl.ui.components.widgets.button.Button;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 

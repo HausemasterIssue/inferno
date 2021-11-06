@@ -1,6 +1,6 @@
 package me.sxmurai.inferno.impl.option;
 
-import me.sxmurai.inferno.api.event.inferno.OptionChangeEvent;
+import me.sxmurai.inferno.impl.event.inferno.OptionChangeEvent;
 import net.minecraftforge.common.MinecraftForge;
 
 import java.util.function.Supplier;

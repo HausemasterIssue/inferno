@@ -1,6 +1,7 @@
-package me.sxmurai.inferno.api.util;
+package me.sxmurai.inferno.api.render;
 
 import me.sxmurai.inferno.Inferno;
+import me.sxmurai.inferno.api.Util;
 
 public class ScaleUtil implements Util {
     public static float centerTextX(float x, float width, float textWidth) {

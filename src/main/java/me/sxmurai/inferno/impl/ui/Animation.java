@@ -1,6 +1,6 @@
 package me.sxmurai.inferno.impl.ui;
 
-import me.sxmurai.inferno.api.util.Timer;
+import me.sxmurai.inferno.api.timing.Timer;
 
 public class Animation {
     private final Timer progressTimer = new Timer();

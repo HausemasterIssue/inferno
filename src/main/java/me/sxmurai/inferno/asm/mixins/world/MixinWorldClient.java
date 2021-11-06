@@ -1,6 +1,6 @@
 package me.sxmurai.inferno.asm.mixins.world;
 
-import me.sxmurai.inferno.api.event.entity.EntitySpawnEvent;
+import me.sxmurai.inferno.impl.event.entity.EntitySpawnEvent;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.common.MinecraftForge;

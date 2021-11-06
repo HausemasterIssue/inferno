@@ -1,4 +1,4 @@
-package me.sxmurai.inferno.api.event.world;
+package me.sxmurai.inferno.impl.event.world;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;

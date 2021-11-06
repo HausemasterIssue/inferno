@@ -1,5 +1,6 @@
-package me.sxmurai.inferno.api.util;
+package me.sxmurai.inferno.api.entity;
 
+import me.sxmurai.inferno.api.Util;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 

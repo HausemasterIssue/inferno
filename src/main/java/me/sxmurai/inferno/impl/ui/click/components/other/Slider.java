@@ -1,8 +1,8 @@
 package me.sxmurai.inferno.impl.ui.click.components.other;
 
 import me.sxmurai.inferno.Inferno;
-import me.sxmurai.inferno.api.util.RenderUtil;
-import me.sxmurai.inferno.api.util.ScaleUtil;
+import me.sxmurai.inferno.api.render.RenderUtil;
+import me.sxmurai.inferno.api.render.ScaleUtil;
 import me.sxmurai.inferno.impl.option.Option;
 import me.sxmurai.inferno.impl.ui.components.Component;
 import org.lwjgl.input.Mouse;

@@ -1,5 +1,6 @@
-package me.sxmurai.inferno.api.util;
+package me.sxmurai.inferno.api.entity;
 
+import me.sxmurai.inferno.api.world.BlockUtil;
 import me.sxmurai.inferno.impl.features.Wrapper;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentHelper;

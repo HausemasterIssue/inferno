@@ -1,4 +1,4 @@
-package me.sxmurai.inferno.api.util;
+package me.sxmurai.inferno.api.render;
 
 public class ColorUtil {
     public static Color getColor(int color) {
