@@ -26,6 +26,7 @@ public class Inferno {
     public static RotationManager rotationManager;
     public static TotemPopManager totemPopManager;
     public static FontManager fontManager;
+    public static ServerManager serverManager;
 
     @SubscribeEvent
     public void onPreInit(FMLPreInitializationEvent event) {
@@ -44,12 +45,14 @@ public class Inferno {
         rotationManager = new RotationManager();
         totemPopManager = new TotemPopManager();
         fontManager = new FontManager();
+        serverManager = new ServerManager();
 
         MinecraftForge.EVENT_BUS.register(new EventManager());
-        MinecraftForge.EVENT_BUS.register(Inferno.moduleManager);
-        MinecraftForge.EVENT_BUS.register(Inferno.notificationManager);
-        MinecraftForge.EVENT_BUS.register(Inferno.rotationManager);
-        MinecraftForge.EVENT_BUS.register(Inferno.totemPopManager);
+        MinecraftForge.EVENT_BUS.register(moduleManager);
+        MinecraftForge.EVENT_BUS.register(notificationManager);
+        MinecraftForge.EVENT_BUS.register(rotationManager);
+        MinecraftForge.EVENT_BUS.register(totemPopManager);
+        MinecraftForge.EVENT_BUS.register(serverManager);
 
         LOGGER.info("Initialized {} {}. Welcome!", Inferno.NAME, Inferno.VERSION);
     }
