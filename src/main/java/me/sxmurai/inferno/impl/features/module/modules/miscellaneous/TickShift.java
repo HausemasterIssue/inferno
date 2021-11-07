@@ -15,6 +15,7 @@ public class TickShift extends Module {
     public final Option<Float> rate = new Option<>("Rate", 2.0f, 1.1f, 20.0f);
     public final Option<Integer> ticks = new Option<>("Ticks", 10, 1, 100);
     public final Option<Boolean> autoDisable = new Option<>("AutoDisable", true);
+    public final Option<Boolean> moveEnable = new Option<>("MoveEnable", true);
 
     private final Queue<CPacketPlayer> packets = new ConcurrentLinkedQueue<>();
     private boolean stop = false; // this is because of my autism
@@ -47,8 +48,14 @@ public class TickShift extends Module {
 
             return;
         }
-
-        mc.timer.tickLength = 50.0f / this.rate.getValue();
+        if(moveEnable.getValue()) {
+            if(mc.gameSettings.keyBindJump.isKeyDown() || mc.gameSettings.keyBindSneak.isKeyDown() || mc.gameSettings.keyBindRight.isKeyDown() || mc.gameSettings.keyBindLeft.isKeyDown() || mc.gameSettings.keyBindForward.isKeyDown() || mc.gameSettings.keyBindBack.isKeyDown()) {
+                mc.timer.tickLength = 50.0f / this.rate.getValue();
+            }
+        } else {
+            mc.timer.tickLength = 50.0f / this.rate.getValue();   
+        }
+        
     }
 
     @SubscribeEvent
