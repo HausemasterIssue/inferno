@@ -6,10 +6,7 @@ import me.sxmurai.inferno.impl.features.module.modules.client.CustomFont;
 import me.sxmurai.inferno.impl.features.module.modules.client.GUI;
 import me.sxmurai.inferno.impl.features.module.modules.client.Notifier;
 import me.sxmurai.inferno.impl.features.module.modules.combat.*;
-import me.sxmurai.inferno.impl.features.module.modules.miscellaneous.FakePlayer;
-import me.sxmurai.inferno.impl.features.module.modules.miscellaneous.NoHandshake;
-import me.sxmurai.inferno.impl.features.module.modules.miscellaneous.NoRotate;
-import me.sxmurai.inferno.impl.features.module.modules.miscellaneous.Suffix;
+import me.sxmurai.inferno.impl.features.module.modules.miscellaneous.*;
 import me.sxmurai.inferno.impl.features.module.modules.movement.FastFall;
 import me.sxmurai.inferno.impl.features.module.modules.movement.NoSlow;
 import me.sxmurai.inferno.impl.features.module.modules.movement.Sprint;
@@ -46,6 +43,7 @@ public class ModuleManager {
                 new NoHandshake(),
                 new NoRotate(),
                 new Suffix(),
+                new TickShift(),
 
                 // movement
                 new FastFall(),
