@@ -1,12 +1,15 @@
 package me.sxmurai.inferno.asm.mixins;
 
+import me.sxmurai.inferno.Inferno;
 import me.sxmurai.inferno.impl.features.module.modules.player.MultiTask;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.multiplayer.PlayerControllerMP;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Minecraft.class)
 public class MixinMinecraft {
@@ -18,5 +21,10 @@ public class MixinMinecraft {
     @Redirect(method = "rightClickMouse", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/PlayerControllerMP;getIsHittingBlock()Z"))
     public boolean hookGetIsHittingBlock(PlayerControllerMP controller) {
         return MultiTask.INSTANCE.isOff() && controller.getIsHittingBlock();
+    }
+
+    @Inject(method = "shutdown", at = @At("HEAD"), cancellable = true)
+    public void shutdown(CallbackInfo info) {
+        Inferno.configManager.saveConfigs();
     }
 }

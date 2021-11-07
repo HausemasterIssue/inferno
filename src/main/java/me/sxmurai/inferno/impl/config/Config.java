@@ -26,8 +26,8 @@ public abstract class Config {
         this.service.scheduleAtFixedRate(this::save, definition.saveInterval(), definition.saveInterval(), TimeUnit.MINUTES);
     }
 
-    protected abstract void save();
-    protected abstract void load();
+    public abstract void save();
+    public abstract void load();
 
     public String getName() {
         return name;

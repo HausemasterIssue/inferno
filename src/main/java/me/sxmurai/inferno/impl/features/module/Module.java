@@ -116,6 +116,16 @@ public class Module implements Wrapper {
     public void onTick() { }
     public void onRenderWorld() { }
 
+    public Option getOption(String name) {
+        for (Option option : this.options) {
+            if (option.getName().equalsIgnoreCase(name)) {
+                return option;
+            }
+        }
+
+        return null;
+    }
+
     public ArrayList<Option> getOptions() {
         return options;
     }

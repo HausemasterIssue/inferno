@@ -4,6 +4,7 @@ import me.sxmurai.inferno.impl.manager.*;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.apache.logging.log4j.LogManager;
@@ -30,6 +31,11 @@ public class Inferno {
 
     @SubscribeEvent
     public void onPreInit(FMLPreInitializationEvent event) {
+        if (!FileManager.getInstance().exists(FileManager.getInstance().getClientFolder())) {
+            LOGGER.info("Creating Inferno folder as it did not exist...");
+            FileManager.getInstance().makeDirectory(FileManager.getInstance().getClientFolder());
+        }
+
         LOGGER.info("get out of my logs cunt - aesthetical");
     }
 
@@ -55,5 +61,12 @@ public class Inferno {
         MinecraftForge.EVENT_BUS.register(serverManager);
 
         LOGGER.info("Initialized {} {}. Welcome!", Inferno.NAME, Inferno.VERSION);
+    }
+
+    @Mod.EventHandler
+    public void onPostInit(FMLPostInitializationEvent event) {
+        LOGGER.info("Loading configurations...");
+        configManager = new ConfigManager();
+        LOGGER.info("Loaded all configurations!");
     }
 }
