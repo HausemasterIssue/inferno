@@ -2,54 +2,56 @@ package me.sxmurai.inferno.impl.features.module.modules.visual;
 
 import me.sxmurai.inferno.impl.features.module.Module;
 import me.sxmurai.inferno.impl.option.Option;
+import me.sxmurai.inferno.impl.ui.Animation;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 
 @Module.Define(name = "Brightness", category = Module.Category.Visual)
 @Module.Info(description = "Makes the game brighter.")
 public class Brightness extends Module {
-    public static float oldGamma = -1.0f;
-
     public final Option<Mode> mode = new Option<>("Mode", Mode.Gamma);
-    public final Option<Float> gamma = new Option<>("Gamma", 100.0f, 0.0f, 100.0f, () -> this.mode.getValue() == Mode.Gamma);
 
-    private boolean gavePotion = false; // this is because we only want to remove the potion effect if the client gave the player it
+    private final Animation animation = new Animation(100.0f, 0.3f, 22L, true);
+    public float oldGamma = -1.0f;
 
     @Override
     protected void onDeactivated() {
-        if (this.gavePotion && mc.player.isPotionActive(MobEffects.NIGHT_VISION)) {
-            this.gavePotion = false;
-            mc.player.removePotionEffect(MobEffects.NIGHT_VISION);
+        if (this.oldGamma != -1.0f) {
+            mc.gameSettings.gammaSetting = this.oldGamma;
+            this.oldGamma = -1.0f;
         }
 
-        if (Brightness.oldGamma != -1.0f) {
-            mc.gameSettings.gammaSetting = Brightness.oldGamma;
-            Brightness.oldGamma = -1.0f;
+        if (fullNullCheck() && mc.player.isPotionActive(MobEffects.NIGHT_VISION)) {
+            mc.player.removePotionEffect(MobEffects.NIGHT_VISION);
         }
     }
 
     @Override
     public void onUpdate() {
         if (this.mode.getValue() == Mode.Gamma) {
-            if (this.gavePotion && mc.player.isPotionActive(MobEffects.NIGHT_VISION)) {
-                this.gavePotion = false;
+            if (this.oldGamma == -1.0f) {
+                this.oldGamma = mc.gameSettings.gammaSetting;
+            }
+
+            if (mc.player.isPotionActive(MobEffects.NIGHT_VISION)) {
                 mc.player.removePotionEffect(MobEffects.NIGHT_VISION);
             }
 
-            if (Brightness.oldGamma == -1.0f) {
-                Brightness.oldGamma = mc.gameSettings.gammaSetting;
+            if (this.animation.getProgress() != 100.0f) {
+                this.animation.update(false);
             }
 
-            mc.gameSettings.gammaSetting = this.gamma.getValue();
-        } else if (this.mode.getValue() == Mode.Potion) {
-            if (Brightness.oldGamma != -1.0f) {
-                mc.gameSettings.gammaSetting = Brightness.oldGamma;
-                Brightness.oldGamma = -1.0f;
+            mc.gameSettings.gammaSetting = this.animation.getProgress();
+        } else {
+            if (this.animation.getProgress() > this.oldGamma) {
+                this.animation.update(true);
+                mc.gameSettings.gammaSetting = this.animation.getProgress();
+                return;
             }
 
-            if (!this.gavePotion || !mc.player.isPotionActive(MobEffects.NIGHT_VISION)) {
-                this.gavePotion = true;
-                mc.player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 100000));
+            this.oldGamma = -1.0f;
+            if (!mc.player.isPotionActive(MobEffects.NIGHT_VISION)) {
+                mc.player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 99999));
             }
         }
     }
