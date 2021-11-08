@@ -48,7 +48,7 @@ public class TickShift extends Module {
 
             return;
         }
-        if(moveEnable.getValue()) {
+        if(this.moveEnable.getValue()) {
             if(mc.gameSettings.keyBindJump.isKeyDown() || mc.gameSettings.keyBindSneak.isKeyDown() || mc.gameSettings.keyBindRight.isKeyDown() || mc.gameSettings.keyBindLeft.isKeyDown() || mc.gameSettings.keyBindForward.isKeyDown() || mc.gameSettings.keyBindBack.isKeyDown()) {
                 mc.timer.tickLength = 50.0f / this.rate.getValue();
             }
